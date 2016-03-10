@@ -1,1 +1,1 @@
-module.exports = require('./lib/mangopay');
+module.exports = require('./lib/mangopay'); 
