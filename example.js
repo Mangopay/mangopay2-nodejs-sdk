@@ -12,3 +12,15 @@ var api = new mangopay({
 api.Users.getAll(function(data) {
     console.log(data);
 });
+
+var UserLegal = require('./lib/models/UserLegal');
+var UserNatural = require('./lib/models/UserNatural');
+
+
+var userLegal = new UserLegal();
+
+userLegal.getReadOnlyProperties();
+var userNatural = new UserNatural();
+
+
+userLegal.getReadOnlyProperties();

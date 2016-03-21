@@ -1,0 +1,13 @@
+{
+  "nonew": true,
+  "curly": true,
+  "noarg": true,
+  "forin": true,
+  "noempty": true,
+  "node": true,
+  "eqeqeq": true,
+  "undef": true,
+  "bitwise": true,
+  "browser": true,
+  "predef": ["require", "module"]
+}
