@@ -9,7 +9,7 @@ var api = new mangopay({
     clientPassword: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
 });
 
-api.Users.getAll(function(data) {
+api.Users.getNatural('1151091', function(data) {
     console.log(data);
 });
 
