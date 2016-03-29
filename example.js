@@ -13,6 +13,10 @@ api.Users.getNatural('1151091', function(data) {
     console.log(data);
 });
 
+api.Users.getAll(function(data) {
+    console.log(data);
+});
+
 var UserLegal = require('./lib/models/UserLegal');
 var UserNatural = require('./lib/models/UserNatural');
 
