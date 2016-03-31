@@ -14,12 +14,13 @@
   },
   "main": "./index.js",
   "dependencies": {
-    "node-rest-client": "^1.8.0",
-    "underscore": "^1.8.3"
+    "node-rest-client": "1.8.x",
+    "underscore": "1.8.x",
+    "promise": "7.1.x"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "chai": "3.5.x",
+    "mocha": "2.4.x"
   },
   "scripts": {
     "test": "mocha"

@@ -66,7 +66,9 @@ Using a model
         "Tag": "custom tag",
     });
     
-    mangopay.Users.create(victorHugo);
+    mangopay.Users.create(victorHugo).then(function(model){ 
+        // User created - using promise
+    });
     
 Using a hash of properties - **PersonType is mandatory** in this case !
 
@@ -84,6 +86,8 @@ Using a hash of properties - **PersonType is mandatory** in this case !
         "PersonType": "NATURAL", 
         "Email": "victor@hugo.com", 
         "Tag": "custom tag",
+    }, function(model) {
+        // User created - using callback
     });
 
 
