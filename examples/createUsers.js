@@ -1,29 +1,18 @@
 /**
- * Mangopay Nodejs SDK Example Usage
+ * Examples of how users can be created
  */
-
-var mangopay = require('./index');
+var mangopay = require('../index');
 
 var api = new mangopay({
     clientId: 'sdk-unit-tests',
     clientPassword: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
 });
 
-//api.Users.getNatural('1151091', function(data) {
-//    console.log(data);
-//});
-//
-//api.Users.getAll(function(data) {
-//    console.log(data);
-//});
+/**
+ * Create a Natural user from a Model
+ */
+var UserNatural = require('../lib/models/UserNatural');
 
-var UserLegal = require('./lib/models/UserLegal');
-var UserNatural = require('./lib/models/UserNatural');
-
-
-var userLegal = new UserLegal();
-
-userLegal.getReadOnlyProperties();
 var userNatural = new UserNatural(
     {
         "FirstName": "Victor",
@@ -42,6 +31,16 @@ var userNatural = new UserNatural(
     }
 );
 
+api.Users.create(userNatural, function(model, response){
+    var firstName = model.getData('FirstName'); // equals to model.data.FirstName
+    console.log(firstName);
+});
+
+/**
+ * Create a Legal user from a Model
+ */
+var UserLegal = require('../lib/models/UserLegal');
+
 var userLegal = new UserLegal(
     {
         Name: "MangoPay",
@@ -57,6 +56,15 @@ var userLegal = new UserLegal(
         Tag: "custom tag"
     }
 );
+
+api.Users.create(userLegal, function(model, response){
+    var firstName = model.getData('Name'); // equals to model.data.FirstName
+    console.log(firstName);
+});
+
+/**
+ * Create a user from a hash of properties. Don't forget to define PersonType
+ */
 api.Users.create({
     Name: "MangoPay",
     Email: "info@mangopay.com",
@@ -69,7 +77,8 @@ api.Users.create({
     LegalRepresentativeNationality: "FR",
     LegalRepresentativeCountryOfResidence: "FR",
     Tag: "custom tag",
-    PersonType: 'LEGAL'
+    PersonType: "LEGAL"
 }, function(model, response){
-    debugger;
+    var firstName = model.getData('Name'); // equals to model.data.Name
+    console.log(firstName);
 });

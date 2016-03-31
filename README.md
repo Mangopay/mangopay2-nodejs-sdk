@@ -37,6 +37,7 @@ Configuration
 
 Sample usage
 -------------------------------------------------
+Don't forget to check examples folder !
 Directly instantiate models available and work with them.
 
     var UserNatural = require('./lib/models/UserNatural');
@@ -88,7 +89,7 @@ Using a hash of properties - **PersonType is mandatory** in this case !
 
 Sample usage of Mangopay SDK installed with npm in a Node.js project
 -------------------------------------------------
-
+Don't forget to check examples folder !
 
 Logging
 -------------------------------------------------
