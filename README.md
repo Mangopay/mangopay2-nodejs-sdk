@@ -43,6 +43,47 @@ Directly instantiate models available and work with them.
     
     var userNatural = new UserNatural();
     userNatural.getReadOnlyProperties();
+    
+### Creating a user ###
+Using a model 
+
+    var UserNatural = require('./lib/models/UserNatural');
+    
+    var victorHugo = new UserNatural({
+        "FirstName": "Victor",
+        "LastName": "Hugo",
+        "Address": "1 rue des Misérables, Paris",
+        "Birthday": 1300186358, 
+        "Nationality": "FR",
+        "CountryOfResidence": "FR",
+        "Occupation": "Writer", 
+        "IncomeRange": "6", 
+        "ProofOfIdentity": null,
+        "ProofOfAddress": null, 
+        "PersonType": "NATURAL", 
+        "Email": "victor@hugo.com", 
+        "Tag": "custom tag",
+    });
+    
+    mangopay.Users.create(victorHugo);
+    
+Using a hash of properties - **PersonType is mandatory** in this case !
+
+    mangopay.Users.create({
+        "FirstName": "Victor",
+        "LastName": "Hugo",
+        "Address": "1 rue des Misérables, Paris",
+        "Birthday": 1300186358, 
+        "Nationality": "FR",
+        "CountryOfResidence": "FR",
+        "Occupation": "Writer", 
+        "IncomeRange": "6", 
+        "ProofOfIdentity": null,
+        "ProofOfAddress": null, 
+        "PersonType": "NATURAL", 
+        "Email": "victor@hugo.com", 
+        "Tag": "custom tag",
+    });
 
 
 Sample usage of Mangopay SDK installed with npm in a Node.js project
