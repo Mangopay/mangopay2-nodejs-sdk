@@ -12,12 +12,11 @@ var api = new mangopay({
  * Using both callback and promise
  */
 api.Users.getNatural('1151091', function(model) {
-    // Getter is always preferred over the direct data access
-    console.log(model.data.FirstName);
-    console.log(model.getData('LastName'));
+    console.log(model['FirstName']);
+    console.log(model['LastName']);
 }).then(function(model){
-    console.log(model.data.FirstName);
-    console.log(model.getData('LastName'));
+    console.log(model['FirstName']);
+    console.log(model['LastName']);
 });
 
 

@@ -30,7 +30,7 @@ var userNatural = new UserNatural({
 });
 
 api.Users.create(userNatural, function(model, response){
-    var firstName = model.getData('FirstName'); // equals to model.data.FirstName
+    var firstName = model['FirstName']; // equals to model.data.FirstName
     console.log(firstName);
 });
 
@@ -54,7 +54,7 @@ var userLegal = new UserLegal({
 });
 
 api.Users.create(userLegal, function(model, response){
-    var firstName = model.getData('Name'); // equals to model.data.FirstName
+    var firstName = model['Name']; // equals to model.data.FirstName
     console.log(firstName);
 });
 
@@ -75,6 +75,6 @@ api.Users.create({
     Tag: "custom tag",
     PersonType: "LEGAL"
 }).then(function(model){
-    var firstName = model.getData('Name'); // equals to model.data.Name
+    var firstName = model['Name']; // equals to model.data.Name
     console.log(firstName);
 });
