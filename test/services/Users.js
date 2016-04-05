@@ -10,6 +10,7 @@ var UserNatural = require('../../lib/models/UserNatural');
 var PersonType = require('../../lib/models/PersonType')
 var BankAccount = require('../../lib/models/BankAccount');
 var BankAccountDetailsIBAN = require('../../lib/models/BankAccountDetailsIBAN');
+var BankAccountDetailsGB = require('../../lib/models/BankAccountDetailsGB');
 
 
 describe('Users', function() {
@@ -148,6 +149,102 @@ describe('Users', function() {
             it('Models should be the same', function(){
                 expect(ibanAccount.Id).to.not.be.undefined;
                 expect(ibanAccount.UserId).to.equal(john.Id);
+            });
+        });
+
+        describe('GB', function() {
+            var gbAccount;
+            before(function(done){
+                var account = new BankAccount({
+                    OwnerName: john.FirstName + ' ' + john.LastName,
+                    OwnerAddress: john.Address,
+                    Details: new BankAccountDetailsGB({
+                        AccountNumber: '63956474',
+                        SortCode: '200000'
+                    })
+                });
+                api.Users.createBankAccount(john.Id, account).then(function(account){
+                    gbAccount = account;
+                    done();
+                });
+            });
+
+            it('Models should be the same', function(){
+                expect(gbAccount.Id).to.not.be.undefined;
+                expect(gbAccount.UserId).to.equal(john.Id);
+                expect(gbAccount.Type).to.equal('GB');
+            });
+        });
+
+        describe('US', function() {
+            var usAccount;
+            before(function(done){
+                var account = new BankAccount({
+                    OwnerName: john.FirstName + ' ' + john.LastName,
+                    OwnerAddress: john.Address,
+                    Type: 'US',
+                    AccountNumber: '234234234234',
+                    ABA: '234334789'
+                });
+                api.Users.createBankAccount(john.Id, account).then(function(account){
+                    usAccount = account;
+                    done();
+                });
+            });
+
+            it('Models should be the same', function(){
+                expect(usAccount.Id).to.not.be.undefined;
+                expect(usAccount.UserId).to.equal(john.Id);
+                expect(usAccount.Type).to.equal('US');
+            });
+        });
+
+        describe('CA', function() {
+            var caAccount;
+            before(function(done){
+                var account = new BankAccount({
+                    OwnerName: john.FirstName + ' ' + john.LastName,
+                    OwnerAddress: john.Address,
+                    Type: 'CA',
+                    BankName: 'TestBankName',
+                    BranchCode: '12345',
+                    AccountNumber: '234234234234',
+                    InstitutionNumber: '123'
+                });
+                api.Users.createBankAccount(john.Id, account).then(function(account){
+                    caAccount = account;
+                    done();
+                });
+            });
+
+            it('Models should be the same', function(){
+                expect(caAccount.Id).to.not.be.undefined;
+                expect(caAccount.UserId).to.equal(john.Id);
+                expect(caAccount.Type).to.equal('CA');
+            });
+        });
+
+        describe('OTHER', function() {
+            var otherAccount;
+            before(function(done){
+                var account = new BankAccount({
+                    OwnerName: john.FirstName + ' ' + john.LastName,
+                    OwnerAddress: john.Address,
+                    Type: 'OTHER',
+                    Country: 'FR',
+                    AccountNumber: '234234234234',
+                    BIC: 'BINAADADXXX'
+                });
+                api.Users.createBankAccount(john.Id, account).then(function(account){
+                    otherAccount = account;
+                    done();
+                });
+            });
+
+            it('Models should be the same', function(){
+                expect(otherAccount.Id).to.not.be.undefined;
+                expect(otherAccount.UserId).to.equal(john.Id);
+                expect(otherAccount.Type).to.equal('OTHER');
             });
         });
 
