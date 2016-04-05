@@ -7,7 +7,10 @@ var helpers = require('../helpers');
 
 var UserLegal = require('../../lib/models/UserLegal');
 var UserNatural = require('../../lib/models/UserNatural');
-var PersonType = require('../../lib/models/PersonType');
+var PersonType = require('../../lib/models/PersonType')
+var BankAccount = require('../../lib/models/BankAccount');
+var BankAccountDetailsIBAN = require('../../lib/models/BankAccountDetailsIBAN');
+
 
 describe('Users', function() {
     var john = new UserNatural(helpers.data.UserNatural);
@@ -91,4 +94,62 @@ describe('Users', function() {
         });
     });
 
+    describe('Save Natural', function(){
+        var johnClone;
+        before(function(done){
+            john.LastName += ' - CHANGED';
+            api.Users.update(john).then(function(){
+                api.Users.get(john.Id).then(function(user){
+                    johnClone = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function(){
+            expect(_.isMatch(john, johnClone)).to.be.true;
+        });
+    });
+    describe('Save Legal', function(){
+        var matrixClone;
+        before(function(done){
+            matrix.LastName += ' - CHANGED';
+            api.Users.update(matrix).then(function(){
+                api.Users.get(matrix.Id).then(function(user){
+                    matrixClone = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function(){
+            expect(_.isMatch(matrix, matrixClone)).to.be.true;
+        });
+    });
+
+    describe('Create Bank Account', function(){
+        describe('IBAN', function() {
+            var ibanAccount;
+            before(function(done){
+                var account = new BankAccount({
+                    OwnerName: john.FirstName + ' ' + john.LastName,
+                    OwnerAddress: john.Address,
+                    Details: new BankAccountDetailsIBAN({
+                        IBAN: 'FR7618829754160173622224154',
+                        BIC: 'CMBRFR2BCME'
+                    })
+                });
+                api.Users.createBankAccount(john.Id, account).then(function(account){
+                    ibanAccount = account;
+                    done();
+                });
+            });
+
+            it('Models should be the same', function(){
+                expect(ibanAccount.Id).to.not.be.undefined;
+                expect(ibanAccount.UserId).to.equal(john.Id);
+            });
+        });
+
+    });
 });
