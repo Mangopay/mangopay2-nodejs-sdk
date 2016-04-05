@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var path = require('path');
 var Promise = require('promise');
 var expect = require('chai').expect;
 var assert = require('chai').assert;
@@ -23,7 +24,7 @@ describe('Users', function() {
 
     before(function(done){
         Promise.all([api.Users.create(john), api.Users.create(matrix)]).then(function() {
-            done()
+            done();
         });
     });
 
@@ -429,6 +430,31 @@ describe('Users', function() {
                     api.errorHandler.restore();
                 });
             });
+
+            describe('Correct File Path', function() {
+                var kycDocument;
+                // Create new KYC Document and add a page
+                before(function(done){
+                    api.Users.createKycDocument(john.Id, {
+                        Status: KycDocumentStatus.Created,
+                        Type: KycDocumentType.IdentityProof
+                    }).then(function(document){
+                        kycDocument = document;
+                        done();
+                    });
+                });
+
+                it('Should be correctly created', function(done){
+                    var filePath = path.resolve(__dirname, '../TestKycPageFile.png');
+                    api.Users.createKycPageFromFile(john.Id, kycDocument.Id, filePath).then(function(){
+                        assert.isOk('Request succeeded');
+                        done();
+                    }, function(){
+                        assert.fail('Request failed');
+                        done();
+                    });
+                });
+            });
         });
     });
 
@@ -470,6 +496,4 @@ describe('Users', function() {
             });
         });
     });
-
-
 });
