@@ -2,6 +2,7 @@ var _ = require('underscore');
 var Promise = require('promise');
 var expect = require('chai').expect;
 var assert = require('chai').assert;
+var sinon = require('sinon');
 
 var helpers = require('../helpers');
 
@@ -332,6 +333,101 @@ describe('Users', function() {
 
             it('Should be updated correctly', function(){
                 expect(updatedKycDocument.Status).to.equal(KycDocumentStatus.ValidationAsked);
+            });
+        });
+
+        describe('Create KYC Page', function() {
+
+            describe('Empty File String', function() {
+                before(function(done){
+                    sinon.stub(api, 'errorHandler');
+                    api.Users.createKycPage(john.Id, kycDocument.Id, {
+                        File: ''
+                    }).then(function(){done()}, function(){done()});
+                });
+
+                it('Should call error handler', function(){
+                    assert(api.errorHandler.calledOnce);
+                });
+
+                after(function(){
+                    api.errorHandler.restore();
+                });
+            });
+
+            describe('Wrong File String', function() {
+                before(function(done){
+                    sinon.stub(api, 'errorHandler');
+                    api.Users.createKycPage(john.Id, kycDocument.Id, {
+                        File: 'qqqq'
+                    }).then(function(){done()}, function(){done()});
+                });
+
+                it('Should call error handler', function(){
+                    assert(api.errorHandler.calledOnce);
+                });
+
+                after(function(){
+                    api.errorHandler.restore();
+                });
+            });
+
+            describe('Correct File String', function() {
+                var kycDocument;
+                // Create new KYC Document and add a page
+                before(function(done){
+                    api.Users.createKycDocument(john.Id, {
+                        Status: KycDocumentStatus.Created,
+                        Type: KycDocumentType.IdentityProof
+                    }).then(function(document){
+                        kycDocument = document;
+                        done();
+                    });
+                });
+
+                it('Should be correctly created', function(done){
+                    api.Users.createKycPage(john.Id, kycDocument.Id, {
+                        File: helpers.data.KYCPageFileString
+                    }).then(function(){
+                        assert.isOk('Request succeeded');
+                        done();
+                    }, function(){
+                        assert.fail('Request failed');
+                        done();
+                    });
+                });
+            });
+
+            describe('Empty File Path', function() {
+                before(function(){
+                    sinon.stub(api, 'errorHandler');
+                    api.Users.createKycPageFromFile(john.Id, kycDocument.Id, '');
+                });
+
+                it('Should call error handler', function(){
+                    assert(api.errorHandler.calledOnce);
+                    assert(api.errorHandler.calledWith('File path cannot be empty'));
+                });
+
+                after(function(){
+                    api.errorHandler.restore();
+                });
+            });
+
+            describe('Wrong File Path', function() {
+                before(function(){
+                    sinon.stub(api, 'errorHandler');
+                    api.Users.createKycPageFromFile(john.Id, kycDocument.Id, 'notExistFileName.tmp');
+                });
+
+                it('Should call error handler', function(){
+                    assert(api.errorHandler.calledOnce);
+                    assert(api.errorHandler.calledWith('File does not exist'));
+                });
+
+                after(function(){
+                    api.errorHandler.restore();
+                });
             });
         });
     });

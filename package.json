@@ -15,8 +15,9 @@
   "main": "./index.js",
   "dependencies": {
     "node-rest-client": "1.8.x",
-    "underscore": "1.8.x",
-    "promise": "7.1.x"
+    "promise": "7.1.x",
+    "sinon": "^1.17.3",
+    "underscore": "1.8.x"
   },
   "devDependencies": {
     "chai": "3.5.x",
