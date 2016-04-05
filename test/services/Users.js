@@ -7,10 +7,13 @@ var helpers = require('../helpers');
 
 var UserLegal = require('../../lib/models/UserLegal');
 var UserNatural = require('../../lib/models/UserNatural');
-var PersonType = require('../../lib/models/PersonType')
+var PersonType = require('../../lib/models/PersonType');
 var BankAccount = require('../../lib/models/BankAccount');
 var BankAccountDetailsIBAN = require('../../lib/models/BankAccountDetailsIBAN');
 var BankAccountDetailsGB = require('../../lib/models/BankAccountDetailsGB');
+var KycDocument = require('../../lib/models/KycDocument');
+var KycDocumentStatus = require('../../lib/models/KycDocumentStatus');
+var KycDocumentType = require('../../lib/models/KycDocumentType');
 
 
 describe('Users', function() {
@@ -146,7 +149,7 @@ describe('Users', function() {
                 });
             });
 
-            it('Models should be the same', function(){
+            it('Account should be created correctly', function(){
                 expect(ibanAccount.Id).to.not.be.undefined;
                 expect(ibanAccount.UserId).to.equal(john.Id);
             });
@@ -169,7 +172,7 @@ describe('Users', function() {
                 });
             });
 
-            it('Models should be the same', function(){
+            it('Account should be created correctly', function(){
                 expect(gbAccount.Id).to.not.be.undefined;
                 expect(gbAccount.UserId).to.equal(john.Id);
                 expect(gbAccount.Type).to.equal('GB');
@@ -192,7 +195,7 @@ describe('Users', function() {
                 });
             });
 
-            it('Models should be the same', function(){
+            it('Account should be created correctly', function(){
                 expect(usAccount.Id).to.not.be.undefined;
                 expect(usAccount.UserId).to.equal(john.Id);
                 expect(usAccount.Type).to.equal('US');
@@ -217,7 +220,7 @@ describe('Users', function() {
                 });
             });
 
-            it('Models should be the same', function(){
+            it('Account should be created correctly', function(){
                 expect(caAccount.Id).to.not.be.undefined;
                 expect(caAccount.UserId).to.equal(john.Id);
                 expect(caAccount.Type).to.equal('CA');
@@ -241,12 +244,136 @@ describe('Users', function() {
                 });
             });
 
-            it('Models should be the same', function(){
+            it('Account should be created correctly', function(){
                 expect(otherAccount.Id).to.not.be.undefined;
                 expect(otherAccount.UserId).to.equal(john.Id);
                 expect(otherAccount.Type).to.equal('OTHER');
             });
         });
-
     });
+
+    describe('Bank Accounts', function() {
+        var bankAccounts;
+        before(function(done){
+            api.Users.getBankAccounts(john.Id).then(function(list){
+                bankAccounts = list;
+                done();
+            });
+        });
+
+        it('List should contain instances of BankAccount', function(){
+            expect(bankAccounts[0] instanceof BankAccount).to.be.true;
+            expect(bankAccounts[0].UserId).to.equal(john.Id);
+        });
+
+        describe('Sort by creation date', function() {
+            var bankAccounts;
+            before(function(done){
+                api.Users.getBankAccounts(john.Id, {
+                    parameters: {
+                        Sort: 'CreationDate:desc'
+                    }
+                }).then(function(list){
+                    bankAccounts = list;
+                    done();
+                });
+            });
+
+            it('Should work properly', function(){
+                expect(bankAccounts[0].CreationDate).to.be.above(bankAccounts[1].CreationDate);
+            });
+        });
+    });
+
+    describe('Create KYC Document', function() {
+        var kycDocument;
+
+        before(function(done){
+            api.Users.createKycDocument(john.Id, {
+                Status: KycDocumentStatus.Created,
+                Type: KycDocumentType.IdentityProof
+            }).then(function(document){
+                kycDocument = document;
+                done();
+            });
+        });
+
+        it('Should be created correctly', function(){
+            expect(kycDocument.Id).not.to.be.undefined;
+            expect(kycDocument.Status).to.equal(KycDocumentStatus.Created);
+            expect(kycDocument.Type).to.equal(KycDocumentType.IdentityProof);
+        });
+
+        describe('Get KYC Document', function() {
+            var getKycDocument;
+            before(function(done){
+                api.Users.getKycDocument(john.Id, kycDocument.Id).then(function(document){
+                    getKycDocument = document;
+                    done();
+                });
+            });
+
+            it('Should be retrieved correctly', function(){
+                expect(_.isMatch(kycDocument, getKycDocument)).to.be.true;
+            });
+        });
+
+        describe('Update KYC Document', function() {
+            var updatedKycDocument;
+            before(function(done){
+                kycDocument.Status = KycDocumentStatus.ValidationAsked;
+                api.Users.updateKycDocument(john.Id, kycDocument).then(function(){
+                    api.Users.getKycDocument(john.Id, kycDocument.Id).then(function(document){
+                        updatedKycDocument = document;
+                        done();
+                    });
+                });
+            });
+
+            it('Should be updated correctly', function(){
+                expect(updatedKycDocument.Status).to.equal(KycDocumentStatus.ValidationAsked);
+            });
+        });
+    });
+
+    describe('Get KYC Documents', function() {
+        var kycDocuments;
+        before(function(done){
+            api.Users.getKycDocuments(john.Id).then(function(list){
+                kycDocuments = list;
+                done();
+            });
+        });
+
+        it('List should contain instances of BankAccount', function(){
+            expect(kycDocuments[0] instanceof KycDocument).to.be.true;
+        });
+
+        describe('Sort by creation date', function() {
+            var kycDocuments;
+            before(function(done){
+                // Create a new document
+                api.Users.createKycDocument(john.Id, {
+                    Status: KycDocumentStatus.Created,
+                    Type: KycDocumentType.IdentityProof
+                }).then(function(){
+                    // Request documents sorted
+                    api.Users.getKycDocuments(john.Id, {
+                        parameters: {
+                            Sort: 'CreationDate:desc'
+                        }
+                    }).then(function(list){
+                        kycDocuments = list;
+                        done();
+                    });
+                });
+            });
+
+            it('Should work properly', function(){
+                expect(kycDocuments[0].CreationDate).to.be.above(kycDocuments[1].CreationDate);
+            });
+        });
+    });
+
+
 });
