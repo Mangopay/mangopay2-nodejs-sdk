@@ -496,4 +496,104 @@ describe('Users', function() {
             });
         });
     });
+
+    //describe('Wallets', function() {
+    //    before(function(done){
+    //
+    //    });
+    //
+    //    it('', function(){
+    //        expect(kycDocuments[0].CreationDate).to.be.above(kycDocuments[1].CreationDate);
+    //    });
+    //});
+
+    /**
+     * TODO implements tests once we have API coverage
+     */
+
+    //function test_Users_AllTransactions() {
+    //    $john = $this->getJohn();
+    //    $payIn = $this->getNewPayInCardDirect();
+    //
+    //    $pagination = new \MangoPay\Pagination(1, 1);
+    //    $filter = new \MangoPay\FilterTransactions();
+    //    $filter->Type = 'PAYIN';
+    //    $filter->AfterDate = $payIn->CreationDate - 1;
+    //    $filter->BeforeDate = $payIn->CreationDate + 1;
+    //    $transactions = $this->_api->Users->GetTransactions($john->Id, $pagination, $filter);
+    //
+    //    $this->assertEqual(count($transactions), 1);
+    //    $this->assertIsA($transactions[0], '\MangoPay\Transaction');
+    //    $this->assertEqual($transactions[0]->AuthorId, $john->Id);
+    //    $this->assertIdenticalInputProps($transactions[0], $payIn);
+    //}
+    //
+    //function test_Users_AllTransactions_SortByCreationDate() {
+    //    $john = $this->getJohn();
+    //    $this->getNewPayInCardDirect();
+    //    $this->getNewPayInCardDirect();
+    //    $sorting = new \MangoPay\Sorting();
+    //    $sorting->AddField("CreationDate", \MangoPay\SortDirection::DESC);
+    //    $pagination = new \MangoPay\Pagination(1, 20);
+    //    $filter = new \MangoPay\FilterTransactions();
+    //    $filter->Type = 'PAYIN';
+    //
+    //    $transactions = $this->_api->Users->GetTransactions($john->Id, $pagination, $filter, $sorting);
+    //
+    //    $this->assertTrue($transactions[0]->CreationDate > $transactions[1]->CreationDate);
+    //}
+    //
+    //function test_Users_AllCards() {
+    //    $john = $this->getNewJohn();
+    //    $payIn = $this->getNewPayInCardDirect($john->Id);
+    //    $card =$this->_api->Cards->Get($payIn->PaymentDetails->CardId);
+    //    $pagination = new \MangoPay\Pagination(1, 1);
+    //
+    //    $cards = $this->_api->Users->GetCards($john->Id, $pagination);
+    //
+    //    $this->assertEqual(count($cards), 1);
+    //    $this->assertIsA($cards[0], '\MangoPay\Card');
+    //    $this->assertIdenticalInputProps($cards[0], $card);
+    //}
+    //
+    //function test_Users_AllCards_SortByCreationDate() {
+    //    $john = $this->getNewJohn();
+    //    $this->getNewPayInCardDirect($john->Id);
+    //    $this->getNewPayInCardDirect($john->Id);
+    //    $pagination = new \MangoPay\Pagination(1, 20);
+    //    $sorting = new \MangoPay\Sorting();
+    //    $sorting->AddField("CreationDate", \MangoPay\SortDirection::ASC);
+    //
+    //    $cards = $this->_api->Users->GetCards($john->Id, $pagination, $sorting);
+    //
+    //    $this->assertTrue($cards[0]->CreationDate < $cards[1]->CreationDate);
+    //}
+    //function test_Users_AllWallets() {
+    //    $john = $this->getJohn();
+    //    $this->getJohnsWallet();
+    //    $pagination = new \MangoPay\Pagination(1, 1);
+    //
+    //    $wallets = $this->_api->Users->GetWallets($john->Id, $pagination);
+    //
+    //    $this->assertEqual(count($wallets), 1);
+    //    $this->assertIsA($wallets[0], '\MangoPay\Wallet');
+    //}
+    //
+    //function test_Users_AllWallets_SortByCreationDate() {
+    //    $john = $this->getJohn();
+    //    $this->getJohnsWallet();
+    //    self::$JohnsWallet = null;
+    //    $this->getJohnsWallet();
+    //    $pagination = new \MangoPay\Pagination(1, 20);
+    //    $sorting = new \MangoPay\Sorting();
+    //    $sorting->AddField("CreationDate", \MangoPay\SortDirection::DESC);
+    //
+    //    $wallets = $this->_api->Users->GetWallets($john->Id, $pagination, $sorting);
+    //
+    //    $this->assertTrue($wallets[0]->CreationDate > $wallets[1]->CreationDate);
+    //}
+
+
+
+
 });
