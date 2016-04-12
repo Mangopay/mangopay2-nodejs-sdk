@@ -556,7 +556,7 @@ describe('Users', function() {
     });
 
     describe('Wallets', function() {
-        var wallets, wallet;;
+        var wallets, wallet;
 
 
         before(function(done){
