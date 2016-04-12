@@ -497,6 +497,38 @@ describe('Users', function() {
         });
     });
 
+    describe('Transactions', function() {
+        var preAuthorization, transactions;
+
+        before(function(done){
+            helpers.getNewPayInCardDirect(api, john, function(data){
+                preAuthorization = data;
+                api.Users.getTransactions(john.Id, function(data, response){
+                    transactions = data;
+                    done();
+                }, {
+                    parameters: {
+                        Type: 'PAYIN',
+                        AfterDate: preAuthorization.CreationDate - 100,
+                        BeforeDate: preAuthorization.CreationDate + 100,
+                        page: 1,
+                        per_page: 10
+                    }
+                })
+
+            });
+
+        });
+
+        it('should have one transaction', function(){
+            expect(transactions.length).to.equal(1);
+        });
+
+        it('transaction data should be correct', function(){
+            expect(transactions[0].AuthorId).to.equal(john.Id);
+        });
+    });
+
     //describe('Wallets', function() {
     //    before(function(done){
     //
