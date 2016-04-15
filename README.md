@@ -11,7 +11,7 @@ Installation
 License
 -------------------------------------------------
 MangopaySDK is distributed under MIT license, see the 
-[LICENSE file](https://github.com/Mangopay/mangopay2-node-sdk/blob/master/LICENSE).
+[LICENSE file](https://github.com/Mangopay/mangopay2-nodejs-sdk/blob/master/LICENSE).
 
 
 Unit Tests
