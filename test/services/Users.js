@@ -498,11 +498,11 @@ describe('Users', function() {
     });
 
     describe('Transactions', function() {
-        var preAuthorization, transactions;
+        var payIn, transactions;
 
         before(function(done){
             helpers.getNewPayInCardDirect(api, john, function(data){
-                preAuthorization = data;
+                payIn = data;
                 done();
             });
         });
@@ -515,10 +515,8 @@ describe('Users', function() {
                 }, {
                     parameters: {
                         Type: 'PAYIN',
-                        AfterDate: preAuthorization.CreationDate - 100,
-                        BeforeDate: preAuthorization.CreationDate + 100,
-                        page: 1,
-                        per_page: 10
+                        AfterDate: payIn.CreationDate - 10,
+                        BeforeDate: payIn.CreationDate + 10
                     }
                 });
             });
@@ -536,7 +534,7 @@ describe('Users', function() {
             var card, cards;
 
             before(function(done){
-                api.Cards.get(preAuthorization.CardId, function(data, response){
+                api.Cards.get(payIn.CardId, function(data, response){
                     card = data;
                     api.Users.getCards(john.Id, function(data, response){
                         cards = data;
