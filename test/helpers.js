@@ -45,7 +45,7 @@ module.exports = {
                 parameters: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4970100000000154',
+                    cardNumber: '4970101122334422',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
@@ -101,9 +101,7 @@ module.exports = {
                     PaymentType: 'CARD',
                     ExecutionType: 'DIRECT'
                 };
-                api.PayIns.create(payIn, function(data, response){
-                    callback(data, response);
-                })
+                api.PayIns.create(payIn, callback)
             });
         });
     },
@@ -136,9 +134,18 @@ module.exports = {
                 SecureMode:  'DEFAULT',
                 Culture: 'fr'
             };
-            api.PayIns.create(payIn, function(data, response){
-                callback(data, response);
-            })
+            api.PayIns.create(payIn, callback)
         });
+    },
+
+    getNewRefundForPayIn: function(api, user, payIn, callback) {
+        var refund = {
+            CreditedWalletId: payIn.CreditedWalletId,
+            AuthorId: user.Id,
+            DebitedFunds: payIn.DebitedFunds,
+            Fees: payIn.Fees
+        };
+
+        api.PayIns.createRefund(payIn.Id, refund, callback);
     }
 };

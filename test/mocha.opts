@@ -1,1 +1,3 @@
 --recursive
+--timeout=30000
+--ui bdd
