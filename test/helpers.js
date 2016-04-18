@@ -106,5 +106,39 @@ module.exports = {
                 })
             });
         });
+    },
+
+    getNewPayInCardWeb: function(api, user, callback) {
+        var self = this;
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = {
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 10000,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                CardType: 'CB_VISA_MASTERCARD',
+                PaymentType: 'CARD',
+                ExecutionType: 'WEB',
+                ReturnURL: 'https://test.com',
+                TemplateURL: 'https://TemplateURL.com',
+                SecureMode:  'DEFAULT',
+                Culture: 'fr'
+            };
+            api.PayIns.create(payIn, function(data, response){
+                callback(data, response);
+            })
+        });
     }
 };
