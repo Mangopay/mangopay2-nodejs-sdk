@@ -9,16 +9,15 @@ var api = new mangopay({
 });
 
 /**
- * Using both callback and promise
+ * Using both callback and promise. Usually you should be using only one of them
  */
-api.Users.getNatural('1151091', function(model) {
-    console.log(model['FirstName']);
-    console.log(model['LastName']);
+api.Users.getNatural('1151091', function(data, response) {
+    console.log(data.FirstName);
+    console.log(data.LastName);
 }).then(function(model){
-    console.log(model['FirstName']);
-    console.log(model['LastName']);
+    console.log(data.FirstName);
+    console.log(data.LastName);
 });
-
 
 /**
  * Exemple of pagination with promise on getAll users API
@@ -29,5 +28,5 @@ api.Users.getAll({
         page: 2
     }
 }).then(function(data){
-    console.log(data)
+    console.log(data);
 });

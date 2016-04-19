@@ -1,5 +1,3 @@
-var _ = require('underscore');
-var path = require('path');
 var expect = require('chai').expect;
 
 var helpers = require('../helpers');
