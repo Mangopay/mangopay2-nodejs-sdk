@@ -38,7 +38,7 @@ Update card
 
 ### Cards.createTemporaryPaymentCard(paymentCard, callback, options) 
 
-WARNING!!
+WARNING
 It's temporary entity and it will be removed in the future.
 Please, contact with support before using these features or if you have any questions.
 
@@ -48,13 +48,13 @@ Create new temporary payment card
 
 **paymentCard**: `Object`, TemporaryPaymentCard object or properties hash
 
-**callback**: , WARNING!!
+**callback**: , WARNING
 It's temporary entity and it will be removed in the future.
 Please, contact with support before using these features or if you have any questions.
 
 Create new temporary payment card
 
-**options**: , WARNING!!
+**options**: , WARNING
 It's temporary entity and it will be removed in the future.
 Please, contact with support before using these features or if you have any questions.
 
@@ -65,7 +65,7 @@ Create new temporary payment card
 
 ### Cards.getTemporaryPaymentCard(paymentCardId, callback, options) 
 
-WARNING!!
+WARNING
 It's temporary entity and it will be removed in the future.
 Please, contact with support before using these features or if you have any questions.
 
@@ -75,13 +75,13 @@ Create new temporary payment card
 
 **paymentCardId**: `number`, TemporaryPaymentCard object or properties hash
 
-**callback**: , WARNING!!
+**callback**: , WARNING
 It's temporary entity and it will be removed in the future.
 Please, contact with support before using these features or if you have any questions.
 
 Create new temporary payment card
 
-**options**: , WARNING!!
+**options**: , WARNING
 It's temporary entity and it will be removed in the future.
 Please, contact with support before using these features or if you have any questions.
 

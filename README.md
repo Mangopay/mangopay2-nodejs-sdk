@@ -1,7 +1,6 @@
 Mangopay Node.js SDK
 =================================================
-MangopaySDK is a Node.js client library to work with
-[Mangopay REST API](http://docs.mangopay.com/api-references/).
+MangopaySDK is a Node.js client library to work with [Mangopay REST API](http://docs.mangopay.com/api-references/).
 
 
 Installation
@@ -20,6 +19,10 @@ Usage inside your app
     });
     
     api.Users.create(...)
+    
+Documentation
+-------------------------------------------------
+[Github Full Node.js SDK Documentation](docs/README.md) is located in ``/docs`` folder. You can also access [API References on our website](https://docs.mangopay.com/api-references/).
 
 License
 -------------------------------------------------
