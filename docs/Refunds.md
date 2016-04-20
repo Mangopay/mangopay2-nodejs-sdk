@@ -1,12 +1,12 @@
-# Global
+# Refunds
 
-
+[MangoPay Refunds API Reference](https://docs.mangopay.com/api-references/refund/)
 
 
 
 * * *
 
-### get(refundId, callback, options) 
+### Refunds.get(refundId, callback, options) 
 
 Get events
 

@@ -1,12 +1,12 @@
-# Global
+# Cards
 
-
+[MangoPay Cards API Reference](https://docs.mangopay.com/api-references/card/)
 
 
 
 * * *
 
-### get(cardId, callback, options) 
+### Cards.get(cardId, callback, options) 
 
 Get card
 
@@ -21,7 +21,7 @@ Get card
 **Returns**: `Object`, Request promise
 
 
-### update(card, callback, options) 
+### Cards.update(card, callback, options) 
 
 Update card
 
@@ -36,7 +36,7 @@ Update card
 **Returns**: `Object`, Request promise
 
 
-### createTemporaryPaymentCard(paymentCard, callback, options) 
+### Cards.createTemporaryPaymentCard(paymentCard, callback, options) 
 
 WARNING!!
 It's temporary entity and it will be removed in the future.
@@ -63,7 +63,7 @@ Create new temporary payment card
 **Returns**: `Object`, Promise of the request
 
 
-### getTemporaryPaymentCard(paymentCardId, callback, options) 
+### Cards.getTemporaryPaymentCard(paymentCardId, callback, options) 
 
 WARNING!!
 It's temporary entity and it will be removed in the future.

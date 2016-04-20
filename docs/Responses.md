@@ -1,4 +1,4 @@
-# Global
+# Responses
 
 
 
@@ -6,7 +6,7 @@
 
 * * *
 
-### get(callback, options) 
+### Responses.get(callback, options) 
 
 Get response from previous call
 

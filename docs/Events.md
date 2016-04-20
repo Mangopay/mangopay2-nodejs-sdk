@@ -1,12 +1,12 @@
-# Global
+# Events
 
-
+[MangoPay Events API Reference](https://docs.mangopay.com/api-references/events/)
 
 
 
 * * *
 
-### getAll(callback, options) 
+### Events.getAll(callback, options) 
 
 Get events
 

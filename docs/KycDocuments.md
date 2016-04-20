@@ -1,12 +1,12 @@
-# Global
+# KycDocuments
 
-
+[MangoPay KYC Documents API Reference](https://docs.mangopay.com/api-references/kyc/documents/)
 
 
 
 * * *
 
-### getAll(callback, options) 
+### KycDocuments.getAll(callback, options) 
 
 Get all KycDocuments
 
@@ -19,7 +19,7 @@ Get all KycDocuments
 **Returns**: `Object`, Request promise
 
 
-### get(kycDocumentId, callback, options) 
+### KycDocuments.get(kycDocumentId, callback, options) 
 
 Get KycDocument
 

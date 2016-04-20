@@ -1,12 +1,12 @@
-# Global
+# PayIns
 
-
+[MangoPay PayIns API Reference](https://docs.mangopay.com/api-references/payins/payin-payment-methods/)
 
 
 
 * * *
 
-### create(payIn, callback, options) 
+### PayIns.create(payIn, callback, options) 
 
 Create new pay-in
 
@@ -21,7 +21,7 @@ Create new pay-in
 **Returns**: `Object`, Request promise
 
 
-### get(payInId, callback, options) 
+### PayIns.get(payInId, callback, options) 
 
 Get pay-in
 
@@ -36,7 +36,7 @@ Get pay-in
 **Returns**: `Object`, Request promise
 
 
-### createRefund(payInId, refund, callback, options) 
+### PayIns.createRefund(payInId, refund, callback, options) 
 
 Create refund for pay-in object
 
@@ -53,7 +53,7 @@ Create refund for pay-in object
 **Returns**: `Object`, Request promise
 
 
-### createTemporaryImmediatePayIn(immediatePayIn, callback, options) 
+### PayIns.createTemporaryImmediatePayIn(immediatePayIn, callback, options) 
 
 WARNING!!
 It's temporary entity and it will be removed in the future.

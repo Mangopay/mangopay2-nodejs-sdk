@@ -1,12 +1,12 @@
-# Global
+# Users
 
-
+[MangoPay Users API Reference](https://docs.mangopay.com/api-references/users/)
 
 
 
 * * *
 
-### create(user) 
+### Users.create(user) 
 
 Create a new user
 
@@ -17,14 +17,14 @@ Create a new user
 **Returns**: `Object`, Promise of the request
 
 
-### getAll() 
+### Users.getAll() 
 
 Get all users
 
 **Returns**: `Object`, Request promise
 
 
-### get(userId, callback, options) 
+### Users.get(userId, callback, options) 
 
 Get natural or legal user by ID
 
@@ -39,7 +39,7 @@ Get natural or legal user by ID
 **Returns**: `Object`, Request promise
 
 
-### getNatural(userId, callback, options) 
+### Users.getNatural(userId, callback, options) 
 
 Get natural user by ID
 
@@ -54,7 +54,7 @@ Get natural user by ID
 **Returns**: `Object`, Request promise
 
 
-### getLegal(userId, callback, options) 
+### Users.getLegal(userId, callback, options) 
 
 Get legal user by ID
 
@@ -69,7 +69,7 @@ Get legal user by ID
 **Returns**: `Object`, Request promise
 
 
-### update(user, callback, options) 
+### Users.update(user, callback, options) 
 
 Save user
 
@@ -84,7 +84,7 @@ Save user
 **Returns**: `Object`, Request promise
 
 
-### createBankAccount(userId, bankAccount, callback, options) 
+### Users.createBankAccount(userId, bankAccount, callback, options) 
 
 Create bank account for user
 
@@ -101,7 +101,7 @@ Create bank account for user
 **Returns**: `Object`, Request promise
 
 
-### getBankAccounts(userId, callback, options) 
+### Users.getBankAccounts(userId, callback, options) 
 
 Get all bank accounts for user
 
@@ -116,7 +116,7 @@ Get all bank accounts for user
 **Returns**: `Object`, Request promise
 
 
-### getBankAccount(userId, bankAccountId, callback, options) 
+### Users.getBankAccount(userId, bankAccountId, callback, options) 
 
 Get all bank accounts for user
 
@@ -133,7 +133,7 @@ Get all bank accounts for user
 **Returns**: `Object`, Request promise
 
 
-### getWallets(userId, callback, options) 
+### Users.getWallets(userId, callback, options) 
 
 Get all wallets accounts for user
 
@@ -148,7 +148,7 @@ Get all wallets accounts for user
 **Returns**: `Object`, Request promise
 
 
-### getTransactions(userId, callback, options) 
+### Users.getTransactions(userId, callback, options) 
 
 Get all transactions for user
 
@@ -163,7 +163,7 @@ Get all transactions for user
 **Returns**: `Object`, Request promise
 
 
-### getCards(userId, callback, options) 
+### Users.getCards(userId, callback, options) 
 
 Get all cards for user
 
@@ -178,7 +178,7 @@ Get all cards for user
 **Returns**: `Object`, Request promise
 
 
-### createKycDocument(userId, kycDocument, callback, options) 
+### Users.createKycDocument(userId, kycDocument, callback, options) 
 
 Create new KYC document
 
@@ -195,7 +195,7 @@ Create new KYC document
 **Returns**: `Object`, Request promise
 
 
-### getKycDocuments(userId, callback, options) 
+### Users.getKycDocuments(userId, callback, options) 
 
 Get all KYC documents for user
 
@@ -210,7 +210,7 @@ Get all KYC documents for user
 **Returns**: `Object`, Request promise
 
 
-### getKycDocument(userId, kycDocumentId, callback, options) 
+### Users.getKycDocument(userId, kycDocumentId, callback, options) 
 
 Get KYC document
 
@@ -227,7 +227,7 @@ Get KYC document
 **Returns**: `Object`, Request promise
 
 
-### updateKycDocument(userId, kycDocumentId, callback, options) 
+### Users.updateKycDocument(userId, kycDocumentId, callback, options) 
 
 Save KYC document
 
@@ -244,7 +244,7 @@ Save KYC document
 **Returns**: `Object`, Request promise
 
 
-### createKycPage(userId, kycDocumentId, kycPage, callback, options) 
+### Users.createKycPage(userId, kycDocumentId, kycPage, callback, options) 
 
 Create page for KYC document
 
@@ -263,7 +263,7 @@ Create page for KYC document
 **Returns**: `Object`, Request promise
 
 
-### createKycPageFromFile(userId, kycDocumentId, file, callback, options) 
+### Users.createKycPageFromFile(userId, kycDocumentId, file, callback, options) 
 
 Create page for KYC document
 

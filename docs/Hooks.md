@@ -1,12 +1,12 @@
-# Global
+# Hooks
 
-
+[MangoPay Hooks API Reference](https://docs.mangopay.com/api-reference/hooks-overview/)
 
 
 
 * * *
 
-### create(hook, callback, options) 
+### Hooks.create(hook, callback, options) 
 
 Create new hook
 
@@ -21,7 +21,7 @@ Create new hook
 **Returns**: `Object`, Request promise
 
 
-### get(hookId, callback, options) 
+### Hooks.get(hookId, callback, options) 
 
 Get hook
 
@@ -36,7 +36,7 @@ Get hook
 **Returns**: `Object`, Request promise
 
 
-### update(hook, callback, options) 
+### Hooks.update(hook, callback, options) 
 
 Save hook
 
@@ -51,7 +51,7 @@ Save hook
 **Returns**: `Object`, Request promise
 
 
-### getAll(callback, options) 
+### Hooks.getAll(callback, options) 
 
 Get all hooks
 

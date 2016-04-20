@@ -1,12 +1,12 @@
-# Global
+# Transfers
 
-
+[MangoPay Transfers API Reference](https://docs.mangopay.com/api-references/transfers/)
 
 
 
 * * *
 
-### create(transfer, callback, options) 
+### Transfers.create(transfer, callback, options) 
 
 Create new transfer
 
@@ -21,7 +21,7 @@ Create new transfer
 **Returns**: `Object`, Request promise
 
 
-### get(transferId, callback, options) 
+### Transfers.get(transferId, callback, options) 
 
 Get transfer
 
@@ -36,7 +36,7 @@ Get transfer
 **Returns**: `Object`, Request promise
 
 
-### createRefund(transferId, refund, callback, options) 
+### Transfers.createRefund(transferId, refund, callback, options) 
 
 Create refund for transfer object
 

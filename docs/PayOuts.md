@@ -1,12 +1,12 @@
-# Global
+# PayOuts
 
-
+[MangoPay PayOuts API Reference](https://docs.mangopay.com/api-references/pay-out-bank-wire/)
 
 
 
 * * *
 
-### create(payOut, callback, options) 
+### PayOuts.create(payOut, callback, options) 
 
 Create new pay-out
 
@@ -21,7 +21,7 @@ Create new pay-out
 **Returns**: `Object`, Request promise
 
 
-### get(payOutId, callback, options) 
+### PayOuts.get(payOutId, callback, options) 
 
 Get payout
 

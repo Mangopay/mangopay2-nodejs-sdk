@@ -1,12 +1,12 @@
-# Global
+# CardRegistrations
 
-
+[MangoPay Card Registration API Reference](https://docs.mangopay.com/api-references/card-registration/)
 
 
 
 * * *
 
-### create(cardRegistration, callback, options) 
+### CardRegistrations.create(cardRegistration, callback, options) 
 
 Create new card registration
 
@@ -21,7 +21,7 @@ Create new card registration
 **Returns**: `Object`, Promise of the request
 
 
-### get(cardRegistrationId, callback, options) 
+### CardRegistrations.get(cardRegistrationId, callback, options) 
 
 Get registration
 
@@ -36,7 +36,7 @@ Get registration
 **Returns**: `Object`, Request promise
 
 
-### update(cardRegistration, callback, options) 
+### CardRegistrations.update(cardRegistration, callback, options) 
 
 Update card registration
 

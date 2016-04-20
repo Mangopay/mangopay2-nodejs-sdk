@@ -1,12 +1,12 @@
-# Global
+# DisputeDocuments
 
-
+[MangoPay Dispute Documents API Reference](https://docs.mangopay.com/api-references/disputes/dispute-documents/)
 
 
 
 * * *
 
-### get(documentId, callback, options) 
+### DisputeDocuments.get(documentId, callback, options) 
 
 Gets dispute's document
 
@@ -21,7 +21,7 @@ Gets dispute's document
 **Returns**: `Object`, Request promise
 
 
-### getAll(callback, options) 
+### DisputeDocuments.getAll(callback, options) 
 
 Gets dispute's documents for client
 
