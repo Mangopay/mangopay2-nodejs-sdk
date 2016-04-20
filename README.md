@@ -22,23 +22,17 @@ Usage inside your app
     
 Documentation
 -------------------------------------------------
-[Github Full Node.js SDK Documentation](docs/README.md) is located in ``/docs`` folder. You can also access [API References on our website](https://docs.mangopay.com/api-references/).
+[Github Full Node.js SDK Documentation](docs/README.md) is located in ``/docs`` folder. 
+You can also access [API References on our website](https://docs.mangopay.com/api-references/).
 
 License
 -------------------------------------------------
-MangopaySDK is distributed under MIT license, see the 
-[LICENSE file](https://github.com/Mangopay/mangopay2-nodejs-sdk/blob/master/LICENSE).
-
-
-Unit Tests
--------------------------------------------------
-Mocha tests are placed under ``/test/`` folder
-
+MangopaySDK is distributed under MIT license, see the [LICENSE file](LICENSE).
 
 Contacts
 -------------------------------------------------
 Report bugs or suggest features using
-[issue tracker on GitHub](https://github.com/Mangopay/mangopay2-nodejs-sdk).
+[issue tracker on GitHub](https://github.com/Mangopay/mangopay2-nodejs-sdk/issues).
 
 Account creation
 -------------------------------------------------
@@ -82,5 +76,13 @@ Sample usage of Mangopay SDK installed with npm in a Node.js project
 -------------------------------------------------
 Don't forget to check examples folder !
 
-Logging
+Contributing
 -------------------------------------------------
+    npm start                       // installs dependencies and global mocha for testing and jsdox for documentation
+    npm test                        // runs the mocha tests
+    npm run-script documentation    // update documentation using jsdox
+    
+Unit Tests
+-------------------------------------------------
+Mocha tests are placed under ``/test/`` folder. To run the tests, make sure you have all dependencies installed.
+Check Contributing section for details.
