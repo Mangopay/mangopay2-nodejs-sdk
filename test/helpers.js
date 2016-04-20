@@ -107,6 +107,47 @@ module.exports = {
         });
     },
 
+    getNewPayoutBankWire: function(api, user, callback) {
+        var self = this;
+
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        var account = {
+            OwnerName: user.FirstName + ' ' + user.LastName,
+            OwnerAddress: user.Address,
+            Type: 'IBAN',
+            IBAN: 'FR7618829754160173622224154',
+            BIC: 'CMBRFR2BCME'
+        };
+
+        api.Wallets.create(wallet).then(function(data, response){
+            api.Users.createBankAccount(user.Id, account).then(function(data, response){
+                var payOut = {
+                    DebitedWalletId: wallet.Id,
+                    AuthorId: user.Id,
+                    CreditedUserId: user.Id,
+                    Tag: 'DefaultTag',
+                    DebitedFunds: {
+                        Amount: 10,
+                        Currency: 'EUR'
+                    },
+                    Fees: {
+                        Amount: 5,
+                        Currency: 'EUR'
+                    },
+                    BankAccountId: data.Id,
+                    BankWireRef: 'User payment',
+                    PaymentType: 'BANK_WIRE'
+                };
+                api.PayOuts.create(payOut, callback);
+            });
+        });
+    },
+
     getNewPayInCardWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],

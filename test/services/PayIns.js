@@ -4,7 +4,6 @@ var helpers = require('../helpers');
 
 describe('PayIns', function() {
     var john = helpers.data.UserNatural;
-    john.PersonType = 'NATURAL';
 
     before(function(done){
         api.Users.create(john, function(){

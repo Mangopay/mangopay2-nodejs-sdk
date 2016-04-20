@@ -5,7 +5,6 @@ var helpers = require('../helpers');
 describe('Card Registrations', function () {
     var cardRegistration;
     var john = helpers.data.UserNatural;
-    john.PersonType = 'NATURAL';
 
     before(function(done){
         api.Users.create(john, function(){
