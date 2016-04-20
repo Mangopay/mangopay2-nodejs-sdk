@@ -11,7 +11,8 @@ module.exports = {
             Nationality: 'FR',
             CountryOfResidence: 'FR',
             Occupation: 'programmer',
-            IncomeRange: 3
+            IncomeRange: 3,
+            PersonType: 'NATURAL'
         },
         UserLegal: {
             Name: 'MartixSampleOrg_NodejsSDK',
@@ -107,7 +108,6 @@ module.exports = {
     },
 
     getNewPayInCardWeb: function(api, user, callback) {
-        var self = this;
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
