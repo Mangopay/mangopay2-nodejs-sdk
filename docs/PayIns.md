@@ -55,27 +55,15 @@ Create refund for pay-in object
 
 ### PayIns.createTemporaryImmediatePayIn(immediatePayIn, callback, options) 
 
-WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
-
-Create new temporary immediate pay-in
+Create new temporary immediate pay-in (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
 **Parameters**
 
 **immediatePayIn**: `Object`, Immediate pay-in object
 
-**callback**: , WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
+**callback**: , Create new temporary immediate pay-in (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
-Create new temporary immediate pay-in
-
-**options**: , WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
-
-Create new temporary immediate pay-in
+**options**: , Create new temporary immediate pay-in (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
 **Returns**: `Object`, Request promise
 

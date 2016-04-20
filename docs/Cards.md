@@ -38,54 +38,30 @@ Update card
 
 ### Cards.createTemporaryPaymentCard(paymentCard, callback, options) 
 
-WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
-
-Create new temporary payment card
+Create new temporary payment card (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
 **Parameters**
 
 **paymentCard**: `Object`, TemporaryPaymentCard object or properties hash
 
-**callback**: , WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
+**callback**: , Create new temporary payment card (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
-Create new temporary payment card
-
-**options**: , WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
-
-Create new temporary payment card
+**options**: , Create new temporary payment card (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
 **Returns**: `Object`, Promise of the request
 
 
 ### Cards.getTemporaryPaymentCard(paymentCardId, callback, options) 
 
-WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
-
-Create new temporary payment card
+Create new temporary payment card ( WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
 **Parameters**
 
 **paymentCardId**: `number`, TemporaryPaymentCard object or properties hash
 
-**callback**: , WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
+**callback**: , Create new temporary payment card ( WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
-Create new temporary payment card
-
-**options**: , WARNING
-It's temporary entity and it will be removed in the future.
-Please, contact with support before using these features or if you have any questions.
-
-Create new temporary payment card
+**options**: , Create new temporary payment card ( WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
 
 **Returns**: `Object`, Promise of the request
 
