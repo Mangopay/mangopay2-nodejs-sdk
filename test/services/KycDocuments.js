@@ -46,7 +46,7 @@ describe('KycDocuments', function() {
             });
         });
 
-        it('should contain the created document', function () {
+        it('should get the document', function () {
             expect(getDocument.Id).to.equal(document.Id);
         });
     });
