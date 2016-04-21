@@ -1,0 +1,53 @@
+var expect = require('chai').expect;
+var helpers = require('../helpers');
+
+describe('Transfers', function() {
+    var john = helpers.data.UserNatural;
+    var wallet, secondWallet, transfer;
+
+    before(function(done){
+        api.Users.create(john).then(function(){
+            wallet = {
+                Owners: [john.Id],
+                Currency: 'EUR',
+                Description: 'WALLET IN EUR'
+            };
+            secondWallet = {
+                Owners: [john.Id],
+                Currency: 'EUR',
+                Description: 'WALLET IN EUR'
+            };
+            api.Wallets.create(wallet).then(function(){
+                api.Wallets.create(secondWallet).then(function(){
+                    api.Transfers.create({
+                        AuthorId: john.Id,
+                        Tag: 'DefaultTag',
+                        CreditedUserId: john.Id,
+                        DebitedFunds: {
+                            Currency: 'EUR',
+                            Amount: 1
+                        },
+                        Fees: {
+                            Currency: 'EUR',
+                            Ammount: 0
+                        },
+                        DebitedWalletId: wallet.Id,
+                        CreditedWalletId: secondWallet.Id
+                    }, function(data, response){
+                        transfer = data;
+                        done();
+                    });
+                });
+            });
+        });
+    });
+
+    describe('Create', function () {
+        it('should not happen because of insufficient funds', function () {
+            expect(transfer.Status).to.equal('FAILED');
+            expect(transfer.CreditedUserId).to.equal(john.Id);
+            expect(transfer.DebitedWalletId).to.equal(wallet.Id);
+            expect(transfer.CreditedWalletId).to.equal(secondWallet.Id);
+        });
+    });
+});
