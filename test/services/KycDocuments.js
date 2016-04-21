@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
 
@@ -25,13 +26,28 @@ describe('KycDocuments', function() {
                  done();
              }, {
                  parameters: {
-                     Sort: 'CreatedDate:desc'
+                     AfterDate: document.CreationDate - 10,
+                     BeforeDate: document.CreationDate + 10
                  }
-             })
+             });
         });
 
-        it('should contain the document', function () {
+        it('should contain the created document', function () {
             expect(_.findWhere(documents, {Id: document.Id})).to.exist;
+        });
+    });
+
+    describe('Get', function () {
+        var getDocument;
+        before(function(done){
+            api.KycDocuments.get(document.Id, function(data, response){
+                getDocument = data;
+                done();
+            });
+        });
+
+        it('should contain the created document', function () {
+            expect(getDocument.Id).to.equal(document.Id);
         });
     });
 });
