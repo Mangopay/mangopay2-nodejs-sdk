@@ -188,5 +188,26 @@ module.exports = {
         };
 
         api.PayIns.createRefund(payIn.Id, refund, callback);
+    },
+
+    getPaylineCorrectRegistartionData: function(cardRegistration, callback) {
+        /*
+         ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
+         */
+        var options = {
+            parameters: {
+                data: cardRegistration.PreregistrationData,
+                accessKeyRef: cardRegistration.AccessKey,
+                cardNumber: '4970101122334422',
+                cardExpirationDate: '1224',
+                cardCvx: '123'
+            },
+            url: cardRegistration.CardRegistrationURL
+        };
+
+        return api.method('post', function (data, response) {
+            callback(new Buffer(data).toString(), response);
+        }, options);
     }
+
 };
