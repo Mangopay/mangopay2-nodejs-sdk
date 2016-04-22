@@ -282,7 +282,7 @@ describe('Users', function() {
             });
 
             it('Should work properly', function(){
-                expect(bankAccounts[0].CreationDate).to.be.above(bankAccounts[1].CreationDate);
+                expect(bankAccounts[0].CreationDate).to.be.above(bankAccounts[3].CreationDate);
             });
         });
     });
@@ -572,8 +572,8 @@ describe('Users', function() {
             });
         });
 
-        it('should have one wallet', function(){
-            expect(wallets.length).to.equal(1);
+        it('should have two wallets', function(){
+            expect(wallets.length).to.equal(2);
         });
 
         it('wallet should contain the right data', function(){

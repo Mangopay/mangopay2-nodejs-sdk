@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var helpers = require('../helpers');
 
-describe('Transfers', function() {
+describe('Refunds', function() {
     var john = helpers.data.UserNatural;
     var wallet, secondWallet, transfer, cardRegistration, card;
 
