@@ -40,10 +40,9 @@ describe('Users', function() {
 
     it('Create Legal Fails If Required Properties Not Provided', function(done){
         var user = new UserLegal();
-        api.Users.create(user).done(function(){
-            assert.fail('Request should not succeed');
-        }, function(){
-            assert.isOk('Our request failed');
+
+        api.Users.create(user, function(data){
+            expect(data.errors).to.exist;
             done();
         });
     });
@@ -64,11 +63,8 @@ describe('Users', function() {
         });
 
         it('Fails for Legal User', function(done) {
-            api.Users.getNatural(matrix.Id).done(function(){
-                assert.fail('Request passed');
-                done()
-            }, function(){
-                assert.isOk('Should fail');
+            api.Users.getLegal(john.Id, function(data) {
+                expect(data.errors).to.exist;
                 done();
             });
         });
@@ -90,11 +86,8 @@ describe('Users', function() {
         });
 
         it('Fails for Natural User', function(done) {
-            api.Users.getNatural(matrix.Id).done(function(){
-                assert.fail('Request passed');
-                done()
-            }, function(){
-                assert.isOk('Should fail');
+            api.Users.getNatural(matrix.Id, function(data) {
+                expect(data.errors).to.exist;
                 done();
             });
         });
