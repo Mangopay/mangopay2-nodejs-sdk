@@ -49,7 +49,7 @@ Sample usage
 -------------------------------------------------
 Don't forget to check examples folder !
     
-### Creating a user ###
+### Creating a user
 
     mangopay.Users.create({
         "FirstName": "Victor",
@@ -70,6 +70,25 @@ Don't forget to check examples folder !
     }).then(function(model){ 
         // User created - using promise
     });;
+    
+### Pagination / Filtering
+In order to [paginate](https://docs.mangopay.com/api-references/pagination/) or [filter](https://docs.mangopay.com/api-references/sort-lists/) results,
+we can use ``options.parameters`` to specify these options:
+
+    api.Transactions.getAll({
+        parameters: {
+            // Pagination
+            per_page: 2,
+            page: 2,
+            
+            // Filters
+            BeforeDate: 1414000367,
+            AfterDate: 1414000367,
+            Nature: REGULAR,
+            Status: FAILED,
+            Type: TRANSFER
+        }
+    }
 
 
 Sample usage of Mangopay SDK installed with npm in a Node.js project
