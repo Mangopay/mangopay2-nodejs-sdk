@@ -14,9 +14,9 @@ Create new pre-authorization
 
 **cardPreAuthorization**: `Object`, CardPreAuthorization object or properties hash
 
-**callback**: , Create new pre-authorization
+**callback**: `function`, Callback function
 
-**options**: , Create new pre-authorization
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -29,9 +29,9 @@ Get pre-authorization object
 
 **cardPreAuthorizationId**: `number`, PreAuthorization identifier
 
-**callback**: , Get pre-authorization object
+**callback**: `function`, Callback function
 
-**options**: , Get pre-authorization object
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

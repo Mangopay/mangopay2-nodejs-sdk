@@ -14,9 +14,9 @@ Create new wallet
 
 **wallet**: `Object`, Wallet object
 
-**callback**: , Create new wallet
+**callback**: `function`, Callback function
 
-**options**: , Create new wallet
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -29,9 +29,9 @@ Get pay-in
 
 **walletId**: `number`, Wallet identifier
 
-**callback**: , Get pay-in
+**callback**: `function`, Callback function
 
-**options**: , Get pay-in
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -44,9 +44,9 @@ Update wallet
 
 **wallet**: `Object`, Wallet object
 
-**callback**: , Update wallet
+**callback**: `function`, Callback function
 
-**options**: , Update wallet
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -59,9 +59,9 @@ Get transactions for the wallet
 
 **walletId**: `number`, Wallet identifier
 
-**callback**: , Get transactions for the wallet
+**callback**: `function`, Callback function
 
-**options**: , Get transactions for the wallet
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

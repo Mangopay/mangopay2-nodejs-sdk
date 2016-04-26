@@ -14,9 +14,9 @@ Get card
 
 **cardId**: `number`, Card identifier
 
-**callback**: , Get card
+**callback**: `function`, Callback function
 
-**options**: , Get card
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -44,9 +44,9 @@ Create new temporary payment card (WARNING It's temporary entity and it will be 
 
 **paymentCard**: `Object`, TemporaryPaymentCard object or properties hash
 
-**callback**: , Create new temporary payment card (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
+**callback**: `function`, Callback function
 
-**options**: , Create new temporary payment card (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -59,9 +59,9 @@ Create new temporary payment card ( WARNING It's temporary entity and it will be
 
 **paymentCardId**: `number`, TemporaryPaymentCard object or properties hash
 
-**callback**: , Create new temporary payment card ( WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
+**callback**: `function`, Callback function
 
-**options**: , Create new temporary payment card ( WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 

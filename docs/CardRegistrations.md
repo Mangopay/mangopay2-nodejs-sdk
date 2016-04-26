@@ -14,9 +14,9 @@ Create new card registration
 
 **cardRegistration**: `Object`, CardRegistration object or properties hash
 
-**callback**: , Create new card registration
+**callback**: `function`, Callback function
 
-**options**: , Create new card registration
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -29,9 +29,9 @@ Get registration
 
 **cardRegistrationId**: `number`, Registration identifier
 
-**callback**: , Get registration
+**callback**: `function`, Callback function
 
-**options**: , Get registration
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

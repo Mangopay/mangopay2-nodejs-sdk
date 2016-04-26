@@ -14,9 +14,9 @@ Create new pay-in
 
 **payIn**: `Object`, PayIn object
 
-**callback**: , Create new pay-in
+**callback**: `function`, Callback function
 
-**options**: , Create new pay-in
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -29,9 +29,9 @@ Get pay-in
 
 **payInId**: `number`, PayIn identifier
 
-**callback**: , Get pay-in
+**callback**: `function`, Callback function
 
-**options**: , Get pay-in
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -46,9 +46,9 @@ Create refund for pay-in object
 
 **refund**: `Object`, Refund data
 
-**callback**: , Create refund for pay-in object
+**callback**: `function`, Callback function
 
-**options**: , Create refund for pay-in object
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -61,9 +61,9 @@ Create new temporary immediate pay-in (WARNING It's temporary entity and it will
 
 **immediatePayIn**: `Object`, Immediate pay-in object
 
-**callback**: , Create new temporary immediate pay-in (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
+**callback**: `function`, Callback function
 
-**options**: , Create new temporary immediate pay-in (WARNING It's temporary entity and it will be removed in the future. Please, contact with support before using these features or if you have any questions.)
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

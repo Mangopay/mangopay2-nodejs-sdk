@@ -32,9 +32,9 @@ Get natural or legal user by ID
 
 **userId**: `number`, User identifier
 
-**callback**: , Get natural or legal user by ID
+**callback**: `function`, Callback function
 
-**options**: , Get natural or legal user by ID
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -47,7 +47,7 @@ Get natural user by ID
 
 **userId**: `number`, User identifier
 
-**callback**: , Callback function
+**callback**: `function`, Callback function              Callback function
 
 **options**: `Object`, Request options
 
@@ -62,7 +62,7 @@ Get legal user by ID
 
 **userId**: `number`, User identifier
 
-**callback**: , Callback function
+**callback**: `function`, Callback function              Callback function
 
 **options**: `Object`, Request options
 

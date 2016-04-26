@@ -14,9 +14,9 @@ Create new transfer
 
 **transfer**: `Object`, Transfer object
 
-**callback**: , Create new transfer
+**callback**: `function`, Callback function
 
-**options**: , Create new transfer
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -29,9 +29,9 @@ Get transfer
 
 **transferId**: `number`, Transfer identifier
 
-**callback**: , Get transfer
+**callback**: `function`, Callback function
 
-**options**: , Get transfer
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -46,9 +46,9 @@ Create refund for transfer object
 
 **refund**: `Object`, Refund object
 
-**callback**: , Create refund for transfer object
+**callback**: `function`, Callback function
 
-**options**: , Create refund for transfer object
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

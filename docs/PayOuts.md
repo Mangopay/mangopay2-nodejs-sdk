@@ -14,9 +14,9 @@ Create new pay-out
 
 **payOut**: `Object`, PayOut object
 
-**callback**: , Create new pay-out
+**callback**: `function`, Callback function
 
-**options**: , Create new pay-out
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -29,9 +29,9 @@ Get payout
 
 **payOutId**: `number`, PayOut identifiers
 
-**callback**: , Get payout
+**callback**: `function`, Callback function
 
-**options**: , Get payout
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

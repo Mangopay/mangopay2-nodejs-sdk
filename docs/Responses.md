@@ -12,9 +12,9 @@ Get response from previous call
 
 **Parameters**
 
-**callback**: , Get response from previous call
+**callback**: `function`, Callback function
 
-**options**: , Get response from previous call
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

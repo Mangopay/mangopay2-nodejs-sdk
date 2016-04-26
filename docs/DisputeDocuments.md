@@ -14,9 +14,9 @@ Gets dispute's document
 
 **documentId**: `number`, Document identifier
 
-**callback**: , Gets dispute's document
+**callback**: `function`, Callback function
 
-**options**: , Gets dispute's document
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -27,9 +27,9 @@ Gets dispute's documents for client
 
 **Parameters**
 
-**callback**: , Gets dispute's documents for client
+**callback**: `function`, Callback function
 
-**options**: , Gets dispute's documents for client
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

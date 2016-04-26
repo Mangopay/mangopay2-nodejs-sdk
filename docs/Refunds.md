@@ -14,9 +14,9 @@ Get events
 
 **refundId**: `number`, Refund id
 
-**callback**: , Get events
+**callback**: `function`, Callback function
 
-**options**: , Get events
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

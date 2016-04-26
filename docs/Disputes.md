@@ -14,9 +14,9 @@ Get dispute
 
 **disputeId**: `number`, Dispute identifier
 
-**callback**: , Get dispute
+**callback**: `function`, Callback function
 
-**options**: , Get dispute
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -27,9 +27,9 @@ Get all disputes
 
 **Parameters**
 
-**callback**: , Get all disputes
+**callback**: `function`, Callback function
 
-**options**: , Get all disputes
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -59,9 +59,9 @@ Contest dispute
 
 **contestedFunds**: `Money`, Contested funds
 
-**callback**: , Contest dispute
+**callback**: `function`, Callback function
 
-**options**: , Contest dispute
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -74,9 +74,9 @@ This method is used to resubmit a Dispute if it is reopened requiring more docs
 
 **disputeId**: `number`, Dispute id
 
-**callback**: , This method is used to resubmit a Dispute if it is reopened requiring more docs
+**callback**: `function`, Callback function
 
-**options**: , This method is used to resubmit a Dispute if it is reopened requiring more docs
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -89,9 +89,9 @@ Close dispute
 
 **disputeId**: `number`, Dispute id
 
-**callback**: , Close dispute
+**callback**: `function`, Callback function
 
-**options**: , Close dispute
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -104,9 +104,9 @@ Gets dispute's transactions
 
 **disputeId**: `number`, Dispute identifier
 
-**callback**: , Gets dispute's transactions
+**callback**: `function`, Callback function
 
-**options**: , Gets dispute's transactions
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -119,9 +119,9 @@ Gets dispute's documents for wallet
 
 **walletId**: `number`, Wallet identifier
 
-**callback**: , Gets dispute's documents for wallet
+**callback**: `function`, Callback function
 
-**options**: , Gets dispute's documents for wallet
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -134,9 +134,9 @@ Gets user's disputes
 
 **userId**: `number`, User identifier
 
-**callback**: , Gets user's disputes
+**callback**: `function`, Callback function
 
-**options**: , Gets user's disputes
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -149,9 +149,9 @@ Gets repudiation
 
 **repudiationId**: `number`, Repudiation identifier
 
-**callback**: , Gets repudiation
+**callback**: `function`, Callback function
 
-**options**: , Gets repudiation
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -166,9 +166,9 @@ Creates settlement transfer
 
 **repudiationId**: `number`, Repudiation identifier
 
-**callback**: , Creates settlement transfer
+**callback**: `function`, Callback function
 
-**options**: , Creates settlement transfer
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -181,9 +181,9 @@ Gets settlement transfer
 
 **settlementTransferId**: `number`, Settlement Transfer identifier
 
-**callback**: , Gets settlement transfer
+**callback**: `function`, Callback function
 
-**options**: , Gets settlement transfer
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -196,9 +196,9 @@ Gets documents for dispute
 
 **disputeId**: `number`, Dispute identifier
 
-**callback**: , Gets documents for dispute
+**callback**: `function`, Callback function
 
-**options**: , Gets documents for dispute
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -213,9 +213,9 @@ Update dispute document
 
 **disputeDocument**: `Object`, Dispute document
 
-**callback**: , Update dispute document
+**callback**: `function`, Callback function
 
-**options**: , Update dispute document
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -230,9 +230,9 @@ Creates document for dispute
 
 **disputeDocument**: `Object`, Dispute document
 
-**callback**: , Creates document for dispute
+**callback**: `function`, Callback function
 
-**options**: , Creates document for dispute
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -249,9 +249,9 @@ Creates document's page for dispute
 
 **disputeDocumentPage**: `Object`, Dispute document page
 
-**callback**: , Creates document's page for dispute
+**callback**: `function`, Callback function
 
-**options**: , Creates document's page for dispute
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 
@@ -268,9 +268,9 @@ Creates document's page for dispute from file
 
 **file**: `string`, File path
 
-**callback**: , Creates document's page for dispute from file
+**callback**: `function`, Callback function
 
-**options**: , Creates document's page for dispute from file
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Promise of the request
 

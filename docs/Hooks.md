@@ -14,9 +14,9 @@ Create new hook
 
 **hook**: `Object`, Hook object
 
-**callback**: , Create new hook
+**callback**: `function`, Callback function
 
-**options**: , Create new hook
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -29,9 +29,9 @@ Get hook
 
 **hookId**: `number`, Hook identifier
 
-**callback**: , Get hook
+**callback**: `function`, Callback function
 
-**options**: , Get hook
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -44,9 +44,9 @@ Save hook
 
 **hook**: `Object`, Hook object
 
-**callback**: , Save hook
+**callback**: `function`, Callback function
 
-**options**: , Save hook
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -57,9 +57,9 @@ Get all hooks
 
 **Parameters**
 
-**callback**: , Get all hooks
+**callback**: `function`, Callback function
 
-**options**: , Get all hooks
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

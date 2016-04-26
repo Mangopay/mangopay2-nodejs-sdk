@@ -12,9 +12,9 @@ Get all KycDocuments
 
 **Parameters**
 
-**callback**: , Get all KycDocuments
+**callback**: `function`, Callback function
 
-**options**: , Get all KycDocuments
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -27,9 +27,9 @@ Get KycDocument
 
 **kycDocumentId**: `number`, KycDocument identifier
 
-**callback**: , Get KycDocument
+**callback**: `function`, Callback function
 
-**options**: , Get KycDocument
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

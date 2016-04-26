@@ -12,9 +12,9 @@ Get events
 
 **Parameters**
 
-**callback**: , Get events
+**callback**: `function`, Callback function
 
-**options**: , Get events
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
