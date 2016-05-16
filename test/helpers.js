@@ -6,7 +6,14 @@ module.exports = {
             FirstName: 'John_NodejsSDK',
             LastName: 'Doe_NodejsSDK',
             Email: 'john.doe@sample.org',
-            Address: '1 rue des Misérables, Paris',
+            Address: {
+                "AddressLine1": "4101 Reservoir Rd NW",
+                "AddressLine2": "",
+                "City": "Washington",
+                "Region": "District of Columbia",
+                "PostalCode": "20007",
+                "Country": "US"
+            },
             Birthday: new Date('12/21/1975').getTime(),
             Nationality: 'FR',
             CountryOfResidence: 'FR',
@@ -18,11 +25,25 @@ module.exports = {
             Name: 'MartixSampleOrg_NodejsSDK',
             Email: 'mail@test.com',
             LegalPersonType: 'BUSINESS',
-            HeadQuartersAddress: '1 rue des Misérables, Paris',
+            HeadQuartersAddress: {
+                "AddressLine1": "4101 Reservoir Rd NW",
+                "AddressLine2": "",
+                "City": "Washington",
+                "Region": "District of Columbia",
+                "PostalCode": "20007",
+                "Country": "US"
+            },
             LegalRepresentativeFirstName: 'John_NodejsSDK',
             LegalRepresentativeLastName: 'Doe_NodejsSDK',
             LegalRepresentativeEmail: 'john.doe@sample.org',
-            LegalRepresentativeAddress:'1 rue des Misérables, Paris' ,
+            LegalRepresentativeAddress: {
+                "AddressLine1": "4101 Reservoir Rd NW",
+                "AddressLine2": "",
+                "City": "Washington",
+                "Region": "District of Columbia",
+                "PostalCode": "20007",
+                "Country": "US"
+            },
             LegalRepresentativeBirthday: new Date('12/21/1975').getTime(),
             LegalRepresentativeNationality: 'FR',
             LegalRepresentativeCountryOfResidence: 'FR'
