@@ -15,7 +15,9 @@ Usage inside your app
     
     var api = new mangopay({
         clientId: 'your_client_id',
-        clientPassword: 'your_client_password'
+        clientPassword: 'your_client_password',
+        // Set the right production API url. If testing, omit the property since it defaults to sandbox URL
+        baseUrl: 'https://api.mangopay.com' 
     });
     
     api.Users.create(...)
