@@ -20,6 +20,20 @@ Usage inside your app
     
     api.Users.create(...)
     
+Supported options
+-------------------------------------------------
+| Option    | Default value | Description |
+| --------  | -----------   | ----------- |
+|clientId   |null      | API Client Id|
+|clientPassword|null| API Client Password|
+|baseUrl|'https://api.sandbox.mangopay.com'| API Base URL. The fault base value points to sandbox. Production is 'https://api.mangopay.com'|
+|debugMode|false| Active debugging|
+|logClass|require('./log')|Log function to be used for debug|
+|connectionTimeout|30000|Set the connection timeout limit (in milliseconds)|
+|responseTimeout|80000|Set the response timeout limit (in milliseconds)|
+|apiVersion|'v2.01'|API Version|
+|errorHandler|function(options, err) {console.error(options, err);}|Set a custom error handler
+    
 Documentation
 -------------------------------------------------
 [Github Full Node.js SDK Documentation](docs/README.md) is located in ``/docs`` folder. 
