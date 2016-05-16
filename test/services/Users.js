@@ -58,8 +58,8 @@ describe('Users', function() {
         });
 
         it('John should be the same', function(){
-            expect(_.isMatch(john1, john.data)).to.be.true;
-            expect(_.isMatch(john2, john.data)).to.be.true;
+            expect(_.isMatch(john1, _.omit(john.data, 'Address'))).to.be.true;
+            expect(_.isMatch(john2, _.omit(john.data, 'Address'))).to.be.true;
         });
 
         it('Fails for Legal User', function(done) {
@@ -81,8 +81,8 @@ describe('Users', function() {
         });
 
         it('Matrix should be the same', function(){
-            expect(_.isMatch(matrix1, matrix.data)).to.be.true;
-            expect(_.isMatch(matrix2, matrix.data)).to.be.true;
+            expect(_.isMatch(matrix1, _.omit(matrix.data, 'HeadquartersAddress', 'LegalRepresentativeAddress'))).to.be.true;
+            expect(_.isMatch(matrix2, _.omit(matrix.data, 'HeadquartersAddress', 'LegalRepresentativeAddress'))).to.be.true;
         });
 
         it('Fails for Natural User', function(done) {
@@ -106,7 +106,8 @@ describe('Users', function() {
         });
 
         it('Models should be the same', function(){
-            expect(_.isMatch(john, johnClone)).to.be.true;
+            expect(_.isMatch(john, _.omit(johnClone, 'Address'))).to.be.true;
+
         });
     });
     describe('Save Legal', function(){
@@ -122,7 +123,7 @@ describe('Users', function() {
         });
 
         it('Models should be the same', function(){
-            expect(_.isMatch(matrix, matrixClone)).to.be.true;
+            expect(_.isMatch(matrix, _.omit(matrixClone, 'HeadquartersAddress', 'LegalRepresentativeAddress'))).to.be.true;
         });
     });
 

@@ -25,7 +25,7 @@ module.exports = {
             Name: 'MartixSampleOrg_NodejsSDK',
             Email: 'mail@test.com',
             LegalPersonType: 'BUSINESS',
-            HeadQuartersAddress: {
+            HeadquartersAddress: {
                 "AddressLine1": "4101 Reservoir Rd NW",
                 "AddressLine2": "",
                 "City": "Washington",

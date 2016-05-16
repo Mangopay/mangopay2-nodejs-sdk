@@ -18,7 +18,14 @@ api.Users.create({
     LegalRepresentativeFirstName: 'Mango',
     LegalRepresentativeLastName: 'Pay',
     LegalRepresentativeEmail: 'mango@mangopay.com',
-    HeadquartersAddress: '1 rue MangoPay, Paris',
+    HeadquartersAddress: {
+        "AddressLine1": "4101 Reservoir Rd NW",
+        "AddressLine2": "",
+        "City": "Washington",
+        "Region": "District of Columbia",
+        "PostalCode": "20007",
+        "Country": "US"
+    },
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: 'FR',
     LegalRepresentativeCountryOfResidence: 'FR',
