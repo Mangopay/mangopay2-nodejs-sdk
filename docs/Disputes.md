@@ -42,9 +42,9 @@ Update dispute's tag
 
 **dispute**: `Object`, Dispute object of properties hash
 
-**callback**: `function`, Update dispute's tag
+**callback**: `function`, Callback function
 
-**options**: `Object`, Update dispute's tag
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
@@ -245,7 +245,7 @@ Creates document's page for dispute
 
 **disputeId**: `number`, Dispute identifier
 
-**disputeDocumentId**: `number`, Dispute document indentifier
+**disputeDocumentId**: `number`, Dispute document identifier
 
 **disputeDocumentPage**: `Object`, Dispute document page
 
@@ -264,7 +264,7 @@ Creates document's page for dispute from file
 
 **disputeId**: `number`, Dispute identifier
 
-**disputeDocumentId**: `number`, Dispute document indentifier
+**disputeDocumentId**: `number`, Dispute document identifier
 
 **file**: `string`, File path
 

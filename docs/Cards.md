@@ -29,9 +29,9 @@ Update card
 
 **card**: `Object`, Card object of properties hash
 
-**callback**: `function`, Update card
+**callback**: `function`, Callback function
 
-**options**: `Object`, Update card
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 

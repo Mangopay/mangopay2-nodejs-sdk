@@ -44,9 +44,9 @@ Update card registration
 
 **cardRegistration**: `Object`, CardPreAuthorization object of properties hash
 
-**callback**: `function`, Update card registration
+**callback**: `function`, Callback function
 
-**options**: `Object`, Update card registration
+**options**: `Object`, Request options
 
 **Returns**: `Object`, Request promise
 
