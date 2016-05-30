@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var Address = require('../lib/models/Address');
 
 module.exports = {
     data: {
@@ -6,14 +7,14 @@ module.exports = {
             FirstName: 'John_NodejsSDK',
             LastName: 'Doe_NodejsSDK',
             Email: 'john.doe@sample.org',
-            Address: {
+            Address: new Address({
                 "AddressLine1": "4101 Reservoir Rd NW",
                 "AddressLine2": "",
                 "City": "Washington",
                 "Region": "District of Columbia",
                 "PostalCode": "20007",
                 "Country": "US"
-            },
+            }),
             Birthday: new Date('12/21/1975').getTime(),
             Nationality: 'FR',
             CountryOfResidence: 'FR',

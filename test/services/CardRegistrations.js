@@ -142,46 +142,5 @@ describe('Card Registrations', function () {
             });
         });
     });
-
-    describe('Temporary Payment Card', function () {
-        var temporaryPaymentCard;
-
-        describe('Create', function () {
-            before(function (done) {
-                temporaryPaymentCard = {
-                    UserId: john.Id,
-                    Tag: 'Test tag',
-                    Culture: 'FR',
-                    ReturnURL: 'http://test.com/test',
-                    TemplateURL: 'https://test.com/test'
-                };
-
-                api.Cards.createTemporaryPaymentCard(temporaryPaymentCard, function(data, response){
-                    done();
-                });
-            });
-
-            it('should be created', function () {
-                expect(temporaryPaymentCard.Id).not.to.be.undefined;
-                expect(temporaryPaymentCard.UserId).to.equal(john.Id);
-            });
-        });
-
-        describe('Get', function () {
-            var getTemporaryPaymentCard;
-
-            before(function (done) {
-                api.Cards.getTemporaryPaymentCard(temporaryPaymentCard.Id, function(data, response){
-                    getTemporaryPaymentCard = data;
-                    done();
-                });
-            });
-
-            it('should be created', function () {
-                expect(getTemporaryPaymentCard.Id).to.equal(temporaryPaymentCard.Id);
-                expect(getTemporaryPaymentCard.UserId).to.equal(john.Id);
-            });
-        });
-    });
 });
 

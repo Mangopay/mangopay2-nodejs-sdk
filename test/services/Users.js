@@ -178,12 +178,13 @@ describe('Users', function() {
         describe('US', function() {
             var usAccount;
             before(function(done){
-                var account = new BankAccount({
+                var account = new api.models.BankAccount({
                     OwnerName: john.FirstName + ' ' + john.LastName,
                     OwnerAddress: john.Address,
-                    Type: 'US',
-                    AccountNumber: '234234234234',
-                    ABA: '234334789'
+                    Details: new api.models.BankAccountDetailsUS({
+                        AccountNumber: '234234234234',
+                        ABA: '234334789'
+                    })
                 });
                 api.Users.createBankAccount(john.Id, account).then(function(account){
                     usAccount = account;

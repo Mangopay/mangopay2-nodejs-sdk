@@ -14,7 +14,7 @@ var api = new mangopay({
 api.Users.getNatural('1151091', function(data, response) {
     console.log(data.FirstName);
     console.log(data.LastName);
-}).then(function(model){
+}).then(function(data){
     console.log(data.FirstName);
     console.log(data.LastName);
 });
