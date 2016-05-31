@@ -28,13 +28,13 @@ Supported options
 | --------  | -----------   | ----------- |
 |clientId   |null      | API Client Id|
 |clientPassword|null| API Client Password|
-|baseUrl|'https://api.sandbox.mangopay.com'| API Base URL. The fault base value points to sandbox. Production is 'https://api.mangopay.com'|
+|baseUrl|"https://api.sandbox.mangopay.com"| API Base URL. The fault base value points to sandbox. Production is 'https://api.mangopay.com'|
 |debugMode|false| Active debugging|
-|logClass|require('./log')|Log function to be used for debug|
+|logClass|```function() {console.log(arguments)}```|Log function to be used for debug|
 |connectionTimeout|30000|Set the connection timeout limit (in milliseconds)|
 |responseTimeout|80000|Set the response timeout limit (in milliseconds)|
 |apiVersion|'v2.01'|API Version|
-|errorHandler|function(options, err) {console.error(options, err);}|Set a custom error handler
+|errorHandler|```function(options, err) {console.error(options, err)}```|Set a custom error handler
     
 Documentation
 -------------------------------------------------
@@ -67,6 +67,8 @@ Don't forget to check examples folder !
     
 ### Creating a user
 
+#### Using a hash of properties:
+
     mangopay.Users.create({
         "FirstName": "Victor",
         "LastName": "Hugo",
@@ -85,7 +87,48 @@ Don't forget to check examples folder !
         // User created - using callback
     }).then(function(model){ 
         // User created - using promise
-    });;
+    });
+    
+#### Using Mangopay SDK pre-defined models:
+
+    var myUser = new api.models.UserLegal({
+        Name: 'MangoPay',
+        Email: 'info@mangopay.com',
+        LegalPersonType: 'BUSINESS',
+        LegalRepresentativeFirstName: 'Mango',
+        LegalRepresentativeLastName: 'Pay',
+        LegalRepresentativeEmail: 'mango@mangopay.com',
+        HeadquartersAddress: new api.models.Address({
+            AddressLine1: "4101 Reservoir Rd NW",
+            AddressLine2: "",
+            City: "Washington",
+            Region: "District of Columbia",
+            PostalCode: "20007",
+            Country: "US"
+        }),
+        LegalRepresentativeBirthday: 1300186358,
+        LegalRepresentativeNationality: 'FR',
+        LegalRepresentativeCountryOfResidence: 'FR',
+        Tag: 'custom tag'
+    });
+    
+    api.Users.create(myUser).then(function(){
+        // Output the created user data to console
+        console.log(myUser.Name + ' user created at ' + myUser.CreationDate);
+    });
+
+#### Promise vs Callback
+Mangopay Node.js SDK supports both callback and promise approach. 
+Here is how they can be implemented :
+
+    api.Service.method(... , function(data, response){
+        // Callback method
+    })
+    
+    api.Service.method(...).then(function(data, response) {
+        // Promise function called
+    })
+
     
 ### Pagination / Filtering
 In order to [paginate](https://docs.mangopay.com/api-references/pagination/) or [filter](https://docs.mangopay.com/api-references/sort-lists/) results,

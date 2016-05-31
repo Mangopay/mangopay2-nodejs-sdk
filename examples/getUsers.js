@@ -20,7 +20,7 @@ api.Users.getNatural('1151091', function(data, response) {
 });
 
 /**
- * Exemple of pagination with promise on getAll users API
+ * Example of pagination with promise on getAll users API
  */
 api.Users.getAll({
     parameters: {
