@@ -23,8 +23,12 @@ describe('Users', function() {
     var matrix = new UserLegal(helpers.data.UserLegal);
 
     before(function(done){
-        Promise.all([api.Users.create(john), api.Users.create(matrix)]).then(function() {
-            done();
+        api.Users.create(john).then(function(data, response){
+            john = data;
+            api.Users.create(matrix).then(function(data, response){
+                matrix = data;
+                done();
+            });
         });
     });
 
