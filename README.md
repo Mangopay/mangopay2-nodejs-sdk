@@ -55,15 +55,6 @@ Account creation
 You can get yourself a [free sandbox account](https://www.mangopay.com/signup/create-sandbox/) or sign up for a 
 [production account](https://www.mangopay.com/signup/submit-your-app/go-live/) (note that validation of your production 
 account can take a few days, so think about doing it in advance of when you actually want to go live).
-
-
-Configuration
--------------------------------------------------
-
-
-Sample usage
--------------------------------------------------
-Don't forget to check examples folder !
     
 ### Creating a user
 
