@@ -178,25 +178,29 @@ module.exports = {
         };
 
         api.Wallets.create(wallet).then(function(){
-            var payIn = {
+            var payIn = new api.models.PayIn({
                 CreditedWalletId: wallet.Id,
                 AuthorId: user.Id,
-                DebitedFunds: {
+                DebitedFunds: new api.models.Money({
                     Amount: 10000,
                     Currency: 'EUR'
-                },
-                Fees: {
+                }),
+                Fees: new api.models.Money({
                     Amount: 0,
                     Currency: 'EUR'
-                },
-                CardType: 'CB_VISA_MASTERCARD',
+                }),
                 PaymentType: 'CARD',
+                PaymentDetails: new api.models.PayInPaymentDetailsCard({
+                    CardType: 'CB_VISA_MASTERCARD'
+                }),
                 ExecutionType: 'WEB',
-                ReturnURL: 'https://test.com',
-                TemplateURL: 'https://TemplateURL.com',
-                SecureMode:  'DEFAULT',
-                Culture: 'fr'
-            };
+                ExecutionDetails: new api.models.PayInPaymentDetailsCard({
+                    ReturnURL: 'https://test.com',
+                    TemplateURL: 'https://TemplateURL.com',
+                    SecureMode:  'DEFAULT',
+                    Culture: 'fr'
+                })
+            });
             api.PayIns.create(payIn, callback)
         });
     },
