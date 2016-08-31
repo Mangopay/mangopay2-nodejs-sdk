@@ -13,11 +13,23 @@ var BankAccount = require('../../lib/models/BankAccount');
 
 
 describe('Mandates', function() {
+    var ibanAccount;
     var john = new UserNatural(helpers.data.UserNatural);
 
     before(function(done){
         api.Users.create(john).then(function(data, response){
-            done()
+            account = new BankAccount({
+                OwnerName: john.FirstName + ' ' + john.LastName,
+                OwnerAddress: john.Address,
+                Details: new BankAccountDetailsIBAN({
+                    IBAN: 'FR7618829754160173622224154',
+                    BIC: 'CMBRFR2BCME'
+                })
+            });
+            api.Users.createBankAccount(john.Id, account).then(function(data){
+                ibanAccount = data;
+                done();
+            });
         });
     });
 
