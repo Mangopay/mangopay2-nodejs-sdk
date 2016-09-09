@@ -4,7 +4,7 @@ var helpers = require('../helpers');
 describe('Reports', function() {
     var report;
 
-    before(function (done) {
+    before(function(done) {
         report = {
             ReportType: "TRANSACTION"
         };
@@ -13,14 +13,11 @@ describe('Reports', function() {
         });
     });
 
-
-    describe('Create', function () {
-        it('should exist', function () {
-            expect(report.Id).to.exist;
-        });
+    it('should exist after creting it', function () {
+        expect(report.Id).to.exist;
     });
 
-    describe('Get', function () {
+    describe('Getting created report', function () {
         var getReport;
 
         before(function(done){
@@ -35,6 +32,4 @@ describe('Reports', function() {
             expect(report.CreationDate).to.equal(getReport.CreationDate);
         });
     });
-
-
 });
