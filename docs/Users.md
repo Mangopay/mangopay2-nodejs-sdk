@@ -101,6 +101,23 @@ Create bank account for user
 **Returns**: `Object`, Request promise
 
 
+### Users.deactivateBankAccount(userId, bankAccountId, callback, options) 
+
+Deactivate a bank account
+
+**Parameters**
+
+**userId**: , Deactivate a bank account
+
+**bankAccountId**: , Deactivate a bank account
+
+**callback**: , Deactivate a bank account
+
+**options**: , Deactivate a bank account
+
+**Returns**: `*`
+
+
 ### Users.getBankAccounts(userId, callback, options) 
 
 Get all bank accounts for user
