@@ -286,6 +286,38 @@ describe('Users', function() {
         });
     });
 
+    describe('Deactivate Bank Account', function(){
+        var otherAccount;
+        var deactivatedBankAccount;
+        before(function(done){
+            var account = new BankAccount({
+                UserId: john.Id,
+                OwnerName: john.FirstName + ' ' + john.LastName,
+                OwnerAddress: john.Address,
+                Type: 'OTHER',
+                Country: 'FR',
+                AccountNumber: '234234234234',
+                BIC: 'BINAADADXXX'
+            });
+            api.Users.createBankAccount(john.Id, account).then(function(account){
+                otherAccount = account;
+
+                api.Users.deactivateBankAccount(otherAccount.UserId, otherAccount.Id).then(function(account){
+                    deactivatedBankAccount = account;
+                    done();
+                });
+
+            });
+        });
+
+        it('Should be deactivated correctly', function(){
+           expect(deactivatedBankAccount.Id).not.to.be.undefined;
+           expect(deactivatedBankAccount.Id).to.equal(otherAccount.Id);
+           expect(deactivatedBankAccount.Active).to.equal(false) ;
+        });
+
+    });
+
     describe('Create KYC Document', function() {
         var kycDocument;
 
