@@ -1,4 +1,4 @@
-Mangopay Node.js SDK
+Mangopay Node.js SDK [![Build Status](https://travis-ci.org/Mangopay/mangopay2-nodejs-sdk.svg?branch=master)](https://travis-ci.org/Mangopay/mangopay2-nodejs-sdk)
 =================================================
 MangopaySDK is a Node.js client library to work with [Mangopay REST API](http://docs.mangopay.com/api-references/).
 
