@@ -2,6 +2,7 @@ var _ = require('underscore');
 var path = require('path');
 var expect = require('chai').expect;
 
+var ClientWallet = require('../../lib/models/ClientWallet');
 describe("Clients", function(){
     var client;
     before(function(done){
@@ -49,6 +50,67 @@ describe("Clients", function(){
         it('should be uploaded', function(){
             expect(requestResponse.statusCode).to.equal(204);
         });
+
+    });
+
+    describe("Get client wallets by funds type", function(){
+        var feesWallets;
+        var creditWallets;
+        before(function(done){
+            api.Clients.getClientWalletsByFundsType('FEES', function(data, response){
+                feesWallets = data;
+                api.Clients.getClientWalletsByFundsType('CREDIT', function(data, response){
+                    creditWallets = data;
+                    done();
+                });
+            });
+        });
+
+        it('should have wallets', function(){
+            expect(feesWallets).not.to.be.undefined;
+            expect(creditWallets).not.to.be.undefined;
+        })
+    });
+
+    describe("Get client wallet", function(){
+        var clientWallets;
+        var clientWallet;
+        before(function(done){
+            api.Clients.getClientWallets(function(data, response){
+                clientWallets = data;
+                api.Clients.getClientWallet(clientWallets[0].FundsType, clientWallets[0].Currency
+                , function(data, response){
+                        clientWallet = data;
+                        done();
+                    });
+            });
+        });
+
+        it('should get the same client wallet', function(){
+            expect(clientWallet).not.to.be.undefined;
+            expect(clientWallet.FundsType).to.equal(clientWallets[0].FundsType);
+            expect(clientWallet.Currency).to.equal(clientWallets[0].Currency);
+        });
+    });
+
+    describe("Get client wallet's transactions",function(){
+        var clientWallets;
+        var transactions;
+        before(function(done){
+            api.Clients.getClientWallets(function(data, response){
+                clientWallets = data;
+                api.Clients.getClientWalletTransactions(clientWallets[0].FundsType, clientWallets[0].Currency
+                , function(data, response){
+                    transactions = data;
+                    done();
+                });
+            });
+        });
+
+        it('should get transactions', function(){
+            expect(transactions).not.to.be.undefined;
+            expect(transactions.length).to.be.greaterThan(0);
+        })
 
     });
 });
