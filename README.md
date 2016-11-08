@@ -116,7 +116,7 @@ Here is how they can be implemented :
         // Callback method
     })
     
-    api.Service.method(...).then(function(data, response, err) {
+    api.Service.method(...).then(function(data, response) {
         // Promise function called
     })
 
