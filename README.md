@@ -112,12 +112,14 @@ account can take a few days, so think about doing it in advance of when you actu
 Mangopay Node.js SDK supports both callback and promise approach. 
 Here is how they can be implemented :
 
-    api.Service.method(... , function(data, response){
+    api.Service.method(... , function(data, response, err){
         // Callback method
     })
     
     api.Service.method(...).then(function(data, response) {
         // Promise function called
+    }, function(error) {
+        //exception
     })
 
     
