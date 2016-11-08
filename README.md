@@ -118,6 +118,8 @@ Here is how they can be implemented :
     
     api.Service.method(...).then(function(data, response) {
         // Promise function called
+    }, function(error) {
+        //exception
     })
 
     
