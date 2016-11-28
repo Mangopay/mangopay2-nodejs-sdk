@@ -4,10 +4,11 @@ node_js:
 script: npm test
 deploy:
   provider: npm
-  email: ''
+  email: 'support@mangopay.com'
   api_key:
     secure: 5QGmKCMYEZ7Mux1kR5ne8zex04ymbJXbtokupkdXHbXUzpWKeXaBVJquUvyUrDWnz3rIow0CnK+xvfFkbkq8DbgDA8bI6S0THVTI8jvKGNe46XqRCsmxIaU6pGfDt7UCZ4hzJ3612TFvEjIKxBQWh+UXeFAiGdzeTycXHo11lJrUqH8vjQDr+oIbmSmQNO9oQzirKeSlJT18GzqgHn+GzENRVi2xsL43NFpLeD1qzZqagDuNSYXr4ZksMy8y1yghx5/PVJ5z7784Dk+sJuPJprqlhixCqo+68JugYpU+v9eYm9bfjF9dqm4avciXjvTnNkHM8smjEJtSzbSCMJGzfHMwffvGRQ67aUFkD4HQoBvgUnoVMnfRqsDTHimFp+9nCRwAXledZvOJGxQMnlrJ7wLuamjyXO0otP2jqa1d0qbJHpRQeCjd+LYTqdyalrnE657d4EaqJd1Qe9+0dxUFzATEtDLG9eVjxEqQvqeuLkM+tvTuza6R6AX/nTTBMWZOFQMZDOiWLpDiuXIBY2l5A+btRDXHFMniZfpra4p514jnigMyORkoOeaCbfoQX9ew31lIVXSF8huiCqlTkdr+mr2wCKW0wgL0V5Wt7vIoPgfNCX9dzjGVDQjZVDm3rtQPlqRTz/7LHyD7ZflwhTA1V4RJjAURygN2i06GvpLyg8k=
   on:
-    tags: true
+    tags: false
     repo: Mangopay/mangopay2-nodejs-sdk
     branch: release
+before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
