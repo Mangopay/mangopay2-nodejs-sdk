@@ -15,7 +15,5 @@ describe('Tokens', function() {
 
     it('should have different token values', function(){
         expect(authentication1.access_token).to.not.equal(authentication2.access_token);
-        expect(authentication1.token_type).to.equal('Bearer');
-        expect(authentication2.token_type).to.equal('Bearer');
     });
 });
