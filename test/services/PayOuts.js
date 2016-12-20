@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var helpers = require('../helpers');
 
 describe('PayOuts', function() {
-    var john = helpers.data.UserNatural;
+    var john = helpers.data.getUserNatural();
     var payOut;
 
     before(function(done){

@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var helpers = require('../helpers');
 
 describe('Wallets', function() {
-    var john = helpers.data.UserNatural;
+    var john = helpers.data.getUserNatural();
     var wallet;
 
     before(function(done){

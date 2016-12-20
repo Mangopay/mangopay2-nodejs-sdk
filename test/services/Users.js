@@ -19,8 +19,8 @@ var KycDocumentType = require('../../lib/models/KycDocumentType');
 
 
 describe('Users', function() {
-    var john = new UserNatural(helpers.data.UserNatural);
-    var matrix = new UserLegal(helpers.data.UserLegal);
+    var john = new UserNatural(helpers.data.getUserNatural());
+    var matrix = new UserLegal(helpers.data.getUserLegal());
 
     before(function(done){
         api.Users.create(john).then(function(data, response){

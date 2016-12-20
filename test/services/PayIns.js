@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var helpers = require('../helpers');
 
 describe('PayIns', function() {
-    var john = helpers.data.UserNatural;
+    var john = helpers.data.getUserNatural();
 
     before(function(done){
         api.Users.create(john, function(){

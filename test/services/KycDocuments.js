@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var helpers = require('../helpers');
 
 describe('KycDocuments', function() {
-    var john = helpers.data.UserNatural;
+    var john = helpers.data.getUserNatural();
     var document;
 
     before(function(done){
