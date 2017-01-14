@@ -152,21 +152,18 @@ describe('Card Registrations', function () {
         var failedResponse;
 
         before(function(done) {
-          api.CardRegistrations.create(newInvalidCardRegistration, function(data){
-            failedResponse = data;
-          })
+          api.CardRegistrations.create(newInvalidCardRegistration)
             .then(function(){
               done('Creating invalid card registration did not failed the promise');
             })
-            .catch(function(e){
+            .catch(function(data, response){
+              failedResponse = data;
               done();
             });
         });
 
         it('should fail', function () {
-            expect(failedResponse.ResultCode).not.to.be.undefined;
-            expect(failedResponse.ResultMessage).not.to.be.undefined;
-            expect(failedResponse.Status).to.equal('ERROR');
+            expect(failedResponse.Type).to.equal('ressource_not_found');
         });
     });
 });
