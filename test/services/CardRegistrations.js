@@ -65,7 +65,7 @@ describe('Card Registrations', function () {
                 url: cardRegistration.CardRegistrationURL
             };
 
-            return api.method('post', function (data, response) {
+            api.method('post', function (data, response) {
                 cardRegistration.RegistrationData = new Buffer(data).toString();
                 newRegistrationData = cardRegistration.RegistrationData;
                 api.CardRegistrations.update(cardRegistration).then(function(data, response){
@@ -142,5 +142,31 @@ describe('Card Registrations', function () {
             });
         });
     });
-});
 
+    describe('Creating Invalid user card registration', function () {
+        var newInvalidCardRegistration = {
+            UserId: '12345678',
+            Currency: 'EUR',
+            CardType: 'CB_VISA_MASTERCARD'
+          };
+        var failedResponse;
+
+        before(function(done) {
+          api.CardRegistrations.create(newInvalidCardRegistration, function(data){
+            failedResponse = data;
+          })
+            .then(function(){
+              done('Creating invalid card registration did not failed the promise');
+            })
+            .catch(function(e){
+              done();
+            });
+        });
+
+        it('should fail', function () {
+            expect(failedResponse.ResultCode).not.to.be.undefined;
+            expect(failedResponse.ResultMessage).not.to.be.undefined;
+            expect(failedResponse.Status).to.equal('ERROR');
+        });
+    });
+});
