@@ -16,7 +16,7 @@ var PayIn = require('../../lib/models/PayIn');
 
 describe('Mandates', function() {
     var ibanAccount, mandate;
-    var john = new UserNatural(_.extend(helpers.data.UserNatural));
+    var john = new UserNatural(_.extend(helpers.data.getUserNatural()));
 
     before(function(done){
         api.Users.create(john).then(function(data, response){

@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var helpers = require('../helpers');
 
 describe('Card PreAuthorizations', function() {
-    var john = helpers.data.UserNatural;
+    var john = helpers.data.getUserNatural();
     var preAuthorization;
 
     before(function(done){

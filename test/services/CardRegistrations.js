@@ -4,7 +4,7 @@ var helpers = require('../helpers');
 
 describe('Card Registrations', function () {
     var cardRegistration;
-    var john = helpers.data.UserNatural;
+    var john = helpers.data.getUserNatural();
 
     before(function(done){
         api.Users.create(john, function(){
@@ -65,7 +65,7 @@ describe('Card Registrations', function () {
                 url: cardRegistration.CardRegistrationURL
             };
 
-            return api.method('post', function (data, response) {
+            api.method('post', function (data, response) {
                 cardRegistration.RegistrationData = new Buffer(data).toString();
                 newRegistrationData = cardRegistration.RegistrationData;
                 api.CardRegistrations.update(cardRegistration).then(function(data, response){
@@ -142,5 +142,28 @@ describe('Card Registrations', function () {
             });
         });
     });
-});
 
+    describe('Creating Invalid user card registration', function () {
+        var newInvalidCardRegistration = {
+            UserId: '12345678',
+            Currency: 'EUR',
+            CardType: 'CB_VISA_MASTERCARD'
+          };
+        var failedResponse;
+
+        before(function(done) {
+          api.CardRegistrations.create(newInvalidCardRegistration)
+            .then(function(){
+              done('Creating invalid card registration did not failed the promise');
+            })
+            .catch(function(data, response){
+              failedResponse = data;
+              done();
+            });
+        });
+
+        it('should fail', function () {
+            expect(failedResponse.Type).to.equal('ressource_not_found');
+        });
+    });
+});
