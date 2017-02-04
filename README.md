@@ -12,16 +12,16 @@ Install the module via npm
 Usage inside your app
 
     var mangopay = require('mangopay2-nodejs-sdk');
-    
+
     var api = new mangopay({
         clientId: 'your_client_id',
         clientPassword: 'your_client_password',
         // Set the right production API url. If testing, omit the property since it defaults to sandbox URL
-        baseUrl: 'https://api.mangopay.com' 
+        baseUrl: 'https://api.mangopay.com'
     });
-    
+
     api.Users.create(...)
-    
+
 Supported options
 -------------------------------------------------
 | Option    | Default value | Description |
@@ -35,10 +35,10 @@ Supported options
 |responseTimeout|80000|Set the response timeout limit (in milliseconds)|
 |apiVersion|'v2.01'|API Version|
 |errorHandler|```function(options, err) {console.error(options, err)}```|Set a custom error handler
-    
+
 Documentation
 -------------------------------------------------
-[Github Full Node.js SDK Documentation](docs/README.md) is located in ``/docs`` folder. 
+[Github Full Node.js SDK Documentation](docs/README.md) is located in ``/docs`` folder.
 You can also access [API References on our website](https://docs.mangopay.com/api-references/).
 
 License
@@ -52,10 +52,10 @@ Report bugs or suggest features using
 
 Account creation
 -------------------------------------------------
-You can get yourself a [free sandbox account](https://www.mangopay.com/signup/create-sandbox/) or sign up for a 
-[production account](https://www.mangopay.com/signup/production-account/) (note that validation of your production 
+You can get yourself a [free sandbox account](https://www.mangopay.com/signup/create-sandbox/) or sign up for a
+[production account](https://www.mangopay.com/signup/production-account/) (note that validation of your production
 account can take a few days, so think about doing it in advance of when you actually want to go live).
-    
+
 ### Creating a user
 
 #### Using a hash of properties:
@@ -64,22 +64,22 @@ account can take a few days, so think about doing it in advance of when you actu
         "FirstName": "Victor",
         "LastName": "Hugo",
         "Address": "1 rue des Misérables, Paris",
-        "Birthday": 1300186358, 
+        "Birthday": 1300186358,
         "Nationality": "FR",
         "CountryOfResidence": "FR",
-        "Occupation": "Writer", 
-        "IncomeRange": "6", 
+        "Occupation": "Writer",
+        "IncomeRange": "6",
         "ProofOfIdentity": null,
-        "ProofOfAddress": null, 
-        "PersonType": "NATURAL", 
-        "Email": "victor@hugo.com", 
+        "ProofOfAddress": null,
+        "PersonType": "NATURAL",
+        "Email": "victor@hugo.com",
         "Tag": "custom tag",
     }, function(model) {
         // User created - using callback
-    }).then(function(model){ 
+    }).then(function(model){
         // User created - using promise
     });
-    
+
 #### Using Mangopay SDK pre-defined models:
 
     var myUser = new api.models.UserLegal({
@@ -102,27 +102,27 @@ account can take a few days, so think about doing it in advance of when you actu
         LegalRepresentativeCountryOfResidence: 'FR',
         Tag: 'custom tag'
     });
-    
+
     api.Users.create(myUser).then(function(){
         // Output the created user data to console
         console.log(myUser.Name + ' user created at ' + myUser.CreationDate);
     });
 
 #### Promise vs Callback
-Mangopay Node.js SDK supports both callback and promise approach. 
+Mangopay Node.js SDK supports both callback and promise approach.
 Here is how they can be implemented :
 
     api.Service.method(... , function(data, response, err){
         // Callback method
     })
-    
+
     api.Service.method(...).then(function(data, response) {
         // Promise function called
     }, function(error) {
         //exception
     })
 
-    
+
 ### Pagination / Filtering
 In order to [paginate](https://docs.mangopay.com/api-references/pagination/) or [filter](https://docs.mangopay.com/api-references/sort-lists/) results,
 we can use ``options.parameters`` to specify these options:
@@ -132,7 +132,7 @@ we can use ``options.parameters`` to specify these options:
             // Pagination
             per_page: 2,
             page: 2,
-            
+
             // Filters
             BeforeDate: 1414000367,
             AfterDate: 1414000367,
@@ -151,8 +151,8 @@ Contributing
 -------------------------------------------------
     npm start                       // installs dependencies and global mocha for testing and jsdox for documentation
     npm test                        // runs the mocha tests
-    npm run-script documentation    // update documentation using jsdox
-    
+    npm run-script documentation    // update documentation using jsdox, make sure to have it installed globally
+
 Unit Tests
 -------------------------------------------------
 Mocha tests are placed under ``/test/`` folder. To run the tests, make sure you have all dependencies installed.
