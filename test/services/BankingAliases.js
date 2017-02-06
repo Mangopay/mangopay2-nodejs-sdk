@@ -17,15 +17,17 @@ describe('Banking Aliases', function() {
                     CreditedUserId: john.Id,
                     WalletId: wallet.Id,
                     OwnerName: john.FirstName,
-                    Country: 'IT'
-
+                    Country: 'LU'
                 });
-                api.BankingAliases.create(bankingAlias).then(done);
+                api.BankingAliases.create(bankingAlias).then(function(data){
+                    bankingAlias = data;
+                    done();
+                });
             });
         });
     });
 
-    it('should exist after creting it', function () {
+    it('should exist after creating it', function () {
         expect(bankingAlias.Id).to.exist;
     });
 
