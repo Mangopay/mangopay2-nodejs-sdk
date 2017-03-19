@@ -9,9 +9,15 @@ var api = new mangopay({
   debug: true
 });
 
+/**
+ * Read full server response object using a callback
+ */
 api.Users.getAll(function (response) {
   // Read pages count
   console.log(response.headers['x-number-of-pages']);
+
+  // Read response body
+  console.log(response.body);
 }, {
   parameters: {
     per_page: 1
@@ -19,23 +25,18 @@ api.Users.getAll(function (response) {
   resolveWithFullResponse: true
 });
 
-api.Users.getAll(null, {
+/**
+ * Read full server response object using promise
+ */
+api.Users.getAll({
   parameters: {
     per_page: 1
   },
   resolveWithFullResponse: true
-}).then(function(){
-  debugger;
-  console.log('ok');
-}).catch(function(){
-  debugger;
-});
+}).then(function(response){
+  // Read pages count
+  console.log(response.headers['x-number-of-pages']);
 
-// api.Users.getAll({
-//   parameters: {
-//     per_page: 1
-//   },
-//   resolveWithFullResponse: true
-// }).then(function (data, response) {
-//   debugger;
-// });
+  // Read response body
+  console.log(response.body);
+});

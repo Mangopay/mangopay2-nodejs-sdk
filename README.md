@@ -142,6 +142,21 @@ we can use ``options.parameters`` to specify these options:
         }
     }
 
+### Reading server response headers
+For [reading the server response headers](examples/readResponseHeaders) we can use ``options.resolveWithFullResponse: true``
+
+    api.Users.getAll(null, {
+      parameters: {
+        per_page: 1
+      },
+      resolveWithFullResponse: true
+    }).then(function(response){
+      // Read pages count
+      console.log(response.headers['x-number-of-pages']);
+
+      // Read response body
+      console.log(response.body);
+    });
 
 Sample usage of Mangopay SDK installed with npm in a Node.js project
 -------------------------------------------------
