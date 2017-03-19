@@ -2,6 +2,8 @@
   "name": "mangopay2-nodejs-sdk",
   "version": "1.4.0",
   "description": "Mangopay Node.js SDK",
+  "repository": "https://github.com/Mangopay/mangopay2-nodejs-sdk.git",
+  "license": "MIT",
   "keywords": [
     "mangopay",
     "nodejs",
