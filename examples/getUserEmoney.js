@@ -11,5 +11,5 @@ var api = new mangopay({
 var USER_ID ='1151091';
 
 api.Users.getEMoney(USER_ID).then(function(data){
-    debugger;
+    console.log(data);
 });
