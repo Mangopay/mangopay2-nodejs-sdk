@@ -29,7 +29,7 @@ describe('Transfers', function() {
                         },
                         Fees: {
                             Currency: 'EUR',
-                            Ammount: 0
+                            Amount: 0
                         },
                         DebitedWalletId: wallet.Id,
                         CreditedWalletId: secondWallet.Id

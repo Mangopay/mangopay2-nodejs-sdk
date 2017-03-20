@@ -57,7 +57,7 @@ describe('Refunds', function() {
                                             },
                                             Fees: {
                                                 Currency: 'EUR',
-                                                Ammount: 0
+                                                Amount: 0
                                             },
                                             DebitedWalletId: wallet.Id,
                                             CreditedWalletId: secondWallet.Id
@@ -83,11 +83,11 @@ describe('Refunds', function() {
                 CreditedWalletId: transfer.CreditedWalletId,
                 AuthorId: john.Id,
                 DebitedFunds: {
-                    Amount: transfer.DebitedFunds.Ammount,
+                    Amount: transfer.DebitedFunds.Amount,
                     Currency: transfer.DebitedFunds.Currency
                 },
                 Fees: {
-                    Amount: transfer.Fees.Ammount,
+                    Amount: transfer.Fees.Amount,
                     Currency: transfer.DebitedFunds.Currency
                 }
             };
