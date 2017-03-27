@@ -143,7 +143,7 @@ we can use ``options.parameters`` to specify these options:
     }
 
 ### Reading server response headers
-For [reading the server response headers](examples/readResponseHeaders) we can use ``options.resolveWithFullResponse: true``
+For [reading the server response headers](examples/readResponseHeaders.js) we can use ``options.resolveWithFullResponse: true``
 
     api.Users.getAll(null, {
       parameters: {
