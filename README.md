@@ -22,7 +22,7 @@ Usage inside your app
 
     api.Users.create(...)
 
-Supported options
+Supported options 
 -------------------------------------------------
 | Option    | Default value | Description |
 | --------  | -----------   | ----------- |
