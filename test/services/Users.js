@@ -353,7 +353,13 @@ describe('Users', function() {
 
         describe('Update KYC Document', function() {
             var updatedKycDocument;
+                
             before(function(done){
+            	var filePath = path.resolve(__dirname, '../TestKycPageFile.png');
+                api.Users.createKycPageFromFile(john.Id, kycDocument.Id, filePath).then(function(){
+                    done();
+                });
+            	
                 kycDocument.Status = KycDocumentStatus.ValidationAsked;
                 api.Users.updateKycDocument(john.Id, kycDocument).then(function(){
                     api.Users.getKycDocument(john.Id, kycDocument.Id).then(function(document){
