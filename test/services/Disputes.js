@@ -364,7 +364,7 @@ describe('Disputes', function() {
                 Type: 'DELIVERY_PROOF'
             }, function(data, response){
                 document = data;
-                api.Disputes.createDisputeDocumentPageFromFile(dispute.Id, document.Id, path.resolve(__dirname + '/../TestKycPageFile.png'), function(){
+                api.Disputes.createDisputeDocumentPageFromFile(dispute.Id, document.Id, path.resolve(__dirname + '../TestKycPageFile.png'), function(){
                     done();
                 });
                 
