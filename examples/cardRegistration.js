@@ -30,7 +30,7 @@ mangoPay.Users.create({
             "cardCvx": "123"
         };
         mangoPay.CardRegistrations.registerCard(cardRegistrationData, cardData, function(data){
-            console.log("Updated card registration data token is %j", JSON.stringify(data));
+            console.log("Updated card registration is %j", JSON.stringify(data));
         });
     });
 });
