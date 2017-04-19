@@ -355,10 +355,10 @@ describe('Users', function() {
             var updatedKycDocument;
                 
             before(function(done){
-            	var filePath = path.resolve(__dirname, '../TestKycPageFile.png');
-                api.Users.createKycPageFromFile(john.Id, kycDocument.Id, filePath).then(function(){
-                    done();
-                });
+            	// var filePath = path.resolve(__dirname, '../TestKycPageFile.png');
+                // api.Users.createKycPageFromFile(john.Id, kycDocument.Id, filePath).then(function(){
+                //     done();
+                // });
             	
                 kycDocument.Status = KycDocumentStatus.ValidationAsked;
                 api.Users.updateKycDocument(john.Id, kycDocument).then(function(){

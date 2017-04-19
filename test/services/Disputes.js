@@ -364,9 +364,9 @@ describe('Disputes', function() {
                 Type: 'DELIVERY_PROOF'
             }, function(data, response){
                 document = data;
-                api.Disputes.createDisputeDocumentPageFromFile(dispute.Id, document.Id, path.resolve(__dirname + '../TestKycPageFile.png'), function(){
-                    done();
-                });
+                // api.Disputes.createDisputeDocumentPageFromFile(dispute.Id, document.Id, path.resolve(__dirname + '../TestKycPageFile.png'), function(){
+                //     done();
+                // });
                 
                 api.Disputes.updateDisputeDocument(dispute.Id, _.extend({}, document, {
                     Status: 'VALIDATION_ASKED'
