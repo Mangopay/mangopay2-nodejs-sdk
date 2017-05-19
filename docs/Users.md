@@ -299,6 +299,21 @@ Create page for KYC document
 **Returns**: `Object`, Request promise
 
 
+### Users.getEMoney(userId, callback, options) 
+
+Get users's EMoney
+
+**Parameters**
+
+**userId**: `number`, User identifier
+
+**callback**: `function`, Get users's EMoney
+
+**options**: `Object`, Get users's EMoney
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 

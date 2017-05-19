@@ -51,6 +51,21 @@ Update card registration
 **Returns**: `Object`, Request promise
 
 
+### CardRegistrations.registerCard(cardRegistrationUrl, cardRegistrationData, callback) 
+
+Submit a card registration
+
+**Parameters**
+
+**cardRegistrationUrl**: `string`, Card Registration URL
+
+**cardRegistrationData**: `object`, Options object hash
+
+**callback**: `function`, Callback function
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 
