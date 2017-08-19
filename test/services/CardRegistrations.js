@@ -2,7 +2,7 @@ var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
 
-describe('Card Registrations', function () {
+describe.only('Card Registrations', function () {
     var cardRegistration;
     var john = helpers.data.getUserNatural();
 
@@ -119,6 +119,26 @@ describe('Card Registrations', function () {
             it('should be retrieved', function () {
                 expect(card.Id).to.not.be.undefined;
                 expect(card.Validity).to.equal('UNKNOWN');
+            });
+        });
+
+        describe('Get By Fingerprint', function() {
+            var cards;
+
+            before(function (done) {
+                api.Cards.getByFingerprint(card.Fingerprint, function(data, response) {
+                    console.log('ok')
+                    cards = data;
+                    console.log(cards);
+                    done();
+                });
+            });
+
+            it('should retrieve list', function () {
+                expect(cards).to.be.an('array');
+                cards.forEach(function (cardByFingerprint) {
+                    expect(cardByFingerprint.Fingerprint).to.equal(card.Fingerprint);
+                });
             });
         });
 
