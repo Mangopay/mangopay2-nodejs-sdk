@@ -2,7 +2,7 @@ var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
 
-describe.only('Card Registrations', function () {
+describe('Card Registrations', function () {
     var cardRegistration;
     var john = helpers.data.getUserNatural();
 
