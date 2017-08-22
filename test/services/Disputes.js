@@ -166,6 +166,27 @@ describe('Disputes', function() {
             expect(page).not.to.be.undefined;
             expect(requestResponse.statusCode).to.equal(204);
         });
+
+        describe('Create Dispute Document Consult', function () {
+            var consults;
+
+            before(function(done) {
+                if(!document) {
+                    console.warn('Cannot test creating dispute document page consult because there\'s no dispute with expected status in the disputes list.');
+                    this.skip();
+                }
+
+                api.Disputes.createDisputeDocumentConsult(document.Id, function(data, response) {
+                    consults = data;
+                    done();
+                });
+            });
+
+            it('should be created', function () {
+                expect(consults).not.to.be.undefined;
+                expect(consults).to.be.an('array');
+            });
+        });
     });
 
     describe('Contest Dispute', function() {
