@@ -122,6 +122,26 @@ describe('Card Registrations', function () {
             });
         });
 
+        describe('Get By Fingerprint', function() {
+            var cards;
+
+            before(function (done) {
+                api.Cards.getByFingerprint(card.Fingerprint, function(data, response) {
+                    console.log('ok')
+                    cards = data;
+                    console.log(cards);
+                    done();
+                });
+            });
+
+            it('should retrieve list', function () {
+                expect(cards).to.be.an('array');
+                cards.forEach(function (cardByFingerprint) {
+                    expect(cardByFingerprint.Fingerprint).to.equal(card.Fingerprint);
+                });
+            });
+        });
+
         describe('Update', function () {
             var updatedCard;
 
