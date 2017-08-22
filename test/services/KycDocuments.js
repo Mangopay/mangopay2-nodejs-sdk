@@ -50,4 +50,20 @@ describe('KycDocuments', function() {
             expect(getDocument.Id).to.equal(document.Id);
         });
     });
+
+    describe('Create KYC Document Consult', function () {
+        var consults;
+
+        before(function(done) {
+            api.KycDocuments.createKycDocumentConsult(document.Id, function(data, response) {
+                consults = data;
+                done();
+            });
+        });
+
+        it('should be created', function () {
+            expect(consults).not.to.be.undefined;
+            expect(consults).to.be.an('array');
+        });
+    });
 });
