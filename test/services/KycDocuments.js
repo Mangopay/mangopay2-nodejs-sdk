@@ -2,7 +2,7 @@ var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
 
-describe.only('KycDocuments', function() {
+describe('KycDocuments', function() {
     var john = helpers.data.getUserNatural();
     var document;
 
