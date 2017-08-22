@@ -2,7 +2,7 @@ var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
 
-describe('KycDocuments', function() {
+describe.only('KycDocuments', function() {
     var john = helpers.data.getUserNatural();
     var document;
 
@@ -48,6 +48,22 @@ describe('KycDocuments', function() {
 
         it('should get the document', function () {
             expect(getDocument.Id).to.equal(document.Id);
+        });
+    });
+
+    describe('Create KYC Document Consult', function () {
+        var consults;
+
+        before(function(done) {
+            api.KycDocuments.createKycDocumentConsult(document.Id, function(data, response) {
+                consults = data;
+                done();
+            });
+        });
+
+        it('should be created', function () {
+            expect(consults).not.to.be.undefined;
+            expect(consults).to.be.an('array');
         });
     });
 });
