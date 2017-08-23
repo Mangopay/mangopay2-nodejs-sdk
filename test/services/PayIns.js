@@ -2,43 +2,43 @@ var expect = require('chai').expect;
 
 var helpers = require('../helpers');
 
-describe('PayIns', function() {
+describe('PayIns', function () {
     var john = helpers.data.getUserNatural();
 
-    before(function(done){
-        api.Users.create(john, function(){
+    before(function (done) {
+        api.Users.create(john, function () {
             done();
         });
     });
 
-    describe('Card Web', function(){
+    describe('Card Web', function () {
         var payIn;
 
-        before(function(done){
-            helpers.getNewPayInCardWeb(api, john, function(data, response){
+        before(function (done) {
+            helpers.getNewPayInCardWeb(api, john, function (data, response) {
                 payIn = data;
                 done();
             });
         });
 
-        describe('Create', function(){
-            it('should create the PayIn', function(){
+        describe('Create', function () {
+            it('should create the PayIn', function () {
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.PaymentType).to.equal('CARD');
                 expect(payIn.ExecutionType).to.equal('WEB');
             });
         });
 
-        describe('Get', function(){
+        describe('Get', function () {
             var getPayIn;
-            before(function(done){
-                api.PayIns.get(payIn.Id, function(data, response){
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
                     getPayIn = data;
                     done()
                 });
             });
 
-            it('should get the PayIn', function(){
+            it('should get the PayIn', function () {
                 expect(getPayIn.Id).not.to.be.undefined;
                 expect(getPayIn.PaymentType).to.equal('CARD');
                 expect(getPayIn.ExecutionType).to.equal('WEB');
@@ -50,18 +50,18 @@ describe('PayIns', function() {
         });
     });
 
-    describe('Card Direct', function(){
+    describe('Card Direct', function () {
         var payIn;
 
-        before(function(done){
-            helpers.getNewPayInCardDirect(api, john, function(data, response){
+        before(function (done) {
+            helpers.getNewPayInCardDirect(api, john, function (data, response) {
                 payIn = data;
                 done();
             });
         });
 
-        describe('Create', function(){
-            it('should create the PayIn', function(){
+        describe('Create', function () {
+            it('should create the PayIn', function () {
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.PaymentType).to.equal('CARD');
                 expect(payIn.ExecutionType).to.equal('DIRECT');
@@ -71,16 +71,16 @@ describe('PayIns', function() {
             });
         });
 
-        describe('Get', function(){
+        describe('Get', function () {
             var getPayIn;
-            before(function(done){
-                api.PayIns.get(payIn.Id, function(data, response){
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
                     getPayIn = data;
                     done()
                 });
             });
 
-            it('should get the PayIn', function(){
+            it('should get the PayIn', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.PaymentType).to.equal('CARD');
                 expect(getPayIn.ExecutionType).to.equal('DIRECT');
@@ -88,17 +88,17 @@ describe('PayIns', function() {
             });
         });
 
-        describe('Create Refund', function(){
+        describe('Create Refund', function () {
             var refund;
 
-            before(function(done){
-                helpers.getNewRefundForPayIn(api, john, payIn, function(data, response){
+            before(function (done) {
+                helpers.getNewRefundForPayIn(api, john, payIn, function (data, response) {
                     refund = data;
                     done();
                 });
             });
 
-            it('should succeed', function(){
+            it('should succeed', function () {
                 expect(refund.DebitedFunds).to.eql(payIn.DebitedFunds);
                 expect(refund.Type).to.equal('PAYOUT');
                 expect(refund.Nature).to.equal('REFUND');
@@ -106,11 +106,11 @@ describe('PayIns', function() {
         });
     });
 
-    describe('PreAuthorizedDirect', function(){
+    describe('PreAuthorizedDirect', function () {
         var preAuthorization, payIn, wallet;
 
-        before(function(done){
-            helpers.getUserCardPreAuthorization(api, john, function(data, response){
+        before(function (done) {
+            helpers.getUserCardPreAuthorization(api, john, function (data, response) {
                 preAuthorization = data;
 
                 wallet = {
@@ -119,7 +119,7 @@ describe('PayIns', function() {
                     Description: 'WALLET IN EUR'
                 };
 
-                api.Wallets.create(wallet).then(function(){
+                api.Wallets.create(wallet).then(function () {
                     payIn = {
                         CreditedWalletId: wallet.Id,
                         AuthorId: john.Id,
@@ -138,14 +138,14 @@ describe('PayIns', function() {
                         PreauthorizationId: preAuthorization.Id
                     };
 
-                    api.PayIns.create(payIn, function(data, response){
+                    api.PayIns.create(payIn, function (data, response) {
                         done();
                     });
                 });
             });
         });
 
-        it('should succeed', function(){
+        it('should succeed', function () {
             expect(payIn.Id).not.to.be.undefined;
             expect(payIn.data.AuthorId).to.equal(john.Id);
             expect(payIn.data.PaymentType).to.equal('PREAUTHORIZED');
@@ -156,23 +156,23 @@ describe('PayIns', function() {
         });
     });
 
-    describe('BankWireDirect', function(){
+    describe('BankWireDirect', function () {
         var payIn, wallet;
 
-        before(function(done){
+        before(function (done) {
             wallet = {
                 Owners: [john.Id],
                 Currency: 'EUR',
                 Description: 'WALLET IN EUR'
             };
 
-            api.Wallets.create(wallet).then(function(){
+            api.Wallets.create(wallet).then(function () {
                 done();
             });
         });
 
-        describe('Create', function(){
-            before(function(done){
+        describe('Create', function () {
+            before(function (done) {
                 payIn = {
                     CreditedWalletId: wallet.Id,
                     AuthorId: john.Id,
@@ -188,12 +188,12 @@ describe('PayIns', function() {
                     ExecutionType: 'DIRECT'
                 };
 
-                api.PayIns.create(payIn, function(data, response){
+                api.PayIns.create(payIn, function (data, response) {
                     done();
                 });
             });
 
-            it('should succeed', function(){
+            it('should succeed', function () {
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.data.AuthorId).to.equal(john.Id);
                 expect(payIn.data.PaymentType).to.equal('BANK_WIRE');
@@ -203,17 +203,17 @@ describe('PayIns', function() {
             });
         });
 
-        describe('Get', function(){
+        describe('Get', function () {
             var getPayIn;
 
-            before(function(done){
-                api.PayIns.get(payIn.Id, function(data, response){
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
                     getPayIn = data;
                     done();
                 });
             });
 
-            it('should succeed', function(){
+            it('should succeed', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.BankAccount.Type).to.equal('IBAN');
                 expect(getPayIn.AuthorId).to.equal(john.Id);
@@ -224,23 +224,23 @@ describe('PayIns', function() {
         });
     });
 
-    describe('DirectDebitWeb', function(){
+    describe('DirectDebitWeb', function () {
         var payIn, wallet;
 
-        before(function(done){
+        before(function (done) {
             wallet = {
                 Owners: [john.Id],
                 Currency: 'EUR',
                 Description: 'WALLET IN EUR'
             };
 
-            api.Wallets.create(wallet).then(function(){
+            api.Wallets.create(wallet).then(function () {
                 done();
             });
         });
 
-        describe('Create', function(){
-            before(function(done){
+        describe('Create', function () {
+            before(function (done) {
                 payIn = {
                     CreditedWalletId: wallet.Id,
                     AuthorId: john.Id,
@@ -260,12 +260,12 @@ describe('PayIns', function() {
                     PAYLINE: 'https://www.maysite.com/payline_template/'
                 };
 
-                api.PayIns.create(payIn, function(data, response){
+                api.PayIns.create(payIn, function (data, response) {
                     done();
                 });
             });
 
-            it('should succeed', function(){
+            it('should succeed', function () {
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.data.AuthorId).to.equal(john.Id);
                 expect(payIn.data.PaymentType).to.equal('DIRECT_DEBIT');
@@ -273,6 +273,88 @@ describe('PayIns', function() {
                 expect(payIn.data.CardId).not.to.be.null;
                 expect(payIn.data.Type).to.equal('PAYIN');
                 expect(payIn.data.Status).to.equal('CREATED');
+            });
+        });
+    });
+
+    describe('PayPalWeb', function () {
+        var payIn, wallet;
+
+        before(function (done) {
+            wallet = {
+                Owners: [john.Id],
+                Currency: 'EUR',
+                Description: 'WALLET IN EUR'
+            };
+
+            api.Wallets.create(wallet).then(function () {
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            var shippingAddress = {
+                RecipientName: "Mangopay Test",
+                Address: {
+                    "AddressLine1": "4101 Reservoir Rd NW",
+                    "AddressLine2": "",
+                    "City": "Washington",
+                    "Region": "District of Columbia",
+                    "PostalCode": "20007",
+                    "Country": "US"
+                }
+            };
+
+            before(function (done) {
+                payIn = {
+                    CreditedWalletId: wallet.Id,
+                    AuthorId: john.Id,
+                    CreditedUserId: john.Id,
+                    DebitedFunds: {
+                        Amount: 10000,
+                        Currency: 'EUR'
+                    },
+                    Fees: {
+                        Amount: 100,
+                        Currency: 'EUR'
+                    },
+                    PaymentType: 'PAYPAL',
+                    ExecutionType: 'WEB',
+                    ReturnURL: 'http://www.mysite.com/returnURL/',
+                    ShippingAddress: shippingAddress
+                };
+
+                api.PayIns.create(payIn, function (data, response) {
+                    done();
+                });
+            });
+
+            it('should be created', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.data.AuthorId).to.equal(john.Id);
+                expect(payIn.data.PaymentType).to.equal('PAYPAL');
+                expect(payIn.data.ExecutionType).to.equal('WEB');
+                expect(payIn.data.CardId).not.to.be.null;
+                expect(payIn.data.Type).to.equal('PAYIN');
+                expect(payIn.data.Status).to.equal('CREATED');
+            });
+
+            describe('Get', function () {
+                var getPayIn;
+
+                before(function (done) {
+                    api.PayIns.get(payIn.Id, function (data, response) {
+                        getPayIn = data;
+                        done();
+                    });
+                });
+
+                it('should be retrieved', function () {
+                    expect(getPayIn.Id).not.to.be.undefined;
+                    expect(getPayIn.Id).to.equal(payIn.Id);
+                    expect(getPayIn.ShippingAddress).not.to.be.undefined;
+                    expect(getPayIn.ShippingAddress).to.deep.equal(shippingAddress);
+                });
             });
         });
     });
