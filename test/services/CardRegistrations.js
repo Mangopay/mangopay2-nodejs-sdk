@@ -127,9 +127,7 @@ describe('Card Registrations', function () {
 
             before(function (done) {
                 api.Cards.getByFingerprint(card.Fingerprint, function(data, response) {
-                    console.log('ok')
                     cards = data;
-                    console.log(cards);
                     done();
                 });
             });
