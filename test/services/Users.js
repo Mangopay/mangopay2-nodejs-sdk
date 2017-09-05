@@ -9,6 +9,7 @@ var helpers = require('../helpers');
 
 var UserLegal = require('../../lib/models/UserLegal');
 var UserNatural = require('../../lib/models/UserNatural');
+var Address = require('../../lib/models/Address');
 var PersonType = require('../../lib/models/PersonType');
 var BankAccount = require('../../lib/models/BankAccount');
 var BankAccountDetailsIBAN = require('../../lib/models/BankAccountDetailsIBAN');
@@ -16,7 +17,7 @@ var BankAccountDetailsGB = require('../../lib/models/BankAccountDetailsGB');
 var KycDocument = require('../../lib/models/KycDocument');
 var KycDocumentStatus = require('../../lib/models/KycDocumentStatus');
 var KycDocumentType = require('../../lib/models/KycDocumentType');
-
+var UboDeclarationStatus = require('../../lib/models/UboDeclarationStatus');
 
 describe('Users', function() {
     var john = new UserNatural(helpers.data.getUserNatural());
@@ -613,6 +614,32 @@ describe('Users', function() {
 
         it('wallet should contain the right data', function(){
             assert(_.contains(wallets[0].Owners, john.Id));
+        });
+    });
+
+    describe('Create UBO declaration', function() {
+        var declarativeUser, createdDeclaration;
+
+        before(function(done) {
+            declarativeUser = helpers.data.getDeclarativeUserNatural();
+
+            api.Users.create(declarativeUser).then(function(data, response) {
+                declarativeUser = data;
+                var uboDeclaration = {
+                    DeclaredUBOs: [declarativeUser.Id]
+                };
+                api.Users.createUboDeclaration(matrix.Id, uboDeclaration).then(function(data, response) {
+                    createdDeclaration = data;
+                    done();
+                });
+            });
+        });
+
+        it('should be successful', function() {
+            expect(createdDeclaration).not.to.be.null;
+            expect(createdDeclaration.Status).to.equal(UboDeclarationStatus.Created);
+            expect(createdDeclaration.UserId).to.equal(matrix.Id);
+            expect(createdDeclaration.DeclaredUBOs[0].UserId).to.equal(declarativeUser.Id);
         });
     });
 });
