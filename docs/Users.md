@@ -244,7 +244,7 @@ Get KYC document
 **Returns**: `Object`, Request promise
 
 
-### Users.updateKycDocument(userId, kycDocumentId, callback, options) 
+### Users.updateKycDocument(userId, kycDocument, callback, options) 
 
 Save KYC document
 
@@ -252,7 +252,7 @@ Save KYC document
 
 **userId**: `number`, Save KYC document
 
-**kycDocumentId**: `number`, Save KYC document
+**kycDocument**: `Object`, Save KYC document
 
 **callback**: `function`, Save KYC document
 
@@ -295,6 +295,21 @@ Create page for KYC document
 **callback**: `function`, Create page for KYC document
 
 **options**: `Object`, Create page for KYC document
+
+**Returns**: `Object`, Request promise
+
+
+### Users.getEMoney(userId, callback, options) 
+
+Get users's EMoney
+
+**Parameters**
+
+**userId**: `number`, User identifier
+
+**callback**: `function`, Get users's EMoney
+
+**options**: `Object`, Get users's EMoney
 
 **Returns**: `Object`, Request promise
 
