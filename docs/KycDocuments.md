@@ -34,6 +34,21 @@ Get KycDocument
 **Returns**: `Object`, Request promise
 
 
+### KycDocuments.createKycDocumentConsult(documentId, callback, options) 
+
+Creates temporary URLs where each page of a KYC document can be viewed.
+
+**Parameters**
+
+**documentId**: `string`, Document identifier
+
+**callback**: `function`, Callback function
+
+**options**: `Object`, Request options
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 
