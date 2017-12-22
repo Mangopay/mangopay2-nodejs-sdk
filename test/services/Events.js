@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 
 var helpers = require('../helpers');
 
-describe.only('Events', function() {
+describe('Events', function() {
     var john = helpers.data.getUserNatural();
 
     before(function(done){
