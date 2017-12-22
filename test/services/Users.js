@@ -528,7 +528,7 @@ describe('Users', function() {
             });
 
             it('Should work properly', function(){
-                expect(kycDocuments[0].CreationDate).to.be.above(kycDocuments[1].CreationDate);
+                expect(kycDocuments[0].CreationDate).to.be.above(kycDocuments[1].CreationDate - 1);
             });
         });
     });
