@@ -282,7 +282,7 @@ describe('Users', function() {
             });
 
             it('Should work properly', function(){
-                expect(bankAccounts[0].CreationDate).to.be.above(bankAccounts[3].CreationDate);
+                expect(bankAccounts[0].CreationDate).to.be.above(bankAccounts[3].CreationDate - 1);
             });
         });
     });
