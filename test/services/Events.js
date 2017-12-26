@@ -116,7 +116,8 @@ describe('Events', function() {
         });
     });
 
-    describe('Get All Sort By Creation Date', function () {
+    // TODO: Remove the .skip() call once Get Events endpoint is fixed on the server.
+    describe.skip('Get All Sort By Creation Date', function () {
         var events;
         before(function(done){
             api.Events.getAll(function(data, response){

@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var Address = require('../lib/models/Address');
+var UserNaturalCapacity = require('../lib/models/UserNaturalCapacity');
 
 module.exports = {
     data: {
@@ -22,7 +23,12 @@ module.exports = {
                 Occupation: 'programmer',
                 IncomeRange: 3,
                 PersonType: 'NATURAL'
-            }
+            };
+        },
+        getDeclarativeUserNatural: function() {
+            var user = this.getUserNatural();
+            user.Capacity = UserNaturalCapacity.Declarative;
+            return user;
         },
         getUserLegal: function(){
             return {

@@ -1,4 +1,4 @@
-# BankingAlias
+# BankingAliases
 
 
 
@@ -6,7 +6,7 @@
 
 * * *
 
-### BankingAlias.create(bankingAlias, callback, options) 
+### BankingAliases.create(bankingAlias, callback, options) 
 
 Create a banking alias
 
@@ -21,7 +21,7 @@ Create a banking alias
 **Returns**: `Object`, Request promise
 
 
-### BankingAlias.get(bankingAliasId, callback, options) 
+### BankingAliases.get(bankingAliasId, callback, options) 
 
 Get a banking alias
 
@@ -36,7 +36,7 @@ Get a banking alias
 **Returns**: `Object`, Request promise
 
 
-### BankingAlias.getAll(callback, options) 
+### BankingAliases.getAll(callback, options) 
 
 Get all banking aliases
 
@@ -49,7 +49,7 @@ Get all banking aliases
 **Returns**: `Object`, Request promise
 
 
-### BankingAlias.update(bankingAliasId, callback, options) 
+### BankingAliases.update(bankingAliasId, callback, options) 
 
 Update banking alias
 
@@ -64,7 +64,7 @@ Update banking alias
 **Returns**: `Object`, Request promise
 
 
-### BankingAlias.deactivate(bankingAliasId, callback, options) 
+### BankingAliases.deactivate(bankingAliasId, callback, options) 
 
 Deactivate banking alias
 
@@ -79,7 +79,7 @@ Deactivate banking alias
 **Returns**: `Object`, Request promise
 
 
-### BankingAlias.activate(bankingAliasId, callback, options) 
+### BankingAliases.activate(bankingAliasId, callback, options) 
 
 Activate banking alias
 
