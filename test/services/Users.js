@@ -587,6 +587,22 @@ describe('Users', function() {
                 expect(cards[0].UserId).to.equal(john.Id);
             });
         });
+
+        describe.only('Get Transactions for Card', function(){
+            var getTransactions;
+
+            before(function(done){
+                api.Cards.getTransactions(payIn.CardId, function(data, response){
+                    getTransactions = data;
+                    done();
+                });
+            });
+
+            it('should be retrieved', function(){
+                expect(getTransactions).not.to.be.undefined;
+                expect(getTransactions).to.be.an('array');
+            });
+        });
     });
 
     describe('Wallets', function() {
