@@ -588,7 +588,7 @@ describe('Users', function() {
             });
         });
 
-        describe.only('Get Transactions for Card', function(){
+        describe('Get Transactions for Card', function(){
             var getTransactions;
 
             before(function(done){
