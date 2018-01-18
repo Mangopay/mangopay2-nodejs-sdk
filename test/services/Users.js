@@ -642,4 +642,20 @@ describe('Users', function() {
             expect(createdDeclaration.DeclaredUBOs[0].UserId).to.equal(declarativeUser.Id);
         });
     });
+
+    describe('Get PreAuthorizations', function() {
+        var getPreAuthorizations;
+
+        before(function(done) {
+            api.Users.getPreAuthorizations(john.Id, function(data, response) {
+                getPreAuthorizations = data;
+                done();
+            });
+        });
+
+        it('should be retrieved', function() {
+            expect(getPreAuthorizations).not.to.be.undefined;
+            expect(getPreAuthorizations).to.be.an('array');
+        });
+    });
 });
