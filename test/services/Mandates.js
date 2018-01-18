@@ -247,7 +247,7 @@ describe('Mandates', function() {
             });
         });
 
-        it.only('should be retrieved', function() {
+        it('should be retrieved', function() {
             expect(getTransactions).not.to.be.undefined;
             expect(getTransactions).to.be.an('array');
         });
