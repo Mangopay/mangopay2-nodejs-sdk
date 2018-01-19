@@ -3,6 +3,7 @@ var expect = require('chai').expect;
 var helpers = require('../helpers');
 
 describe('PayIns', function () {
+    var payIn;
     var john = helpers.data.getUserNatural();
 
     before(function (done) {
@@ -12,7 +13,6 @@ describe('PayIns', function () {
     });
 
     describe('Card Web', function () {
-        var payIn;
 
         before(function (done) {
             helpers.getNewPayInCardWeb(api, john, function (data, response) {
@@ -356,6 +356,22 @@ describe('PayIns', function () {
                     expect(getPayIn.ShippingAddress).to.deep.equal(shippingAddress);
                 });
             });
+        });
+    });
+
+    describe('Get Refunds', function() {
+        var getRefunds;
+
+        before(function(done) {
+            api.PayIns.getRefunds(payIn.Id, function(data, response) {
+                getRefunds = data;
+                done();
+            });
+        });
+
+        it('should be retrieved', function() {
+            expect(getRefunds).not.to.be.undefined;
+            expect(getRefunds).to.be.an('array');
         });
     });
 });
