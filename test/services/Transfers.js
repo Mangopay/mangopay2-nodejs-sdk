@@ -50,4 +50,20 @@ describe('Transfers', function() {
             expect(transfer.CreditedWalletId).to.equal(secondWallet.Id);
         });
     });
+
+    describe('Get Refunds', function() {
+        var getRefunds;
+
+        before(function(done) {
+            api.Transfers.getRefunds(transfer.Id, function(data, response) {
+                getRefunds = data;
+                done();
+            });
+        });
+
+        it.only('should be retrieved', function() {
+            expect(getRefunds).not.to.be.undefined;
+            expect(getRefunds).to.be.an('array');
+        });
+    });
 });
