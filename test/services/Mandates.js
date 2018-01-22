@@ -237,4 +237,19 @@ describe('Mandates', function() {
         });
     }
 
+    describe('Get Transactions', function() {
+        var getTransactions;
+
+        before(function(done) {
+            api.Mandates.getTransactions(mandate.Id, function(data) {
+                getTransactions = data;
+                done();
+            });
+        });
+
+        it('should be retrieved', function() {
+            expect(getTransactions).not.to.be.undefined;
+            expect(getTransactions).to.be.an('array');
+        });
+    });
 });
