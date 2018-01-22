@@ -42,4 +42,20 @@ describe('PayOuts', function() {
             expect(payOut.ExecutionDate).to.be.null;
         });
     });
+
+    describe('Get Refunds', function() {
+        var getRefunds;
+
+        before(function(done) {
+            api.PayOuts.getRefunds(payOut.Id, function(data, response) {
+                getRefunds = data;
+                done();
+            });
+        });
+
+        it('should be retrieved', function() {
+            expect(getRefunds).not.to.be.undefined;
+            expect(getRefunds).to.be.an('array');
+        })
+    })
 });

@@ -496,4 +496,19 @@ describe('Disputes', function() {
             });
         });
     });
+    describe('Get Disputes Pending Settlement', function(){
+        var getPendingSettlement;
+
+        before(function(done){
+            api.Disputes.getPendingSettlement(function(data, response){
+                getPendingSettlement = data;
+                done();
+            })
+        });
+
+        it('should be retrieved', function(){
+            expect(getPendingSettlement).not.to.be.undefined;
+            expect(getPendingSettlement).to.be.an('array')
+        })
+    })
 });
