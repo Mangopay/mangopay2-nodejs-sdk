@@ -24,9 +24,9 @@ describe('Users', function() {
     var matrix = new UserLegal(helpers.data.getUserLegal());
 
     before(function(done){
-        api.Users.create(john).then(function(data, response){
+        api.Users.create(john).then(function(data){
             john = data;
-            api.Users.create(matrix).then(function(data, response){
+            api.Users.create(matrix).then(function(data){
                 matrix = data;
                 done();
             });
@@ -623,12 +623,12 @@ describe('Users', function() {
         before(function(done) {
             declarativeUser = helpers.data.getDeclarativeUserNatural();
 
-            api.Users.create(declarativeUser).then(function(data, response) {
+            api.Users.create(declarativeUser).then(function(data) {
                 declarativeUser = data;
                 var uboDeclaration = {
                     DeclaredUBOs: [declarativeUser.Id]
                 };
-                api.Users.createUboDeclaration(matrix.Id, uboDeclaration).then(function(data, response) {
+                api.Users.createUboDeclaration(matrix.Id, uboDeclaration).then(function(data) {
                     createdDeclaration = data;
                     done();
                 });

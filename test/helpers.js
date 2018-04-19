@@ -87,7 +87,7 @@ module.exports = {
 
             return api.method('post', function (data, response) {
                 cardRegistration.RegistrationData = new Buffer(data).toString();
-                api.CardRegistrations.update(cardRegistration).then(function(data, response){
+                api.CardRegistrations.update(cardRegistration).then(function(data){
                     preAuthorization = {
                         AuthorId: user.Id,
                         DebitedFunds: {
@@ -156,8 +156,8 @@ module.exports = {
             BIC: 'CMBRFR2BCME'
         };
 
-        api.Wallets.create(wallet).then(function(data, response){
-            api.Users.createBankAccount(user.Id, account).then(function(data, response){
+        api.Wallets.create(wallet).then(function(data){
+            api.Users.createBankAccount(user.Id, account).then(function(data){
                 var payOut = {
                     DebitedWalletId: wallet.Id,
                     AuthorId: user.Id,

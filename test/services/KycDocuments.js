@@ -11,7 +11,7 @@ describe('KycDocuments', function() {
             api.Users.createKycDocument(john.Id, {
                 Status: 'CREATED',
                 Type: 'IDENTITY_PROOF'
-            }).then(function(data, response){
+            }).then(function(data){
                 document = data;
                 done();
             });
