@@ -13,7 +13,7 @@ describe('Repudiations', function() {
             })
         });
 
-        it.only('should be retrieved', function() {
+        it('should be retrieved', function() {
             expect(getRefunds).not.to.be.undefined;
             expect(getRefunds).to.be.an('array');
         });
