@@ -21,7 +21,7 @@ describe('Reports - Transaction', function() {
         var getReport;
 
         before(function(done){
-            api.Reports.get(report.Id).then(function(data, response){
+            api.Reports.get(report.Id).then(function(data){
                 getReport = data;
                 done();
             });
@@ -54,7 +54,7 @@ describe('Reports - Wallet', function() {
         var getReport;
 
         before(function(done){
-            api.Reports.get(report.Id).then(function(data, response){
+            api.Reports.get(report.Id).then(function(data){
                 getReport = data;
                 done();
             });

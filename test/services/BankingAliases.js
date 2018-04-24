@@ -35,7 +35,7 @@ describe('Banking Aliases', function() {
         var getBankingAlias;
 
         before(function(done){
-            api.BankingAliases.get(bankingAlias.Id).then(function(data, response){
+            api.BankingAliases.get(bankingAlias.Id).then(function(data){
                 getBankingAlias = data;
                 done();
             });
@@ -54,8 +54,8 @@ describe('Banking Aliases', function() {
         var deactivatedBankingAlias;
 
         before(function(done){
-            api.BankingAliases.deactivate(bankingAlias.Id).then(function(data, response){
-                api.BankingAliases.get(bankingAlias.Id).then(function(data, response){
+            api.BankingAliases.deactivate(bankingAlias.Id).then(function(data){
+                api.BankingAliases.get(bankingAlias.Id).then(function(data){
                     deactivatedBankingAlias = data;
                     done();
                 });
