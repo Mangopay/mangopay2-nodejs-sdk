@@ -45,7 +45,8 @@ describe('Card PreAuthorizations', function() {
         });
     });
 
-    describe('Update', function() {
+    // TODO: Re-enable this test as soon as AVS is implemented
+    describe.skip('Update', function() {
         var updatedPreAuthorization;
 
         before(function(done){
