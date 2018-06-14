@@ -6,7 +6,7 @@ var ClientWallet = require('../../lib/models/ClientWallet');
 describe("Clients", function(){
     var client;
     before(function(done){
-        api.Clients.get().then(function(data, response){
+        api.Clients.get().then(function(data){
             client = data;
             done();
         });
@@ -24,7 +24,7 @@ describe("Clients", function(){
 
         before(function(done){
             api.Clients.update({PrimaryThemeColour: themeColor, PrimaryButtonColour: buttonColor})
-                .then(function(data, response){
+                .then(function(data){
                 updatedClient = data;
                 done();
             });

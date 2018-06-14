@@ -1,6 +1,12 @@
 var expect = require('chai').expect;
 
 var helpers = require('../helpers');
+var mangopay = require('../../index');
+
+var api = global.api = new mangopay({
+  clientId: 'sdk-unit-tests',
+  clientPassword: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
+});
 
 describe('PayIns', function () {
     var payIn;
@@ -68,6 +74,7 @@ describe('PayIns', function () {
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('SUCCEEDED');
                 expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.SecurityInfo.AVSResult).to.equal('FULL_MATCH')
             });
         });
 

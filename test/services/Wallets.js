@@ -29,7 +29,7 @@ describe('Wallets', function() {
         var getWallet;
 
         before(function(done){
-            api.Wallets.get(wallet.Id).then(function(data, response){
+            api.Wallets.get(wallet.Id).then(function(data){
                 getWallet = data;
                 done();
             });
@@ -46,7 +46,7 @@ describe('Wallets', function() {
 
         before(function(done){
             wallet.description = NEW_DESCRIPTION;
-            api.Wallets.update(wallet).then(function(data, response){
+            api.Wallets.update(wallet).then(function(data){
                 wallet = data;
                 done();
             });

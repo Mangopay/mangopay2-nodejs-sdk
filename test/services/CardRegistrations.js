@@ -68,7 +68,7 @@ describe('Card Registrations', function () {
             api.method('post', function (data, response) {
                 cardRegistration.RegistrationData = new Buffer(data).toString();
                 newRegistrationData = cardRegistration.RegistrationData;
-                api.CardRegistrations.update(cardRegistration).then(function(data, response){
+                api.CardRegistrations.update(cardRegistration).then(function(data){
                     updatedCardRegistration = data;
                     done();
                 });

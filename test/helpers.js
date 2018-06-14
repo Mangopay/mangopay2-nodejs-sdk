@@ -87,7 +87,7 @@ module.exports = {
 
             return api.method('post', function (data, response) {
                 cardRegistration.RegistrationData = new Buffer(data).toString();
-                api.CardRegistrations.update(cardRegistration).then(function(data, response){
+                api.CardRegistrations.update(cardRegistration).then(function(data){
                     preAuthorization = {
                         AuthorId: user.Id,
                         DebitedFunds: {
@@ -95,7 +95,17 @@ module.exports = {
                             Amount: 10000
                         },
                         CardId: cardRegistration.CardId,
-                        SecureModeReturnURL: 'http://test.com'
+                        SecureModeReturnURL: 'http://test.com',
+                        Billing: {
+                            Address: {
+                                "AddressLine1": "4101 Reservoir Rd NW",
+                                "AddressLine2": "",
+                                "City": "Washington",
+                                "Region": "District of Columbia",
+                                "PostalCode": "80400",
+                                "Country": "US"
+                            }
+                        }
                     };
 
                     api.CardPreAuthorizations.create(preAuthorization, function(data, response){
@@ -132,7 +142,17 @@ module.exports = {
                     CardId: preauthorization.CardId,
                     SecureModeReturnURL: 'http://test.com',
                     PaymentType: 'CARD',
-                    ExecutionType: 'DIRECT'
+                    ExecutionType: 'DIRECT',
+                    Billing: {
+                        Address: {
+                          "AddressLine1": "4101 Reservoir Rd NW",
+                          "AddressLine2": "",
+                          "City": "Washington",
+                          "Region": "District of Columbia",
+                          "PostalCode": "68400",
+                          "Country": "US"
+                        }
+                    }
                 };
                 api.PayIns.create(payIn, callback)
             });
@@ -156,8 +176,8 @@ module.exports = {
             BIC: 'CMBRFR2BCME'
         };
 
-        api.Wallets.create(wallet).then(function(data, response){
-            api.Users.createBankAccount(user.Id, account).then(function(data, response){
+        api.Wallets.create(wallet).then(function(data){
+            api.Users.createBankAccount(user.Id, account).then(function(data){
                 var payOut = {
                     DebitedWalletId: wallet.Id,
                     AuthorId: user.Id,

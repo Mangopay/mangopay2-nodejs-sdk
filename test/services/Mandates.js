@@ -19,7 +19,7 @@ describe('Mandates', function() {
     var john = new UserNatural(_.extend(helpers.data.getUserNatural()));
 
     before(function(done){
-        api.Users.create(john).then(function(data, response){
+        api.Users.create(john).then(function(data){
             john = data;
 
             var account = new BankAccount({
