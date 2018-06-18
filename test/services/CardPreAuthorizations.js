@@ -45,8 +45,7 @@ describe('Card PreAuthorizations', function() {
         });
     });
 
-    // TODO: Re-enable this test as soon as AVS is implemented
-    describe.skip('Update', function() {
+    describe('Update', function() {
         var updatedPreAuthorization;
 
         before(function(done){
@@ -61,6 +60,7 @@ describe('Card PreAuthorizations', function() {
         it('should be updated', function(){
             expect(updatedPreAuthorization.Status).to.equal('SUCCEEDED');
             expect(updatedPreAuthorization.PaymentStatus).to.equal('CANCELED');
+            expect(updatedPreAuthorization.SecurityInfo.AVSResult).to.equal('POSTAL_CODE_MATCH_ONLY')
         });
     });
 });

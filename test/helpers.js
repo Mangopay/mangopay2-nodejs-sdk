@@ -95,7 +95,17 @@ module.exports = {
                             Amount: 10000
                         },
                         CardId: cardRegistration.CardId,
-                        SecureModeReturnURL: 'http://test.com'
+                        SecureModeReturnURL: 'http://test.com',
+                        Billing: {
+                            Address: {
+                                "AddressLine1": "4101 Reservoir Rd NW",
+                                "AddressLine2": "",
+                                "City": "Washington",
+                                "Region": "District of Columbia",
+                                "PostalCode": "80400",
+                                "Country": "US"
+                            }
+                        }
                     };
 
                     api.CardPreAuthorizations.create(preAuthorization, function(data, response){
@@ -132,7 +142,17 @@ module.exports = {
                     CardId: preauthorization.CardId,
                     SecureModeReturnURL: 'http://test.com',
                     PaymentType: 'CARD',
-                    ExecutionType: 'DIRECT'
+                    ExecutionType: 'DIRECT',
+                    Billing: {
+                        Address: {
+                          "AddressLine1": "4101 Reservoir Rd NW",
+                          "AddressLine2": "",
+                          "City": "Washington",
+                          "Region": "District of Columbia",
+                          "PostalCode": "68400",
+                          "Country": "US"
+                        }
+                    }
                 };
                 api.PayIns.create(payIn, callback)
             });
