@@ -28,6 +28,6 @@
   "scripts": {
     "start": "npm install -g mocha && npm install -g jsdox && npm install",
     "documentation": "jsdox -t docs/templates/ -i README -o docs lib/services",
-    "test": "mocha"
+    "test": "mocha ./test/services/Client.js"
   }
 }
