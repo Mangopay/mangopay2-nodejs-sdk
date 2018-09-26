@@ -4,8 +4,8 @@ var helpers = require('../helpers');
 var mangopay = require('../../index');
 
 var api = global.api = new mangopay({
-  clientId: 'sdk-unit-tests',
-  clientPassword: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
+    clientId: 'sdk-unit-tests',
+    clientPassword: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
 });
 
 describe('PayIns', function () {
@@ -364,19 +364,40 @@ describe('PayIns', function () {
                 });
             });
         });
+
+        describe("Get with Email", function () {
+            var payInId = "54088959";
+            var accountEmail = "paypal-buyer-user@mangopay.com"
+            var payinWithEmail;
+
+            before(function (done) {
+                api.PayIns.get(payInId, function (data, response) {
+                    payinWithEmail = data;
+                    done();
+                });
+            });
+
+            it("should contain buyer's email", function () {
+                expect(payinWithEmail).not.to.be.undefined;
+                expect(payinWithEmail.Id).to.equal(payInId);
+                expect(payinWithEmail.PaypalBuyerAccountEmail).not.to.be.undefined;
+                expect(payinWithEmail.PaypalBuyerAccountEmail).to.equal(accountEmail);
+            });
+        });
+
     });
 
-    describe('Get Refunds', function() {
+    describe('Get Refunds', function () {
         var getRefunds;
 
-        before(function(done) {
-            api.PayIns.getRefunds(payIn.Id, function(data, response) {
+        before(function (done) {
+            api.PayIns.getRefunds(payIn.Id, function (data, response) {
                 getRefunds = data;
                 done();
             });
         });
 
-        it('should be retrieved', function() {
+        it('should be retrieved', function () {
             expect(getRefunds).not.to.be.undefined;
             expect(getRefunds).to.be.an('array');
         });
