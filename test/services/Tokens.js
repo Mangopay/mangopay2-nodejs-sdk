@@ -27,7 +27,7 @@ describe('When trying to authenticate with wrong credentials', function() {
     before('Build API object with wrong credentials', function(done){
         var wrongApi = new mangopay({
             clientId: 'sdk-unit-tests',
-            clientPassword: 'wrongPass'
+            clientApiKey: 'wrongPass'
         });
 
         wrongApi.authorize()
