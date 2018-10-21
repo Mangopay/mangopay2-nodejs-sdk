@@ -15,7 +15,7 @@ Usage inside your app
 
     var api = new mangopay({
         clientId: 'your_client_id',
-        clientPassword: 'your_client_password',
+        clientApiKey: 'your_client_api_key',
         // Set the right production API url. If testing, omit the property since it defaults to sandbox URL
         baseUrl: 'https://api.mangopay.com'
     });
@@ -27,7 +27,7 @@ Supported options
 | Option    | Default value | Description |
 | --------  | -----------   | ----------- |
 |clientId   |null      | API Client Id|
-|clientPassword|null| API Client Password|
+|clientApiKey|null| API Client Api Key|
 |baseUrl|"https://api.sandbox.mangopay.com"| API Base URL. The fault base value points to sandbox. Production is 'https://api.mangopay.com'|
 |debugMode|false| Active debugging|
 |logClass|```function() {console.log(arguments)}```|Log function to be used for debug|
