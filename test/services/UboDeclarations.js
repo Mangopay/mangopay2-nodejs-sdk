@@ -9,7 +9,7 @@ var mangopay = require('../../lib/mangopay');
 
 var api = global.api = new mangopay({
     clientId: 'sdk-unit-tests',
-    clientPassword: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
+    clientApiKey: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
 });
 
 describe('UBO Declarations', function () {
