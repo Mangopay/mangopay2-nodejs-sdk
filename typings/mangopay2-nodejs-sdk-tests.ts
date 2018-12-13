@@ -1,21 +1,21 @@
-import MangoPay from "mangopay2-nodejs-sdk";
+import * as Mangopay from "mangopay2-nodejs-sdk";
 
 // $ExpectError
-const invalidConfig: MangoPay.Config = {};
+const invalidConfig: Mangopay.Config = {};
 
 /* General Types */
 
-const validConfig: MangoPay.Config = {
+const validConfig: Mangopay.Config = {
   clientId: "your_client_id",
   clientApiKey: "your_client_api_key",
   baseUrl: "https://api.mangopay.com"
 };
 
-const api = new MangoPay(validConfig); // $ExpectType MangoPay
-const payIn: MangoPay.models.PayIn = new api.models.PayIn({}); // $ExpectType PayIn
-const address: MangoPay.models.Address = new api.models.Address({}); // $ExpectType Address
+const api = new Mangopay(validConfig); // $ExpectType MangoPay
+const payIn: Mangopay.models.PayIn = new api.models.PayIn({}); // $ExpectType PayIn
+const address: Mangopay.models.Address = new api.models.Address({}); // $ExpectType Address
 
-const addressData: MangoPay.Address.AddressData = {
+const addressData: Mangopay.address.AddressData = {
   AddressLine1: "20 T Street",
   AddressLine2: "",
   City: "London",
@@ -59,7 +59,30 @@ api.Users.create(legalUser, { readResponseHeaders: true }).then(data => {
   const value = data.body; // $ExpectType UserLegalData
 });
 
-api.Users.create(legalUser, { headers: {} }).then(data => {
+api.Users.create(
+  {
+    PersonType: "LEGAL",
+    Name: "MangoPay",
+    Email: "info@mangopay.com",
+    LegalPersonType: "BUSINESS",
+    LegalRepresentativeFirstName: "Mango",
+    LegalRepresentativeLastName: "Pay",
+    LegalRepresentativeEmail: "mango@mangopay.com",
+    HeadquartersAddress: new api.models.Address({
+      AddressLine1: "4101 Reservoir Rd NW",
+      AddressLine2: "",
+      City: "Washington",
+      Region: "District of Columbia",
+      PostalCode: "20007",
+      Country: "US"
+    }),
+    LegalRepresentativeBirthday: 1300186358,
+    LegalRepresentativeNationality: "FR",
+    LegalRepresentativeCountryOfResidence: "FR",
+    Tag: "custom tag"
+  },
+  { headers: {} }
+).then(data => {
   const d = data; // $ExpectType UserLegalData
 });
 

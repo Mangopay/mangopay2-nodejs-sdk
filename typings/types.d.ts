@@ -2,7 +2,17 @@
  * Makes specified keys of an interface Optional.
  */
 export type MakeKeysOptional<T1, T2 extends keyof T1> = Omit<T1, T2> &
-  { [P in T2]+?: T1[P] };
+  Partial<Pick<T1, T2>>;
+
+export type PickPartial<T, Par extends keyof T> = Pick<Partial<T>, Par>;
+
+export type PickPartialRequired<
+  T,
+  Par extends keyof T,
+  Req extends keyof T
+> = Pick<Partial<T>, Par> & Pick<Required<T>, Req>;
+
+export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
 /**
  * Makes specified keys of an interface nullable.
@@ -14,18 +24,9 @@ export type MakeKeysNullable<T1, T2 extends keyof T1> = Omit<T1, T2> &
  * Makes specified keys of an interface Required.
  */
 export type MakeKeysRequired<T1, T2 extends keyof T1> = Omit<T1, T2> &
-  { [P in T2]-?: T1[P] };
+  Required<Pick<T1, T2>>;
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
-/** Like Partial but recursive */
-export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends Array<infer U>
-    ? Array<DeepPartial<U>>
-    : T[P] extends ReadonlyArray<infer U>
-    ? ReadonlyArray<DeepPartial<U>>
-    : DeepPartial<T[P]>
-};
 
 export type OmitType<T extends { Type: string }> = Omit<T, "Type">;
 

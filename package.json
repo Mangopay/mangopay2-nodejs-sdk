@@ -23,7 +23,7 @@
     "underscore": "1.8.x"
   },
   "devDependencies": {
-    "dtslint": "0.3.0",
+    "dtslint": "0.4.1",
     "chai": "3.5.x",
     "sinon": "^1.17.3",
     "mocha": "2.4.x"

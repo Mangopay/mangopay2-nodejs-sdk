@@ -6,13 +6,13 @@ import {
   ApiMethod,
   CountryISO,
   CurrencyISO,
-  MakeKeysNullable,
-  MakeKeysOptional,
   MakeKeysRequired,
   Omit,
-  DeepPartial,
   OmitType,
-  ValueOf
+  PickPartialRequired,
+  ValueOf,
+  PickPartial,
+  DeepPartial
 } from "./types";
 
 export = MangoPay;
@@ -55,7 +55,7 @@ declare class MangoPay {
   method(
     method: ApiMethod,
     callback: (...args: any[]) => void,
-    options: RequestOptions
+    options: MangoPay.RequestOptions
   ): any;
 }
 
@@ -88,7 +88,7 @@ declare namespace MangoPay {
   type PaymentStatus = "WAITING" | "CANCELED" | "EXPIRED" | "VALIDATED";
   type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
   interface BillingData {
-    Address: Address | Address.AddressData | string;
+    Address: models.Address | address.AddressData | string;
   }
 
   interface SecurityInfoData {
@@ -255,7 +255,7 @@ declare namespace MangoPay {
       apiVersion: string;
       readonly id: string;
     };
-    headers: Headers;
+    headers: Partial<Headers>;
   }
 
   type WithToJson<T extends object> = T & { toJSON(): any };
@@ -270,16 +270,16 @@ declare namespace MangoPay {
      * The page number of results you wish to return
      * @default 1
      */
-    Page?: int;
+    Page?: number;
 
     /**
      * The number of results to return per page: Max 100;
      * @default 10
      */
-    Per_Page?: int;
+    Per_Page?: number;
   }
 
-  interface FilterOptions {
+  interface FilterOptions extends Record<string, any> {
     /**
      * The column to sort against and direction - only CreationDate (or Date for the events) is available and ASC or DESC for the direction
      */
@@ -294,8 +294,6 @@ declare namespace MangoPay {
      * To return only resources that have CreationDate AFTER this date
      */
     AfterDate?: Timestamp;
-
-    [key: string]: string | number | boolean;
   }
 
   interface MethodOptions extends DeepPartial<RequestOptions> {
@@ -314,11 +312,10 @@ declare namespace MangoPay {
   interface DependsObject {
     dependsPropertyName: string;
     propertyName: string;
-    propertyValueMapping: Record<string, Model>;
+    propertyValueMapping: Record<string, models.Model>;
   }
 
   interface ModelMethods<T extends {}> {
-    new (data: T): this;
     initialize(): void;
 
     /**
@@ -340,7 +337,7 @@ declare namespace MangoPay {
     parse(): void;
   }
 
-  private namespace models {
+  namespace models {
     const PayInExecutionType: IPayInExecutionType;
     const PayInPaymentType: IPayInPaymentType;
     const MandateStatus: IMandateStatus;
@@ -356,16 +353,23 @@ declare namespace MangoPay {
     const UboDeclarationStatus: IUboDeclarationStatus;
     const UboRefusedReasonType: IUboRefusedReasonType;
     const UserNaturalCapacity: IUserNaturalCapacity;
-    class DeclaredUbo extends Model<UboDeclaration.UboDeclarationData> {
-      constructor(data: Partial<UboDeclaration.UboDeclarationData>);
+    class DeclaredUbo extends Model<uboDeclaration.UboDeclarationData> {
+      constructor(data: Partial<uboDeclaration.UboDeclarationData>);
     }
 
-    class Model<T = any> {
-      constructor(data: any);
+    class Model<T = any> implements ModelMethods<T> {
+      initialize(): void;
+      getData<K extends keyof T>(attribute: K): T[K];
+      setData<K extends keyof T>(attribute: K, value: T[K]): this;
+      setData(attribute: Partial<T>): this;
+      setData(attribute: any, value?: any): this;
+      getReadOnlyProperties(): Array<keyof T>;
+      getDependsObjects(): DependsObject[];
+      parse(): void;
+      constructor(data: T);
     }
-    interface Model<T extends {}> extends ModelMethods<T> {}
 
-    class EntityBase<T extends EntityBase.EntityBaseData> extends Model<T> {
+    class EntityBase<T = any> extends Model<T> {
       initialize(): void;
 
       /**
@@ -396,23 +400,24 @@ declare namespace MangoPay {
       constructor(data: BillingData);
     }
 
-    class Address extends EntityBase<Address.AddressData> {
-      constructor(data: Partial<Address.AddressData>);
+    class Address extends EntityBase<address.AddressData> {
+      constructor(data: Partial<address.AddressData>);
     }
 
-    interface Address extends Address.AddressData {}
+    interface Address extends address.AddressData {}
 
-    class BankingAlias extends EntityBase<BankingAlias.IBANBankingAliasData> {
-      constructor(data: Partial<BankingAlias.BankingAliasData>);
+    class BankingAlias extends EntityBase<bankingAlias.IBANBankingAliasData> {
+      constructor(data: Partial<bankingAlias.BankingAliasData>);
     }
 
     class BankingAliasIBAN extends BankingAlias {}
 
-    interface BankingAlias extends BankingAlias.IBANBankingAliasData {}
+    interface BankingAlias extends bankingAlias.IBANBankingAliasData {}
 
-    class BankAccount extends EntityBase<BankAccount.BaseData> {
-      constructor(data: BankAccount.CreationDetails);
+    class BankAccount extends EntityBase<bankAccount.BaseData> {
+      constructor(data: bankAccount.CreationDetails);
     }
+    interface BankAccount extends bankAccount.DataIntersection {}
 
     class BankAccountDetails {
       constructor(data: any);
@@ -422,150 +427,134 @@ declare namespace MangoPay {
       constructor(data: any);
     }
 
-    interface BankAccountDetailsCA extends BankAccount.CADetails {}
+    interface BankAccountDetailsCA extends bankAccount.CADetails {}
 
     class BankAccountDetailsOther extends BankAccountDetails {
       constructor(data: any);
     }
 
-    interface BankAccountDetailsOther extends BankAccount.OtherDetails {}
+    interface BankAccountDetailsOther extends bankAccount.OtherDetails {}
 
     class BankAccountDetailsGB extends BankAccountDetails {
       constructor(data: any);
     }
 
-    interface BankAccountDetailsGB extends BankAccount.GBDetails {}
+    interface BankAccountDetailsGB extends bankAccount.GBDetails {}
 
     class BankAccountDetailsIBAN extends BankAccountDetails {
       constructor(data: any);
     }
 
-    interface BankAccountDetailsIBAN extends BankAccount.IBANDetails {}
+    interface BankAccountDetailsIBAN extends bankAccount.IBANDetails {}
 
     class BankAccountDetailsUS extends BankAccountDetails {
       constructor(data: any);
     }
 
-    interface BankAccountDetailsUS extends BankAccount.USDetails {}
+    interface BankAccountDetailsUS extends bankAccount.USDetails {}
 
-    class BankAccountType {
-      constructor(data: any);
+    class Transaction extends EntityBase<transaction.TransactionData> {
+      constructor(data: transaction.TransactionData);
     }
 
-    interface BankAccount extends BankAccount.Data {}
+    interface Transaction extends transaction.TransactionData {}
 
-    class Transaction extends EntityBase<Transaction.TransactionData> {
-      constructor(data: Transaction.TransactionData);
-    }
+    class ClientWallet extends EntityBase<wallet.WalletData> {}
 
-    interface Transaction extends Transaction.TransactionData {}
-
-    class ClientWallet extends EntityBase<Wallet.WalletData> {}
-
-    class Wallet extends EntityBase<Wallet.WalletData> {
-      constructor(data: Wallet.CreateWallet | Wallet.UpdateWallet);
+    class Wallet extends EntityBase<wallet.WalletData> {
+      constructor(data: wallet.CreateWallet | wallet.UpdateWallet);
     }
 
     class DocumentPageConsult extends Model {
-      constructor(data: Partial<DisputeDocument.DocumentPageConsult>);
+      constructor(data: Partial<disputeDocument.DocumentPageConsult>);
     }
 
-    interface DocumentPageConsult extends DisputeDocument.DocumentPageConsult {}
+    interface DocumentPageConsult extends disputeDocument.DocumentPageConsult {}
 
-    class Document extends BaseEntity<any> {
+    class Document extends EntityBase {
       constructor(data: any);
     }
 
     class DisputeDocument extends Document {}
 
-    interface DisputeDocument extends DisputeDocument.DisputeDocumentData {}
+    interface DisputeDocument extends disputeDocument.DisputeDocumentData {}
 
-    class DisputeDocumentPage extends BaseEntity<any> {
-      constructor(data: CreateDisputePage);
+    class DisputeDocumentPage extends EntityBase {
+      constructor(data: disputeDocument.CreateDisputeDocumentPage);
     }
 
     interface DisputeDocumentPage
-      extends DisputeDocument.CreateDisputeDocumentPage {}
+      extends disputeDocument.CreateDisputeDocumentPage {}
 
-    class KycDocument extends EntityBase<KycDocument.KycDocumentData> {
-      constructor(
-        data: KycDocument.CreateKycDocument | KycDocument.UpdateKycDocument
-      );
+    class KycDocument extends EntityBase<kycDocument.KycDocumentData> {
+      constructor(data: Partial<kycDocument.KycDocumentData>);
     }
 
-    interface KycDocument extends KycDocument.KycDocumentData {}
-
-    class KycDocumentStatus {
-      constructor(data: any);
-    }
-
-    class KycDocumentType {
-      constructor(data: any);
-    }
+    interface KycDocument extends kycDocument.KycDocumentData {}
 
     class KycPage {
-      constructor(data: KycDocument.CreateKycPage);
+      constructor(data: kycDocument.CreateKycPage);
     }
 
-    interface KycPage extends KycDocument.CreateKycPage {}
+    interface KycPage extends kycDocument.CreateKycPage {}
 
     class EMoney {
-      constructor(data: EMoney.EMoneyData);
+      constructor(data: eMoney.EMoneyData);
     }
 
-    interface EMoney extends EMoney.EMoneyData {}
+    interface EMoney extends eMoney.EMoneyData {}
 
-    class UboDeclaration extends EntityBase<UboDeclaration.UboDeclarationData> {
+    class UboDeclaration extends EntityBase<uboDeclaration.UboDeclarationData> {
       constructor(
         data:
-          | UboDeclaration.CreateUboDeclaration
-          | UboDeclaration.UpdateUboDeclaration
+          | uboDeclaration.CreateUboDeclaration
+          | uboDeclaration.UpdateUboDeclaration
       );
     }
 
-    interface UboDeclaration extends UboDeclaration.UboDeclarationData {}
+    interface UboDeclaration extends uboDeclaration.UboDeclarationData {}
 
     class CardRegistration extends EntityBase<
-      CardRegistration.CardRegistrationData
+      cardRegistration.CardRegistrationData
     > {
       constructor(
         data:
-          | CardRegistration.CreateCardRegistration
-          | CardRegistration.UpdateCardRegistration
+          | cardRegistration.CreateCardRegistration
+          | cardRegistration.UpdateCardRegistration
       );
     }
 
-    interface CardRegistration extends CardRegistration.CardRegistrationData {}
+    interface CardRegistration extends cardRegistration.CardRegistrationData {}
 
-    class Card extends EntityBase<Card.CardData> {
-      constructor(data: Card.CardData);
+    class Card extends EntityBase<card.CardData> {
+      constructor(data: card.CardData);
     }
 
-    interface Card extends Card.CardData {}
+    interface Card extends card.CardData {}
 
     class CardPreAuthorization {
       constructor(
         data:
-          | CardPreAuthorization.CardPreAuthorizationData
-          | CardPreAuthorization.UpdateCardPreAuthorization
+          | cardPreAuthorization.CardPreAuthorizationData
+          | cardPreAuthorization.UpdateCardPreAuthorization
       );
     }
 
     interface CardPreAuthorization
-      extends CardPreAuthorization.CardPreAuthorizationData {}
+      extends cardPreAuthorization.CardPreAuthorizationData {}
 
     class SecurityInfo extends EntityBase<
-      SecurityInfo & EntityBase.EntityBaseData
+      SecurityInfo & entityBase.EntityBaseData
     > {
       constructor(data: SecurityInfo);
     }
 
-    class UserLegal extends EntityBase<User.UserLegalData> {
+    class UserLegal extends EntityBase<user.UserLegalData> {
       PersonType: "LEGAL";
       constructor(
         data: MakeKeysRequired<
-          Partial<User.UserLegalData>,
-          User.RequiredUserLegalData
+          Partial<user.UserLegalData>,
+          user.RequiredUserLegalData
         >
       );
 
@@ -573,17 +562,17 @@ declare namespace MangoPay {
        * Sets the person type for the model
        * @param personType
        */
-      setPersonType(type: User.PersonType): void;
+      setPersonType(type: user.PersonType): void;
     }
 
-    interface UserLegal extends User.UserLegalData {}
+    interface UserLegal extends user.UserLegalData {}
 
-    class UserNatural extends EntityBase<User.UserNaturalData> {
+    class UserNatural extends EntityBase<user.UserNaturalData> {
       PersonType: "NATURAL";
       constructor(
         data: MakeKeysRequired<
-          Partial<User.UserNaturalData>,
-          User.RequiredUserNaturalData
+          Partial<user.UserNaturalData>,
+          user.RequiredUserNaturalData
         >
       );
 
@@ -591,144 +580,142 @@ declare namespace MangoPay {
        * Sets the person type for the model
        * @param personType
        */
-      setPersonType(type: User.PersonType): void;
+      setPersonType(type: user.PersonType): void;
     }
 
-    interface UserNatural extends User.UserNaturalData {}
+    interface UserNatural extends user.UserNaturalData {}
 
-    class User extends EntityBase<User.UserData> {
-      constructor(data: User.UserData);
+    class User extends EntityBase<user.UserData> {
+      constructor(data: user.UserData);
 
       /**
        * Sets the person type for the model
        * @param personType
        */
-      setPersonType(type: User.PersonType): void;
+      setPersonType(type: user.PersonType): void;
     }
 
-    interface User extends User.UserData {}
+    interface User extends user.UserData {}
 
-    class PayIn extends EntityBase<PayIn.BasePayInData> {
+    class PayIn extends EntityBase<payIn.BasePayInData> {
       constructor(data: any);
     }
 
-    interface PayIn extends PayIn.BasePayInData {}
+    interface PayIn extends payIn.BasePayInData {}
 
-    class PayInPaymentDetails extends EntityBase<any> {
+    class PayInPaymentDetails extends EntityBase {
       constructor(data: any);
     }
 
-    class PayInExecutionDetails extends EntityBase<any> {
+    class PayInExecutionDetails extends EntityBase {
       constructor(data: any);
     }
 
-    class PayInExecutionDetailsDirect extends PayInExecutionDetails<any> {
+    class PayInExecutionDetailsDirect extends PayInExecutionDetails {
       constructor(data: any);
     }
 
-    class PayInExecutionDetailsWeb extends PayInExecutionDetails<any> {
+    class PayInExecutionDetailsWeb extends PayInExecutionDetails {
       constructor(data: any);
     }
 
-    class PayInPaymentDetailsBankWire extends PayInPaymentDetails<any> {
+    class PayInPaymentDetailsBankWire extends PayInPaymentDetails {
       constructor(data: any);
     }
 
-    class PayInPaymentDetailsBankingAlias extends PayInPaymentDetails<any> {
+    class PayInPaymentDetailsBankingAlias extends PayInPaymentDetails {
       constructor(data: any);
     }
 
-    class PayInPaymentDetailsCard extends PayInPaymentDetails<any> {
+    class PayInPaymentDetailsCard extends PayInPaymentDetails {
       constructor(data: any);
     }
 
-    class PayInPaymentDetailsCardDirect extends PayInPaymentDetails<any> {
+    class PayInPaymentDetailsCardDirect extends PayInPaymentDetails {
       constructor(data: any);
     }
 
-    class PayInPaymentDetailsCardWeb extends PayInPaymentDetails<any> {
+    class PayInPaymentDetailsCardWeb extends PayInPaymentDetails {
       constructor(data: any);
     }
 
-    class PayInPaymentDetailsDirectDebitDirect extends PayInPaymentDetails<
-      any
+    class PayInPaymentDetailsDirectDebitDirect extends PayInPaymentDetails {
+      constructor(data: any);
+    }
+
+    class PayInPaymentDetailsDirectDebitWeb extends PayInPaymentDetails {
+      constructor(data: any);
+    }
+
+    class PayInPaymentDetailsPayPal extends PayInPaymentDetails {
+      constructor(data: any);
+    }
+
+    class PayInPaymentDetailsPreAuthorized extends PayInPaymentDetails {
+      constructor(data: any);
+    }
+
+    class PayInTemplateURLOptions extends EntityBase {
+      constructor(data: any);
+    }
+
+    class Refund extends EntityBase<refund.RefundData> {
+      constructor(data: refund.CreatePayInRefund | refund.CreateTransferRefund);
+    }
+
+    class RefundReasonDetails extends EntityBase {
+      constructor(data: any);
+    }
+
+    class Repudiation extends EntityBase<repudiation.RepudiationData> {
+      constructor(data: Partial<repudiation.RepudiationData>);
+    }
+
+    interface Repudiation extends repudiation.RepudiationData {}
+
+    class Client extends EntityBase<client.ClientData> {
+      constructor(data?: Partial<client.ClientData>);
+    }
+
+    interface Client extends client.ClientData {}
+
+    class PlatformCategorization extends EntityBase<
+      client.PlatformCategorization
     > {
-      constructor(data: any);
+      constructor(data: client.PlatformCategorization);
     }
 
-    class PayInPaymentDetailsDirectDebitWeb extends PayInPaymentDetails<any> {
-      constructor(data: any);
+    class Dispute extends EntityBase<dispute.DisputeData> {
+      constructor(data: Partial<dispute.DisputeData>);
     }
 
-    class PayInPaymentDetailsPayPal extends PayInPaymentDetails<any> {
-      constructor(data: any);
-    }
-
-    class PayInPaymentDetailsPreAuthorized extends PayInPaymentDetails<any> {
-      constructor(data: any);
-    }
-
-    class PayInTemplateURLOptions extends EntityBase<any> {
-      constructor(data: any);
-    }
-
-    class Refund extends EntityBase<Refund.RefundData> {
-      constructor(data: Refund.CreatePayInRefund | Refund.CreateTransferRefund);
-    }
-
-    class RefundReasonDetails extends EntityBase<any> {
-      constructor(data: any);
-    }
-
-    class Repudiation extends EntityBase<Repudiation.RepudiationData> {
-      constructor(data: Partial<Repudiation.RepudiationData>);
-    }
-
-    interface Repudiation extends Repudiation.RepudiationData {}
-
-    class Client extends BaseEntity<Client.ClientData> {
-      constructor(data?: Partial<Client.ClientData>);
-    }
-
-    interface Client extends ClientData {}
-
-    class PlatformCategorization extends BaseEntity<
-      Client.PlatformCategorization
-    > {
-      constructor(data: Client.PlatformCategorization);
-    }
-
-    class Dispute extends EntityBase<Dispute.DisputeData> {
-      constructor(data: Partial<Dispute.DisputeData>);
-    }
-
-    interface Dispute extends Dispute.DisputeData {}
+    interface Dispute extends dispute.DisputeData {}
 
     class DisputeReason extends Model {
       constructor(data: any);
     }
 
     class SettlementTransfer extends EntityBase<
-      SettlementTransfer.SettlementTransferData
+      settlementTransfer.SettlementTransferData
     > {
-      constructor(data: Partial<SettlementTransfer.SettlementTransferData>);
+      constructor(data: Partial<settlementTransfer.SettlementTransferData>);
     }
 
     interface SettlementTransfer
-      extends SettlementTransfer.SettlementTransferData {}
+      extends settlementTransfer.SettlementTransferData {}
 
-    class Transfer extends BaseEntity<Transfer.TransferData> {
-      constructor(data: Partial<Transfer.CreateTransfer>);
+    class Transfer extends EntityBase<transfer.TransferData> {
+      constructor(data: Partial<transfer.CreateTransfer>);
     }
 
-    interface Transfer extends Transfer.TransferData {}
+    interface Transfer extends transfer.TransferData {}
 
-    class PayOut extends BaseEntity<PayOut.PayOutData> {
+    class PayOut extends EntityBase<PayOut.PayOutData> {
       constructor(data: Partial<PayOut.CreatePayOut>);
     }
     // interface PayOut extends PayOut.PayoutData {}
 
-    class PayOutPaymentDetails extends BaseEntity<any> {
+    class PayOutPaymentDetails extends EntityBase {
       constructor(data?: any);
     }
 
@@ -736,29 +723,29 @@ declare namespace MangoPay {
       constructor(data?: any);
     }
 
-    class Mandate extends EntityBase<Mandate.MandateData> {
-      constructor(data?: Partial<Mandate.MandateData>);
+    class Mandate extends EntityBase<mandate.MandateData> {
+      constructor(data?: Partial<mandate.MandateData>);
     }
 
-    interface Mandate extends Mandate.MandateData {}
+    interface Mandate extends mandate.MandateData {}
 
-    class Hook extends EntityBase<Hook.HookData> {
-      constructor(data?: Partial<Hook.HookData>);
+    class Hook extends EntityBase<hook.HookData> {
+      constructor(data?: Partial<hook.HookData>);
     }
 
-    interface Hook extends Hook.HookData {}
+    interface Hook extends hook.HookData {}
 
-    class Report extends EntityBase<Report.ReportData> {
-      constructor(data?: Partial<Report.ReportData>);
+    class Report extends EntityBase<report.ReportData> {
+      constructor(data?: Partial<report.ReportData>);
     }
 
-    interface Report extends Report.ReportData {}
+    interface Report extends report.ReportData {}
 
-    class ReportFilter extends Model<Report.Filters> {
-      constructor(data?: Partial<Report.Filters>);
+    class ReportFilter extends Model<report.Filters> {
+      constructor(data?: Partial<report.Filters>);
     }
 
-    interface Report extends Report.Filters {}
+    interface Report extends report.Filters {}
   }
 
   interface IPayInExecutionType {
@@ -904,7 +891,7 @@ declare namespace MangoPay {
     Declarative: "DECLARATIVE";
   }
 
-  namespace EntityBase {
+  namespace entityBase {
     interface EntityBaseData {
       Id: string;
       Tag: string;
@@ -912,7 +899,7 @@ declare namespace MangoPay {
     }
   }
 
-  namespace Address {
+  namespace address {
     interface AddressData {
       AddressLine1: string;
       AddressLine2: string;
@@ -921,12 +908,12 @@ declare namespace MangoPay {
       PostalCode: string;
       Country: string;
     }
-    type AddressType = string | AddressData;
+    type AddressType = string | AddressData | models.Address;
   }
 
-  namespace BankingAlias {
+  namespace bankingAlias {
     type BankingAliasType = "IBAN";
-    interface BankingAliasData extends EntityBase.EntityBaseData {
+    interface BankingAliasData extends entityBase.EntityBaseData {
       /**
        * The user ID who is credited (defaults to the owner of the wallet)
        */
@@ -976,15 +963,18 @@ declare namespace MangoPay {
     }
 
     interface CreateIBANBankingAlias
-      extends Pick<IBANBankingAliasData, "OwnerName" | "Country">,
-        Partial<Pick<IBANBankingAliasData, "Tag" | "CreditedUserId">> {}
+      extends PickPartialRequired<
+        IBANBankingAliasData,
+        "Tag" | "CreditedUserId",
+        "OwnerName" | "Country"
+      > {}
   }
 
-  namespace BankAccount {
+  namespace bankAccount {
     type BankAccountType = "IBAN" | "GB" | "US" | "CA" | "OTHER";
     type DepositAccountType = "CHECKING" | "SAVINGS";
 
-    interface BaseData extends EntityBase.EntityBaseData {
+    interface BaseData extends entityBase.EntityBaseData {
       /**
        * The object owner's UserId
        */
@@ -1003,12 +993,12 @@ declare namespace MangoPay {
       /**
        * The address of the owner of the bank account
        */
-      OwnerAddress: Address.AddressType;
+      OwnerAddress: address.AddressType;
 
       /**
        * @deprecated
        */
-      Details?: BankAccountDetails;
+      Details?: models.BankAccountDetails;
 
       /**
        * Whether the bank account is active or not
@@ -1022,7 +1012,7 @@ declare namespace MangoPay {
       /**
        * The address of the owner of the bank account
        */
-      OwnerAddress: Address;
+      OwnerAddress: address.AddressType;
 
       /**
        * The name of the owner of the bank account
@@ -1040,7 +1030,7 @@ declare namespace MangoPay {
       BIC?: string;
     }
 
-    interface IBANData extends BaseData, IBANDetails {}
+    type IBANData = BaseData & IBANDetails;
 
     interface USDetails {
       Type: "US";
@@ -1048,7 +1038,7 @@ declare namespace MangoPay {
       /**
        * The address of the owner of the bank account
        */
-      OwnerAddress: Address.AddressType;
+      OwnerAddress: address.AddressType;
 
       /**
        * The name of the owner of the bank account
@@ -1071,7 +1061,7 @@ declare namespace MangoPay {
       DepositAccountType?: DepositAccountType;
     }
 
-    interface USData extends BaseData, USDetails {}
+    type USData = BaseData & USDetails;
 
     interface CADetails {
       Type: "CA";
@@ -1079,7 +1069,7 @@ declare namespace MangoPay {
       /**
        * The address of the owner of the bank account
        */
-      OwnerAddress: Address.AddressType;
+      OwnerAddress: address.AddressType;
 
       /**
        * The name of the owner of the bank account
@@ -1107,7 +1097,7 @@ declare namespace MangoPay {
       BankName: string;
     }
 
-    interface CAData extends BaseData, CADetails {}
+    type CAData = BaseData & CADetails;
 
     interface GBDetails {
       Type: "GB";
@@ -1115,7 +1105,7 @@ declare namespace MangoPay {
       /**
        * The address of the owner of the bank account
        */
-      OwnerAddress: Address.AddressType;
+      OwnerAddress: address.AddressType;
 
       /**
        * The name of the owner of the bank account
@@ -1133,7 +1123,7 @@ declare namespace MangoPay {
       AccountNumber: string;
     }
 
-    interface GBData extends BaseData, GBDetails {}
+    type GBData = BaseData & GBDetails;
 
     interface OtherDetails {
       Type: "OTHER";
@@ -1141,7 +1131,7 @@ declare namespace MangoPay {
       /**
        * The address of the owner of the bank account
        */
-      OwnerAddress: Address.AddressType;
+      OwnerAddress: address.AddressType;
 
       /**
        * The name of the owner of the bank account
@@ -1164,9 +1154,10 @@ declare namespace MangoPay {
       AccountNumber: string;
     }
 
-    interface OtherData extends BaseData, OtherDetails {}
+    type OtherData = BaseData & OtherDetails;
 
     type Data = OtherData | CAData | GBData | IBANData | USData;
+    type DataIntersection = OtherData & CAData & GBData & IBANData & USData;
     type CreationDetails =
       | OtherDetails
       | CADetails
@@ -1175,7 +1166,7 @@ declare namespace MangoPay {
       | USDetails;
   }
 
-  namespace Transaction {
+  namespace transaction {
     type TransactionNature =
       | "REGULAR"
       | "REPUDIATION"
@@ -1184,7 +1175,7 @@ declare namespace MangoPay {
     type TransactionType = "PAYIN" | "TRANSFER" | "PAYOUT";
     type TransactionStatus = "CREATED" | "SUCCEEDED" | "FAILED";
 
-    interface TransactionData extends EntityBase.EntityBaseData {
+    interface TransactionData extends entityBase.EntityBaseData {
       /**
        * Information about the funds that are being debited
        */
@@ -1252,11 +1243,11 @@ declare namespace MangoPay {
     }
   }
 
-  namespace Wallet {
+  namespace wallet {
     type ClientFundsType = "FEES" | "CREDIT";
     type FundsType = "DEFAULT" | ClientFundsType;
 
-    interface WalletData extends EntityBase.EntityBaseData {
+    interface WalletData extends entityBase.EntityBaseData {
       /**
        * An array of userIDs of who own's the wallet. For now, you only can set up a unique owner.
        */
@@ -1290,10 +1281,10 @@ declare namespace MangoPay {
 
     type CreateWallet = UpdateWallet &
       Pick<WalletData, "Owners" | "Currency" | "Description">;
-    type UpdateWallet = Partial<Pick<WalletData, "Tag" | "Description">>;
+    type UpdateWallet = PickPartial<WalletData, "Tag" | "Description">;
   }
 
-  namespace DisputeDocument {
+  namespace disputeDocument {
     type DisputeDocumentType =
       | "DELIVERY_PROOF"
       | "INVOICE"
@@ -1319,7 +1310,7 @@ declare namespace MangoPay {
       | "DOCUMENT_FALSIFIED"
       | "OTHER";
 
-    interface DisputeDocumentData extends EntityBase.EntityBaseData {
+    interface DisputeDocumentData extends entityBase.EntityBaseData {
       /**
        * Gives the type of the KYC document
        */
@@ -1409,7 +1400,7 @@ declare namespace MangoPay {
     }
   }
 
-  namespace KycDocument {
+  namespace kycDocument {
     type KycDocumentType =
       | "IDENTITY_PROOF"
       | "REGISTRATION_PROOF"
@@ -1435,7 +1426,7 @@ declare namespace MangoPay {
       | "UNDERAGE_PERSON"
       | "SPECIFIC_CASE";
 
-    interface KycDocumentData extends EntityBase.EntityBaseData {
+    interface KycDocumentData extends entityBase.EntityBaseData {
       /**
        * Gives the type of the KYC document
        */
@@ -1465,6 +1456,14 @@ declare namespace MangoPay {
        * The date when the document was processed by MANGOPAY
        */
       ProcessedDate: Timestamp;
+    }
+
+    interface CreateKycDocument {
+      /**
+       * Gives the type of the KYC document
+       */
+      Type: KycDocumentType;
+      Tag?: string;
     }
 
     interface CreateKycDocument {
@@ -1508,8 +1507,8 @@ declare namespace MangoPay {
     }
   }
 
-  namespace EMoney {
-    interface EMoneyData extends EntityBase.EntityBaseData {
+  namespace eMoney {
+    interface EMoneyData extends entityBase.EntityBaseData {
       /**
        * The object owner's UserId
        */
@@ -1527,8 +1526,8 @@ declare namespace MangoPay {
     }
   }
 
-  namespace UboDeclaration {
-    interface UboDeclarationData extends EntityBase.EntityBaseData {
+  namespace uboDeclaration {
+    interface UboDeclarationData extends entityBase.EntityBaseData {
       /**
        * The object owner's UserId
        */
@@ -1537,7 +1536,7 @@ declare namespace MangoPay {
       /**
        * Status of a UBO Declaration
        */
-      Status: KycDocument.DocumentStatus;
+      Status: kycDocument.DocumentStatus;
 
       /**
        * Reason types for a UBO Declaration
@@ -1571,8 +1570,12 @@ declare namespace MangoPay {
     }
   }
 
-  namespace CardRegistration {
-    interface CardRegistrationData extends EntityBase.EntityBaseData {
+  namespace cardRegistration {
+    interface CardRegistrationData extends entityBase.EntityBaseData {
+      /**
+       * The object owner's UserId
+       */
+      UserId: string;
       /**
        * The currency - should be ISO_4217 format
        */
@@ -1601,7 +1604,7 @@ declare namespace MangoPay {
       /**
        * The type of card
        */
-      CardType: Card.CardType;
+      CardType: card.CardType;
 
       /**
        * The ID of a card
@@ -1621,19 +1624,22 @@ declare namespace MangoPay {
       /**
        * Status of the card registration
        */
-      Status: Card.CardStatus;
+      Status: card.CardStatus;
     }
 
-    type CreateCardRegistration = Partial<
-      Pick<CardRegistrationData, "CardType" | "Tag">
-    > &
-      Pick<CardRegistrationData, "UserId" | "Currency" | "CardType">;
-    type UpdateCardRegistration = Partial<
-      Pick<CardRegistrationData, "Tag" | "RegistrationData">
+    interface CreateCardRegistration
+      extends PickPartialRequired<
+        CardRegistrationData,
+        "CardType" | "Tag",
+        "UserId" | "Currency"
+      > {}
+    type UpdateCardRegistration = PickPartial<
+      CardRegistrationData,
+      "Tag" | "RegistrationData"
     >;
   }
 
-  namespace Card {
+  namespace card {
     type CardType =
       | "CB_VISA_MASTERCARD"
       | "DINERS"
@@ -1646,7 +1652,7 @@ declare namespace MangoPay {
     type CardStatus = "CREATED" | "VALIDATED" | "ERROR";
     type CardValidity = "UNKNOWN" | "VALID" | "INVALID";
 
-    interface CardData extends EntityBase.EntityBaseData {
+    interface CardData extends entityBase.EntityBaseData {
       /**
        * The expiry date of the card - must be in format MMYY
        */
@@ -1690,7 +1696,7 @@ declare namespace MangoPay {
       /**
        * The currency - should be ISO_4217 format
        */
-      Currency: CurrencyIso;
+      Currency: CurrencyISO;
 
       /**
        * Whether the card is valid or not. Once they process (or attempt to process) a payment with the card we are able to indicate if it is "valid" or "invalid".
@@ -1710,8 +1716,8 @@ declare namespace MangoPay {
     }
   }
 
-  namespace CardPreAuthorization {
-    interface CardPreAuthorizationData extends EntityBase.EntityBaseData {
+  namespace cardPreAuthorization {
+    interface CardPreAuthorizationData extends entityBase.EntityBaseData {
       /**
        * A user's ID
        */
@@ -1795,24 +1801,23 @@ declare namespace MangoPay {
       SecurityInfo: SecurityInfoData;
     }
 
-    type CreateCardPreAuthorization = Partial<
-      Pick<CardPreAuthorizationData, "Tag" | "Billing" | "Secure">
-    > &
-      Pick<
-        CardPreAuthorizationData,
-        "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeRedirectUrl"
-      >;
-    type UpdateCardPreAuthorization = Partial<
-      Pick<CardPreAuthorizationData, "Tag">
-    > &
-      Pick<CardPreAuthorizationData, "PaymentStatus" | "Id">;
+    type CreateCardPreAuthorization = PickPartialRequired<
+      CardPreAuthorizationData,
+      "Tag" | "Billing" | "SecureMode",
+      "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeRedirectUrl"
+    >;
+    type UpdateCardPreAuthorization = PickPartialRequired<
+      CardPreAuthorizationData,
+      "Tag",
+      "PaymentStatus" | "Id"
+    >;
   }
 
-  namespace Hook {
+  namespace hook {
     type HookValidity = "UNKNOWN" | "VALID" | "INVALID";
     type HookStatus = "DISABLED" | "ENABLED";
 
-    interface HookData extends EntityBase.EntityBaseData {
+    interface HookData extends entityBase.EntityBaseData {
       /**
        * This is the URL where your receive notification for each EventType
        */
@@ -1831,19 +1836,21 @@ declare namespace MangoPay {
       /**
        * The event type
        */
-      EventType: Event.EventType;
+      EventType: event.EventType;
     }
 
     interface CreateHook
-      extends Pick<HookData, "EventType" | "Url">,
-        Partial<Pick<HookData, "Tag">> {}
+      extends PickPartialRequired<HookData, "Tag", "EventType" | "Url"> {}
 
     interface UpdateHook
-      extends Pick<HookData, "Id">,
-        Partial<Pick<HookData, "EventType" | "Url" | "Tag">> {}
+      extends PickPartialRequired<
+        HookData,
+        "EventType" | "Url" | "Tag",
+        "Id"
+      > {}
   }
 
-  namespace Report {
+  namespace report {
     interface Filters {
       /**
        * To return only resources that have CreationDate BEFORE this date
@@ -1858,17 +1865,17 @@ declare namespace MangoPay {
       /**
        * The type of the transaction
        */
-      Type: Transaction.TransactionType[];
+      Type: transaction.TransactionType[];
 
       /**
        * The status of the transaction
        */
-      Status: Transaction.TransactionStatus[];
+      Status: transaction.TransactionStatus[];
 
       /**
        * The nature of the transaction
        */
-      Nature: Transaction.TransactionNature[];
+      Nature: transaction.TransactionNature[];
 
       /**
        * The minimum amount of DebitedFunds
@@ -1958,7 +1965,7 @@ declare namespace MangoPay {
       | "Type"
       | "WireReference";
 
-    interface ReportData {
+    interface ReportData extends entityBase.EntityBaseData {
       /**
        * The date when the report was executed
        */
@@ -2016,21 +2023,19 @@ declare namespace MangoPay {
     }
 
     interface CreateReport
-      extends Partial<
-        Pick<
-          ReportData,
-          | "Tag"
-          | "CallbackURL"
-          | "DownloadFormat"
-          | "Sort"
-          | "Preview"
-          | "Filters"
-          | "Columns"
-        >
+      extends PickPartial<
+        ReportData,
+        | "Tag"
+        | "CallbackURL"
+        | "DownloadFormat"
+        | "Sort"
+        | "Preview"
+        | "Filters"
+        | "Columns"
       > {}
   }
 
-  namespace Mandate {
+  namespace mandate {
     /**
      * - "CREATED" - the mandate has been created
      * - "SUBMITTED" - the mandate has been submitted to the banks and you can now do payments with this mandate
@@ -2042,7 +2047,7 @@ declare namespace MangoPay {
     type MandateCultureCode = "EN" | "FR" | "NL" | "DE" | "ES" | "IT" | "PL";
     type MandateExecutionType = "WEB";
     type MandateType = "DIRECT_DEBIT";
-    interface MandateData extends EntityBase.EntityBaseData {
+    interface MandateData extends entityBase.EntityBaseData {
       /**
        * An ID of a Bank Account
        */
@@ -2110,11 +2115,14 @@ declare namespace MangoPay {
     }
 
     interface CreateMandate
-      extends Pick<MandateData, "BankAccountId" | "Culture" | "ReturnURL">,
-        Partial<Pick<MandateData, "Tag">> {}
+      extends PickPartialRequired<
+        MandateData,
+        "Tag",
+        "BankAccountId" | "Culture" | "ReturnURL"
+      > {}
   }
 
-  namespace User {
+  namespace user {
     /**
      * Should be only one of these values:
      * 1 - for incomes <18K€),
@@ -2139,7 +2147,7 @@ declare namespace MangoPay {
       | "LegalRepresentativeProofOfIdentity"
       | "ShareholderDeclaration"
       | "Statute";
-    interface UserData extends EntityBase.EntityBaseData {
+    interface UserData extends entityBase.EntityBaseData {
       /**
        * Type of user
        */
@@ -2172,7 +2180,7 @@ declare namespace MangoPay {
       /**
        * The address of the company’s headquarters
        */
-      HeadquartersAddress: Address.AddressType;
+      HeadquartersAddress: address.AddressType;
 
       /**
        * The first name of the company’s Legal representative person
@@ -2187,7 +2195,7 @@ declare namespace MangoPay {
       /**
        * The address of the company’s Legal representative person
        */
-      LegalRepresentativeAddress: Address.AddressType;
+      LegalRepresentativeAddress: address.AddressType;
 
       /**
        * The email of the company’s Legal representative person - must be valid
@@ -2224,6 +2232,11 @@ declare namespace MangoPay {
        * The shareholder declaration of the company
        */
       ShareholderDeclaration: string | null;
+
+      /**
+       * The official registered number of the business
+       */
+      CompanyNumber: string;
     }
 
     interface UserNaturalData extends UserData {
@@ -2242,7 +2255,7 @@ declare namespace MangoPay {
       /**
        * The user address
        */
-      Address: string | Address.AddressData;
+      Address: string | address.AddressData;
 
       /**
        * The date of birth of the user - be careful to set the right timezone (should be UTC) to avoid 00h becoming 23h (and hence interpreted as the day before)
@@ -2300,7 +2313,15 @@ declare namespace MangoPay {
       | "Email";
 
     interface BaseUserLegalData
-      extends Partial<Omit<UserLegalData, StaticKeys>> {
+      extends PickPartial<
+        UserLegalData,
+        | RequiredUserLegalData
+        | "CompanyNumber"
+        | "LegalRepresentativeEmail"
+        | "LegalRepresentativeAddress"
+        | "HeadquartersAddress"
+        | "Tag"
+      > {
       PersonType: "LEGAL";
     }
 
@@ -2315,7 +2336,10 @@ declare namespace MangoPay {
       > {}
 
     interface BaseUserNaturalData
-      extends Partial<Omit<UserNaturalData, StaticKeys>> {
+      extends PickPartial<
+        UserNaturalData,
+        RequiredUserNaturalData | "Address" | "Occupation" | "IncomeRange"
+      > {
       PersonType: "NATURAL";
     }
 
@@ -2330,7 +2354,7 @@ declare namespace MangoPay {
       > {}
   }
 
-  namespace PayIn {
+  namespace payIn {
     type PayInPaymentType = ValueOf<IPayInPaymentType>;
     type PayInExecutionType =
       | ValueOf<IPayInExecutionType>
@@ -2340,7 +2364,7 @@ declare namespace MangoPay {
       Payline: string;
     }
 
-    interface BasePayInData extends EntityBase.EntityBaseData {
+    interface BasePayInData extends entityBase.EntityBaseData {
       /**
        * Information about the funds that are being debited
        */
@@ -2379,12 +2403,12 @@ declare namespace MangoPay {
       /**
        * The nature of the transaction
        */
-      Nature: Transaction.TransactionNature;
+      Nature: transaction.TransactionNature;
 
       /**
        * The status of the transaction
        */
-      Status: Transaction.TransactionStatus;
+      Status: transaction.TransactionStatus;
 
       /**
        * When the transaction happened
@@ -2404,7 +2428,7 @@ declare namespace MangoPay {
       /**
        * The type of the transaction
        */
-      Type: Transaction.TransactionType;
+      Type: transaction.TransactionType;
 
       /**
        * The type of payin
@@ -2429,7 +2453,7 @@ declare namespace MangoPay {
       /**
        * The type of card
        */
-      CardType: Card.CardType;
+      CardType: card.CardType;
 
       /**
        * The SecureMode corresponds to '3D secure' for CB Visa and MasterCard. This field lets you activate it manually. The field lets you activate it
@@ -2496,7 +2520,7 @@ declare namespace MangoPay {
       /**
        * The type of card
        */
-      CardType: Card.CardType;
+      CardType: card.CardType;
 
       /**
        * The SecureMode corresponds to '3D secure' for CB Visa and MasterCard. This field lets you activate it manually.
@@ -2726,15 +2750,15 @@ declare namespace MangoPay {
     }
 
     interface CreateBankWireDirectPayIn
-      extends Pick<
-          BankWireDirectPayInData,
-          | "AuthorId"
-          | "CreditedUserId"
-          | "CreditedWalletId"
-          | "DeclaredDebitedFunds"
-          | "DeclaredFees"
-        >,
-        Partial<Pick<BankWireDirectPayInData, "Tag">> {
+      extends PickPartialRequired<
+        BankWireDirectPayInData,
+        "Tag",
+        | "AuthorId"
+        | "CreditedUserId"
+        | "CreditedWalletId"
+        | "DeclaredDebitedFunds"
+        | "DeclaredFees"
+      > {
       ExecutionType: "DIRECT";
       PaymentType: "BANK_WIRE";
     }
@@ -2746,7 +2770,7 @@ declare namespace MangoPay {
       | BankWireDirectPayInData;
   }
 
-  namespace Refund {
+  namespace refund {
     type RefundReasonType =
       | "INITIALIZED_BY_CLIENT"
       | "BANKACCOUNT_INCORRECT"
@@ -2758,7 +2782,7 @@ declare namespace MangoPay {
       RefundReasonType: RefundReasonType;
     }
 
-    interface RefundData extends Transaction.TransactionData {
+    interface RefundData extends transaction.TransactionData {
       /**
        * The nature of the transaction
        */
@@ -2772,7 +2796,7 @@ declare namespace MangoPay {
       /**
        * The initial transaction type
        */
-      InitialTransactionType: Transaction.TransactionType;
+      InitialTransactionType: transaction.TransactionType;
 
       /**
        * Contains info about the reason for refund
@@ -2793,8 +2817,8 @@ declare namespace MangoPay {
     }
   }
 
-  namespace Repudiation {
-    interface RepudiationData extends Transaction.TransactionData {
+  namespace repudiation {
+    interface RepudiationData extends transaction.TransactionData {
       /**
        * The nature of the transaction
        */
@@ -2808,16 +2832,16 @@ declare namespace MangoPay {
       /**
        * The initial transaction type
        */
-      InitialTransactionType: Transaction.TransactionType;
+      InitialTransactionType: transaction.TransactionType;
 
       /**
        * Contains info about the reason for refund
        */
-      RefundReason: RefundReason;
+      RefundReason: refund.RefundReason;
     }
   }
 
-  namespace Client {
+  namespace client {
     type BusinessType = "MARKETPLACE" | "CROWDFUNDING" | "FRANCHISE" | "OTHER";
     type Sector =
       | "RENTALS"
@@ -2837,7 +2861,7 @@ declare namespace MangoPay {
       BusinessType: BusinessType;
     }
 
-    interface ClientData extends EntityBase.EntityBaseData {
+    interface ClientData extends entityBase.EntityBaseData {
       /**
        * The pretty name for the client
        */
@@ -2906,7 +2930,7 @@ declare namespace MangoPay {
       /**
        * The address of the company’s headquarters
        */
-      HeadquartersAddress: Address.AddressType;
+      HeadquartersAddress: address.AddressType;
 
       /**
        * The tax (or VAT) number for your company
@@ -2953,7 +2977,7 @@ declare namespace MangoPay {
       /**
        * The address of the company’s headquarters
        */
-      HeadquartersAddress?: Address.AddressType;
+      HeadquartersAddress?: address.AddressType;
 
       /**
        * The tax (or VAT) number for your company
@@ -2984,7 +3008,7 @@ declare namespace MangoPay {
     }
   }
 
-  namespace Event {
+  namespace event {
     type EventType =
       | "PAYIN_NORMAL_CREATED"
       | "PAYIN_NORMAL_SUCCEEDED"
@@ -3055,7 +3079,7 @@ declare namespace MangoPay {
     }
   }
 
-  namespace Dispute {
+  namespace dispute {
     type DisputeReasonType =
       | "DUPLICATE"
       | "FRAUD"
@@ -3089,7 +3113,7 @@ declare namespace MangoPay {
       DisputeReasonMessage: string;
     }
 
-    interface DisputeData extends EntityBase.EntityBaseData {
+    interface DisputeData extends entityBase.EntityBaseData {
       /**
        * The initial transaction ID
        */
@@ -3098,7 +3122,7 @@ declare namespace MangoPay {
       /**
        * The initial transaction type
        */
-      InitialTransactionType: Transaction.TransactionType;
+      InitialTransactionType: transaction.TransactionType;
 
       /**
        * The result code
@@ -3152,15 +3176,15 @@ declare namespace MangoPay {
     }
 
     interface SubmitDispute
-      extends Partial<Pick<DisputeData, "ContestedFunds">> {}
+      extends PickPartial<DisputeData, "ContestedFunds"> {}
 
-    interface UpdateDispute extends Partial<Pick<DisputeData, "Tag">> {}
+    interface UpdateDispute extends PickPartial<DisputeData, "Tag"> {}
   }
 
-  interface DisputeReason extends Dispute.DisputeReason {}
+  interface DisputeReason extends dispute.DisputeReason {}
 
-  namespace SettlementTransfer {
-    interface SettlementTransferData extends Refund.RefundData {
+  namespace settlementTransfer {
+    interface SettlementTransferData extends transaction.TransactionData {
       /**
        * The nature of the transaction
        */
@@ -3170,18 +3194,33 @@ declare namespace MangoPay {
        * The ID of the associated repudiation transaction
        */
       RepudiationId: string;
+
+      /**
+       * The initial transaction ID
+       */
+      InitialTransactionId: string;
+
+      /**
+       * The initial transaction type
+       */
+      InitialTransactionType: transaction.TransactionType;
+
+      /**
+       * Contains info about the reason for refund
+       */
+      RefundReason: refund.RefundReason;
     }
 
     interface CreateSettlementTransfer
-      extends Pick<
-          SettlementTransferData,
-          "AuthorId" | "DebitedFunds" | "Fees"
-        >,
-        Partial<Pick<SettlementTransferData, "Tag">> {}
+      extends PickPartialRequired<
+        SettlementTransferData,
+        "Tag",
+        "AuthorId" | "DebitedFunds" | "Fees"
+      > {}
   }
 
-  namespace Transfer {
-    interface TransferData extends EntityBase.EntityBaseData {
+  namespace transfer {
+    interface TransferData extends entityBase.EntityBaseData {
       /**
        * Information about the funds that are being debited
        */
@@ -3220,12 +3259,12 @@ declare namespace MangoPay {
       /**
        * The nature of the transaction
        */
-      Nature: Transaction.TransactionNature;
+      Nature: transaction.TransactionNature;
 
       /**
        * The status of the transaction
        */
-      Status: Transaction.TransactionStatus;
+      Status: transaction.TransactionStatus;
 
       /**
        * When the transaction happened
@@ -3287,7 +3326,7 @@ declare namespace MangoPay {
   }
 
   namespace PayOut {
-    interface PayOutData extends Transfer.TransferData {
+    interface PayOutData extends Omit<transfer.TransferData, "Type"> {
       /**
        * The type of the transaction
        */
@@ -3345,14 +3384,8 @@ declare namespace MangoPay {
      * Create a new user
      * @param user
      */
-    create: MethodOverload<
-      models.UserLegal | User.CreateUserLegalData,
-      User.UserLegalData
-    > &
-      MethodOverload<
-        models.UserNatural | User.CreateUserNaturalData,
-        User.UserNaturalData
-      >;
+    create: MethodOverload<user.CreateUserLegalData, user.UserLegalData> &
+      MethodOverload<user.CreateUserNaturalData, user.UserNaturalData>;
 
     /**
      * Update a user
@@ -3360,12 +3393,12 @@ declare namespace MangoPay {
      * @param options
      */
     update: MethodOverload<
-      models.UserLegal | User.UpdateUserLegalData,
-      User.UserLegalData
+      models.UserLegal | user.UpdateUserLegalData,
+      user.UserLegalData
     > &
       MethodOverload<
-        models.UserNatural | User.UpdateUserNaturalData,
-        User.UserNaturalData
+        models.UserNatural | user.UpdateUserNaturalData,
+        user.UserNaturalData
       >;
 
     /**
@@ -3373,27 +3406,27 @@ declare namespace MangoPay {
      * @param userId
      * @param options
      */
-    get: MethodOverload<string, User.UserLegalData | User.UserNaturalData>;
+    get: MethodOverload<string, user.UserLegalData | user.UserNaturalData>;
 
     /**
      * Get natural user by ID
      * @param userId
      * @param options
      */
-    getNatural: MethodOverload<string, User.UserNaturalData>;
+    getNatural: MethodOverload<string, user.UserNaturalData>;
 
     /**
      * Get legal user by ID
      * @param userId
      * @param options
      */
-    getLegal: MethodOverload<string, User.UserLegalData>;
+    getLegal: MethodOverload<string, user.UserLegalData>;
 
     /**
      * Get all users
      */
     getAll: NoArgMethodOverload<
-      Array<User.UserLegalData | User.UserNaturalData>
+      Array<user.UserLegalData | user.UserNaturalData>
     >;
 
     /**
@@ -3404,21 +3437,21 @@ declare namespace MangoPay {
      */
     createBankAccount: TwoArgsMethodOverload<
       string,
-      BankAccount.USDetails,
-      BankAccount.USData
+      bankAccount.USDetails,
+      bankAccount.USData
     > &
       TwoArgsMethodOverload<
         string,
-        BankAccount.OtherDetails,
-        BankAccount.OtherData
+        bankAccount.OtherDetails,
+        bankAccount.OtherData
       > &
       TwoArgsMethodOverload<
         string,
-        BankAccount.IBANDetails,
-        BankAccount.IBANData
+        bankAccount.IBANDetails,
+        bankAccount.IBANData
       > &
-      TwoArgsMethodOverload<string, BankAccount.GBDetails, BankAccount.GBData> &
-      TwoArgsMethodOverload<string, BankAccount.CADetails, BankAccount.CAData>;
+      TwoArgsMethodOverload<string, bankAccount.GBDetails, bankAccount.GBData> &
+      TwoArgsMethodOverload<string, bankAccount.CADetails, bankAccount.CAData>;
 
     /**
      * Deactivate a bank account
@@ -3435,7 +3468,7 @@ declare namespace MangoPay {
      * @param userId
      * @param options
      */
-    getBankAccounts: MethodOverload<string, BankAccount.Data[]>;
+    getBankAccounts: MethodOverload<string, bankAccount.Data[]>;
 
     /**
      * Get all bank accounts for user
@@ -3443,26 +3476,26 @@ declare namespace MangoPay {
      * @param bankAccountId
      * @param options
      */
-    getBankAccount: TwoArgsMethodOverload<string, string, BankAccount.Data>;
+    getBankAccount: TwoArgsMethodOverload<string, string, bankAccount.Data>;
 
     /**
      * Get all wallets accounts for user
      */
-    getWallets: MethodOverload<string, Wallet.WalletData[]>;
+    getWallets: MethodOverload<string, wallet.WalletData[]>;
 
     /**
      * Get all transactions for user
      * @param userId
      * @param options
      */
-    getTransactions: MethodOverload<string, Transaction.TransactionData[]>;
+    getTransactions: MethodOverload<string, transaction.TransactionData[]>;
 
     /**
      * Get all cards for user
      * @param userId
      * @param options
      */
-    getCards: MethodOverload<string, Card.CardData[]>;
+    getCards: MethodOverload<string, card.CardData[]>;
 
     /**
      * Create new KYC document
@@ -3472,8 +3505,8 @@ declare namespace MangoPay {
      */
     createKycDocument: TwoArgsMethodOverload<
       string,
-      KycDocument.CreateKycDocument,
-      KycDocument.KycDocumentData
+      kycDocument.CreateKycDocument,
+      kycDocument.KycDocumentData
     >;
 
     /**
@@ -3481,7 +3514,7 @@ declare namespace MangoPay {
      * @param userId
      * @param options
      */
-    getKycDocuments: MethodOverload<string, KycDocument.KycDocumentData[]>;
+    getKycDocuments: MethodOverload<string, kycDocument.KycDocumentData[]>;
 
     /**
      * Get KYC document
@@ -3492,7 +3525,7 @@ declare namespace MangoPay {
     getKycDocument: TwoArgsMethodOverload<
       string,
       string,
-      KycDocument.KycDocumentData
+      kycDocument.KycDocumentData
     >;
 
     /**
@@ -3503,8 +3536,8 @@ declare namespace MangoPay {
      */
     updateKycDocument: TwoArgsMethodOverload<
       string,
-      KycDocument.SubmitKycDocument,
-      KycDocument.KycDocumentData
+      kycDocument.SubmitKycDocument,
+      kycDocument.KycDocumentData
     >;
 
     /**
@@ -3517,8 +3550,8 @@ declare namespace MangoPay {
     createKycPage: ThreeArgsMethodOverload<
       string,
       string,
-      KycDocument.CreateKycPage,
-      KycDocument.KycDocumentData
+      kycDocument.CreateKycPage,
+      kycDocument.KycDocumentData
     >;
 
     /**
@@ -3532,7 +3565,7 @@ declare namespace MangoPay {
       string,
       string,
       string,
-      KycDocument.KycDocumentData
+      kycDocument.KycDocumentData
     >;
 
     /**
@@ -3540,7 +3573,7 @@ declare namespace MangoPay {
      * @param userId
      * @param options
      */
-    getEMoney: MethodOverload<string, EMoney.EMoneyData>;
+    getEMoney: MethodOverload<string, eMoney.EMoneyData>;
 
     /**
      * Create an UboDeclaration for the user
@@ -3550,8 +3583,8 @@ declare namespace MangoPay {
      */
     createUboDeclaration: TwoArgsMethodOverload<
       string,
-      UboDeclaration.CreateUboDeclaration,
-      UboDeclaration.UboDeclarationData
+      uboDeclaration.CreateUboDeclaration,
+      uboDeclaration.UboDeclarationData
     >;
 
     /**
@@ -3561,7 +3594,7 @@ declare namespace MangoPay {
      */
     getPreAuthorizations: MethodOverload<
       string,
-      CardPreAuthorization.CardPreAuthorizationData[]
+      cardPreAuthorization.CardPreAuthorizationData[]
     >;
   }
 
@@ -3580,14 +3613,14 @@ declare namespace MangoPay {
      * Get all KycDocuments
      * @param options
      */
-    getAll: NoArgMethodOverload<KycDocument.KycDocumentData[]>;
+    getAll: NoArgMethodOverload<kycDocument.KycDocumentData[]>;
 
     /**
      * Get KycDocument
      * @param kycDocumentId
      * @param options
      */
-    get: MethodOverload<string, KycDocument.KycDocumentData>;
+    get: MethodOverload<string, kycDocument.KycDocumentData>;
 
     /**
      * Creates temporary URLs where each page of a KYC document can be viewed.
@@ -3617,7 +3650,7 @@ declare namespace MangoPay {
      * @param id
      * @param options
      */
-    get: MethodOverload<string, UboDeclaration.UboDeclarationData>;
+    get: MethodOverload<string, uboDeclaration.UboDeclarationData>;
 
     /**
      * Updates a UBO declaration entity.
@@ -3625,8 +3658,8 @@ declare namespace MangoPay {
      * @param options
      */
     update: MethodOverload<
-      UboDeclaration.UpdateUboDeclaration,
-      UboDeclaration.UboDeclarationData
+      uboDeclaration.UpdateUboDeclaration,
+      uboDeclaration.UboDeclarationData
     >;
   }
 
@@ -3636,7 +3669,7 @@ declare namespace MangoPay {
      * @param bankAccountId
      * @param options
      */
-    getTransactions: MethodOverload<string, Transaction.TransactionData[]>;
+    getTransactions: MethodOverload<string, transaction.TransactionData[]>;
   }
 
   class Wallets {
@@ -3645,27 +3678,33 @@ declare namespace MangoPay {
      * @param wallet
      * @param options
      */
-    create: MethodOverload<Wallet.CreateWallet | Wallet, Wallet.WalletData>;
+    create: MethodOverload<
+      wallet.CreateWallet | models.Wallet,
+      wallet.WalletData
+    >;
 
     /**
      * Update wallet
      * @param wallet
      * @param options
      */
-    update: MethodOverload<Wallet.UpdateWallet | Wallet, Wallet.WalletData>;
+    update: MethodOverload<
+      wallet.UpdateWallet | models.Wallet,
+      wallet.WalletData
+    >;
 
     /**
      * Get a specific wallet
      * @param walletId
      */
-    get: MethodOverload<string, Wallet.WalletData>;
+    get: MethodOverload<string, wallet.WalletData>;
 
     /**
      * Get transactions for the wallet
      * @param walletId
      * @param options
      */
-    getTransactions: MethodOverload<string, Transaction.TransactionData[]>;
+    getTransactions: MethodOverload<string, transaction.TransactionData[]>;
   }
 
   class Cards {
@@ -3674,7 +3713,7 @@ declare namespace MangoPay {
      * @param cardId
      * @param ptions
      */
-    get: MethodOverload<string, Card.CardData>;
+    get: MethodOverload<string, card.CardData>;
 
     /**
      * Gets a list of cards having the same fingerprint.
@@ -3682,21 +3721,21 @@ declare namespace MangoPay {
      *
      * @param fingerprint The fingerprint hash
      */
-    getByFingerprint: MethodOverload<string, Card.CardData[]>;
+    getByFingerprint: MethodOverload<string, card.CardData[]>;
 
     /**
      * Update card (currently only supports deactivation)
      * @param card
      * @param options
      */
-    update: MethodOverload<Card.UpdateCard, Card.CardData>;
+    update: MethodOverload<card.UpdateCard, card.CardData>;
 
     /**
      * Get list of Transactions of a Card
      * @param cardId
      * @param options
      */
-    getTransactions: MethodOverload<string, Transaction.TransactionData[]>;
+    getTransactions: MethodOverload<string, transaction.TransactionData[]>;
 
     /**
      * Gets list of PreAuthorizations of a Card.
@@ -3705,7 +3744,7 @@ declare namespace MangoPay {
      */
     getPreAuthorizations: MethodOverload<
       string,
-      CardPreAuthorization.CardPreAuthorizationData[]
+      cardPreAuthorization.CardPreAuthorizationData[]
     >;
   }
 
@@ -3728,8 +3767,8 @@ declare namespace MangoPay {
      * @param options
      */
     create: MethodOverload<
-      CardRegistration.CreateCardRegistration,
-      CardRegistration.CardRegistrationData
+      cardRegistration.CreateCardRegistration,
+      cardRegistration.CardRegistrationData
     >;
 
     /**
@@ -3737,15 +3776,15 @@ declare namespace MangoPay {
      * @param cardRegistrationId
      * @param options
      */
-    get: MethodOverload<string, CardRegistration.CardRegistrationData>;
+    get: MethodOverload<string, cardRegistration.CardRegistrationData>;
 
     /**
      * Update card registration
      * @param  cardRegistration
      */
     update: MethodOverload<
-      CardRegistration.UpdateCardRegistration,
-      CardRegistration.CardRegistrationData
+      cardRegistration.UpdateCardRegistration,
+      cardRegistration.CardRegistrationData
     >;
   }
 
@@ -3769,8 +3808,8 @@ declare namespace MangoPay {
      * @param options
      */
     create: MethodOverload<
-      CardPreAuthorization.CreateCardPreAuthorization,
-      CardPreAuthorization.CardPreAuthorizationData
+      cardPreAuthorization.CreateCardPreAuthorization,
+      cardPreAuthorization.CardPreAuthorizationData
     >;
 
     /**
@@ -3778,15 +3817,15 @@ declare namespace MangoPay {
      * @param cardPreAuthorizationId
      * @param options
      */
-    get: MethodOverload<string, CardPreAuthorization.CardPreAuthorizationData>;
+    get: MethodOverload<string, cardPreAuthorization.CardPreAuthorizationData>;
 
     /**
      * Update pre-authorization object (currently only supports cancellation)
      * @param  cardPreAuthorization
      */
     update: MethodOverload<
-      CardPreAuthorization.UpdateCardPreAuthorization,
-      CardPreAuthorization.CardPreAuthorizationData
+      cardPreAuthorization.UpdateCardPreAuthorization,
+      cardPreAuthorization.CardPreAuthorizationData
     >;
   }
 
@@ -3797,17 +3836,17 @@ declare namespace MangoPay {
      * @param options
      */
     create: MethodOverload<
-      PayIn.CreateCardDirectPayIn,
-      PayIn.CardDirectPayInData
+      payIn.CreateCardDirectPayIn,
+      payIn.CardDirectPayInData
     > &
       MethodOverload<
-        PayIn.CreateCardPreAuthorizedPayIn,
-        PayIn.CardPreAuthorizedPayInData
+        payIn.CreateCardPreAuthorizedPayIn,
+        payIn.CardPreAuthorizedPayInData
       > &
-      MethodOverload<PayIn.CreateCardWebPayIn, PayIn.CardWebPayInData> &
+      MethodOverload<payIn.CreateCardWebPayIn, payIn.CardWebPayInData> &
       MethodOverload<
-        PayIn.CreateBankWireDirectPayIn,
-        PayIn.BankWireDirectPayInData
+        payIn.CreateBankWireDirectPayIn,
+        payIn.BankWireDirectPayInData
       >;
 
     /**
@@ -3815,7 +3854,7 @@ declare namespace MangoPay {
      * @param payInId
      * @param options
      */
-    get: MethodOverload<string, PayIn.PayInData>;
+    get: MethodOverload<string, payIn.PayInData>;
 
     /**
      * Create refund for pay-in object
@@ -3825,8 +3864,8 @@ declare namespace MangoPay {
      */
     createRefund: TwoArgsMethodOverload<
       string,
-      Refund.CreatePayInRefund,
-      Refund.RefundData
+      refund.CreatePayInRefund,
+      refund.RefundData
     >;
 
     /**
@@ -3834,7 +3873,7 @@ declare namespace MangoPay {
      * @param payInId
      * @param options
      */
-    getRefunds: MethodOverload<string, Refund.RefundData[]>;
+    getRefunds: MethodOverload<string, refund.RefundData[]>;
   }
 
   class Refunds {
@@ -3843,41 +3882,41 @@ declare namespace MangoPay {
      * @param refundId
      * @param options
      */
-    get: MethodOverload<string, Refund.RefundData>;
+    get: MethodOverload<string, refund.RefundData>;
   }
 
   class Clients {
     /**
      * Get the client
      */
-    get: NoArgMethodOverload<Client.ClientData>;
+    get: NoArgMethodOverload<client.ClientData>;
 
     /**
      * Update the client
      * @param client
      * @param options
      */
-    update: MethodOverload<Client.UpdateClient, Client.ClientData>;
+    update: MethodOverload<client.UpdateClient, client.ClientData>;
 
     /**
      * Upload client logo from base64 image string
      * @param base64Logo
      * @param options
      */
-    uploadLogo: MethodOverload<string, Client.ClientData>;
+    uploadLogo: MethodOverload<string, client.ClientData>;
 
     /**
      * Upload client logo from file path
      * @param filePath
      * @param options
      */
-    uploadLogoFromFile: MethodOverload<string, Client.ClientData>;
+    uploadLogoFromFile: MethodOverload<string, client.ClientData>;
 
     /**
      * Get all client wallets
      * @param options
      */
-    getClientWallets: NoArgMethodOverload<Wallet.ClientWalletData[]>;
+    getClientWallets: NoArgMethodOverload<wallet.ClientWalletData[]>;
 
     /**
      * Get a client wallet
@@ -3886,9 +3925,9 @@ declare namespace MangoPay {
      * @param options
      */
     getClientWallet: TwoArgsMethodOverload<
-      Wallet.ClientFundsType,
+      wallet.ClientFundsType,
       CurrencyISO,
-      Wallet.ClientWalletData
+      wallet.ClientWalletData
     >;
 
     /**
@@ -3897,8 +3936,8 @@ declare namespace MangoPay {
      * @param options
      */
     getClientWalletsByFundsType: MethodOverload<
-      Wallet.ClientFundsType,
-      Wallet.ClientWalletData[]
+      wallet.ClientFundsType,
+      wallet.ClientWalletData[]
     >;
 
     /**
@@ -3908,9 +3947,9 @@ declare namespace MangoPay {
      * @param options
      */
     getClientWalletTransactions: TwoArgsMethodOverload<
-      Wallet.ClientFundsType,
+      wallet.ClientFundsType,
       CurrencyISO,
-      Transaction.TransactionData[]
+      transaction.TransactionData[]
     >;
   }
 
@@ -3934,7 +3973,7 @@ declare namespace MangoPay {
      * @param payOutId
      * @param options
      */
-    getRefunds: MethodOverload<string, Refund.RefundData[]>;
+    getRefunds: MethodOverload<string, refund.RefundData[]>;
   }
 
   class Transfers {
@@ -3943,14 +3982,14 @@ declare namespace MangoPay {
      * @param transfer
      * @param options
      */
-    create: MethodOverload<Transfer.CreateTransfer, Transfer.TransferData>;
+    create: MethodOverload<transfer.CreateTransfer, transfer.TransferData>;
 
     /**
      * Get transfer
      * @param transferId
      * @param options
      */
-    get: MethodOverload<string, Transfer.TransferData>;
+    get: MethodOverload<string, transfer.TransferData>;
 
     /**
      * Create refund for transfer object
@@ -3960,8 +3999,8 @@ declare namespace MangoPay {
      */
     createRefund: TwoArgsMethodOverload<
       string,
-      Refund.CreateTransferRefund,
-      Refund.RefundData
+      refund.CreateTransferRefund,
+      refund.RefundData
     >;
 
     /**
@@ -3969,7 +4008,7 @@ declare namespace MangoPay {
      * @param transferId
      * @param options
      */
-    getRefunds: MethodOverload<string, Refund.RefundData[]>;
+    getRefunds: MethodOverload<string, refund.RefundData[]>;
   }
 
   class BankingAliases {
@@ -3979,8 +4018,8 @@ declare namespace MangoPay {
      * @param options
      */
     create: MethodOverload<
-      BankingAlias.CreateIBANBankingAlias,
-      BankingAlias.IBANBankingAliasData
+      bankingAlias.CreateIBANBankingAlias,
+      bankingAlias.IBANBankingAliasData
     >;
 
     /**
@@ -3988,13 +4027,13 @@ declare namespace MangoPay {
      * @param bankingAliasId
      * @param options
      */
-    get: MethodOverload<string, BankingAlias.IBANBankingAliasData>;
+    get: MethodOverload<string, bankingAlias.IBANBankingAliasData>;
 
     /**
      * Get all banking aliases
      * @param options
      */
-    getAll: NoArgMethodOverload<BankingAlias.IBANBankingAliasData[]>;
+    getAll: NoArgMethodOverload<bankingAlias.IBANBankingAliasData[]>;
 
     /**
      * Update banking alias
@@ -4002,8 +4041,8 @@ declare namespace MangoPay {
      * @param options
      */
     update: MethodOverload<
-      Partial<Omit<BankingAlias.CreateIBANBankingAlias, "CreditedUserId">>,
-      BankingAlias.IBANBankingAliasData
+      Partial<Omit<bankingAlias.CreateIBANBankingAlias, "CreditedUserId">>,
+      bankingAlias.IBANBankingAliasData
     >;
 
     /**
@@ -4011,14 +4050,14 @@ declare namespace MangoPay {
      * @param bankingAliasId
      * @param options
      */
-    deactivate: MethodOverload<string, BankingAlias.IBANBankingAliasData>;
+    deactivate: MethodOverload<string, bankingAlias.IBANBankingAliasData>;
 
     /**
      * Activate banking alias
      * @param bankingAliasId
      * @param options
      */
-    activate: MethodOverload<string, BankingAlias.IBANBankingAliasData>;
+    activate: MethodOverload<string, bankingAlias.IBANBankingAliasData>;
   }
 
   class DisputeDocuments {
@@ -4026,14 +4065,14 @@ declare namespace MangoPay {
      * Get all KycDocuments
      * @param options
      */
-    getAll: NoArgMethodOverload<DisputeDocument.DisputeDocumentData[]>;
+    getAll: NoArgMethodOverload<disputeDocument.DisputeDocumentData[]>;
 
     /**
      * Get KycDocument
      * @param documentId
      * @param options
      */
-    get: MethodOverload<string, DisputeDocument.DisputeDocumentData>;
+    get: MethodOverload<string, disputeDocument.DisputeDocumentData>;
 
     /**
      * Creates temporary URLs where each page of a KYC document can be viewed.
@@ -4051,7 +4090,7 @@ declare namespace MangoPay {
      * @param repudiationId
      * @param options
      */
-    getRefunds: MethodOverload<string, Refund.RefundData[]>;
+    getRefunds: MethodOverload<string, refund.RefundData[]>;
   }
 
   class Disputes {
@@ -4060,20 +4099,20 @@ declare namespace MangoPay {
      * @param disputeId
      * @param options
      */
-    get: MethodOverload<string, Dispute.DisputeData>;
+    get: MethodOverload<string, dispute.DisputeData>;
 
     /**
      * Get all disputes
      * @param options
      */
-    getAll: NoArgMethodOverload<Dispute.DisputeData[]>;
+    getAll: NoArgMethodOverload<dispute.DisputeData[]>;
 
     /**
      * Update dispute's tag
      * @param dispute
      * @param options
      */
-    update: MethodOverload<Dispute.UpdateDispute, Dispute.DisputeData>;
+    update: MethodOverload<dispute.UpdateDispute, dispute.DisputeData>;
 
     /**
      * Contest dispute
@@ -4084,7 +4123,7 @@ declare namespace MangoPay {
     contestDispute: TwoArgsMethodOverload<
       string,
       MoneyData,
-      Dispute.DisputeData
+      dispute.DisputeData
     >;
 
     /**
@@ -4092,42 +4131,42 @@ declare namespace MangoPay {
      * @param disputeId
      * @param options
      */
-    resubmitDispute: MethodOverload<string, Dispute.DisputeData>;
+    resubmitDispute: MethodOverload<string, dispute.DisputeData>;
 
     /**
      * Close dispute
      * @param disputeId
      * @param options
      */
-    closeDispute: MethodOverload<string, Dispute.DisputeData>;
+    closeDispute: MethodOverload<string, dispute.DisputeData>;
 
     /**
      * Gets dispute's transactions
      * @param disputeId
      * @param options
      */
-    getTransactions: MethodOverload<string, Transaction.TransactionData[]>;
+    getTransactions: MethodOverload<string, transaction.TransactionData[]>;
 
     /**
      * Gets dispute's documents for wallet
      * @param walletId
      * @param options
      */
-    getDisputesForWallet: MethodOverload<string, Transaction.DisputeData[]>;
+    getDisputesForWallet: MethodOverload<string, dispute.DisputeData[]>;
 
     /**
      * Gets user's disputes
      * @param userId
      * @param options
      */
-    getDisputesForUser: MethodOverload<string, Dispute.DisputeData[]>;
+    getDisputesForUser: MethodOverload<string, dispute.DisputeData[]>;
 
     /**
      * Gets repudiation
      * @param repudiationId
      * @param options
      */
-    getRepudiation: MethodOverload<string, Repudiation.RepudiationData[]>;
+    getRepudiation: MethodOverload<string, repudiation.RepudiationData[]>;
 
     /**
      * Creates settlement transfer
@@ -4136,9 +4175,9 @@ declare namespace MangoPay {
      * @param options
      */
     createSettlementTransfer: TwoArgsMethodOverload<
-      SettlementTransfer.CreateSettlementTransfer,
+      settlementTransfer.CreateSettlementTransfer,
       string,
-      SettlementTransfer.SettlementTransferData
+      settlementTransfer.SettlementTransferData
     >;
 
     /**
@@ -4148,7 +4187,7 @@ declare namespace MangoPay {
      */
     getSettlementTransfer: MethodOverload<
       string,
-      SettlementTransfer.SettlementTransferData
+      settlementTransfer.SettlementTransferData
     >;
 
     /**
@@ -4158,7 +4197,7 @@ declare namespace MangoPay {
      */
     getDocumentsForDispute: MethodOverload<
       string,
-      DisputeDocument.DisputeDocumentData[]
+      disputeDocument.DisputeDocumentData[]
     >;
 
     /**
@@ -4169,8 +4208,8 @@ declare namespace MangoPay {
      */
     updateDisputeDocument: TwoArgsMethodOverload<
       string,
-      Partial<DisputeDocument.DisputeDocumentData>,
-      DisputeDocument.DisputeDocumentData
+      Partial<disputeDocument.DisputeDocumentData>,
+      disputeDocument.DisputeDocumentData
     >;
 
     /**
@@ -4181,8 +4220,8 @@ declare namespace MangoPay {
      */
     createDisputeDocument: TwoArgsMethodOverload<
       string,
-      DisputeDocument.CreateDisputeDocument,
-      DisputeDocument.DisputeDocumentData
+      disputeDocument.CreateDisputeDocument,
+      disputeDocument.DisputeDocumentData
     >;
 
     /**
@@ -4195,8 +4234,8 @@ declare namespace MangoPay {
     createDisputeDocumentPage: ThreeArgsMethodOverload<
       string,
       string,
-      DisputeDocument.CreateDisputeDocumentPage,
-      DisputeDocument.DisputeDocumentData
+      disputeDocument.CreateDisputeDocumentPage,
+      disputeDocument.DisputeDocumentData
     >;
 
     /**
@@ -4210,14 +4249,14 @@ declare namespace MangoPay {
       string,
       string,
       string,
-      DisputeDocument.DisputeDocumentData
+      disputeDocument.DisputeDocumentData
     >;
 
     /**
      * Retrieve a list of Disputes pending settlement
      * @param options
      */
-    getPendingSettlement: NoArgMethodOverload<Dispute.DisputeData[]>;
+    getPendingSettlement: NoArgMethodOverload<dispute.DisputeData[]>;
   }
 
   class Events {
@@ -4225,7 +4264,7 @@ declare namespace MangoPay {
      * Get events
      * @param options
      */
-    getAll: NoArgMethodOverload<Event.EventData[]>;
+    getAll: NoArgMethodOverload<event.EventData[]>;
   }
 
   class Responses {
@@ -4242,34 +4281,34 @@ declare namespace MangoPay {
      * @param mandate
      * @param options
      */
-    create: MethodOverload<Mandate.CreateMandate, Mandate.MandateData>;
+    create: MethodOverload<mandate.CreateMandate, mandate.MandateData>;
 
     /**
      * Get all mandates
      * @param options
      */
-    getAll: NoArgMethodOverload<Mandate.MandateData[]>;
+    getAll: NoArgMethodOverload<mandate.MandateData[]>;
 
     /**
      * Get mandate by ID
      * @param mandateId
      * @param options
      */
-    get: MethodOverload<string, Mandate.MandateData>;
+    get: MethodOverload<string, mandate.MandateData>;
 
     /**
      * Cancel a mandate
      * @param mandateId
      * @param options
      */
-    cancel: MethodOverload<string, Mandate.MandateData>;
+    cancel: MethodOverload<string, mandate.MandateData>;
 
     /**
      * Gets user's mandates
      * @param userId
      * @param options
      */
-    getMandatesForUser: MethodOverload<string, Mandate.MandateData[]>;
+    getMandatesForUser: MethodOverload<string, mandate.MandateData[]>;
 
     /**
      * Gets bank account mandates
@@ -4280,7 +4319,7 @@ declare namespace MangoPay {
     getMandatesForBankAccount: TwoArgsMethodOverload<
       string,
       string,
-      Mandate.MandateData[]
+      mandate.MandateData[]
     >;
 
     /**
@@ -4288,7 +4327,7 @@ declare namespace MangoPay {
      * @param mandateId
      * @param options
      */
-    getTransactions: MethodOverload<string, Transaction.TransactionData[]>;
+    getTransactions: MethodOverload<string, transaction.TransactionData[]>;
   }
   class Hooks {
     /**
@@ -4296,27 +4335,27 @@ declare namespace MangoPay {
      * @param hook
      * @param options
      */
-    create: MethodOverload<Hook.CreateHook, Hook.HookData>;
+    create: MethodOverload<hook.CreateHook, hook.HookData>;
 
     /**
      * Get hook
      * @param hookId
      * @param options
      */
-    get: MethodOverload<string, Hook.HookData>;
+    get: MethodOverload<string, hook.HookData>;
 
     /**
      * Save hook
      * @param hook
      * @param options
      */
-    update: MethodOverload<Hook.UpdateHook, Hook.HookData>;
+    update: MethodOverload<hook.UpdateHook, hook.HookData>;
 
     /**
      * Get all hooks
      * @param options
      */
-    getAll: NoArgMethodOverload<Hook.HookData[]>;
+    getAll: NoArgMethodOverload<hook.HookData[]>;
   }
 
   class Reports {
@@ -4325,19 +4364,19 @@ declare namespace MangoPay {
      * @param report
      * @param options
      */
-    create: MethodOverload<Report.CreateReport, Report.ReportData>;
+    create: MethodOverload<report.CreateReport, report.ReportData>;
 
     /**
      * Get a report
      * @param reportId
      * @param options
      */
-    get: MethodOverload<string, Report.ReportData>;
+    get: MethodOverload<string, report.ReportData>;
 
     /**
      * Get all reports
      * @param options
      */
-    getAll: NoArgMethodOverload<Report.ReportData[]>;
+    getAll: NoArgMethodOverload<report.ReportData[]>;
   }
 }
