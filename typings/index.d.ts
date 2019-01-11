@@ -320,8 +320,7 @@ declare namespace MangoPay {
 
     /**
      * Returns object property value
-     * @param attribute   - Property value to return
-     * @returns {*}
+     * @param attribute
      */
     getData<K extends keyof T>(attribute: K): T[K];
 
@@ -374,8 +373,6 @@ declare namespace MangoPay {
 
       /**
        * Returns object property value
-       * @param attribute   - Property value to return
-       * @returns {*}
        */
       getData<K extends keyof T>(attribute: K): T[K];
 
@@ -1791,12 +1788,12 @@ declare namespace MangoPay {
       PayInId: string;
 
       /**
-       * Contains every useful informations related to the user billing
+       * Contains useful information related to the user billing
        */
       Billing: BillingData;
 
       /**
-       * Contains useful informations related to security and fraud
+       * Contains useful information related to security and fraud
        */
       SecurityInfo: SecurityInfoData;
     }
@@ -1804,7 +1801,7 @@ declare namespace MangoPay {
     type CreateCardPreAuthorization = PickPartialRequired<
       CardPreAuthorizationData,
       "Tag" | "Billing" | "SecureMode",
-      "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeRedirectUrl"
+      "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL"
     >;
     type UpdateCardPreAuthorization = PickPartialRequired<
       CardPreAuthorizationData,
@@ -2574,12 +2571,12 @@ declare namespace MangoPay {
       StatementDescriptor: string;
 
       /**
-       * Contains every useful informations related to the user billing
+       * Contains useful information related to the user billing
        */
       Billing: BillingData;
 
       /**
-       * Contains useful informations related to security and fraud
+       * Contains information related to security and fraud
        */
       SecurityInfo: SecurityInfoData;
 
@@ -2640,7 +2637,7 @@ declare namespace MangoPay {
       SecureMode?: SecureMode;
 
       /**
-       * Contains every useful informations related to the user billing
+       * Contains useful information related to the user billing
        */
       Billing?: BillingData;
 

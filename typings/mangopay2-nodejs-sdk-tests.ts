@@ -1,4 +1,4 @@
-import * as Mangopay from "mangopay2-nodejs-sdk";
+import Mangopay = require("mangopay2-nodejs-sdk");
 
 // $ExpectError
 const invalidConfig: Mangopay.Config = {};
@@ -341,7 +341,7 @@ api.CardPreAuthorizations.create({
   AuthorId: "user",
   CardId: "card-id",
   DebitedFunds: { Currency: "AUD", Amount: 4000 },
-  SecureModeRedirectUrl: "https://secureurl.com"
+  SecureModeReturnURL: "https://secureurl.com"
 }).then(data => {
   const d = data; // $ExpectType CardPreAuthorizationData
 });
