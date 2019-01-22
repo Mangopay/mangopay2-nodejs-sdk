@@ -2335,7 +2335,11 @@ declare namespace MangoPay {
     interface BaseUserNaturalData
       extends PickPartial<
         UserNaturalData,
-        RequiredUserNaturalData | "Address" | "Occupation" | "IncomeRange"
+        | RequiredUserNaturalData
+        | "Address"
+        | "Occupation"
+        | "IncomeRange"
+        | "Tag"
       > {
       PersonType: "NATURAL";
     }

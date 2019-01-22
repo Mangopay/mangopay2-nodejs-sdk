@@ -109,7 +109,8 @@ api.Users.create(
     FirstName: "Sara",
     LastName: "McNick",
     CountryOfResidence: "GB",
-    Nationality: "US"
+    Nationality: "US",
+    Tag: "natural-user"
   },
   data => {
     const d = data; // $ExpectType UserNaturalData
