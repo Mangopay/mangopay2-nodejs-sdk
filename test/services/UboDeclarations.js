@@ -35,7 +35,7 @@ describe('UBO Declarations', function () {
         var getDeclaration;
 
         before(function (done) {
-            api.UboDeclarations.get(uboDeclaration.Id, function (data, response) {
+            api.UboDeclarations.get(company.Id, uboDeclaration.Id, function (data, response) {
                 getDeclaration = data;
                 done();
             });
@@ -47,7 +47,12 @@ describe('UBO Declarations', function () {
         });
     });
 
-    describe('Update', function () {
+    // It's not possible to do an update on a UBO declaration
+    // UBO declaration is a container.
+    // You can create, edit in it
+    // Then you have to submit this UBO declaration
+    
+    /*describe('Update', function () {
         var updatedDeclaration;
 
         before(function (done) {
@@ -63,5 +68,5 @@ describe('UBO Declarations', function () {
             expect(updatedDeclaration).not.to.be.null;
             expect(updatedDeclaration.Status).to.equal(UboDeclarationStatus.ValidationAsked);
         });
-    });
+    });*/
 });
