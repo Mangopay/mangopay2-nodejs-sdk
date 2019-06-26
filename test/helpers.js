@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var Address = require('../lib/models/Address');
+var Birthplace = require('../lib/models/Birthplace');
 var UserNaturalCapacity = require('../lib/models/UserNaturalCapacity');
 
 module.exports = {
@@ -29,6 +30,26 @@ module.exports = {
             var user = this.getUserNatural();
             user.Capacity = UserNaturalCapacity.Declarative;
             return user;
+        },
+        getUbo: function () {
+            return {
+                FirstName: 'John_NodejsSDK',
+                LastName: 'Doe_NodejsSDK',
+                Address: new Address({
+                    "AddressLine1": "4101 Reservoir Rd NW",
+                    "AddressLine2": "",
+                    "City": "Washington",
+                    "Region": "District of Columbia",
+                    "PostalCode": "20007",
+                    "Country": "US"
+                }),
+                Nationality: 'FR',
+                Birthday: new Date('12/21/1975').getTime(),
+                Birthplace: new Birthplace({
+                    "City": "Washington",
+                    "Country": "US"
+                })
+            }
         },
         getUserLegal: function(){
             return {
