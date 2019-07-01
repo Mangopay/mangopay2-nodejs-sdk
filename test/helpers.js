@@ -20,6 +20,10 @@ module.exports = {
                 }),
                 Birthday: new Date('12/21/1975').getTime(),
                 Nationality: 'FR',
+                Birthplace: {
+                    "City": "Paris",
+                    "Country": "FR"
+                    },
                 CountryOfResidence: 'FR',
                 Occupation: 'programmer',
                 IncomeRange: 3,

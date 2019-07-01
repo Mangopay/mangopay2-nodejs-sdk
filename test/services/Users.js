@@ -17,6 +17,8 @@ var BankAccountDetailsGB = require('../../lib/models/BankAccountDetailsGB');
 var KycDocument = require('../../lib/models/KycDocument');
 var KycDocumentStatus = require('../../lib/models/KycDocumentStatus');
 var KycDocumentType = require('../../lib/models/KycDocumentType');
+var UboDeclaration = require('../../lib/models/UboDeclaration');
+var Ubo = require('../../lib/models/Ubo');
 var UboDeclarationStatus = require('../../lib/models/UboDeclarationStatus');
 
 describe('Users', function() {
@@ -634,28 +636,27 @@ describe('Users', function() {
     });
 
     describe('Create UBO declaration', function() {
-        var declarativeUser, createdDeclaration;
+        var declarativeUser, createdDeclaration, ubo;
 
         before(function(done) {
             declarativeUser = helpers.data.getDeclarativeUserNatural();
 
-            api.Users.create(declarativeUser).then(function(data) {
-                declarativeUser = data;
-                var uboDeclaration = {
-                    DeclaredUBOs: [declarativeUser.Id]
-                };
-                api.Users.createUboDeclaration(matrix.Id, uboDeclaration).then(function(data) {
-                    createdDeclaration = data;
-                    done();
+                api.UboDeclarations.create(matrix.Id, function (data, response) {
+                    uboDeclaration = data;
+
+                    api.UboDeclarations.createUbo(matrix.Id, uboDeclaration.Id, declarativeUser, function (data, response) {
+                        ubo = data;
+                        
+                        done();
+                    });
                 });
-            });
         });
 
         it('should be successful', function() {
-            expect(createdDeclaration).not.to.be.null;
-            expect(createdDeclaration.Status).to.equal(UboDeclarationStatus.Created);
-            expect(createdDeclaration.UserId).to.equal(matrix.Id);
-            expect(createdDeclaration.DeclaredUBOs[0].UserId).to.equal(declarativeUser.Id);
+            expect(uboDeclaration).not.to.be.null;
+            expect(uboDeclaration.Status).to.equal(UboDeclarationStatus.Created);
+            expect(ubo).not.to.be.null;
+            expect(ubo.FirstName).to.equal(declarativeUser.FirstName);
         });
     });
 
