@@ -639,7 +639,7 @@ describe('Users', function() {
         var declarativeUser, createdDeclaration, ubo;
 
         before(function(done) {
-            declarativeUser = helpers.data.getDeclarativeUserNatural();
+            declarativeUser = helpers.data.getUbo();
 
                 api.UboDeclarations.create(matrix.Id, function (data, response) {
                     uboDeclaration = data;
