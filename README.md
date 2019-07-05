@@ -100,6 +100,7 @@ account can take a few days, so think about doing it in advance of when you actu
         LegalRepresentativeBirthday: 1300186358,
         LegalRepresentativeNationality: 'FR',
         LegalRepresentativeCountryOfResidence: 'FR',
+        CompanyNumber: 123456789,
         Tag: 'custom tag'
     });
 

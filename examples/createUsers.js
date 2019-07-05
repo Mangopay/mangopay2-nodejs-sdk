@@ -39,12 +39,13 @@ var myUser = new api.models.UserLegal({
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: 'FR',
     LegalRepresentativeCountryOfResidence: 'FR',
+    CompanyNumber: 123456789,
     Tag: 'custom tag'
 });
 
-api.Users.create(myUser).then(function(){
+api.Users.create(myUser).then(function (myReturnedUser) {
     // Output the created user data to console
-    console.log(myUser.Name + ' user created at ' + myUser.CreationDate);
+    console.log(myUser.Name + ' legal user created at ' + myReturnedUser.CreationDate);
 });
 
 /**
@@ -73,8 +74,39 @@ api.Users.create({
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: 'FR',
     LegalRepresentativeCountryOfResidence: 'FR',
+    CompanyNumber: 123456789,
     Tag: 'custom tag'
-}, function(myOtherUser) {
+}, function (myOtherUser) {
     // Output the created user data to console
     console.log(myOtherUser.Name + ' user created at ' + myOtherUser.CreationDate);
+});
+
+/**
+ *
+ * Create a new natural user with only required values
+ * Promise style handling of the response
+ *
+ */
+api.Users.create({
+    PersonType: "NATURAL",
+    FirstName: "John",
+    LastName: "Smith",
+    Birthday: 1300186358,
+    Nationality: "FR",
+    CountryOfResidence: "GB",
+    Email: "john@smith.eu",
+}).then(function (response) {
+    console.log("Natural user created", response);
+});
+
+/**
+ *
+ * Fail at creating a new natural user, error caught
+ * Promise style handling of the response
+ *
+ */
+api.Users.create({
+    PersonType: "NATURAL",
+}).catch(function (error) {
+    console.log("Natural user creation failed", error);
 });
