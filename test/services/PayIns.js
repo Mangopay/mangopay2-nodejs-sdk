@@ -74,7 +74,7 @@ describe('PayIns', function () {
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('SUCCEEDED');
                 expect(payIn.Type).to.equal('PAYIN');
-                expect(payIn.SecurityInfo.AVSResult).to.equal('FULL_MATCH')
+                expect(payIn.SecurityInfo.AVSResult).to.equal('NO_CHECK')
             });
         });
 
