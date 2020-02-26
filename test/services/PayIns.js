@@ -495,12 +495,12 @@ describe('PayIns', function () {
             });
 
             it('should be created', function () {
-                expect(applePayPayIn.Id).not.to.be.undefined;
-                expect(applePayPayIn.data.AuthorId).to.equal(john.Id);
-                expect(applePayPayIn.data.PaymentType).to.equal('GOOGLEPAY');
-                expect(applePayPayIn.data.ExecutionType).to.equal('DIRECT');
-                expect(applePayPayIn.data.Type).to.equal('PAYIN');
-                expect(applePayPayIn.data.Status).to.equal('SUCCEEDED');
+                expect(googlePayIn.Id).not.to.be.undefined;
+                expect(googlePayIn.data.AuthorId).to.equal(john.Id);
+                expect(googlePayIn.data.PaymentType).to.equal('GOOGLEPAY');
+                expect(googlePayIn.data.ExecutionType).to.equal('DIRECT');
+                expect(googlePayIn.data.Type).to.equal('PAYIN');
+                expect(googlePayIn.data.Status).to.equal('SUCCEEDED');
             });
         });
     });
