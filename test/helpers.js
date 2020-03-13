@@ -108,7 +108,7 @@ module.exports = {
             };
 
             return api.method('post', function (data, response) {
-                cardRegistration.RegistrationData = new Buffer(data).toString();
+                cardRegistration.RegistrationData = Buffer.from(data).toString();
                 api.CardRegistrations.update(cardRegistration).then(function(data){
                     preAuthorization = {
                         AuthorId: user.Id,
@@ -284,7 +284,7 @@ module.exports = {
         };
 
         return api.method('post', function (data, response) {
-            callback(new Buffer(data).toString(), response);
+            callback(Buffer.from(data).toString(), response);
         }, options);
     }
 
