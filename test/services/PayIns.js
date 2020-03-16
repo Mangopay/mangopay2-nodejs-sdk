@@ -446,6 +446,65 @@ describe('PayIns', function () {
         });
     });
 
+    describe.skip('GooglePay', function () {
+        var googlePayIn, wallet;
+
+        before(function (done) {
+            wallet = {
+                Owners: [john.Id],
+                Currency: 'EUR',
+                Description: 'WALLET IN EUR'
+            };
+
+            api.Wallets.create(wallet).then(function () {
+                done();
+            });
+        });
+
+        describe('Create', function () {
+
+            var paymentData = {
+                TransactionId: 'placeholder',
+                Network: 'placeholder',
+                TokenData: "placeholder"
+            };
+
+            before(function (done) {
+                googlePayIn = {
+                    CreditedWalletId: wallet.Id,
+                    AuthorId: john.Id,
+                    CreditedUserId: john.Id,
+                    DebitedFunds: {
+                        Amount: 199,
+                        Currency: 'EUR'
+                    },
+                    Fees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    PaymentType: 'GOOGLEPAY',
+                    ExecutionType: 'DIRECT',
+                    PaymentData: paymentData,
+                    Tag: "Create an GooglePay card direct Payin",
+                    StatementDescriptor: "php"
+                };
+
+                api.PayIns.create(googlePayIn, function (data, response) {
+                    done();
+                });
+            });
+
+            it('should be created', function () {
+                expect(googlePayIn.Id).not.to.be.undefined;
+                expect(googlePayIn.data.AuthorId).to.equal(john.Id);
+                expect(googlePayIn.data.PaymentType).to.equal('GOOGLEPAY');
+                expect(googlePayIn.data.ExecutionType).to.equal('DIRECT');
+                expect(googlePayIn.data.Type).to.equal('PAYIN');
+                expect(googlePayIn.data.Status).to.equal('SUCCEEDED');
+            });
+        });
+    });
+
     describe('Get Refunds', function () {
         var getRefunds;
 
