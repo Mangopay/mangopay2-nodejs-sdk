@@ -1,5 +1,18 @@
 ## [Unreleased]
 
+## [1.12]
+### Added
+- GooglePay support has been added. This mean of payment will shortly be available (beta phase). Feel free to ask our Sales / Technical Account Manager team about it !
+- `AccountNumber` parameter has been added for Payins `EXTERNAL_INSTRUCTION` (as funds could be sent from a non-IBAN account to a wallet)
+- `EXPIRED` Status for Mandates has been added. Related EventType status `MANDATE_EXPIRED` has been added too.
+
+### Changed
+- `PAYLINEV2` parameter has been added to `TemplateURLOptions` object, as `PAYLINE` parameter will be deprecated very soon.
+
+### Security
+- node-rest-client has been updated from 1.8.x version to 3.1.x version
+- Deprecated `Buffer` constructor has been replaced
+
 ## [1.11] - 2019-10-18
 ### Added
 - ApplePay `Payin` functions are now available. More info about activation to come in the following weeks...  
