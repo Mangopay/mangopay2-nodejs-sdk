@@ -8,8 +8,9 @@ var api = new mangopay({
     clientApiKey: 'cqFfFrWfCcb7UadHNxx2C9Lo6Djw8ZduLi7J9USTmu8bhxxpju'
 });
 
-var USER_ID ='1151091';
+var USER_ID = '1151091';
+var year = 2019;
 
-api.Users.getEMoney(USER_ID).then(function(data){
+api.Users.getEMoney(USER_ID, year).then(function (data) {
     console.log(data);
 });

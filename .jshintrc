@@ -8,6 +8,7 @@
   "eqeqeq": true,
   "undef": true,
   "bitwise": true,
+  "esversion": 6,
   "browser": true,
   "predef": ["require", "module"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "mangopay2-nodejs-sdk",
-  "version": "1.10.0",
+  "version": "1.12.0",
   "description": "Mangopay Node.js SDK",
   "repository": "https://github.com/Mangopay/mangopay2-nodejs-sdk.git",
   "license": "MIT",
@@ -16,7 +16,7 @@
   },
   "main": "./index.js",
   "dependencies": {
-    "node-rest-client": "1.8.x",
+    "node-rest-client": "3.1.0",
     "promise": "7.1.x",
     "underscore": "1.8.x"
   },
