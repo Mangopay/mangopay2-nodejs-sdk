@@ -520,4 +520,46 @@ describe('PayIns', function () {
             expect(getRefunds).to.be.an('array');
         });
     });
+
+    describe('ExetrnalInstructionIBAN', function () {
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get("74980101", function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.PaymentType).to.equal('BANK_WIRE');
+                expect(getPayIn.ExecutionType).to.equal('EXTERNAL_INSTRUCTION');
+                expect(getPayIn.DebitedBankAccount.Type).to.equal('IBAN');
+                expect(getPayIn.DebitedBankAccount.IBAN).not.to.be.null;
+                expect(getPayIn.DebitedBankAccount.AccountNumber).to.be.null;
+            });
+        });
+    });
+
+    describe('ExetrnalInstructionAccountNumber', function () {
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get("74981216", function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.PaymentType).to.equal('BANK_WIRE');
+                expect(getPayIn.ExecutionType).to.equal('EXTERNAL_INSTRUCTION');
+                expect(getPayIn.DebitedBankAccount.Type).to.equal('OTHER');
+                expect(getPayIn.DebitedBankAccount.IBAN).to.be.null;
+                expect(getPayIn.DebitedBankAccount.AccountNumber).not.to.be.null;
+            });
+        });
+    });
 });
