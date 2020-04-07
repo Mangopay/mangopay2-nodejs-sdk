@@ -57,4 +57,23 @@ describe('Hooks', function() {
             expect(updatedHook.Url).to.equal(newUrl);
         });
     });
+
+    describe('Get All', function () {
+        var hooks;
+        before(function (done) {
+            api.Hooks.getAll(function(data, response){
+                hooks = data;
+                done();
+            }, {
+                page: 1,
+                per_page: 50,
+                sort: "CreationDate:DESC"
+            });
+        });
+
+        it('should be > 0', function(){
+            expect(hooks.length).to.be.greaterThan(0);
+            expect(hooks[0].CreationDate).to.be.greaterThan(hooks[1].CreationDate);
+        });
+    });
 });
