@@ -57,4 +57,32 @@ describe('Hooks', function() {
             expect(updatedHook.Url).to.equal(newUrl);
         });
     });
+
+    describe('Create User Kyc Regular', function () {
+        before(function (done) {
+            api.Hooks.getAll(function(data, response){
+                hook = data.find(x => x.EventType === "USER_KYC_REGULAR");
+                if (!hook){
+                    api.Hooks.create({
+                        EventType: 'USER_KYC_REGULAR',
+                        Url: 'http://test.com'
+                    }, function(data, response){
+                        hook = data;
+                        done();
+                    });
+                }
+                done();
+            }, {
+                parameters: {
+                    EventType: 'USER_KYC_REGULAR',
+                    Page: 1,
+                    Per_Page: 100
+                }
+            });
+        });
+
+        it('should be created', function () {
+            expect(hook.Id).to.exist;
+        });
+    });
 });
