@@ -58,6 +58,34 @@ describe('Hooks', function() {
         });
     });
 
+ describe('Create User Kyc Regular', function () {
+        before(function (done) {
+            api.Hooks.getAll(function(data, response){
+                hook = data.find(x => x.EventType === "USER_KYC_REGULAR");
+                if (!hook){
+                    api.Hooks.create({
+                        EventType: 'USER_KYC_REGULAR',
+                        Url: 'http://test.com'
+                    }, function(data, response){
+                        hook = data;
+                        done();
+                    });
+                }
+                done();
+            }, {
+                parameters: {
+                    EventType: 'USER_KYC_REGULAR',
+                    Page: 1,
+                    Per_Page: 100
+                }
+            });
+        });
+
+        it('should be created', function () {
+            expect(hook.Id).to.exist;
+        });
+    });
+
     describe('Get All', function () {
         var hooks;
         before(function (done) {
@@ -74,6 +102,7 @@ describe('Hooks', function() {
         it('should be > 0', function(){
             expect(hooks.length).to.be.greaterThan(0);
             expect(hooks[0].CreationDate).to.be.greaterThan(hooks[1].CreationDate);
+
         });
     });
 });
