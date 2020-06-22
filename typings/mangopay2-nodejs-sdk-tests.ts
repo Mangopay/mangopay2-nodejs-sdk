@@ -19,7 +19,7 @@ const addressData: Mangopay.address.AddressData = {
   AddressLine1: "20 T Street",
   AddressLine2: "",
   City: "London",
-  Country: "UK",
+  Country: "AD",
   PostalCode: "FR43 2WE",
   Region: "London"
 };
@@ -223,11 +223,11 @@ api.Users.getEMoney("user-id").then(data => {
   const d = data; // $ExpectType EMoneyData
 });
 
-api.Users.createUboDeclaration("user-id", { DeclaredUBOs: ["user1"] }).then(
-  data => {
-    const d = data; // $ExpectType UboDeclarationData
-  }
-);
+// api.Users.createUboDeclaration("user-id", { DeclaredUBOs: ["user1"] }).then(
+//   data => {
+//     const d = data; // $ExpectType UboDeclarationData
+//   }
+// );
 
 api.Users.getPreAuthorizations("user-id").then(data => {
   const d = data; // $ExpectType CardPreAuthorizationData[]
@@ -249,15 +249,47 @@ api.KycDocuments.createKycDocumentConsult("kyc-id").then(data => {
 
 /* UboDeclarations */
 
-api.UboDeclarations.get("ubo-id").then(data => {
+api.UboDeclarations.get("userId", "id").then(data => {
   const d = data; // $ExpectType UboDeclarationData
 });
 
-api.UboDeclarations.update({
-  Id: "ubo-id",
-  DeclaredUBOs: ["user1", "user2"]
+api.UboDeclarations.update("userId", {
+  Id: "uboId",
+  Ubos: ["user1", "user2"]
 }).then(data => {
   const d = data; // $ExpectType UboDeclarationData
+});
+
+api.UboDeclarations.create("userId").then(data => {
+  const d = data; // $ExpectType UboDeclarationData
+});
+
+api.UboDeclarations.createUbo("userId", "uboDeclarationId", {
+  Address: address,
+  Birthday: 1300186358,
+  FirstName: "John",
+  LastName: "Silver",
+  Nationality: "US"
+}).then(data => {
+  const d = data; // $ExpectType UboData
+});
+
+api.UboDeclarations.getAll("userId").then((data => {
+  const d = data; // $ExpectType UboDeclarationData[]
+}));
+
+api.UboDeclarations.getUbo("userId", "uboDeclarationId", "uboId").then(data => {
+  const d = data; // $ExpectType UboData
+});
+
+api.UboDeclarations.updateUbo("userId", "uboDeclarationId", {
+  Address: address,
+  Birthday: 1300186358,
+  FirstName: "John",
+  LastName: "Silver",
+  Nationality: "US"
+}).then(data => {
+  const d = data; // $ExpectType UboData
 });
 
 /* BankAccounts */
@@ -277,7 +309,7 @@ api.Wallets.create({
 });
 
 const wallet = new api.models.Wallet({
-  Currency: "GB",
+  Currency: "EUR",
   Description: "A description",
   Owners: ["user-id"]
 });

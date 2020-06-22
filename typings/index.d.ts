@@ -503,13 +503,19 @@ declare namespace MangoPay {
 
     class UboDeclaration extends EntityBase<uboDeclaration.UboDeclarationData> {
       constructor(
-        data:
-          | uboDeclaration.CreateUboDeclaration
-          | uboDeclaration.UpdateUboDeclaration
+        data: uboDeclaration.UboDeclarationData
       );
     }
 
     interface UboDeclaration extends uboDeclaration.UboDeclarationData {}
+
+    class Ubo extends EntityBase<uboDeclaration.UboData> {
+      constructor(
+          data: uboDeclaration.UboData
+      )
+    }
+
+    interface Ubo extends uboDeclaration.UboData {}
 
     class CardRegistration extends EntityBase<
       cardRegistration.CardRegistrationData
@@ -616,6 +622,10 @@ declare namespace MangoPay {
       constructor(data: any);
     }
 
+    class PayInExecutionDetailsBankingAlias extends PayInExecutionDetails {
+      constructor(data: any);
+    }
+
     class PayInPaymentDetailsBankWire extends PayInPaymentDetails {
       constructor(data: any);
     }
@@ -645,6 +655,14 @@ declare namespace MangoPay {
     }
 
     class PayInPaymentDetailsPayPal extends PayInPaymentDetails {
+      constructor(data: any);
+    }
+
+    class PayInPaymentDetailsApplePay extends PayInPaymentDetails {
+      constructor(data: any);
+    }
+
+    class PayInPaymentDetailsGooglePay extends PayInPaymentDetails {
       constructor(data: any);
     }
 
@@ -707,6 +725,14 @@ declare namespace MangoPay {
 
     interface Transfer extends transfer.TransferData {}
 
+    class ShippingAddress extends EntityBase<
+        shippingAddress.ShippingAddressData
+        > {
+      constructor(data: Partial<shippingAddress.ShippingAddressData>);
+    }
+
+    interface ShippingAddress extends shippingAddress.ShippingAddressData {}
+
     class PayOut extends EntityBase<PayOut.PayOutData> {
       constructor(data: Partial<PayOut.CreatePayOut>);
     }
@@ -743,6 +769,11 @@ declare namespace MangoPay {
     }
 
     interface Report extends report.Filters {}
+
+    class DebitedBankAccount extends EntityBase<bankAccount.DebitedBankAccountData> {
+      constructor(data: bankAccount.DebitedBankAccountData);
+    }
+    interface DebitedBankAccount extends bankAccount.DebitedBankAccountData {}
   }
 
   interface IPayInExecutionType {
@@ -763,6 +794,7 @@ declare namespace MangoPay {
     Submitted: "SUBMITTED";
     Active: "ACTIVE";
     Failed: "FAILED";
+    Expired: "EXPIRED";
   }
 
   interface ILegalPersonType {
@@ -827,18 +859,9 @@ declare namespace MangoPay {
     /**
      * When at least one natural user is missing on the declaration
      */
-    MissingUbo: "MISSING_UBO";
+    MissingUbo: 'MISSING_UBO';
 
-    /**
-     * When at least one natural user should not be declared as UBO
-     */
-    InvalidDeclaredUbo: "INVALID_DECLARED_UBO";
-
-    /**
-     * When at least one natural user declared as UBO has been created
-     * with wrong details (i.e. date of birth, country of residence)
-     */
-    InvalidUboDetails: "INVALID_UBO_DETAILS";
+    DeclarationDontMatchUboInfo: 'DECLARATION_DO_NOT_MATCH_UBO_INFORMATION';
   }
 
   interface IUboDeclarationStatus {
@@ -861,6 +884,11 @@ declare namespace MangoPay {
      * When the UBO declaration was refused
      */
     Refused: "REFUSED";
+
+    /**
+     * When the UBO declaration was incomplete
+     */
+    Incomplete: 'INCOMPLETE';
   }
 
   interface IUboRefusedReasonType {
@@ -903,7 +931,7 @@ declare namespace MangoPay {
       City: string;
       Region: string;
       PostalCode: string;
-      Country: string;
+      Country: CountryISO;
     }
     type AddressType = string | AddressData | models.Address;
   }
@@ -1004,7 +1032,7 @@ declare namespace MangoPay {
     }
 
     interface IBANDetails {
-      Type: "IBAN";
+      Type: string | "IBAN";
 
       /**
        * The address of the owner of the bank account
@@ -1030,7 +1058,7 @@ declare namespace MangoPay {
     type IBANData = BaseData & IBANDetails;
 
     interface USDetails {
-      Type: "US";
+      Type: string | "US";
 
       /**
        * The address of the owner of the bank account
@@ -1061,7 +1089,7 @@ declare namespace MangoPay {
     type USData = BaseData & USDetails;
 
     interface CADetails {
-      Type: "CA";
+      Type: string | "CA";
 
       /**
        * The address of the owner of the bank account
@@ -1097,7 +1125,7 @@ declare namespace MangoPay {
     type CAData = BaseData & CADetails;
 
     interface GBDetails {
-      Type: "GB";
+      Type: string | "GB";
 
       /**
        * The address of the owner of the bank account
@@ -1123,7 +1151,7 @@ declare namespace MangoPay {
     type GBData = BaseData & GBDetails;
 
     interface OtherDetails {
-      Type: "OTHER";
+      Type: string | "OTHER";
 
       /**
        * The address of the owner of the bank account
@@ -1138,7 +1166,7 @@ declare namespace MangoPay {
       /**
        * The Country of the Address
        */
-      Country: string;
+      Country: CountryISO;
 
       /**
        * The BIC of the bank account
@@ -1149,6 +1177,38 @@ declare namespace MangoPay {
        * The account number of the bank account. Must be numbers only. Canadian account numbers must be a maximum of 20 digits.
        */
       AccountNumber: string;
+    }
+
+    interface DebitedBankAccountData {
+      /**
+       * The name of the owner of the bank account
+       */
+      OwnerName: string;
+
+      /**
+       * The account number of the bank account. Must be numbers only. Canadian account numbers must be a maximum of 20 digits.
+       */
+      AccountNumber: string;
+
+      /**
+       * The IBAN of the bank account
+       */
+      IBAN: string;
+
+      /**
+       * The BIC of the bank account
+       */
+      BIC: string;
+
+      /**
+       * The Type of the bank account
+       */
+      Type: BankAccountType;
+
+      /**
+       * The Country ISO
+       */
+      Country: CountryISO;
     }
 
     type OtherData = BaseData & OtherDetails;
@@ -1526,33 +1586,46 @@ declare namespace MangoPay {
   namespace uboDeclaration {
     interface UboDeclarationData extends entityBase.EntityBaseData {
       /**
-       * The object owner's UserId
+       * cannot be modified by clients
        */
-      UserId: string;
-
+      ProcessedDate: null;
       /**
-       * Status of a UBO Declaration
+       * Declaration status (one of UboDeclarationStatus)
        */
-      Status: kycDocument.DocumentStatus;
-
+      Status: null;
       /**
-       * Reason types for a UBO Declaration
+       * Array of reasons why the declaration was refused
+       * Values as declared in UboDeclarationRefusedReasonType.
        */
-      RefusedReasonTypes: string[];
-
+      Reason: null;
       /**
-       * Refused Reason Message for a UBO Declaration
+       * Explanation of why the declaration was refused.
        */
-      RefusedReasonMessage: string;
-
+      Message: null;
       /**
-       * An array of UserIDs declared as Ultimate Beneficial Owners of a BUSINESS Legal User.
+       * Table of ubos (declared in Ubo)
        */
-      DeclaredUBOs: string[];
+      Ubos: [];
+    }
+
+    interface UboData extends entityBase.EntityBaseData {
+      FirstName: string;
+      LastName: string;
+      Address: address.AddressType;
+      Nationality: string;
+      Birthday: Timestamp;
+    }
+
+    interface CreateUbo {
+      FirstName: string;
+      LastName: string;
+      Address: address.AddressType;
+      Nationality: string;
+      Birthday: Timestamp;
     }
 
     interface CreateUboDeclaration {
-      DeclaredUBOs?: string[];
+      Ubos?: string[];
     }
 
     interface UpdateUboDeclaration {
@@ -1563,7 +1636,14 @@ declare namespace MangoPay {
       /**
        * An array of UserIDs declared as Ultimate Beneficial Owners of a BUSINESS Legal User.
        */
-      DeclaredUBOs?: string[];
+      Ubos?: string[];
+    }
+  }
+
+  namespace birthplace {
+    interface Birthplace extends entityBase.EntityBaseData {
+      City: string;
+      Country: CountryISO;
     }
   }
 
@@ -2363,6 +2443,7 @@ declare namespace MangoPay {
 
     interface TemplateURLOptions {
       Payline: string;
+      PAYLINEV2: string;
     }
 
     interface BasePayInData extends entityBase.EntityBaseData {
@@ -2934,6 +3015,11 @@ declare namespace MangoPay {
       HeadquartersAddress: address.AddressType;
 
       /**
+       * The phone number of the company's headquarters
+       */
+      HeadquartersPhoneNumber: string;
+
+      /**
        * The tax (or VAT) number for your company
        */
       TaxNumber: string;
@@ -3218,6 +3304,20 @@ declare namespace MangoPay {
         "Tag",
         "AuthorId" | "DebitedFunds" | "Fees"
       > {}
+  }
+
+  namespace shippingAddress {
+    interface ShippingAddressData {
+      /**
+       * Name of the shipping recipient
+       */
+      RecipientName: string;
+
+      /**
+       * The shipping address
+       */
+      Address: address.AddressType;
+    }
   }
 
   namespace transfer {
@@ -3576,17 +3676,17 @@ declare namespace MangoPay {
      */
     getEMoney: MethodOverload<string, eMoney.EMoneyData>;
 
-    /**
-     * Create an UboDeclaration for the user
-     * @param userId
-     * @param uboDeclaration
-     * @param options
-     */
-    createUboDeclaration: TwoArgsMethodOverload<
-      string,
-      uboDeclaration.CreateUboDeclaration,
-      uboDeclaration.UboDeclarationData
-    >;
+    // /**
+    //  * Create an UboDeclaration for the user
+    //  * @param userId
+    //  * @param uboDeclaration
+    //  * @param options
+    //  */
+    // createUboDeclaration: TwoArgsMethodOverload<
+    //   string,
+    //   uboDeclaration.CreateUboDeclaration,
+    //   uboDeclaration.UboDeclarationData
+    // >;
 
     /**
      * Get all user preauthorizations
@@ -3648,20 +3748,56 @@ declare namespace MangoPay {
   class UboDeclarations {
     /**
      * Retrieves a UBO declaration object from the API.
-     * @param id
-     * @param options
+     * @param {String} userId User Unique identifier
+     * @param {String} id Unique identifier
+     * @param {Object} options
      */
-    get: MethodOverload<string, uboDeclaration.UboDeclarationData>;
+    get: TwoArgsMethodOverload<string, string, uboDeclaration.UboDeclarationData>;
 
     /**
      * Updates a UBO declaration entity.
-     * @param uboDeclaration Updated UBO declaration entity - must have ID
-     * @param options
+     * @param {String} userId User Unique Identifier
+     * @param {Object} uboDeclaration Updated UBO declaration entity - must have ID!
+     * @param {Object} options
      */
-    update: MethodOverload<
+    update: TwoArgsMethodOverload<
+        string,
       uboDeclaration.UpdateUboDeclaration,
       uboDeclaration.UboDeclarationData
     >;
+
+    /**
+     * Create a UBO declaration object from the API
+     * @param {String} userId user Unique identifier
+     * @param {Object} options
+     */
+    create: MethodOverload<string, uboDeclaration.UboDeclarationData>;
+
+    /**
+     * @param {String} userId user Uniquer identifier
+     */
+    getAll: MethodOverload<string, uboDeclaration.UboDeclarationData[]>;
+
+    /**
+     * @param {String} userId User Uniquer identifier
+     * @param {String} uboDeclarationId UboDeclaration Uniquer identifier
+     * @param {Object} Ubo object
+     */
+    createUbo: ThreeArgsMethodOverload<string, string, uboDeclaration.CreateUbo, uboDeclaration.UboData>;
+
+    /**
+     * @param {String} userId User Uniquer identifier
+     * @param {String} uboDeclarationId UboDeclaration Uniquer identifier
+     * @param {String} uboId Ubo Uniquer identifier
+     */
+    getUbo: ThreeArgsMethodOverload<string, string, string, uboDeclaration.UboData>;
+
+    /**
+     * @param {String} userId User Uniquer identifier
+     * @param {String} uboDeclarationId UboDeclaration Uniquer identifier
+     * @param {Object} Ubo object
+     */
+    updateUbo: ThreeArgsMethodOverload<string, string, uboDeclaration.CreateUbo, uboDeclaration.UboData>;
   }
 
   class BankAccounts {
