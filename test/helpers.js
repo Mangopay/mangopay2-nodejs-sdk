@@ -97,14 +97,17 @@ module.exports = {
              ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
              */
             var options = {
-                parameters: {
+                data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4970101122334422',
+                    cardNumber: '4972485830400056',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
-                url: cardRegistration.CardRegistrationURL
+                url: cardRegistration.CardRegistrationURL,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             };
 
             return api.method('post', function (data, response) {
@@ -273,14 +276,17 @@ module.exports = {
          ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
          */
         var options = {
-            parameters: {
+            data: {
                 data: cardRegistration.PreregistrationData,
                 accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4970101122334422',
+                cardNumber: '4972485830400056',
                 cardExpirationDate: '1224',
                 cardCvx: '123'
             },
-            url: cardRegistration.CardRegistrationURL
+            url: cardRegistration.CardRegistrationURL,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         };
 
         return api.method('post', function (data, response) {

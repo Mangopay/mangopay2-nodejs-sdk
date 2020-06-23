@@ -55,14 +55,17 @@ describe('Card Registrations', function () {
 
         before(function (done) {
             var options = {
-                parameters: {
+                data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
                     cardNumber: '4970101122334422',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
-                url: cardRegistration.CardRegistrationURL
+                url: cardRegistration.CardRegistrationURL,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             };
 
             api.method('post', function (data, response) {
