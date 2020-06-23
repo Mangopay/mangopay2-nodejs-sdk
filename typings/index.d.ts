@@ -940,7 +940,7 @@ declare namespace MangoPay {
     type BankingAliasType = "IBAN";
     interface BankingAliasData extends entityBase.EntityBaseData {
       /**
-       * The user ID who is credited (defaults to the owner of the wallet)
+       * The user ID who is credited (defaults to the owner of the wallet).
        */
       CreditedUserId: string;
 
