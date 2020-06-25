@@ -66,9 +66,12 @@ describe('Wallets', function() {
                     transactions = data;
                     done();
                 }, {
-                    parameters: {
-                        TYPE: 'PAYIN'
-                    }
+                    // parameters: {
+                    //     TYPE: 'PAYIN'
+                    // },
+                    page: 1,
+                    per_page: 50,
+                    TYPE: 'PAYIN'
                 });
             });
         });
