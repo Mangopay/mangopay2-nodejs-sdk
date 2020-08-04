@@ -28,6 +28,9 @@ describe('Cards', function () {
         it('should be retrieved', function () {
             expect(getPreAuthorizations).not.to.be.undefined;
             expect(getPreAuthorizations).to.be.an('array');
+
+            if (getPreAuthorizations.length)
+                expect(getPreAuthorizations[0].MultiCapture).to.exist;
         });
     });
 });
