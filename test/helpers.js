@@ -100,7 +100,7 @@ module.exports = {
                 data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4972485830400056',
+                    cardNumber: '4972485830400064',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
@@ -279,7 +279,7 @@ module.exports = {
             data: {
                 data: cardRegistration.PreregistrationData,
                 accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4972485830400056',
+                cardNumber: '4972485830400064',
                 cardExpirationDate: '1224',
                 cardCvx: '123'
             },
