@@ -292,6 +292,49 @@ module.exports = {
         return api.method('post', function (data, response) {
             callback(Buffer.from(data).toString(), response);
         }, options);
+    },
+
+    getNewPayInCardWebWithIdempotencyKey: function(api, user, idempotencyKey, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = new api.models.PayIn({
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: new api.models.Money({
+                    Amount: 10000,
+                    Currency: 'EUR'
+                }),
+                Fees: new api.models.Money({
+                    Amount: 0,
+                    Currency: 'EUR'
+                }),
+                PaymentType: 'CARD',
+                PaymentDetails: new api.models.PayInPaymentDetailsCard({
+                    CardType: 'CB_VISA_MASTERCARD'
+                }),
+                ExecutionType: 'WEB',
+                ExecutionDetails: new api.models.PayInPaymentDetailsCard({
+                    ReturnURL: 'https://test.com',
+                    TemplateURL: 'https://TemplateURL.com',
+                    SecureMode:  'DEFAULT',
+                    Culture: 'fr'
+                })
+            });
+            api.PayIns.create(payIn, callback, {
+                headers: {
+                    "Idempotency-Key": idempotencyKey
+                }
+            });
+        });
+    },
+
+    generateRandomString: function () {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 
 };
