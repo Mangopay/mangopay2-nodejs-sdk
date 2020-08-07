@@ -295,6 +295,7 @@ module.exports = {
     },
 
     getNewPayInCardWebWithIdempotencyKey: function(api, user, idempotencyKey, callback) {
+        var options = api.OptionsHelper.withIdempotency({}, idempotencyKey);
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
@@ -325,11 +326,7 @@ module.exports = {
                     Culture: 'fr'
                 })
             });
-            api.PayIns.create(payIn, callback, {
-                headers: {
-                    "Idempotency-Key": idempotencyKey
-                }
-            });
+            api.PayIns.create(payIn, callback, options);
         });
     },
 
