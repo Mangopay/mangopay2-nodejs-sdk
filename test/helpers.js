@@ -100,7 +100,7 @@ module.exports = {
                 data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4972485830400056',
+                    cardNumber: '4972485830400064',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
@@ -279,7 +279,7 @@ module.exports = {
             data: {
                 data: cardRegistration.PreregistrationData,
                 accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4972485830400056',
+                cardNumber: '4972485830400064',
                 cardExpirationDate: '1224',
                 cardCvx: '123'
             },
@@ -292,6 +292,46 @@ module.exports = {
         return api.method('post', function (data, response) {
             callback(Buffer.from(data).toString(), response);
         }, options);
+    },
+
+    getNewPayInCardWebWithIdempotencyKey: function(api, user, idempotencyKey, callback) {
+        var options = api.OptionsHelper.withIdempotency({}, idempotencyKey);
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = new api.models.PayIn({
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: new api.models.Money({
+                    Amount: 10000,
+                    Currency: 'EUR'
+                }),
+                Fees: new api.models.Money({
+                    Amount: 0,
+                    Currency: 'EUR'
+                }),
+                PaymentType: 'CARD',
+                PaymentDetails: new api.models.PayInPaymentDetailsCard({
+                    CardType: 'CB_VISA_MASTERCARD'
+                }),
+                ExecutionType: 'WEB',
+                ExecutionDetails: new api.models.PayInPaymentDetailsCard({
+                    ReturnURL: 'https://test.com',
+                    TemplateURL: 'https://TemplateURL.com',
+                    SecureMode:  'DEFAULT',
+                    Culture: 'fr'
+                })
+            });
+            api.PayIns.create(payIn, callback, options);
+        });
+    },
+
+    generateRandomString: function () {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 
 };
