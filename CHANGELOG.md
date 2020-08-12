@@ -1,5 +1,14 @@
 ## [Unreleased]
 
+## [1.13]
+### Added
+`USER_KYC_REGULAR` has been added as a new `Event`. Thanks to it, you are now able to know when all the needed KYCs for a user have been validated and its KYCLevel is updated.
+
+## Fixed
+- Some issues on `CardRegistration` have been fixed
+- Pagination parameters use has been fixed and can now be used correctly
+
+
 ## [1.12]
 ### Added
 - GooglePay support has been added. This mean of payment will shortly be available (beta phase). Feel free to ask our Sales / Technical Account Manager team about it !

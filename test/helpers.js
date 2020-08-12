@@ -97,14 +97,17 @@ module.exports = {
              ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
              */
             var options = {
-                parameters: {
+                data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4970101122334422',
+                    cardNumber: '4972485830400064',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
-                url: cardRegistration.CardRegistrationURL
+                url: cardRegistration.CardRegistrationURL,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             };
 
             return api.method('post', function (data, response) {
@@ -273,19 +276,62 @@ module.exports = {
          ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
          */
         var options = {
-            parameters: {
+            data: {
                 data: cardRegistration.PreregistrationData,
                 accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4970101122334422',
+                cardNumber: '4972485830400064',
                 cardExpirationDate: '1224',
                 cardCvx: '123'
             },
-            url: cardRegistration.CardRegistrationURL
+            url: cardRegistration.CardRegistrationURL,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         };
 
         return api.method('post', function (data, response) {
             callback(Buffer.from(data).toString(), response);
         }, options);
+    },
+
+    getNewPayInCardWebWithIdempotencyKey: function(api, user, idempotencyKey, callback) {
+        var options = api.OptionsHelper.withIdempotency({}, idempotencyKey);
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = new api.models.PayIn({
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: new api.models.Money({
+                    Amount: 10000,
+                    Currency: 'EUR'
+                }),
+                Fees: new api.models.Money({
+                    Amount: 0,
+                    Currency: 'EUR'
+                }),
+                PaymentType: 'CARD',
+                PaymentDetails: new api.models.PayInPaymentDetailsCard({
+                    CardType: 'CB_VISA_MASTERCARD'
+                }),
+                ExecutionType: 'WEB',
+                ExecutionDetails: new api.models.PayInPaymentDetailsCard({
+                    ReturnURL: 'https://test.com',
+                    TemplateURL: 'https://TemplateURL.com',
+                    SecureMode:  'DEFAULT',
+                    Culture: 'fr'
+                })
+            });
+            api.PayIns.create(payIn, callback, options);
+        });
+    },
+
+    generateRandomString: function () {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 
 };

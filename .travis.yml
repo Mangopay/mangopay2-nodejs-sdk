@@ -11,4 +11,4 @@ deploy:
     tags: false
     repo: Mangopay/mangopay2-nodejs-sdk
     branch: release
-before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
