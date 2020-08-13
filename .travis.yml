@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - "lts/*"
-script: npm test
+script: npm test && npm run test:types
 deploy:
   provider: npm
   email: mickael@mangopay.com
