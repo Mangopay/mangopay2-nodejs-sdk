@@ -261,8 +261,8 @@ declare namespace MangoPay {
   type WithToJson<T extends object> = T & { toJSON(): any };
 
   // Determines the shape of the response
-  interface ReadResponseHeaders {
-    readResponseHeaders: true;
+  interface resolveWithFullResponse {
+    resolveWithFullResponse: true;
   }
 
   interface PaginationOptions {
@@ -302,11 +302,11 @@ declare namespace MangoPay {
   }
 
   interface MethodOptionWithResponse extends MethodOptions {
-    readResponseHeaders: true;
+    resolveWithFullResponse: true;
   }
 
   interface MethodOptionWithoutResponse extends MethodOptions {
-    readResponseHeaders?: false;
+    resolveWithFullResponse?: false;
   }
 
   interface DependsObject {
@@ -1850,7 +1850,7 @@ declare namespace MangoPay {
       /**
        * This is the URL where to redirect users to proceed to 3D secure validation
        */
-      SecureModeRedirectUrl: string;
+      SecureModeRedirectURL: string;
 
       /**
        * This is the URL where users are automatically redirected after 3D secure validation (if activated)
@@ -2673,7 +2673,7 @@ declare namespace MangoPay {
       /**
        * This is the URL where to redirect users to proceed to 3D secure validation
        */
-      SecureModeRedirectUrl: string;
+      SecureModeRedirectURL: string;
     }
 
     interface CreateCardDirectPayIn {
