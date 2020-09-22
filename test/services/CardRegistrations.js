@@ -158,25 +158,26 @@ describe('Card Registrations', function () {
             });
         });
 
-        describe('Update', function () {
-            var updatedCard;
+        // test card deactivated
+        //describe('Update', function () {
+        //    var updatedCard;
 
-            before(function(done) {
-                updatedCard = {
-                    Id: card.Id,
-                    Validity: 'INVALID'
-                };
-                api.Cards.update(updatedCard, function(data, response){
-                    updatedCard = data;
-                    done();
-                });
-            });
+        //    before(function(done) {
+        //        updatedCard = {
+        //            Id: card.Id,
+        //            Validity: 'INVALID'
+        //        };
+        //        api.Cards.update(updatedCard, function(data, response){
+        //            updatedCard = data;
+        //            done();
+        //        });
+        //    });
 
-            it('should be updated', function () {
-                expect(updatedCard.Id).to.equal(card.Id);
-                expect(updatedCard.Active).to.be.false;
-            });
-        });
+        //    it('should be updated', function () {
+        //        expect(updatedCard.Id).to.equal(card.Id);
+        //        expect(updatedCard.Active).to.be.false;
+        //    });
+        //});
     });
 
     describe('Creating Invalid user card registration', function () {
