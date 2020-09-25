@@ -111,10 +111,25 @@ describe('Card Registrations', function () {
 
     describe('Cards', function () {
         var card;
+        var validatedCard;
         before(function(done) {
             api.Cards.get(cardRegistration.CardId, function(data, response){
                 card = data;
                 done();
+            });
+        });
+
+        describe('Validate Card', function () {
+            before(function(done) {
+                api.Cards.validate(cardRegistration.CardId, function(data, response){
+                    validatedCard = data;
+                    done();
+                });
+            });
+
+            it('should be validate', function () {
+                expect(validatedCard).to.not.be.undefined;
+                expect(validatedCard.Id).to.not.be.undefined;
             });
         });
 
@@ -143,25 +158,26 @@ describe('Card Registrations', function () {
             });
         });
 
-        describe('Update', function () {
-            var updatedCard;
+        // test card deactivated
+        //describe('Update', function () {
+        //    var updatedCard;
 
-            before(function(done) {
-                updatedCard = {
-                    Id: card.Id,
-                    Validity: 'INVALID'
-                };
-                api.Cards.update(updatedCard, function(data, response){
-                    updatedCard = data;
-                    done();
-                });
-            });
+        //    before(function(done) {
+        //        updatedCard = {
+        //            Id: card.Id,
+        //            Validity: 'INVALID'
+        //        };
+        //        api.Cards.update(updatedCard, function(data, response){
+        //            updatedCard = data;
+        //            done();
+        //        });
+        //    });
 
-            it('should be updated', function () {
-                expect(updatedCard.Id).to.equal(card.Id);
-                expect(updatedCard.Active).to.be.false;
-            });
-        });
+        //    it('should be updated', function () {
+        //        expect(updatedCard.Id).to.equal(card.Id);
+        //        expect(updatedCard.Active).to.be.false;
+        //    });
+        //});
     });
 
     describe('Creating Invalid user card registration', function () {
