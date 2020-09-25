@@ -261,8 +261,8 @@ declare namespace MangoPay {
   type WithToJson<T extends object> = T & { toJSON(): any };
 
   // Determines the shape of the response
-  interface ReadResponseHeaders {
-    readResponseHeaders: true;
+  interface resolveWithFullResponse {
+    resolveWithFullResponse: true;
   }
 
   interface PaginationOptions {
@@ -302,11 +302,11 @@ declare namespace MangoPay {
   }
 
   interface MethodOptionWithResponse extends MethodOptions {
-    readResponseHeaders: true;
+    resolveWithFullResponse: true;
   }
 
   interface MethodOptionWithoutResponse extends MethodOptions {
-    readResponseHeaders?: false;
+    resolveWithFullResponse?: false;
   }
 
   interface DependsObject {
@@ -1321,7 +1321,7 @@ declare namespace MangoPay {
       FundsType: FundsType;
 
       /**
-       * A desciption of the wallet
+       * A description of the wallet
        */
       Description: string;
 
@@ -1850,7 +1850,7 @@ declare namespace MangoPay {
       /**
        * This is the URL where to redirect users to proceed to 3D secure validation
        */
-      SecureModeRedirectUrl: string;
+      SecureModeRedirectURL: string;
 
       /**
        * This is the URL where users are automatically redirected after 3D secure validation (if activated)
@@ -2069,7 +2069,7 @@ declare namespace MangoPay {
       ReportType: "TRANSACTIONS";
 
       /**
-       * The column to sort against and direction seperate by a `:`
+       * The column to sort against and direction separated by a `:`
        */
       Sort: string;
 
@@ -2673,7 +2673,7 @@ declare namespace MangoPay {
       /**
        * This is the URL where to redirect users to proceed to 3D secure validation
        */
-      SecureModeRedirectUrl: string;
+      SecureModeRedirectURL: string;
     }
 
     interface CreateCardDirectPayIn {
@@ -3707,7 +3707,7 @@ declare namespace MangoPay {
    * 3. Edit the object Document and set the Status field to "VALIDATION_ASKED" (instead of "CREATED")
    * 4. The demand is received by our team. The object is waiting for a "VALIDATED" status
    *
-   * Note that you are not allowed to store KYC documents on your side unless you have permission from the approriate authorities in your country
+   * Note that you are not allowed to store KYC documents on your side unless you have permission from the appropriate authorities in your country
    */
   class KycDocuments {
     /**

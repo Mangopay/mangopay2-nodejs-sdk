@@ -26,7 +26,7 @@ describe('Card PreAuthorizations', function() {
             expect(preAuthorization.PaymentStatus).to.equal('WAITING');
             expect(preAuthorization.ExecutionType).to.equal('DIRECT');
             expect(preAuthorization.PayInId).to.be.null;
-            // expect(preAuthorization.RemainingFunds).to.exist;
+            expect(preAuthorization.RemainingFunds).to.exist;
         });
     });
 
@@ -43,7 +43,7 @@ describe('Card PreAuthorizations', function() {
         it('should be fetched', function(){
             expect(getPreAuthorization.Id).to.equal(preAuthorization.Id);
             expect(getPreAuthorization.ResultCode).to.equal('000000');
-            // expect(getPreAuthorization.RemainingFunds).to.exist;
+            expect(getPreAuthorization.RemainingFunds).to.exist;
         });
     });
 
@@ -63,7 +63,7 @@ describe('Card PreAuthorizations', function() {
             expect(updatedPreAuthorization.Status).to.equal('SUCCEEDED');
             expect(updatedPreAuthorization.PaymentStatus).to.equal('CANCELED');
             expect(updatedPreAuthorization.SecurityInfo.AVSResult).to.equal('NO_CHECK');
-            // expect(updatedPreAuthorization.RemainingFunds).to.exist;
+            expect(updatedPreAuthorization.RemainingFunds).to.exist;
         });
     });
 });

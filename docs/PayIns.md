@@ -53,6 +53,21 @@ Create refund for pay-in object
 **Returns**: `Object`, Request promise
 
 
+### PayIns.getRefunds(payInId, callback, options) 
+
+Gets list of Refunds for a PayIn
+
+**Parameters**
+
+**payInId**: `number`, PayIn identifier
+
+**callback**: `function`, Callback function
+
+**options**: `Object`, Request options
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 

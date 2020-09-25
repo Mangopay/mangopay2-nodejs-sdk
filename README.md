@@ -59,7 +59,7 @@ account can take a few days, so think about doing it in advance of when you actu
 ### Creating a user
 
 #### Using a hash of properties:
-
+```ts
     mangopay.Users.create({
         "FirstName": "Victor",
         "LastName": "Hugo",
@@ -79,9 +79,10 @@ account can take a few days, so think about doing it in advance of when you actu
     }).then(function(model){
         // User created - using promise
     });
+```
 
 #### Using Mangopay SDK pre-defined models:
-
+```ts
     var myUser = new api.models.UserLegal({
         Name: 'MangoPay',
         Email: 'info@mangopay.com',
@@ -108,11 +109,13 @@ account can take a few days, so think about doing it in advance of when you actu
         // Output the created user data to console
         console.log(myUser.Name + ' user created at ' + myUser.CreationDate);
     });
+```
 
 #### Promise vs Callback
 Mangopay Node.js SDK supports both callback and promise approach.
 Here is how they can be implemented :
 
+```ts
     api.Service.method(... , function(data, response, err){
         // Callback method
     })
@@ -122,12 +125,12 @@ Here is how they can be implemented :
     }, function(error) {
         //exception
     })
-
+```
 
 ### Pagination / Filtering
 In order to [paginate](https://docs.mangopay.com/api-references/pagination/) or [filter](https://docs.mangopay.com/api-references/sort-lists/) results,
 we can use ``options.parameters`` to specify these options:
-
+```ts
     api.Transactions.getAll({
         parameters: {
             // Pagination
@@ -142,10 +145,11 @@ we can use ``options.parameters`` to specify these options:
             Type: TRANSFER
         }
     }
+```
 
 ### Reading server response headers
 For [reading the server response headers](examples/readResponseHeaders.js) we can use ``options.resolveWithFullResponse: true``
-
+```ts
     api.Users.getAll(null, {
       parameters: {
         per_page: 1
@@ -158,6 +162,7 @@ For [reading the server response headers](examples/readResponseHeaders.js) we ca
       // Read response body
       console.log(response.body);
     });
+```
 
 Sample usage of Mangopay SDK installed with npm in a Node.js project
 -------------------------------------------------

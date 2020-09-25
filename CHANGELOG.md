@@ -1,4 +1,8 @@
-## [Unreleased]
+## [1.14.2]
+- New endpoint -> get UBO declaration by ID
+- RemainingFunds tests
+- Fixing of Typos, for Typescript compatibility
+- New endpoint to support changes to Card Validation process (please listen out for product announcements)
 
 ## [1.13]
 ### Added

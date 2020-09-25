@@ -47,6 +47,22 @@ describe('UBO Declarations', function () {
         });
     });
 
+    describe('GetById', function () {
+        var getDeclaration;
+
+        before(function (done) {
+            api.UboDeclarations.getById(uboDeclaration.Id, function (data, response) {
+                getDeclaration = data;
+                done();
+            });
+        });
+
+        it('should be retrieved', function () {
+            expect(getDeclaration).not.to.be.null;
+            expect(getDeclaration.Id).to.equal(uboDeclaration.Id);
+        });
+    });
+
     describe('GetAll', function () {
         var getDeclarations;
 

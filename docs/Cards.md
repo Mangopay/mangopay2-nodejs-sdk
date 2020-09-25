@@ -48,6 +48,36 @@ Update card
 **Returns**: `Object`, Request promise
 
 
+### Cards.getTransactions(cardId, callback, options) 
+
+Get list of Transactions of a Card
+
+**Parameters**
+
+**cardId**: `number`, Card identifier
+
+**callback**: `function`, Callback function
+
+**options**: `object`, Request options
+
+**Returns**: `object`, Request promise
+
+
+### Cards.getPreAuthorizations(cardId, callback, options) 
+
+Gets list of PreAuthorizations of a Card.
+
+**Parameters**
+
+**cardId**: `number`, Card identifier
+
+**callback**: `function`, Callback function
+
+**options**: `Object`, Request options
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 
