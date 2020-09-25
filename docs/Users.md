@@ -299,13 +299,17 @@ Create page for KYC document
 **Returns**: `Object`, Request promise
 
 
-### Users.getEMoney(userId, callback, options) 
+### Users.getEMoney(userId, year, month, callback, options) 
 
 Get users's EMoney
 
 **Parameters**
 
 **userId**: `number`, User identifier
+
+**year**: `year`, The year for which we want to get the emoney
+
+**month**: `month`, The month for which we want to get the emoney. Can be null
 
 **callback**: `function`, Get users's EMoney
 

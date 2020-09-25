@@ -275,6 +275,19 @@ Creates document's page for dispute from file
 **Returns**: `Object`, Promise of the request
 
 
+### Disputes.getPendingSettlement(callback, options) 
+
+Retrieve a list of Disputes pending settlement
+
+**Parameters**
+
+**callback**: `function`, Callback function
+
+**options**: `object`, Request options
+
+**Returns**: `object`, Request promise
+
+
 
 * * *
 

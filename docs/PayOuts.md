@@ -36,6 +36,21 @@ Get payout
 **Returns**: `Object`, Request promise
 
 
+### PayOuts.getRefunds(payOutId, callback, options) 
+
+Gets list of Refunds of a PayOut
+
+**Parameters**
+
+**payOutId**: `number`, PayOut identifier
+
+**callback**: `function`, Callback function
+
+**options**: `Object`, Request options
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 
