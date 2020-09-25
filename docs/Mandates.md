@@ -96,6 +96,21 @@ Gets bank account mandates
 **Returns**: `Object`, Request promise
 
 
+### Mandates.getTransactions(mandateId, callback, options) 
+
+Gets Transactions for a Mandate
+
+**Parameters**
+
+**mandateId**: `number`, Mandate identifier
+
+**callback**: `function`, Callback function
+
+**options**: `Object`, Request options
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 

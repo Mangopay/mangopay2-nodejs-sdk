@@ -53,6 +53,21 @@ Create refund for transfer object
 **Returns**: `Object`, Request promise
 
 
+### Transfers.getRefunds(transferId, callback, options) 
+
+Gets list of Refunds of a Transfer
+
+**Parameters**
+
+**transferId**: `number`, Transfer identifier
+
+**callback**: `function`, Callback function
+
+**options**: `Object`, Request options
+
+**Returns**: `Object`, Request promise
+
+
 
 * * *
 
