@@ -3477,6 +3477,7 @@ declare namespace MangoPay {
        */
       BankWireRef?: string;
       Tag?: string;
+      PaymentType: IPayOutPaymentType["BankWire"];
     }
   }
 
