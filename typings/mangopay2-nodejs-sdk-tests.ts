@@ -489,7 +489,10 @@ api.PayOuts.create({
   AuthorId: "user-id",
   DebitedFunds: { Amount: 2000, Currency: "GBP" },
   BankAccountId: "bank-id",
-  DebitedWalletId: "wallet-id"
+  DebitedWalletId: "wallet-id",
+  BankWireRef: "placeholder",
+  Tag: "placeholder",
+  PaymentType: api.models.PayOutPaymentType.BankWire
 }).then(data => {
   const d = data; // $ExpectType PayOutData
 });
