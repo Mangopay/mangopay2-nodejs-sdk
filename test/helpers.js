@@ -117,7 +117,7 @@ module.exports = {
                         AuthorId: user.Id,
                         DebitedFunds: {
                             Currency: 'EUR',
-                            Amount: 10000
+                            Amount: 1000
                         },
                         CardId: cardRegistration.CardId,
                         SecureModeReturnURL: 'http://test.com',
@@ -157,7 +157,7 @@ module.exports = {
                     CreditedWalletId: wallet.Id,
                     AuthorId: user.Id,
                     DebitedFunds: {
-                        Amount: 10000,
+                        Amount: 1000,
                         Currency: 'EUR'
                     },
                     Fees: {
@@ -237,7 +237,7 @@ module.exports = {
                 CreditedWalletId: wallet.Id,
                 AuthorId: user.Id,
                 DebitedFunds: new api.models.Money({
-                    Amount: 10000,
+                    Amount: 1000,
                     Currency: 'EUR'
                 }),
                 Fees: new api.models.Money({
@@ -307,7 +307,7 @@ module.exports = {
                 CreditedWalletId: wallet.Id,
                 AuthorId: user.Id,
                 DebitedFunds: new api.models.Money({
-                    Amount: 10000,
+                    Amount: 1000,
                     Currency: 'EUR'
                 }),
                 Fees: new api.models.Money({
