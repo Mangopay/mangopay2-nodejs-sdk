@@ -3,8 +3,15 @@ var path = require('path');
 var expect = require('chai').expect;
 
 var ClientWallet = require('../../lib/models/ClientWallet');
+var BankAccount = require('../../lib/models/BankAccount');
+var BankAccountDetailsIBAN = require('../../lib/models/BankAccountDetailsIBAN');
+var PayOut = require('../../lib/models/PayOut');
+var PayOutPaymentDetailsBankWire = require('../../lib/models/PayOutPaymentDetailsBankWire');
+
 describe("Clients", function () {
     var client;
+    var createdBankAccount;
+
     before(function (done) {
         api.Clients.get().then(function (data) {
             client = data;
@@ -24,7 +31,11 @@ describe("Clients", function () {
         var phoneNumber = Math.floor(Math.random() * 100000).toString();
 
         before(function (done) {
-            api.Clients.update({PrimaryThemeColour: themeColor, PrimaryButtonColour: buttonColor, HeadquartersPhoneNumber: phoneNumber})
+            api.Clients.update({
+                PrimaryThemeColour: themeColor,
+                PrimaryButtonColour: buttonColor,
+                HeadquartersPhoneNumber: phoneNumber
+            })
                 .then(function (data) {
                     updatedClient = data;
                     done();
@@ -118,5 +129,77 @@ describe("Clients", function () {
             expect(transactions.length).to.be.greaterThan(0);
         })
 
+    });
+
+    describe("Create BankAccountIBAN", function () {
+        var account = new BankAccount({
+            OwnerName: "Joe Blogs",
+            OwnerAddress: {
+                "AddressLine1": "1 Mangopay Street",
+                "AddressLine2": "The Loop",
+                "City": "Paris",
+                "Region": "Ile de France",
+                "PostalCode": "75001",
+                "Country": "FR"
+            },
+            Details: new BankAccountDetailsIBAN({
+                IBAN: "FR7630004000031234567890143",
+                BIC: "CRLYFRPP"
+            }),
+            Tag: "custom meta"
+        });
+
+        before(function (done) {
+            api.Clients.createBankAccountIBAN(account).then(function (data) {
+                createdBankAccount = data;
+                done();
+            });
+        });
+
+        it('should get the bank account', function () {
+            expect(createdBankAccount).not.to.be.undefined;
+            expect(createdBankAccount.Id).not.to.be.undefined;
+        });
+    });
+
+    describe("Create PayOut", function () {
+        var createdPayOut;
+        var clientWallets;
+        var clientWallet;
+
+        before(function (done) {
+            api.Clients.getClientWallets(function (data, response) {
+                clientWallets = data;
+                api.Clients.getClientWallet(clientWallets[0].FundsType, clientWallets[0].Currency
+                    , function (data, response) {
+                        clientWallet = data;
+
+                        var payOut = new PayOut({
+                            DebitedWalletId: clientWallet.Id,
+                            PaymentType: 'BANK_WIRE',
+                            MeanOfPaymentDetails: new PayOutPaymentDetailsBankWire({
+                                BankAccountId: createdBankAccount.Id,
+                                BankWireRef: 'invoice 7282'
+                            }),
+                            DebitedFunds: {
+                                "Currency": "EUR",
+                                "Amount": 12
+                            },
+                            Tag: 'bla'
+                        });
+
+                        api.Clients.createPayOut(payOut).then(function (data) {
+                            createdPayOut = data;
+                            done();
+                        });
+                    });
+            });
+        });
+
+        it('should create the payout', function () {
+            console.log(createdPayOut);
+            expect(createdPayOut).not.to.be.undefined;
+            expect(createdPayOut.Id).not.to.be.undefined;
+        });
     });
 });
