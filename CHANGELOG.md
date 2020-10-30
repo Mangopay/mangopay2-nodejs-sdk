@@ -1,3 +1,8 @@
+## [1.14.3] - 2020-10-30
+- added PaymentType to the CreatePayOut Object
+- added new endpoint for PreAuthorization Transactions
+- added methods for creating client bank accounts and payouts
+
 ## [1.14.2]
 - New endpoint -> get UBO declaration by ID
 - RemainingFunds tests
