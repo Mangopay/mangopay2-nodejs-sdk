@@ -115,6 +115,7 @@ describe('PayIns', function () {
 
     describe('PreAuthorizedDirect', function () {
         var preAuthorization, payIn, wallet;
+        var transactionsData;
 
         before(function (done) {
             helpers.getUserCardPreAuthorization(api, john, function (data, response) {
@@ -131,7 +132,7 @@ describe('PayIns', function () {
                         CreditedWalletId: wallet.Id,
                         AuthorId: john.Id,
                         DebitedFunds: {
-                            Amount: 10000,
+                            Amount: 1000,
                             Currency: 'EUR'
                         },
                         Fees: {
@@ -160,6 +161,17 @@ describe('PayIns', function () {
             expect(payIn.data.CardId).not.to.be.null;
             expect(payIn.data.Type).to.equal('PAYIN');
             expect(payIn.data.Status).to.equal('SUCCEEDED');
+        });
+
+        before(function(done){
+            api.CardPreAuthorizations.getTransactions(preAuthorization.Id, function(data, response){
+                transactionsData = data;
+                done();
+            });
+        });
+
+        it('should get transactions', function () {
+            expect(transactionsData[0].Status).to.equal('SUCCEEDED');
         });
     });
 
