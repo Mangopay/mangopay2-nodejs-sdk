@@ -3150,7 +3150,7 @@ declare namespace MangoPay {
       | "USER_INFLOWS_BLOCKED"
       | "USER_INFLOWS_UNBLOCKED"
       | "USER_OUTFLOWS_BLOCKED"
-      | "USER_OUTFLOWS_UNBLOCKED"
+      | "USER_OUTFLOWS_UNBLOCKED";
 
     interface EventData {
       /**
