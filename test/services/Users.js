@@ -646,7 +646,7 @@ describe('Users', function() {
 
                     api.UboDeclarations.createUbo(matrix.Id, uboDeclaration.Id, declarativeUser, function (data, response) {
                         ubo = data;
-                        
+
                         done();
                     });
                 });
@@ -673,6 +673,21 @@ describe('Users', function() {
         it('should be retrieved', function() {
             expect(getPreAuthorizations).not.to.be.undefined;
             expect(getPreAuthorizations).to.be.an('array');
+        });
+    });
+
+    describe('Get BlockStatus', function () {
+        var blockStatus;
+
+        before(function (done) {
+            api.Users.getBlockStatus(john.Id, function (data, response) {
+                blockStatus = data;
+                done();
+            });
+        });
+
+        it('should get the block status', function() {
+            expect(blockStatus).not.to.be.undefined;
         });
     });
 });
