@@ -1,3 +1,8 @@
+## [1.14.4] - 2020-12-09
+- Added 'Regulatory' endpoint to allow checks of User Block Status
+- Added support for Regulatory -> Blocked Status Hooks
+- Fix for SubmitKycDocument bug
+
 ## [1.14.3] - 2020-10-30
 - added PaymentType to the CreatePayOut Object
 - added new endpoint for PreAuthorization Transactions
