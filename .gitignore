@@ -6,3 +6,7 @@ node_modules
 .idea/
 
 .vscode/
+
+.vs/
+
+Folder.DotSettings.user
