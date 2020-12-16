@@ -23,10 +23,10 @@
     "underscore": "1.8.x"
   },
   "devDependencies": {
-    "chai": "3.5.x",
     "dtslint": "0.4.1",
-    "mocha": "2.4.x",
-    "sinon": "^1.17.3"
+    "chai": "3.5.x",
+    "sinon": "^1.17.3",
+    "mocha": "2.4.x"
   },
   "scripts": {
     "start": "npm install -g mocha && npm install -g jsdox && npm install",
