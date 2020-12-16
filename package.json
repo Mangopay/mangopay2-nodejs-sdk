@@ -17,21 +17,21 @@
   },
   "main": "./index.js",
   "dependencies": {
-    "@types/node": "^8.10.61",
+    "@types/node": "14.14.x",
     "node-rest-client": "3.1.0",
-    "promise": "7.1.x",
-    "underscore": "1.8.x"
+    "promise": "8.1.x",
+    "underscore": "1.12.x"
   },
   "devDependencies": {
-    "dtslint": "0.4.1",
-    "chai": "3.5.x",
-    "sinon": "^1.17.3",
-    "mocha": "2.4.x"
+    "chai": "4.2.x",
+    "dtslint": "4.0.6",
+    "mocha": "8.2.x",
+    "sinon": "9.2.x"
   },
   "scripts": {
     "start": "npm install -g mocha && npm install -g jsdox && npm install",
     "documentation": "jsdox -t docs/templates/ -i README -o docs lib/services",
-    "test": "mocha",
+    "test": "mocha 'test/**/*.js' --recursive --timeout 60000 --ui bdd",
     "test:types": "dtslint ./typings"
   }
 }
