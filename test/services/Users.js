@@ -690,4 +690,19 @@ describe('Users', function() {
             expect(blockStatus).not.to.be.undefined;
         });
     });
+
+    describe('Get Regulatory', function () {
+        var blockStatus;
+
+        before(function (done) {
+            api.Users.getRegulatory(john.Id, function (data, response) {
+                blockStatus = data;
+                done();
+            });
+        });
+
+        it('should get regulatory', function () {
+            expect(blockStatus).not.to.be.undefined;
+        });
+    });
 });
