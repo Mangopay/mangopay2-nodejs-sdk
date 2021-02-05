@@ -179,8 +179,9 @@ describe("Clients", function () {
                             PaymentType: 'BANK_WIRE',
                             MeanOfPaymentDetails: new PayOutPaymentDetailsBankWire({
                                 BankAccountId: createdBankAccount.Id,
-                                BankWireRef: 'invoice 7282'
-                            }),
+                                BankWireRef: 'invoice 7282',
+                                PayoutModeRequested: 'STANDARD'
+                    }),
                             DebitedFunds: {
                                 "Currency": "EUR",
                                 "Amount": 12
