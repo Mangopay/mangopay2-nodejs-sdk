@@ -28,7 +28,7 @@ Supported options
 | --------  | -----------   | ----------- |
 |clientId   |null      | API Client Id|
 |clientApiKey|null| API Client Api Key|
-|baseUrl|"https://api.sandbox.mangopay.com"| API Base URL. The fault base value points to sandbox. Production is 'https://api.mangopay.com'|
+|baseUrl|"https://api.sandbox.mangopay.com"| API Base URL. The default value points to sandbox. Production is 'https://api.mangopay.com'|
 |debugMode|false| Active debugging|
 |logClass|```function() {console.log(arguments)}```|Log function to be used for debug|
 |connectionTimeout|30000|Set the connection timeout limit (in milliseconds)|
