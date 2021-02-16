@@ -122,6 +122,8 @@ module.exports = {
                         CardId: cardRegistration.CardId,
                         SecureModeReturnURL: 'http://test.com',
                         Billing: {
+                            FirstName: "John",
+                            LastName: "Doe",
                             Address: {
                                 "AddressLine1": "4101 Reservoir Rd NW",
                                 "AddressLine2": "",
@@ -169,6 +171,8 @@ module.exports = {
                     PaymentType: 'CARD',
                     ExecutionType: 'DIRECT',
                     Billing: {
+                        FirstName: "John",
+                        LastName: "Doe",
                         Address: {
                           "AddressLine1": "4101 Reservoir Rd NW",
                           "AddressLine2": "",
