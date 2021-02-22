@@ -1,3 +1,17 @@
+## [1.15.0] - 2021-02-22
+- 3DS2 integration with Shipping and Billing objects, including FirstName and LastName fields
+- The objects Billing and Shipping may be included on all calls to the following endpoints:
+    - /preauthorizations/card/direct
+    - /payins/card/direct
+    - /payins/card/web
+- Enable Instant Payment for payouts by adding a new parameter PayoutModeRequested on the following endpoint /payouts/bankwire
+    - The new parameter PayoutModeRequested can take two different values : "INSTANT_PAYMENT" or "STANDARD" (STANDARD = the way we proceed normally a payout request)
+    - This new parameter is not mandatory and if empty or not present, the payout will be "STANDARD" by default
+    - Instant Payment is in beta all over Europe - SEPA region
+- Fix typo in README
+- Fix typo IpAdress -> IpAddress in PayInPaymentDetailsCardDirect
+- Fix Users update through a PUT request
+
 ## [1.14.4] - 2020-12-09
 - Added 'Regulatory' endpoint to allow checks of User Block Status
 - Added support for Regulatory -> Blocked Status Hooks
