@@ -1,3 +1,47 @@
+## [1.16.0] - 2021-03-25
+## Added
+
+### On demand feature for 3DSv2
+
+> **This on-demand feature is for testing purposes only and will not be available in production**
+
+#### Request
+
+We've added a new parameter `Requested3DSVersion` (not mandatory) that allows you to choose between versions of 3DS protocols (managed by the parameter `SecureMode`). Two values are available: 
+* `V1`
+* `V2_1`
+
+If nothing is sent, the flow will be 3DS V1. 
+
+The `Requested3DSVersion` may be included on all calls to the following endpoints:
+* `/preauthorizations/card/direct`
+* `/payins/card/direct`
+
+#### Response
+
+In the API response, the `Requested3DSVersion` will show the value you requested:
+* `V1`
+* `V2_1`
+* `null` – indicates that nothing was requested
+
+The parameter `Applied3DSVersion` shows you the version of the 3DS protocol used. Two values are possible:
+* `V1`
+* `V2_1`
+
+## [1.15.0] - 2021-02-22
+- 3DS2 integration with Shipping and Billing objects, including FirstName and LastName fields
+- The objects Billing and Shipping may be included on all calls to the following endpoints:
+    - /preauthorizations/card/direct
+    - /payins/card/direct
+    - /payins/card/web
+- Enable Instant Payment for payouts by adding a new parameter PayoutModeRequested on the following endpoint /payouts/bankwire
+    - The new parameter PayoutModeRequested can take two different values : "INSTANT_PAYMENT" or "STANDARD" (STANDARD = the way we proceed normally a payout request)
+    - This new parameter is not mandatory and if empty or not present, the payout will be "STANDARD" by default
+    - Instant Payment is in beta all over Europe - SEPA region
+- Fix typo in README
+- Fix typo IpAdress -> IpAddress in PayInPaymentDetailsCardDirect
+- Fix Users update through a PUT request
+
 ## [1.14.4] - 2020-12-09
 - Added 'Regulatory' endpoint to allow checks of User Block Status
 - Added support for Regulatory -> Blocked Status Hooks

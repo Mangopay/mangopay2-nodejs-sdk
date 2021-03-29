@@ -26,8 +26,8 @@ describe('Mandates', function() {
                 OwnerName: john.FirstName + ' ' + john.LastName,
                 OwnerAddress: john.Address,
                 Details: new BankAccountDetailsIBAN({
-                    IBAN: 'FR7618829754160173622224154',
-                    BIC: 'CMBRFR2BCME'
+                    IBAN: 'FR7630004000031234567890143',
+                    BIC: 'CRLYFRPP'
                 })
             });
 
