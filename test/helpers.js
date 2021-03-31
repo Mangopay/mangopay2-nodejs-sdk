@@ -202,7 +202,7 @@ module.exports = {
             OwnerAddress: user.Address,
             Type: 'IBAN',
             IBAN: 'FR7630004000031234567890143',
-            BIC: 'CRLYFRPP'
+            BIC: 'BNPAFRPP'
         };
 
         api.Wallets.create(wallet).then(function(data){
