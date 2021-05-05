@@ -1355,7 +1355,8 @@ declare namespace MangoPay {
       | "CREATED"
       | "VALIDATION_ASKED"
       | "VALIDATED"
-      | "REFUSED";
+      | "REFUSED"
+      | "OUT_OF_DATE";
 
     type RefusedReasonType =
       | "DOCUMENT_UNREADABLE"
