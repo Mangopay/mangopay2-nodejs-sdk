@@ -3761,6 +3761,13 @@ declare namespace MangoPay {
     get: TwoArgsMethodOverload<string, string, uboDeclaration.UboDeclarationData>;
 
     /**
+     * Retrieves a UBO declaration object from the API.
+     * @param {String} id Unique identifier
+     * @param {Object} options
+     */
+    getById: MethodOverload<string, uboDeclaration.UboDeclarationData>;
+
+    /**
      * Updates a UBO declaration entity.
      * @param {String} userId User Unique Identifier
      * @param {Object} uboDeclaration Updated UBO declaration entity - must have ID!
