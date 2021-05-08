@@ -50,6 +50,22 @@ describe('Banking Aliases', function() {
         });
     });
 
+    describe('Getting created banking aliases', function () {
+        var getBankingAlias;
+
+        before(function(done){
+            api.BankingAliases.getAll(bankingAlias.WalletId).then(function(data){
+                getBankingAlias = data;
+                done();
+            });
+        });
+
+        it('should be ok', function () {
+            expect(getBankingAlias).to.not.be.null;
+            expect(getBankingAlias.length).to.equal(1);
+        });
+    });
+
     describe('Deactivate the Bank Alias', function () {
         var deactivatedBankingAlias;
 
