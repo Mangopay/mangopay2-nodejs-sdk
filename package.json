@@ -26,8 +26,9 @@
   "devDependencies": {
     "chai": "4.2.x",
     "dtslint": "4.0.6",
-    "mocha": "8.2.x",
-    "sinon": "9.2.x"
+    "mocha": "^8.2.1",
+    "sinon": "9.2.x",
+    "ts-node": "^9.1.1"
   },
   "scripts": {
     "start": "npm install -g mocha && npm install -g jsdox && npm install",
