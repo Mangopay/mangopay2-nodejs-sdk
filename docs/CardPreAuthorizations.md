@@ -1,12 +1,12 @@
 # CardPreAuthorizations
 
-[MangoPay Card Pre-Authorizations API Reference](https://docs.mangopay.com/api-references/card/pre-authorization/)
+[MangoPay Card Pre-Authorizations API Reference](https://docs.mangopay.com/endpoints/v2.01/preauthorizations)
 
 
 
 * * *
 
-### CardPreAuthorizations.create(cardPreAuthorization, callback, options) 
+### CardPreAuthorizations.create(cardPreAuthorization, callback, options)
 
 Create new pre-authorization
 
@@ -21,7 +21,7 @@ Create new pre-authorization
 **Returns**: `Object`, Promise of the request
 
 
-### CardPreAuthorizations.get(cardPreAuthorizationId, callback, options) 
+### CardPreAuthorizations.get(cardPreAuthorizationId, callback, options)
 
 Get pre-authorization object
 
@@ -36,7 +36,7 @@ Get pre-authorization object
 **Returns**: `Object`, Request promise
 
 
-### CardPreAuthorizations.update(cardPreAuthorization, callback, options) 
+### CardPreAuthorizations.update(cardPreAuthorization, callback, options)
 
 Update pre-authorization object
 
@@ -53,13 +53,3 @@ Update pre-authorization object
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

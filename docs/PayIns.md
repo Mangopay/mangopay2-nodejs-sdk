@@ -1,12 +1,12 @@
 # PayIns
 
-[MangoPay PayIns API Reference](https://docs.mangopay.com/api-references/payins/payin-payment-methods/)
+[MangoPay PayIns API Reference](https://docs.mangopay.com/endpoints/v2.01/payins)
 
 
 
 * * *
 
-### PayIns.create(payIn, callback, options) 
+### PayIns.create(payIn, callback, options)
 
 Create new pay-in
 
@@ -21,7 +21,7 @@ Create new pay-in
 **Returns**: `Object`, Request promise
 
 
-### PayIns.get(payInId, callback, options) 
+### PayIns.get(payInId, callback, options)
 
 Get pay-in
 
@@ -36,7 +36,7 @@ Get pay-in
 **Returns**: `Object`, Request promise
 
 
-### PayIns.createRefund(payInId, refund, callback, options) 
+### PayIns.createRefund(payInId, refund, callback, options)
 
 Create refund for pay-in object
 
@@ -53,7 +53,7 @@ Create refund for pay-in object
 **Returns**: `Object`, Request promise
 
 
-### PayIns.getRefunds(payInId, callback, options) 
+### PayIns.getRefunds(payInId, callback, options)
 
 Gets list of Refunds for a PayIn
 
@@ -70,13 +70,3 @@ Gets list of Refunds for a PayIn
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

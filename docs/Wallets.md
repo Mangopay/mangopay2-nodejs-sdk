@@ -1,12 +1,12 @@
 # Wallets
 
-[MangoPay Wallets API Reference](https://docs.mangopay.com/api-references/wallets/)
+[MangoPay Wallets API Reference](https://docs.mangopay.com/endpoints/v2.01/wallets)
 
 
 
 * * *
 
-### Wallets.create(wallet, callback, options) 
+### Wallets.create(wallet, callback, options)
 
 Create new wallet
 
@@ -21,7 +21,7 @@ Create new wallet
 **Returns**: `Object`, Request promise
 
 
-### Wallets.get(walletId, callback, options) 
+### Wallets.get(walletId, callback, options)
 
 Get pay-in
 
@@ -36,7 +36,7 @@ Get pay-in
 **Returns**: `Object`, Request promise
 
 
-### Wallets.update(wallet, callback, options) 
+### Wallets.update(wallet, callback, options)
 
 Update wallet
 
@@ -51,7 +51,7 @@ Update wallet
 **Returns**: `Object`, Request promise
 
 
-### Wallets.getTransactions(walletId, callback, options) 
+### Wallets.getTransactions(walletId, callback, options)
 
 Get transactions for the wallet
 
@@ -68,13 +68,3 @@ Get transactions for the wallet
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

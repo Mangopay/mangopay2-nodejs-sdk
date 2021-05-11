@@ -1,12 +1,12 @@
 # Global
 
-
+[MangoPay UBO Declaration API Reference](https://docs.mangopay.com/endpoints/v2.01/ubo-declarations)
 
 
 
 * * *
 
-### create(userId, callback, options) 
+### create(userId, callback, options)
 
 Create a UBO declaration object from the API
 
@@ -20,7 +20,7 @@ Create a UBO declaration object from the API
 
 
 
-### get(userId, id, callback, options) 
+### get(userId, id, callback, options)
 
 Retrieves a UBO declaration object from the API.
 
@@ -36,7 +36,7 @@ Retrieves a UBO declaration object from the API.
 
 
 
-### getById(id, callback, options) 
+### getById(id, callback, options)
 
 Retrieves a UBO declaration object from the API.
 
@@ -50,7 +50,7 @@ Retrieves a UBO declaration object from the API.
 
 
 
-### update(userId, uboDeclaration, callback, options) 
+### update(userId, uboDeclaration, callback, options)
 
 Updates a UBO declaration entity.
 
@@ -68,13 +68,3 @@ Updates a UBO declaration entity.
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

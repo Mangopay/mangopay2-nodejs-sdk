@@ -1,12 +1,12 @@
 # PayOuts
 
-[MangoPay PayOuts API Reference](https://docs.mangopay.com/api-references/pay-out-bank-wire/)
+[MangoPay PayOuts API Reference](https://docs.mangopay.com/endpoints/v2.01/payouts)
 
 
 
 * * *
 
-### PayOuts.create(payOut, callback, options) 
+### PayOuts.create(payOut, callback, options)
 
 Create new pay-out
 
@@ -21,7 +21,7 @@ Create new pay-out
 **Returns**: `Object`, Request promise
 
 
-### PayOuts.get(payOutId, callback, options) 
+### PayOuts.get(payOutId, callback, options)
 
 Get payout
 
@@ -36,7 +36,7 @@ Get payout
 **Returns**: `Object`, Request promise
 
 
-### PayOuts.getRefunds(payOutId, callback, options) 
+### PayOuts.getRefunds(payOutId, callback, options)
 
 Gets list of Refunds of a PayOut
 
@@ -53,13 +53,3 @@ Gets list of Refunds of a PayOut
 
 
 * * *
-
-
-
-
-
-
-
-
-
-
