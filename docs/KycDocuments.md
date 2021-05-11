@@ -1,12 +1,11 @@
 # KycDocuments
 
-[MangoPay KYC Documents API Reference](https://docs.mangopay.com/api-references/kyc/documents/)
-
+[MangoPay KYC Documents API Reference](https://docs.mangopay.com/index.php/endpoints/v2.01/kyc-documents)
 
 
 * * *
 
-### KycDocuments.getAll(callback, options) 
+### KycDocuments.getAll(callback, options)
 
 Get all KycDocuments
 
@@ -19,7 +18,7 @@ Get all KycDocuments
 **Returns**: `Object`, Request promise
 
 
-### KycDocuments.get(kycDocumentId, callback, options) 
+### KycDocuments.get(kycDocumentId, callback, options)
 
 Get KycDocument
 
@@ -34,7 +33,7 @@ Get KycDocument
 **Returns**: `Object`, Request promise
 
 
-### KycDocuments.createKycDocumentConsult(documentId, callback, options) 
+### KycDocuments.createKycDocumentConsult(documentId, callback, options)
 
 Creates temporary URLs where each page of a KYC document can be viewed.
 
@@ -51,13 +50,3 @@ Creates temporary URLs where each page of a KYC document can be viewed.
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

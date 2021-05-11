@@ -22,7 +22,7 @@ Usage inside your app
 
     api.Users.create(...)
 
-Supported options 
+Supported options
 -------------------------------------------------
 | Option    | Default value | Description |
 | --------  | -----------   | ----------- |
@@ -39,7 +39,7 @@ Supported options
 Documentation
 -------------------------------------------------
 [Github Full Node.js SDK Documentation](docs/README.md) is located in ``/docs`` folder.
-You can also access [API References on our website](https://docs.mangopay.com/api-references/).
+You can also access [API References on our website](https://docs.mangopay.com/endpoints/).
 
 License
 -------------------------------------------------
@@ -127,7 +127,7 @@ Here is how they can be implemented :
 ```
 
 ### Pagination / Filtering
-In order to [paginate](https://docs.mangopay.com/api-references/pagination/) or [filter](https://docs.mangopay.com/api-references/sort-lists/) results,
+In order to [paginate or filter](https://docs.mangopay.com/guide/lists-pagination-management) results,
 we can use ``options.parameters`` to specify these options:
 ```ts
     api.Transactions.getAll({

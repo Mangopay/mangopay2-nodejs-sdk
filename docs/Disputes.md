@@ -1,12 +1,12 @@
 # Disputes
 
-[MangoPay Disputes API Reference](https://docs.mangopay.com/api-references/disputes/)
+[MangoPay Disputes API Reference](https://docs.mangopay.com/endpoints/v2.01/disputes#e176_the-dispute-object)
 
 
 
 * * *
 
-### Disputes.get(disputeId, callback, options) 
+### Disputes.get(disputeId, callback, options)
 
 Get dispute
 
@@ -21,7 +21,7 @@ Get dispute
 **Returns**: `Object`, Request promise
 
 
-### Disputes.getAll(callback, options) 
+### Disputes.getAll(callback, options)
 
 Get all disputes
 
@@ -34,7 +34,7 @@ Get all disputes
 **Returns**: `Object`, Request promise
 
 
-### Disputes.update(dispute, callback, options) 
+### Disputes.update(dispute, callback, options)
 
 Update dispute's tag
 
@@ -49,7 +49,7 @@ Update dispute's tag
 **Returns**: `Object`, Request promise
 
 
-### Disputes.contestDispute(disputeId, contestedFunds, callback, options) 
+### Disputes.contestDispute(disputeId, contestedFunds, callback, options)
 
 Contest dispute
 
@@ -66,7 +66,7 @@ Contest dispute
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.resubmitDispute(disputeId, callback, options) 
+### Disputes.resubmitDispute(disputeId, callback, options)
 
 This method is used to resubmit a Dispute if it is reopened requiring more docs
 
@@ -81,7 +81,7 @@ This method is used to resubmit a Dispute if it is reopened requiring more docs
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.closeDispute(disputeId, callback, options) 
+### Disputes.closeDispute(disputeId, callback, options)
 
 Close dispute
 
@@ -96,7 +96,7 @@ Close dispute
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.getTransactions(disputeId, callback, options) 
+### Disputes.getTransactions(disputeId, callback, options)
 
 Gets dispute's transactions
 
@@ -111,7 +111,7 @@ Gets dispute's transactions
 **Returns**: `Object`, Request promise
 
 
-### Disputes.getDisputesForWallet(walletId, callback, options) 
+### Disputes.getDisputesForWallet(walletId, callback, options)
 
 Gets dispute's documents for wallet
 
@@ -126,7 +126,7 @@ Gets dispute's documents for wallet
 **Returns**: `Object`, Request promise
 
 
-### Disputes.getDisputesForUser(userId, callback, options) 
+### Disputes.getDisputesForUser(userId, callback, options)
 
 Gets user's disputes
 
@@ -141,7 +141,7 @@ Gets user's disputes
 **Returns**: `Object`, Request promise
 
 
-### Disputes.getRepudiation(repudiationId, callback, options) 
+### Disputes.getRepudiation(repudiationId, callback, options)
 
 Gets repudiation
 
@@ -156,7 +156,7 @@ Gets repudiation
 **Returns**: `Object`, Request promise
 
 
-### Disputes.createSettlementTransfer(settlementTransfer, repudiationId, callback, options) 
+### Disputes.createSettlementTransfer(settlementTransfer, repudiationId, callback, options)
 
 Creates settlement transfer
 
@@ -173,7 +173,7 @@ Creates settlement transfer
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.getSettlementTransfer(settlementTransferId, callback, options) 
+### Disputes.getSettlementTransfer(settlementTransferId, callback, options)
 
 Gets settlement transfer
 
@@ -188,7 +188,7 @@ Gets settlement transfer
 **Returns**: `Object`, Request promise
 
 
-### Disputes.getDocumentsForDispute(disputeId, callback, options) 
+### Disputes.getDocumentsForDispute(disputeId, callback, options)
 
 Gets documents for dispute
 
@@ -203,7 +203,7 @@ Gets documents for dispute
 **Returns**: `Object`, Request promise
 
 
-### Disputes.updateDisputeDocument(disputeId, disputeDocument, callback, options) 
+### Disputes.updateDisputeDocument(disputeId, disputeDocument, callback, options)
 
 Update dispute document
 
@@ -220,7 +220,7 @@ Update dispute document
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.createDisputeDocument(disputeId, disputeDocument, callback, options) 
+### Disputes.createDisputeDocument(disputeId, disputeDocument, callback, options)
 
 Creates document for dispute
 
@@ -237,7 +237,7 @@ Creates document for dispute
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.createDisputeDocumentPage(disputeId, disputeDocumentId, disputeDocumentPage, callback, options) 
+### Disputes.createDisputeDocumentPage(disputeId, disputeDocumentId, disputeDocumentPage, callback, options)
 
 Creates document's page for dispute
 
@@ -256,7 +256,7 @@ Creates document's page for dispute
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.createDisputeDocumentPageFromFile(disputeId, disputeDocumentId, file, callback, options) 
+### Disputes.createDisputeDocumentPageFromFile(disputeId, disputeDocumentId, file, callback, options)
 
 Creates document's page for dispute from file
 
@@ -275,7 +275,7 @@ Creates document's page for dispute from file
 **Returns**: `Object`, Promise of the request
 
 
-### Disputes.getPendingSettlement(callback, options) 
+### Disputes.getPendingSettlement(callback, options)
 
 Retrieve a list of Disputes pending settlement
 
@@ -290,13 +290,3 @@ Retrieve a list of Disputes pending settlement
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

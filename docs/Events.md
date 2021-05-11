@@ -1,12 +1,12 @@
 # Events
 
-[MangoPay Events API Reference](https://docs.mangopay.com/api-references/events/)
+[MangoPay Events API Reference](https://docs.mangopay.com/endpoints/v2.01/events#e251_the-event-object)
 
 
 
 * * *
 
-### Events.getAll(callback, options) 
+### Events.getAll(callback, options)
 
 Get events
 
@@ -21,13 +21,3 @@ Get events
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

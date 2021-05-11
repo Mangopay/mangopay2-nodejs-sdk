@@ -1,12 +1,12 @@
 # Cards
 
-[MangoPay Cards API Reference](https://docs.mangopay.com/api-references/card/)
+[MangoPay Cards API Reference](https://docs.mangopay.com/endpoints/v2.01/cards#e177_the-card-registration-object)
 
 
 
 * * *
 
-### Cards.get(cardId, callback, options) 
+### Cards.get(cardId, callback, options)
 
 Get card
 
@@ -21,7 +21,7 @@ Get card
 **Returns**: `Object`, Request promise
 
 
-### Cards.getByFingerprint(fingerprint) 
+### Cards.getByFingerprint(fingerprint)
 
 Gets a list of cards having the same fingerprint.
 The fingerprint is a hash uniquely generated per 16-digit card number.
@@ -33,7 +33,7 @@ The fingerprint is a hash uniquely generated per 16-digit card number.
 **Returns**: , List of Cards corresponding to provided fingerprint
 
 
-### Cards.update(card, callback, options) 
+### Cards.update(card, callback, options)
 
 Update card
 
@@ -48,7 +48,7 @@ Update card
 **Returns**: `Object`, Request promise
 
 
-### Cards.getTransactions(cardId, callback, options) 
+### Cards.getTransactions(cardId, callback, options)
 
 Get list of Transactions of a Card
 
@@ -63,7 +63,7 @@ Get list of Transactions of a Card
 **Returns**: `object`, Request promise
 
 
-### Cards.getPreAuthorizations(cardId, callback, options) 
+### Cards.getPreAuthorizations(cardId, callback, options)
 
 Gets list of PreAuthorizations of a Card.
 
@@ -80,13 +80,3 @@ Gets list of PreAuthorizations of a Card.
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

@@ -1,12 +1,12 @@
 # Repudiations
 
-[MangoPay Repudiations API Reference](https://docs.mangopay.com/api-references/repudiations/)
+[MangoPay Repudiations API Reference](https://docs.mangopay.com/endpoints/v2.01/repudiations)
 
 
 
 * * *
 
-### Repudiations.getRefunds(repudiationId, callback, options) 
+### Repudiations.getRefunds(repudiationId, callback, options)
 
 Gets list of Refunds of a Repudiation
 
@@ -23,13 +23,3 @@ Gets list of Refunds of a Repudiation
 
 
 * * *
-
-
-
-
-
-
-
-
-
-

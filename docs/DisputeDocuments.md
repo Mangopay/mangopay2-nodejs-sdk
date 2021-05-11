@@ -1,12 +1,12 @@
 # DisputeDocuments
 
-[MangoPay Dispute Documents API Reference](https://docs.mangopay.com/api-references/disputes/dispute-documents/)
+[MangoPay Dispute Documents API Reference](https://docs.mangopay.com/endpoints/v2/dispute-documents#e214_the-dispute-document-object)
 
 
 
 * * *
 
-### DisputeDocuments.get(documentId, callback, options) 
+### DisputeDocuments.get(documentId, callback, options)
 
 Gets dispute's document
 
@@ -21,7 +21,7 @@ Gets dispute's document
 **Returns**: `Object`, Request promise
 
 
-### DisputeDocuments.getAll(callback, options) 
+### DisputeDocuments.getAll(callback, options)
 
 Gets dispute's documents for client
 
@@ -34,7 +34,7 @@ Gets dispute's documents for client
 **Returns**: `Object`, Request promise
 
 
-### DisputeDocuments.createDisputeDocumentConsult(documentId, callback, options) 
+### DisputeDocuments.createDisputeDocumentConsult(documentId, callback, options)
 
 Creates temporary URLs where each page of a dispute document can be viewed.
 
@@ -51,13 +51,3 @@ Creates temporary URLs where each page of a dispute document can be viewed.
 
 
 * * *
-
-
-
-
-
-
-
-
-
-
