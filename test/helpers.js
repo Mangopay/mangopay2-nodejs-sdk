@@ -222,7 +222,8 @@ module.exports = {
                     },
                     BankAccountId: data.Id,
                     BankWireRef: 'User payment',
-                    PaymentType: 'BANK_WIRE'
+                    PaymentType: 'BANK_WIRE',
+                    PayoutModeRequested: 'STANDARD'
                 };
                 api.PayOuts.create(payOut, callback);
             });

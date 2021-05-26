@@ -41,6 +41,24 @@ describe('PayOuts', function() {
             expect(payOut.Status).to.equal('FAILED');
             expect(payOut.ExecutionDate).to.be.null;
         });
+
+        describe('Get Bankwire', function() {
+            var getBankwire;
+
+            before(function(done){
+                api.PayOuts.getBankwire(payOut.Id, function(data, response){
+                    getBankwire = data;
+                    done();
+                });
+            });
+
+            it('should be fetched', function(){
+                expect(payOut.Id).to.equal(getPayOut.Id);
+                expect(payOut.Status).to.equal('FAILED');
+                expect(payOut.ExecutionDate).to.be.null;
+                expect(payOut.ModeRequested).to.equal('STANDARD');
+            });
+        });
     });
 
     describe('Get Refunds', function() {
