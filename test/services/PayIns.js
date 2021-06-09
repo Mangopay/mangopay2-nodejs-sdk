@@ -574,4 +574,110 @@ describe('PayIns', function () {
             });
         });
     });
+
+    describe('Recurring Payments', function() {
+        var cardId;
+        var walletId;
+        before('Create a wallet with money and a card', function(done){
+            wallet = {
+                Owners: [john.Id],
+                Currency: 'EUR',
+                Description: 'WALLET IN EUR'
+            };
+            cardRegistration = {
+                UserId: john.Id,
+                Currency: 'EUR'
+            };
+            api.Wallets.create(wallet).then(function(){
+                api.CardRegistrations.create(cardRegistration, function() {
+                    helpers.getPaylineCorrectRegistartionData(cardRegistration, function(data, response){
+                        cardRegistration.RegistrationData = data;
+                        api.CardRegistrations.update(cardRegistration).then(function(data){
+                            updatedCardRegistration = data;
+                            cardId = updatedCardRegistration.CardId;
+                            walletId = wallet.Id;
+                        });
+                        api.Cards.get(cardRegistration.CardId, function(data, response) {
+                            card = data;
+                            api.PayIns.create({
+                                CreditedWalletId: wallet.Id,
+                                AuthorId: john.Id,
+                                DebitedFunds: {
+                                    Amount: 10000,
+                                    Currency: 'EUR'
+                                },
+                                Fees: {
+                                    Amount: 0,
+                                    Currency: 'EUR'
+                                },
+                                CardId: card.Id,
+                                SecureMode: 'DEFAULT',
+                                SecureModeReturnURL: 'https://test.com',
+                                PaymentType: 'CARD',
+                                ExecutionType: 'DIRECT'
+                            }, function(data, response) {
+                                done();
+                            })
+                        })
+                    })
+                })
+            })
+        });
+
+        describe('Create a Recurring Payment', function() {
+            var recurringPayin;
+            before(function(done){
+                console.log('CardId: ' + cardId);
+                console.log("WalletId: "+ walletId);
+                recurringPayin = {
+                    AuthorId: john.Id,
+                    CardId: cardId,
+                    CreditedUserId: john.Id,
+                    CreditedWalletId: walletId,
+                    FirstTransactionDebitedFunds: {
+                        Amount: 10,
+                        Currency: 'EUR'
+                    },
+                    FirstTransactionFees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    Billing: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    Shipping: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    }
+                };
+
+                api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
+                    recurringPayin = data;
+                    done();
+                })
+            })
+
+            it('should be created', function() {
+                console.log(JSON.stringify(recurringPayin));
+                expect(recurringPayin).to.not.be.null;
+            })
+        })
+    });
 });
