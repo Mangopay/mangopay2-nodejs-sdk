@@ -79,6 +79,7 @@ describe('Card Registrations', function () {
         });
 
         it('should be updated', function () {
+            console.log(JSON.stringify(updatedCardRegistration));
             expect(updatedCardRegistration.RegistrationData).to.equal(newRegistrationData);
             expect(updatedCardRegistration.Status).to.equal('VALIDATED');
             expect(updatedCardRegistration.ResultCode).to.equal('000000');
