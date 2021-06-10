@@ -299,6 +299,26 @@ module.exports = {
         }, options);
     },
 
+    getPaylineCorrectRegistartionData3DSecure: function(cardRegistration, callback) {
+        var options = {
+            data: {
+                data: cardRegistration.PreregistrationData,
+                accessKeyRef: cardRegistration.AccessKey,
+                cardNumber: '4970105191923460',
+                cardExpirationDate: '1224',
+                cardCvx: '123'
+            },
+            url: cardRegistration.CardRegistrationURL,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+
+        return api.method('post', function (data, response) {
+            callback(Buffer.from(data).toString(), response);
+        }, options);
+    },
+
     getNewPayInCardWebWithIdempotencyKey: function(api, user, idempotencyKey, callback) {
         var options = api.OptionsHelper.withIdempotency({}, idempotencyKey);
         var wallet = {
