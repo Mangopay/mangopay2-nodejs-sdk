@@ -1,3 +1,16 @@
+## [1.19.0] - 2021-06-10
+## Added 
+
+We have added a new feature **[recurring payments](https://docs.mangopay.com/guide/recurring-payments)** dedicated to clients needing to charge a card repeatedly, such as subscriptions or payments installments. 
+
+You can start testing in sandbox, to help you define your workflow. This release provides the first elements of the full feature.
+
+- [Create a Recurring PayIn Registration object](https://docs.mangopay.com/endpoints/v2.01/payins#e1051_create-a-recurring-payin-registration), containing all the information to define the recurring payment
+- [Initiate your recurring payment flow](https://docs.mangopay.com/endpoints/v2.01/payins#e1053_create-a-recurring-payin-cit) with an authenticated transaction (CIT) using the Card Recurring PayIn endpoint
+- [Continue your recurring payment flow](https://docs.mangopay.com/endpoints/v2.01/payins#e1054_create-a-recurring-payin-mit) with an non-authenticated transaction (MIT) using the Card Recurring PayIn endpoint
+
+This feature is not yet available in production and you need to contact the Support team to request access.
+
 ## [1.18.0] - 2021-05-27
 ## Added 
 
