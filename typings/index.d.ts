@@ -3594,7 +3594,7 @@ declare namespace MangoPay {
      * @param bankAccountId
      * @param options
      */
-    deactivateBankAccount: TwoArgsMethodOverload<string, string, void>;
+    deactivateBankAccount: TwoArgsMethodOverload<string, string, bankAccount.Data>;
 
     /**
      * Get all bank accounts for user
