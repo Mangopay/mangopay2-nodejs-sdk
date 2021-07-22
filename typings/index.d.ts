@@ -95,6 +95,18 @@ declare namespace MangoPay {
     AVSResult: AVSResult;
   }
 
+  interface BrowserInfoData {
+    AcceptHeader: string;
+    JavaEnabled: boolean;
+    Language: string;
+    ColorDepth: number;
+    ScreenHeight: number;
+    ScreehWidth: number;
+    JavascriptEnabled: boolean;
+    TimeZoneOffset: string;
+    UserAgent: string;
+  }
+
   interface MoneyData {
     /**
      * The currency - should be ISO_4217 format
@@ -2733,6 +2745,13 @@ declare namespace MangoPay {
        * See here for important info. Note that each bank handles this information differently, some show less or no information.
        */
       StatementDescriptor?: string;
+
+      /**
+       * The ip address
+       */
+      IpAddress?: string;
+
+      BrowserInfo?: BrowserInfoData;
     }
 
     interface CardPreAuthorizedPayInData extends BasePayInData {
