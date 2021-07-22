@@ -10,3 +10,6 @@ node_modules
 .vs/
 
 Folder.DotSettings.user
+
+## Removed the package-lock as it should be auto generated
+package-lock.json
