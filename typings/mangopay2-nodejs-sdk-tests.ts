@@ -170,7 +170,7 @@ api.Users.getBankAccounts("user-id").then(data => {
 });
 
 api.Users.deactivateBankAccount("user-id", "bankAccount-id").then(data => {
-  const d = data; // $ExpectType void
+  const d = data; // $ExpectType Data
 });
 
 api.Users.getTransactions("user-id").then(data => {
