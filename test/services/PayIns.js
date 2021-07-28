@@ -688,7 +688,15 @@ describe('PayIns', function () {
                         IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
                         SecureModeReturnURL: "http://www.my-site.com/returnurl",
                         StatementDescriptor: "lorem",
-                        Tag: "custom meta"
+                        Tag: "custom meta",
+                        DebitedFunds: {
+                            Amount: 10,
+                            Currency: 'EUR'
+                        },
+                        Fees: {
+                            Amount: 1,
+                            Currency: 'EUR'
+                        },
                     };
         
                     api.PayIns.createRecurringPayInRegistrationCIT(cit, function(data, response){
