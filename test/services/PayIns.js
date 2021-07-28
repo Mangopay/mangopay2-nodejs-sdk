@@ -761,10 +761,41 @@ describe('PayIns', function () {
                 }).then(function(){
                     console.log('RegistrationId: ' + recurring.Id);        
                     api.PayIns.getRecurringPayin(recurring.Id, function (data, response) {
-                        console.log(JSON.stringify(data));
                         getRecurring = data;
-                        done()
-                    });
+                    }).then(function(){
+                        updateObj = {
+                            Billing: {
+                                FirstName: 'TEST',
+                                LastName: 'TEST',
+                                Address: {
+                                    AddressLine1: '1 MangoPay Street',
+                                    AddressLine2: 'The Loop',
+                                    City: 'Paris',
+                                    Region: 'Ile de France',
+                                    PostalCode: '75001',
+                                    Country: 'FR'
+                                }
+                            },
+                            Shipping: {
+                                FirstName: 'TEST',
+                                LastName: 'TEST',
+                                Address: {
+                                    AddressLine1: '1 MangoPay Street',
+                                    AddressLine2: 'The Loop',
+                                    City: 'Paris',
+                                    Region: 'Ile de France',
+                                    PostalCode: '75001',
+                                    Country: 'FR'
+                                }
+                            }
+                        };
+
+                        api.PayIns.updateRecurringPayin(recurring.Id, updateObj, function (data, response) {
+                            console.log(JSON.stringify(data));
+                            updateRec = data;
+                            done();
+                        });
+                    })
                 })
             })
 
