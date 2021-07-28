@@ -711,5 +711,66 @@ describe('PayIns', function () {
                 expect(createCit).to.not.be.null;
             })
         })
+    
+        describe('Get Recurring Payment', function () {
+            var recurring;
+            before(function(done){
+                console.log('CardId: ' + cardId);
+                console.log("WalletId: "+ walletId);
+                recurringPayin = {
+                    AuthorId: john.Id,
+                    CardId: cardId,
+                    CreditedUserId: john.Id,
+                    CreditedWalletId: walletId,
+                    FirstTransactionDebitedFunds: {
+                        Amount: 10,
+                        Currency: 'EUR'
+                    },
+                    FirstTransactionFees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    Billing: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    Shipping: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    }
+                };
+
+                api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
+                    recurring = data;
+                }).then(function(){
+                    console.log('RegistrationId: ' + recurring.Id);        
+                    api.PayIns.getRecurringPayin(recurring.Id, function (data, response) {
+                        console.log(JSON.stringify(data));
+                        getRecurring = data;
+                        done()
+                    });
+                })
+            })
+
+            it('should get the RecurringPayin', function () {
+                expect(getRecurring.Id).not.to.be.undefined;
+            });
+        });
     });
 });
