@@ -1,3 +1,77 @@
+## [1.20.0] - 2021-08-04
+## Fixed 
+
+- We have added BrowserInfo for CreateCardDirectPayIn 
+- We have fix a bug with DeactivateBankAccount (missing return data)
+
+## Added
+
+- You can now update and view a Recurring PayIn Registration object. To know more about this feature, please consult the documentation [here](https://docs.mangopay.com/guide/recurring-payments-introduction). 
+- To improve recurring payments, we have added new parameters for CIT : DebitedFunds & Fees. To know more about this feature, please consult the documentation [here](https://docs.mangopay.com/endpoints/v2.01/payins#e1053_create-a-recurring-payin-cit)
+
+## [1.19.0] - 2021-06-10
+## Added 
+
+We have added a new feature **[recurring payments](https://docs.mangopay.com/guide/recurring-payments)** dedicated to clients needing to charge a card repeatedly, such as subscriptions or payments installments. 
+
+You can start testing in sandbox, to help you define your workflow. This release provides the first elements of the full feature.
+
+- [Create a Recurring PayIn Registration object](https://docs.mangopay.com/endpoints/v2.01/payins#e1051_create-a-recurring-payin-registration), containing all the information to define the recurring payment
+- [Initiate your recurring payment flow](https://docs.mangopay.com/endpoints/v2.01/payins#e1053_create-a-recurring-payin-cit) with an authenticated transaction (CIT) using the Card Recurring PayIn endpoint
+- [Continue your recurring payment flow](https://docs.mangopay.com/endpoints/v2.01/payins#e1054_create-a-recurring-payin-mit) with an non-authenticated transaction (MIT) using the Card Recurring PayIn endpoint
+
+This feature is not yet available in production and you need to contact the Support team to request access.
+
+## [1.18.0] - 2021-05-27
+## Added 
+
+Mangopay introduces the instant payment mode. It allows payouts (transfer from wallet to user bank account) to be processed within 25 seconds, rather than the 48 hours for a standard payout.
+
+You can now use this new type of payout with the NodeJS SDK.
+
+Example :
+
+```javascript
+let payoutData = api.PayOuts.getBankwire(payOut.Id);
+// where payOut.Id is the id of an existing payout
+```
+
+Please note that this feature must be authorized and activated by MANGOPAY. More information [here](https://docs.mangopay.com/guide/instant-payment-payout).
+
+## [1.17.0] - 2021-05-11
+## Fixed 
+
+### IBAN for testing purposes
+
+⚠️ **IBAN provided for testing purpose should never be used outside of a testing environement!**
+
+- Fix `BankAccount` IBAN reference for tests
+
+More information about how to test payments, click [here](https://docs.mangopay.com/guide/testing-payments).
+
+### BankingAlias
+
+The SDK was calling the endpoint using a deprecated format. It has been fixed.
+
+## Added 
+
+### New events for PreAuthorization
+
+Some of you use a lot the [PreAuthorization](https://docs.mangopay.com/endpoints/v2.01/preauthorizations#e183_the-preauthorization-object) feature of our API. To make your life easier, we have added three new events :
+
+- PREAUTHORIZATION_CREATED
+- PREAUTHORIZATION_SUCCEEDED
+- PREAUTHORIZATION_FAILED
+
+The goal is to help you monitor a PreAuthorization with a [webhook](https://docs.mangopay.com/endpoints/v2.01/hooks#e246_the-hook-object).
+
+*Example: If a PreAuthorization is desynchronized, when the status is updated, you will be able to know it.*
+
+### Models and services are preloaded from predefined lists
+
+Thanks to @jgautheron, the SDK is now compatible with bundlers (Webpack, etc...) and avoid i/o at runtime.
+
+ 
 ## [1.16.0] - 2021-03-25
 ## Added
 
