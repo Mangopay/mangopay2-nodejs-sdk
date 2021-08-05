@@ -107,6 +107,11 @@ declare namespace MangoPay {
     UserAgent: string;
   }
 
+  interface FallbackResonData {
+    Code: string;
+    Message: string;
+  }
+
   interface MoneyData {
     /**
      * The currency - should be ISO_4217 format
