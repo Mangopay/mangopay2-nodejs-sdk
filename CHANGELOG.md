@@ -1,3 +1,9 @@
+## [1.20.1] - 2021-08-05
+## Fixed 
+
+- Change `FallbackReason` parameter's type to object in PayOutPaymentDetailsBankWire  
+
+
 ## [1.20.0] - 2021-08-04
 ## Fixed 
 
