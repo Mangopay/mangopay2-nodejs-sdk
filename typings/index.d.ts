@@ -101,7 +101,7 @@ declare namespace MangoPay {
     Language: string;
     ColorDepth: number;
     ScreenHeight: number;
-    ScreehWidth: number;
+    ScreenWidth: number;
     JavascriptEnabled: boolean;
     TimeZoneOffset: string;
     UserAgent: string;
