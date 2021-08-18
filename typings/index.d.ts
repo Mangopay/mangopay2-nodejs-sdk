@@ -1661,7 +1661,7 @@ declare namespace MangoPay {
   }
 
   namespace birthplace {
-    interface Birthplace extends entityBase.EntityBaseData {
+    interface Birthplace {
       City: string;
       Country: CountryISO;
     }

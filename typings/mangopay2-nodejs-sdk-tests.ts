@@ -269,7 +269,11 @@ api.UboDeclarations.createUbo("userId", "uboDeclarationId", {
   Birthday: 1300186358,
   FirstName: "John",
   LastName: "Silver",
-  Nationality: "US"
+  Nationality: "US",
+  Birthplace: {
+    City: "Brasov",
+    Country: "RO"
+  }
 }).then(data => {
   const d = data; // $ExpectType UboData
 });
