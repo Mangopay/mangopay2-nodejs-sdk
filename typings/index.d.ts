@@ -1641,6 +1641,7 @@ declare namespace MangoPay {
       Address: address.AddressType;
       Nationality: string;
       Birthday: Timestamp;
+      Birthplace: birthplace.Birthplace;
     }
 
     interface CreateUboDeclaration {
