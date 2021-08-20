@@ -83,7 +83,7 @@ declare namespace MangoPay {
     | "ADDRESS_MATCH_ONLY"
     | "POSTAL_CODE_MATCH_ONLY"
     | "FULL_MATCH";
-  type SecureMode = "DEFAULT" | "FORCE";
+  type SecureMode = "DEFAULT" | "FORCE" | "NO_CHOICE";
   type PreAuthorizationExecutionType = "DIRECT";
   type PaymentStatus = "WAITING" | "CANCELED" | "EXPIRED" | "VALIDATED";
   type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
