@@ -3142,6 +3142,7 @@ declare namespace MangoPay {
       | "TRANSFER_REFUND_SUCCEEDED"
       | "TRANSFER_REFUND_FAILED"
       | "KYC_CREATED"
+      | "KYC_OUTDATED"
       | "KYC_VALIDATION_ASKED"
       | "KYC_SUCCEEDED"
       | "KYC_FAILED"
