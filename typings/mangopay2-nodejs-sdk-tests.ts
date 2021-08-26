@@ -437,6 +437,21 @@ api.PayIns.create({
   const d = data; // $ExpectType BankWireDirectPayInData
 });
 
+// create Payconiq PayIn
+api.PayIns.create({
+  PaymentType: "PAYCONIQ",
+  ExecutionType: "WEB",
+  Tag: "custom meta",
+  AuthorId: "user-id",
+  CreditedWalletId: "wallet-id",
+  DebitedFunds: { Amount: 500, Currency: "GBP" },
+  Fees: { Amount: 500, Currency: "GBP" },
+  ReturnURL: "http://www.my-site.com/returnURL",
+  Country: "BE"
+}).then(data => {
+  const d = data; // $ExpectType PayconiqWebPayInData
+});
+
 api.PayIns.get("payin-id").then(data => {
   const d = data; // $ExpectType PayInData
 });

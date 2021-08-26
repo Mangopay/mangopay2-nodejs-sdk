@@ -62,6 +62,7 @@ export type ApiMethod =
   | "payins_createrefunds"
   | "payins_applepay-direct_create"
   | "payins_googlepay-direct_create"
+    | "payins_payconiq-web_create"
   | "payouts_bankwire_create"
   | "payouts_bankwire_get"
   | "payouts_get"
