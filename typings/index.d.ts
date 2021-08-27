@@ -2971,7 +2971,7 @@ declare namespace MangoPay {
 
       EndDate?: Timestamp;
 
-      Frequency?: string;
+      Frequency?: number;
 
       FixedNextAmount?: boolean;
 
@@ -3038,7 +3038,7 @@ declare namespace MangoPay {
 
       BrowserInfo: BrowserInfoData;
 
-      IpAddress: String;
+      IpAddress: string;
 
       Billing: BillingOrShippingRecurringPayInData;
 
@@ -4266,12 +4266,25 @@ declare namespace MangoPay {
      */
     getRefunds: MethodOverload<string, refund.RefundData[]>;
 
+    /**
+     * Get Recurring PayIn
+     * @param payInId
+     */
     getRecurringPayin: MethodOverload<string, payIn.PayInRecurringRegistrationData>;
 
+    /**
+     * Update Recurring PayIn
+     * @param payInId
+     * @param updateData
+     */
     updateRecurringPayin: TwoArgsMethodOverload<string,
         payIn.UpdatePayInRecurringRegistration,
         payIn.PayInRecurringRegistrationData>;
 
+    /**
+     * Create Recurring PayIn
+     * @param createData
+     */
     createRecurringPayment: MethodOverload<payIn.CreatePayInRecurringRegistration,
         payIn.PayInRecurringRegistrationData>;
 
