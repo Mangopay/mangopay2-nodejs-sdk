@@ -1641,6 +1641,7 @@ declare namespace MangoPay {
       Address: address.AddressType;
       Nationality: string;
       Birthday: Timestamp;
+      Birthplace: birthplace.Birthplace;
     }
 
     interface CreateUboDeclaration {
@@ -1660,7 +1661,7 @@ declare namespace MangoPay {
   }
 
   namespace birthplace {
-    interface Birthplace extends entityBase.EntityBaseData {
+    interface Birthplace {
       City: string;
       Country: CountryISO;
     }
