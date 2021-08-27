@@ -457,6 +457,107 @@ api.PayIns.getRefunds("payin-id").then(data => {
   const d = data; // $ExpectType RefundData[]
 });
 
+api.PayIns.createRecurringPayment({
+  AuthorId: "author-id",
+  CardId: "card-id",
+  CreditedUserId: "credited-user-id",
+  CreditedWalletId: "credited-wallet-id",
+  FirstTransactionDebitedFunds: {Amount: 10000, Currency: "EUR"},
+  FirstTransactionFees: {Amount: 10000, Currency: "EUR"},
+  Billing: {
+    FirstName: "FN", LastName: "LN", Address: {
+      AddressLine1: "20 T Street",
+      AddressLine2: "",
+      City: "London",
+      Country: "AD",
+      PostalCode: "FR43 2WE",
+      Region: "London"
+    }
+  },
+  Shipping: {
+    FirstName: "FN", LastName: "LN", Address: {
+      AddressLine1: "20 T Street",
+      AddressLine2: "",
+      City: "London",
+      Country: "AD",
+      PostalCode: "FR43 2WE",
+      Region: "London"
+    }
+  },
+  EndDate: 1234,
+  Frequency: 10,
+  FixedNextAmount: false,
+  FractionedPayment: false,
+  Migration: false,
+  NextTransactionDebitedFunds: {Amount: 10000, Currency: "EUR"},
+  NextTransactionFees: {Amount: 10000, Currency: "EUR"}
+}).then(data => {
+  const d = data; // $ExpectType PayInRecurringRegistrationData
+});
+
+api.PayIns.getRecurringPayin("payin-id").then(data => {
+  const d = data; // $ExpectType PayInRecurringRegistrationData
+});
+
+api.PayIns.updateRecurringPayin("payin-id", {
+  CardId: "card-id",
+  Billing: {
+    FirstName: "FN", LastName: "LN", Address: {
+      AddressLine1: "20 T Street",
+      AddressLine2: "",
+      City: "London",
+      Country: "AD",
+      PostalCode: "FR43 2WE",
+      Region: "London"
+    }
+  },
+  Shipping: {
+    FirstName: "FN", LastName: "LN", Address: {
+      AddressLine1: "20 T Street",
+      AddressLine2: "",
+      City: "London",
+      Country: "AD",
+      PostalCode: "FR43 2WE",
+      Region: "London"
+    }
+  }
+}).then(data => {
+  const d = data; // $ExpectType PayInRecurringRegistrationData
+});
+
+api.PayIns.createRecurringPayInRegistrationCIT({
+  RecurringPayinRegistrationId: "recurring-payin-reg-id",
+  BrowserInfo: {
+    AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+    ColorDepth: 4,
+    JavaEnabled: true,
+    JavascriptEnabled: true,
+    Language: 'FR-FR',
+    ScreenHeight: 1800,
+    ScreenWidth: 400,
+    TimeZoneOffset: "+60",
+    UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+  },
+  IpAddress: "1234",
+  SecureModeReturnURL: "http://www.my-site.com/returnURL",
+  DebitedFunds: {Amount: 100, Currency: "EUR"},
+  Fees: {Amount: 100, Currency: "EUR"},
+  StatementDescriptor: "lorem",
+  Tag: "custom meta"
+}).then(data => {
+  const d = data; // $ExpectType RecurringPayInData
+});
+
+api.PayIns.createRecurringPayInRegistrationMIT({
+  RecurringPayinRegistrationId: "recurring-payin-reg-id",
+  DebitedFunds: {Amount: 100, Currency: "EUR"},
+  Fees: {Amount: 100, Currency: "EUR"},
+  StatementDescriptor: "lorem",
+  Tag: "custom meta"
+}).then(data => {
+  const d = data; // $ExpectType RecurringPayInData
+});
+
 /* Clients */
 api.Clients.get().then(data => {
   const d = data; // $ExpectType ClientData
