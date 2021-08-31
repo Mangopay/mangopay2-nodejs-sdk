@@ -2772,6 +2772,31 @@ declare namespace MangoPay {
       BrowserInfo?: BrowserInfoData;
     }
 
+    interface DirectDebitDirectPayInData extends BasePayInData {
+      ChargeDate: Timestamp;
+
+      MandateId: string;
+    }
+
+    interface CreateDirectDebitDirectPayIn {
+      ExecutionType: "DIRECT";
+      PaymentType: "DIRECT_DEBIT";
+
+      AuthorId: string;
+
+      CreditedUserId?: string;
+
+      CreditedWalletId: string;
+
+      DebitedFunds: MoneyData;
+
+      Fees: MoneyData;
+
+      MandateId: string;
+
+      StatementDescriptor?: string;
+    }
+
     interface CardPreAuthorizedPayInData extends BasePayInData {
       PreauthorizationId: string;
       ExecutionType: "DIRECT";
@@ -3086,7 +3111,8 @@ declare namespace MangoPay {
       | CardDirectPayInData
       | CardPreAuthorizedPayInData
       | CardWebPayInData
-      | BankWireDirectPayInData;
+      | BankWireDirectPayInData
+      | DirectDebitDirectPayInData;
   }
 
   namespace refund {
@@ -4240,7 +4266,11 @@ declare namespace MangoPay {
       MethodOverload<
         payIn.CreateBankWireDirectPayIn,
         payIn.BankWireDirectPayInData
-      >;
+      > &
+        MethodOverload<
+            payIn.CreateDirectDebitDirectPayIn,
+            payIn.DirectDebitDirectPayInData
+            >;
 
     /**
      * Get pay-in

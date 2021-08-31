@@ -445,6 +445,20 @@ api.PayIns.create({
   const d = data; // $ExpectType BankWireDirectPayInData
 });
 
+api.PayIns.create({
+  PaymentType: "DIRECT_DEBIT",
+  ExecutionType: "DIRECT",
+  AuthorId: "user-id",
+  CreditedUserId: "user-id",
+  CreditedWalletId: "wallet-id",
+  Fees: { Amount: 100, Currency: "GBP" },
+  DebitedFunds: { Amount: 2000, Currency: "GBP" },
+  StatementDescriptor: "placeholder",
+  MandateId: "mandate-id"
+}).then(data => {
+  const d = data; // $ExpectType DirectDebitDirectPayInData
+});
+
 api.PayIns.get("payin-id").then(data => {
   const d = data; // $ExpectType PayInData
 });
