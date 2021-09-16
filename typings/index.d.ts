@@ -1906,12 +1906,16 @@ declare namespace MangoPay {
        * Contains useful information related to security and fraud
        */
       SecurityInfo: SecurityInfoData;
+
+      IpAddress: string;
+
+      BrowserInfo: BrowserInfoData;
     }
 
     type CreateCardPreAuthorization = PickPartialRequired<
       CardPreAuthorizationData,
       "Tag" | "Billing" | "SecureMode",
-      "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL"
+      "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo"
     >;
     type UpdateCardPreAuthorization = PickPartialRequired<
       CardPreAuthorizationData,
