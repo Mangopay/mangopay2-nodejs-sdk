@@ -843,8 +843,6 @@ describe('PayIns', function () {
 
         describe('Create', function () {
             it('should create the PayIn', function () {
-                console.log("created payconiq:");
-                console.log(payIn);
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.PaymentType).to.equal('PAYCONIQ');
                 expect(payIn.ExecutionType).to.equal('WEB');
