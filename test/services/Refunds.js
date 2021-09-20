@@ -33,7 +33,7 @@ describe('Refunds', function() {
                                     CreditedWalletId: wallet.Id,
                                     AuthorId: john.Id,
                                     DebitedFunds: {
-                                        Amount: 10000,
+                                        Amount: 100,
                                         Currency: 'EUR'
                                     },
                                     Fees: {
