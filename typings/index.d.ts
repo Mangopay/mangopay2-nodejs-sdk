@@ -83,12 +83,22 @@ declare namespace MangoPay {
     | "ADDRESS_MATCH_ONLY"
     | "POSTAL_CODE_MATCH_ONLY"
     | "FULL_MATCH";
-  type SecureMode = "DEFAULT" | "FORCE";
+  type SecureMode = "DEFAULT" | "FORCE" | "NO_CHOICE";
   type PreAuthorizationExecutionType = "DIRECT";
   type PaymentStatus = "WAITING" | "CANCELED" | "EXPIRED" | "VALIDATED";
   type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
+  type _3DSVersion = "V1" | "V2_1";
+
   interface BillingData {
     Address: models.Address | address.AddressData | string;
+  }
+
+  interface BillingOrShippingRecurringPayInData {
+    FirstName: string;
+
+    LastName: string;
+
+    Address: address.AddressData;
   }
 
   interface SecurityInfoData {
@@ -1646,6 +1656,7 @@ declare namespace MangoPay {
       Address: address.AddressType;
       Nationality: string;
       Birthday: Timestamp;
+      Birthplace: birthplace.Birthplace;
     }
 
     interface CreateUboDeclaration {
@@ -1665,7 +1676,7 @@ declare namespace MangoPay {
   }
 
   namespace birthplace {
-    interface Birthplace extends entityBase.EntityBaseData {
+    interface Birthplace {
       City: string;
       Country: CountryISO;
     }
@@ -2465,6 +2476,8 @@ declare namespace MangoPay {
       | ValueOf<IPayInExecutionType>
       | "EXTERNAL_INSTRUCTION";
 
+    type RecurringType = "CLASSIC_SUBSCRIPTION" | "FRACTIONED_PAYMENT" | "CUSTOM";
+
     interface TemplateURLOptions {
       Payline: string;
       PAYLINEV2: string;
@@ -2876,6 +2889,204 @@ declare namespace MangoPay {
       PaymentType: "BANK_WIRE";
     }
 
+    interface PayInRecurringRegistrationState {
+      PayinsLinked: number;
+
+      CumulatedDebitedAmount: MoneyData;
+
+      CumulatedFeesAmount: MoneyData;
+
+      LastPayinId: number;
+    }
+
+    interface PayInRecurringRegistrationData extends entityBase.EntityBaseData {
+      /**
+       * The status of the transaction
+       */
+      Status: transaction.TransactionStatus;
+
+      CurrentState: PayInRecurringRegistrationState;
+
+      RecurringType: RecurringType;
+
+      TotalAmount: number;
+
+      CycleNumber: number;
+
+      /**
+       * A user's ID
+       */
+      AuthorId: string;
+
+      /**
+       * The ID of a card
+       */
+      CardId: string;
+
+      /**
+       * The user ID who is credited (defaults to the owner of the wallet)
+       */
+      CreditedUserId: string;
+
+      /**
+       * The ID of the wallet where money will be credited
+       */
+      CreditedWalletId: string;
+
+      Billing: BillingOrShippingRecurringPayInData;
+
+      Shipping: BillingOrShippingRecurringPayInData;
+
+      EndDate: Timestamp;
+
+      Frequency: string;
+
+      FixedNextAmount: boolean;
+
+      FractionedPayment: boolean;
+
+      FreeCycles: number;
+
+      FirstTransactionDebitedFunds: MoneyData;
+
+      FirstTransactionFees: MoneyData;
+
+      NextTransactionDebitedFunds: MoneyData;
+
+      NextTransactionFees: MoneyData;
+
+      Migration: boolean;
+    }
+
+    interface CreatePayInRecurringRegistration {
+      AuthorId: string;
+
+      CardId: string;
+
+      CreditedUserId?: string;
+
+      CreditedWalletId: string;
+
+      FirstTransactionDebitedFunds: MoneyData;
+
+      FirstTransactionFees: MoneyData;
+
+      Billing?: BillingOrShippingRecurringPayInData;
+
+      Shipping?: BillingOrShippingRecurringPayInData;
+
+      EndDate?: Timestamp;
+
+      Frequency?: number;
+
+      FixedNextAmount?: boolean;
+
+      FractionedPayment?: boolean;
+
+      Migration?: boolean;
+
+      NextTransactionDebitedFunds?: MoneyData;
+
+      NextTransactionFees?: MoneyData;
+    }
+
+    interface UpdatePayInRecurringRegistration {
+      CardId?: string;
+
+      Billing?: BillingOrShippingRecurringPayInData;
+
+      Shipping?: BillingOrShippingRecurringPayInData;
+    }
+
+    interface RecurringPayInData extends BasePayInData {
+      /**
+       * The SecureMode corresponds to '3D secure' for CB Visa and MasterCard. This field lets you activate it manually.
+       * The field lets you activate it automatically with "DEFAULT" (Secured Mode will be activated from €50 or when MANGOPAY detects there is a higher risk ),
+       * "FORCE" (if you wish to specifically force the secured mode).
+       */
+      SecureMode: SecureMode;
+
+      /**
+       * The ID of a card
+       */
+      CardId: string;
+
+      /**
+       * The value is 'true' if the SecureMode was used
+       */
+      SecureModeNeeded: boolean;
+
+      /**
+       * This is the URL where to redirect users to proceed to 3D secure validation
+       */
+      SecureModeRedirectURL: string;
+
+      /**
+       * This is the URL where users are automatically redirected after 3D secure validation (if activated)
+       */
+      SecureModeReturnURL: string;
+
+      /**
+       * The language to use for the payment page - needs to be the ISO code of the language
+       */
+      Culture: CountryISO;
+
+      /**
+       * Contains useful information related to security and fraud
+       */
+      SecurityInfo: SecurityInfoData;
+
+      /**
+       * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+       * See here for important info. Note that each bank handles this information differently, some show less or no information.
+       */
+      StatementDescriptor: string;
+
+      BrowserInfo: BrowserInfoData;
+
+      IpAddress: string;
+
+      Billing: BillingOrShippingRecurringPayInData;
+
+      Shipping: BillingOrShippingRecurringPayInData;
+
+      Requested3DSVersion: _3DSVersion;
+
+      Applied3DSVersion: _3DSVersion;
+
+      RecurringPayinRegistrationId: string;
+    }
+
+    interface CreateRecurringPayInCIT {
+      RecurringPayinRegistrationId: string;
+
+      BrowserInfo: BrowserInfoData;
+
+      IpAddress: string;
+
+      SecureModeReturnURL: string;
+
+      StatementDescriptor?: string;
+
+      Tag?: string;
+
+      DebitedFunds?: MoneyData;
+
+      Fees?: MoneyData;
+    }
+
+    interface CreateRecurringPayInMIT {
+      RecurringPayinRegistrationId: string;
+
+      DebitedFunds?: MoneyData;
+
+      Fees?: MoneyData;
+
+      StatementDescriptor?: string;
+
+      Tag?: string;
+    }
+
     interface PayconiqWebPayInData extends BasePayInData {
       ExecutionType: "WEB";
       PaymentType: "PAYCONIQ";
@@ -3213,6 +3424,7 @@ declare namespace MangoPay {
       | "TRANSFER_REFUND_SUCCEEDED"
       | "TRANSFER_REFUND_FAILED"
       | "KYC_CREATED"
+      | "KYC_OUTDATED"
       | "KYC_VALIDATION_ASKED"
       | "KYC_SUCCEEDED"
       | "KYC_FAILED"
@@ -4130,6 +4342,35 @@ declare namespace MangoPay {
      * @param options
      */
     getRefunds: MethodOverload<string, refund.RefundData[]>;
+
+    /**
+     * Get Recurring PayIn
+     * @param payInId
+     */
+    getRecurringPayin: MethodOverload<string, payIn.PayInRecurringRegistrationData>;
+
+    /**
+     * Update Recurring PayIn
+     * @param payInId
+     * @param updateData
+     */
+    updateRecurringPayin: TwoArgsMethodOverload<string,
+        payIn.UpdatePayInRecurringRegistration,
+        payIn.PayInRecurringRegistrationData>;
+
+    /**
+     * Create Recurring PayIn
+     * @param createData
+     */
+    createRecurringPayment: MethodOverload<payIn.CreatePayInRecurringRegistration,
+        payIn.PayInRecurringRegistrationData>;
+
+    createRecurringPayInRegistrationCIT: MethodOverload<payIn.CreateRecurringPayInCIT,
+        payIn.RecurringPayInData>;
+
+    createRecurringPayInRegistrationMIT: MethodOverload<payIn.CreateRecurringPayInMIT,
+        payIn.RecurringPayInData
+        >;
   }
 
   class Refunds {

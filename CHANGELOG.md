@@ -1,3 +1,11 @@
+## [1.20.2] - 2021-08-27
+## Fixed 
+
+- Missing types for Recurring payments
+- Missing "NO_CHOICE" in secure mode
+- Missing "KYC_OUTDATED" in type
+- Bug fix UBO creation with BirthPlace 
+
 ## [1.20.1] - 2021-08-05
 ## Fixed 
 
