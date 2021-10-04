@@ -340,7 +340,7 @@ describe('Users', function() {
     });
 
     describe('Create KYC Document', function() {
-        var kycDocument;
+        var kycDocument, getKycDocument;
 
         before(function(done){
             api.Users.createKycDocument(john.Id, {
@@ -348,28 +348,18 @@ describe('Users', function() {
                 Type: KycDocumentType.IdentityProof
             }).then(function(document){
                 kycDocument = document;
+                api.Users.getKycDocument(john.Id, kycDocument.Id).then(function(document){
+                    getKycDocument = document;
+                });
                 done();
             });
         });
 
-        it('Should be created correctly', function(){
+        it('Should be created and fetched correctly', function(){
             expect(kycDocument.Id).not.to.be.undefined;
             expect(kycDocument.Status).to.equal(KycDocumentStatus.Created);
             expect(kycDocument.Type).to.equal(KycDocumentType.IdentityProof);
-        });
-
-        describe('Get KYC Document', function() {
-            var getKycDocument;
-            before(function(done){
-                api.Users.getKycDocument(john.Id, kycDocument.Id).then(function(document){
-                    getKycDocument = document;
-                    done();
-                });
-            });
-
-            it('Should be retrieved correctly', function(){
-                expect(_.isMatch(kycDocument, getKycDocument)).to.be.true;
-            });
+            expect(_.isMatch(kycDocument, getKycDocument)).to.be.true;
         });
 
         describe('Update KYC Document', function() {
