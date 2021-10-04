@@ -382,7 +382,19 @@ api.CardPreAuthorizations.create({
   AuthorId: "user",
   CardId: "card-id",
   DebitedFunds: { Currency: "AUD", Amount: 4000 },
-  SecureModeReturnURL: "https://secureurl.com"
+  SecureModeReturnURL: "https://secureurl.com",
+  IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+  BrowserInfo: {
+    AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+    ColorDepth: 4,
+    JavaEnabled: true,
+    JavascriptEnabled: true,
+    Language: 'FR-FR',
+    ScreenHeight: 1800,
+    ScreenWidth: 400,
+    TimeZoneOffset: "+60",
+    UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+  }
 }).then(data => {
   const d = data; // $ExpectType CardPreAuthorizationData
 });
@@ -443,6 +455,21 @@ api.PayIns.create({
   DeclaredFees: { Amount: 500, Currency: "GBP" }
 }).then(data => {
   const d = data; // $ExpectType BankWireDirectPayInData
+});
+
+// create Payconiq PayIn
+api.PayIns.create({
+  PaymentType: "PAYCONIQ",
+  ExecutionType: "WEB",
+  Tag: "custom meta",
+  AuthorId: "user-id",
+  CreditedWalletId: "wallet-id",
+  DebitedFunds: { Amount: 500, Currency: "GBP" },
+  Fees: { Amount: 500, Currency: "GBP" },
+  ReturnURL: "http://www.my-site.com/returnURL",
+  Country: "BE"
+}).then(data => {
+  const d = data; // $ExpectType PayconiqWebPayInData
 });
 
 api.PayIns.create({

@@ -665,6 +665,10 @@ declare namespace MangoPay {
       constructor(data: any);
     }
 
+    class PayInPaymentDetailsPayconiq extends PayInPaymentDetails {
+      constructor(data: any);
+    }
+
     class PayInPaymentDetailsCardDirect extends PayInPaymentDetails {
       constructor(data: any);
     }
@@ -814,6 +818,7 @@ declare namespace MangoPay {
     DirectDebit: "DIRECT_DEBIT";
     Preauthorized: "PREAUTHORIZED";
     PayPal: "PAYPAL";
+    Payconiq: "PAYCONIQ";
   }
 
   interface IMandateStatus {
@@ -1906,12 +1911,16 @@ declare namespace MangoPay {
        * Contains useful information related to security and fraud
        */
       SecurityInfo: SecurityInfoData;
+
+      IpAddress: string;
+
+      BrowserInfo: BrowserInfoData;
     }
 
     type CreateCardPreAuthorization = PickPartialRequired<
       CardPreAuthorizationData,
       "Tag" | "Billing" | "SecureMode",
-      "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL"
+      "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo"
     >;
     type UpdateCardPreAuthorization = PickPartialRequired<
       CardPreAuthorizationData,
@@ -3107,11 +3116,77 @@ declare namespace MangoPay {
       Tag?: string;
     }
 
+    interface PayconiqWebPayInData extends BasePayInData {
+      ExecutionType: "WEB";
+      PaymentType: "PAYCONIQ";
+
+      /**
+       * Time in millis when the page consult will expire.
+       */
+      ExpirationDate: Timestamp;
+
+      /**
+       * The URL to redirect to after payment (whether successful or not)
+       */
+      ReturnURL: string;
+
+      /**
+       * The URL to redirect to user to for them to proceed with the payment
+       */
+      RedirectURL: string;
+
+      /**
+       * The URL to be used in App2App workflow
+       */
+      DeepLinkURL: string;
+    }
+
+    interface CreatePayconiqWebPayInData {
+      ExecutionType: "WEB";
+      PaymentType: "PAYCONIQ";
+
+      /**
+       * Custom data that you can add to this item
+       */
+      Tag?: string;
+
+      /**
+       * A user's ID
+       */
+      AuthorId: string;
+
+      /**
+       * The ID of the wallet where money will be credited
+       */
+      CreditedWalletId: string;
+
+      /**
+       * Information about the funds that are being debited
+       */
+      DebitedFunds: MoneyData;
+
+      /**
+       * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+       */
+      Fees: MoneyData;
+
+      /**
+       * The URL to redirect to after payment (whether successful or not)
+       */
+      ReturnURL: string;
+
+      /**
+       * The Country of the Address
+       */
+      Country: CountryISO;
+    }
+
     type PayInData =
       | CardDirectPayInData
       | CardPreAuthorizedPayInData
       | CardWebPayInData
       | BankWireDirectPayInData
+      | PayconiqWebPayInData
       | DirectDebitDirectPayInData;
   }
 
@@ -4267,6 +4342,10 @@ declare namespace MangoPay {
         payIn.CreateBankWireDirectPayIn,
         payIn.BankWireDirectPayInData
       > &
+        MethodOverload<
+            payIn.CreatePayconiqWebPayInData,
+            payIn.PayconiqWebPayInData
+            > &
         MethodOverload<
             payIn.CreateDirectDebitDirectPayIn,
             payIn.DirectDebitDirectPayInData
