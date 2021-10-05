@@ -48,6 +48,7 @@ describe('KycDocuments', function() {
 
         it('should get the document', function () {
             expect(getDocument.Id).to.equal(document.Id);
+            expect(getDocument.Flags).not.to.be.undefined;
         });
     });
 
