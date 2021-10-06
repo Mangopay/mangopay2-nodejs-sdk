@@ -1,3 +1,13 @@
+## [1.21.0] - 2021-10-06
+## Added
+
+As requested by numerous clients, we are now providing [Payconiq](https://www.payconiq.be/fr) as a new mean-of-payment. To request access, please contact MANGOPAY.
+
+## Fix
+
+- We have added missing types (IpAddress, BrowserInfo, DirectDebitDirectPayIn)
+- We have fixed the tests and increased timeout limits.
+
 ## [1.20.2] - 2021-08-27
 ## Fixed 
 
