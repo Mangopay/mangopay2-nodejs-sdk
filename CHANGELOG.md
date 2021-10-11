@@ -1,3 +1,17 @@
+## [1.22.0] - 2021-10-11
+## Added
+
+**We provide more information regarding refused KYC documents.** Therefore it will be easier for you to adapt your app behavior and help your end user.
+
+You are now able to see the exact explanation thanks to a new parameter called “Flags”. 
+
+It has been added to 
+
+`api.KycDocuments.get(document.Id, function(data, response){});`
+
+It will display one or several error codes that provide the reason(s) why your document validation has failed. These error codes description are available [here](https://docs.mangopay.com/guide/kyc-document).
+
+
 ## [1.21.0] - 2021-10-06
 ## Added
 
