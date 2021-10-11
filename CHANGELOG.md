@@ -1,4 +1,4 @@
-## [1.22.0] - 2021-10-11
+## [1.22.1] - 2021-10-11
 ## Added
 
 **We provide more information regarding refused KYC documents.** Therefore it will be easier for you to adapt your app behavior and help your end user.
