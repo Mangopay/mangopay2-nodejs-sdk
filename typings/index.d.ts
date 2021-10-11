@@ -1546,6 +1546,11 @@ declare namespace MangoPay {
        * The date when the document was processed by MANGOPAY
        */
       ProcessedDate: Timestamp;
+
+      /**
+       * More information regarding why the document has been rejected
+       */
+      Flags: string[];
     }
 
     interface CreateKycDocument {
