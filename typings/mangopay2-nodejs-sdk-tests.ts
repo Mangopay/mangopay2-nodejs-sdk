@@ -526,7 +526,7 @@ api.PayIns.createRecurringPayment({
     }
   },
   EndDate: 1234,
-  Frequency: 10,
+  Frequency: "Monthly",
   FixedNextAmount: false,
   FractionedPayment: false,
   Migration: false,

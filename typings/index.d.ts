@@ -88,6 +88,7 @@ declare namespace MangoPay {
   type PaymentStatus = "WAITING" | "CANCELED" | "EXPIRED" | "VALIDATED";
   type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
   type _3DSVersion = "V1" | "V2_1";
+  type Frequency = "Daily" | "Weekly" | "TwiceAMonth" | "Monthly" | "Bimonthly" | "Quarterly" | "Semiannual" | "Annual" | "Biannual";
 
   interface BillingData {
     Address: models.Address | address.AddressData | string;
@@ -2973,7 +2974,7 @@ declare namespace MangoPay {
 
       EndDate: Timestamp;
 
-      Frequency: string;
+      Frequency: Frequency;
 
       FixedNextAmount: boolean;
 
@@ -3011,7 +3012,7 @@ declare namespace MangoPay {
 
       EndDate?: Timestamp;
 
-      Frequency?: number;
+      Frequency?: Frequency;
 
       FixedNextAmount?: boolean;
 
