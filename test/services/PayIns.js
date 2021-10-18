@@ -801,6 +801,7 @@ describe('PayIns', function () {
 
             it('should get the RecurringPayin', function () {
                 expect(getRecurring.Id).not.to.be.undefined;
+                expect(getRecurring.Status).not.to.be.undefined;
             });
         });
     });
