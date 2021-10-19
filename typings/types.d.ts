@@ -575,3 +575,25 @@ export type CurrencyISO =
   | "ZAR"
   | "ZMW"
   | "ZWD";
+
+/** A UTC timestamp in seconds */
+export type Timestamp = number;
+
+export type ColumnAndDirection = "ASC" | "DESC";
+
+export type AVSResult =
+    | "NO_CHECK"
+    | "NO_MATCH"
+    | "ADDRESS_MATCH_ONLY"
+    | "POSTAL_CODE_MATCH_ONLY"
+    | "FULL_MATCH";
+
+export type SecureMode = "DEFAULT" | "FORCE" | "NO_CHOICE";
+
+export type PreAuthorizationExecutionType = "DIRECT";
+
+export type PaymentStatus = "WAITING" | "CANCELED" | "EXPIRED" | "VALIDATED";
+
+export type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
+
+export type _3DSVersion = "V1" | "V2_1";

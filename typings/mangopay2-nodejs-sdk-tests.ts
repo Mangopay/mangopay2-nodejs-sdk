@@ -1,21 +1,24 @@
 import Mangopay = require("mangopay2-nodejs-sdk");
+import { Base } from "base";
+import { Models } from "models";
+import { address } from "models/address";
 
 // $ExpectError
-const invalidConfig: Mangopay.Config = {};
+const invalidConfig: Base.Config = {};
 
 /* General Types */
 
-const validConfig: Mangopay.Config = {
+const validConfig: Base.Config = {
   clientId: "your_client_id",
   clientApiKey: "your_client_api_key",
   baseUrl: "https://api.mangopay.com"
 };
 
 const api = new Mangopay(validConfig); // $ExpectType MangoPay
-const payIn: Mangopay.models.PayIn = new api.models.PayIn({}); // $ExpectType PayIn
-const address: Mangopay.models.Address = new api.models.Address({}); // $ExpectType Address
+const payIn: Models.PayIn = new api.models.PayIn({}); // $ExpectType PayIn
+const address: Models.Address = new api.models.Address({}); // $ExpectType Address
 
-const addressData: Mangopay.address.AddressData = {
+const addressData: address.AddressData = {
   AddressLine1: "20 T Street",
   AddressLine2: "",
   City: "London",

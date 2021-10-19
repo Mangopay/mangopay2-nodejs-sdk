@@ -1,0 +1,236 @@
+import { CountryISO, MakeKeysRequired, PickPartial, Timestamp } from "../types";
+import { address } from "./address";
+import { entityBase } from "./entityBase";
+
+export namespace user {
+    interface UserData extends entityBase.EntityBaseData {
+        /**
+         * Type of user
+         */
+        PersonType: PersonType;
+
+        /**
+         * The person's email address (not more than 12 consecutive numbers) - must be a valid email
+         */
+        Email: string;
+
+        /**
+         * KYC Level (LIGHT or REGULAR)
+         */
+        KYCLevel: KYCLevel;
+    }
+
+    interface UserLegalData extends UserData {
+        PersonType: "LEGAL";
+
+        /**
+         * The name of the legal user
+         */
+        Name: string;
+
+        /**
+         * Type for legal user.
+         */
+        LegalPersonType: LegalPersonType;
+
+        /**
+         * The address of the company’s headquarters
+         */
+        HeadquartersAddress: address.AddressType;
+
+        /**
+         * The first name of the company’s Legal representative person
+         */
+        LegalRepresentativeFirstName: string;
+
+        /**
+         * The last name of the company’s Legal representative person
+         */
+        LegalRepresentativeLastName: string;
+
+        /**
+         * The address of the company’s Legal representative person
+         */
+        LegalRepresentativeAddress: address.AddressType;
+
+        /**
+         * The email of the company’s Legal representative person - must be valid
+         */
+        LegalRepresentativeEmail: string;
+
+        /**
+         * The date of birth of the company’s Legal representative person - be careful to set the right timezone (should be UTC) to avoid 00h becoming 23h (and hence interpreted as the day before)
+         */
+        LegalRepresentativeBirthday: Timestamp;
+
+        /**
+         * The nationality of the company’s Legal representative person
+         */
+        LegalRepresentativeNationality: CountryISO;
+
+        /**
+         * The country of residence of the company’s Legal representative person
+         */
+        LegalRepresentativeCountryOfResidence: CountryISO;
+
+        ProofOfIdentity: string | null;
+
+        /**
+         * The business statute of the company
+         */
+        Statute: string | null;
+
+        /**
+         * A MANGOPAY reference to the validated document of the proof of registration of the company
+         */
+        ProofOfRegistration: string | null;
+
+        /**
+         * The shareholder declaration of the company
+         */
+        ShareholderDeclaration: string | null;
+
+        /**
+         * The official registered number of the business
+         */
+        CompanyNumber: string;
+    }
+
+    interface UserNaturalData extends UserData {
+        PersonType: "NATURAL";
+
+        /**
+         * The name of the user
+         */
+        FirstName: string;
+
+        /**
+         * The last name of the user
+         */
+        LastName: string;
+
+        /**
+         * The user address
+         */
+        Address: string | address.AddressData;
+
+        /**
+         * The date of birth of the user - be careful to set the right timezone (should be UTC) to avoid 00h becoming 23h (and hence interpreted as the day before)
+         */
+        Birthday: Timestamp;
+
+        /**
+         * The user’s nationality. ISO 3166-1 alpha-2 format is expected
+         */
+        Nationality: CountryISO;
+
+        /**
+         * The user’s country of residence. ISO 3166-1 alpha-2 format is expected
+         */
+        CountryOfResidence: CountryISO;
+
+        /**
+         * User’s occupation, ie. Work
+         */
+        Occupation: string;
+
+        IncomeRange: IncomeRange;
+
+        /**
+         * Maximum length is 255 characters
+         */
+        ProofOfIdentity: string | null;
+
+        /**
+         * Maximum length is 255 characters
+         */
+        ProofOfAddress: string | null;
+
+        /**
+         * The capacity of this user - for use with UBO declarations
+         */
+        Capacity: "NORMAL" | "DECLARATIVE";
+    }
+
+    interface BaseUserLegalData extends PickPartial<UserLegalData,
+        | RequiredUserLegalData
+        | "CompanyNumber"
+        | "LegalRepresentativeEmail"
+        | "LegalRepresentativeAddress"
+        | "HeadquartersAddress"
+        | "Tag"> {
+        PersonType: "LEGAL";
+    }
+
+    interface UpdateUserLegalData extends BaseUserLegalData {
+        Id: string;
+    }
+
+    interface CreateUserLegalData extends MakeKeysRequired<BaseUserLegalData,
+        RequiredUserLegalData | "PersonType"> {
+    }
+
+    interface BaseUserNaturalData extends PickPartial<UserNaturalData,
+        | RequiredUserNaturalData
+        | "Address"
+        | "Occupation"
+        | "IncomeRange"
+        | "Tag"> {
+        PersonType: "NATURAL";
+    }
+
+    interface UpdateUserNaturalData extends BaseUserNaturalData {
+        Id: string;
+    }
+
+    interface CreateUserNaturalData extends MakeKeysRequired<BaseUserNaturalData,
+        RequiredUserNaturalData | "PersonType"> {
+    }
+
+    /**
+     * Should be only one of these values:
+     * 1 - for incomes <18K€),
+     * 2 - for incomes between 18 and 30K€,
+     * 3 - for incomes between 30 and 50K€,
+     * 4 - for incomes between 50 and 80K€,
+     * 5 - for incomes between 80 and 120K€,
+     * 6 - for incomes >120K€
+     */
+    type IncomeRange = 1 | 2 | 3 | 4 | 5 | 6;
+
+    type PersonType = "NATURAL" | "LEGAL";
+
+    type KYCLevel = "LIGHT" | "REGULAR";
+
+    type LegalPersonType = "BUSINESS" | "ORGANIZATION" | "SOLETRADER";
+
+    type StaticKeys =
+        | "KYCLevel"
+        | "PersonType"
+        | "Id"
+        | "CreationDate"
+        | "ProofOfIdentity"
+        | "ProofOfAddress"
+        | "ProofOfRegistration"
+        | "LegalRepresentativeProofOfIdentity"
+        | "ShareholderDeclaration"
+        | "Statute";
+
+    type RequiredUserLegalData =
+        | "LegalPersonType"
+        | "Name"
+        | "LegalRepresentativeBirthday"
+        | "LegalRepresentativeCountryOfResidence"
+        | "LegalRepresentativeNationality"
+        | "LegalRepresentativeFirstName"
+        | "LegalRepresentativeLastName"
+        | "Email";
+
+    type RequiredUserNaturalData =
+        | "FirstName"
+        | "LastName"
+        | "Birthday"
+        | "Nationality"
+        | "CountryOfResidence"
+        | "Email";
+}
