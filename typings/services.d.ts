@@ -1,9 +1,3 @@
-import {
-    MethodOverload,
-    NoArgMethodOverload,
-    ThreeArgsMethodOverload,
-    TwoArgsMethodOverload
-} from "./index";
 import { CurrencyISO, Omit } from "./types";
 import { Models } from "./models";
 import { bankingAlias } from "./models/bankingAlias";
@@ -30,9 +24,14 @@ import { cardPreAuthorization } from "./models/cardPreauthorization";
 import { uboDeclaration } from "./models/uboDeclaration";
 import { kycDocument } from "./models/kycDocument";
 import { money } from "./models/money";
+import { Base } from "./base";
 
 export namespace Services {
     import MoneyData = money.MoneyData;
+    import MethodOverload = Base.MethodOverload;
+    import NoArgMethodOverload = Base.NoArgMethodOverload;
+    import TwoArgsMethodOverload = Base.TwoArgsMethodOverload;
+    import ThreeArgsMethodOverload = Base.ThreeArgsMethodOverload;
 
     class Users {
         /**

@@ -49,10 +49,6 @@ export namespace Models {
     const UboRefusedReasonType: Enums.IUboRefusedReasonType;
     const UserNaturalCapacity: Enums.IUserNaturalCapacity;
 
-    class DeclaredUbo extends Model<uboDeclaration.UboDeclarationData> {
-        constructor(data: Partial<uboDeclaration.UboDeclarationData>);
-    }
-
     interface ModelMethods<T extends {}> {
         initialize(): void;
 
@@ -230,6 +226,10 @@ export namespace Models {
 
     interface DisputeDocumentPage
         extends disputeDocument.CreateDisputeDocumentPage {
+    }
+
+    class DeclaredUbo extends Model<uboDeclaration.UboDeclarationData> {
+        constructor(data: Partial<uboDeclaration.UboDeclarationData>);
     }
 
     class KycDocument extends EntityBase<kycDocument.KycDocumentData> {
