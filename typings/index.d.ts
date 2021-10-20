@@ -2487,6 +2487,9 @@ declare namespace MangoPay {
 
     type RecurringType = "CLASSIC_SUBSCRIPTION" | "FRACTIONED_PAYMENT" | "CUSTOM";
 
+    type RecurringPaymentStatus = "CREATED" | "AUTHENTICATION_NEEDED" | "IN_PROGRESS" | "ENDED";
+    type UpdateRecurringPaymentStatus = "ENDED";
+
     interface TemplateURLOptions {
       Payline: string;
       PAYLINEV2: string;
@@ -2937,7 +2940,7 @@ declare namespace MangoPay {
       /**
        * The status of the transaction
        */
-      Status: transaction.TransactionStatus;
+      Status: RecurringPaymentStatus;
 
       CurrentState: PayInRecurringRegistrationState;
 
@@ -3030,6 +3033,8 @@ declare namespace MangoPay {
       Billing?: BillingOrShippingRecurringPayInData;
 
       Shipping?: BillingOrShippingRecurringPayInData;
+
+      Status?: UpdateRecurringPaymentStatus;
     }
 
     interface RecurringPayInData extends BasePayInData {

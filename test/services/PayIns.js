@@ -627,8 +627,6 @@ describe('PayIns', function () {
         describe('Create a Recurring Payment', function() {
             var recurring;
             before(function(done){
-                console.log('CardId: ' + cardId);
-                console.log("WalletId: "+ walletId);
                 recurringPayin = {
                     AuthorId: john.Id,
                     CardId: cardId,
@@ -671,7 +669,6 @@ describe('PayIns', function () {
                 api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
                     recurring = data;
                 }).then(function(){
-                    console.log('RegistrationId: ' + recurring.Id);
                     cit = {
                         RecurringPayinRegistrationId: recurring.Id,
                         BrowserInfo: {
@@ -715,8 +712,6 @@ describe('PayIns', function () {
         describe('Get Recurring Payment', function () {
             var recurring;
             before(function(done){
-                console.log('CardId: ' + cardId);
-                console.log("WalletId: "+ walletId);
                 recurringPayin = {
                     AuthorId: john.Id,
                     CardId: cardId,
@@ -759,48 +754,103 @@ describe('PayIns', function () {
                 api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
                     recurring = data;
                 }).then(function(){
-                    console.log('RegistrationId: ' + recurring.Id);
                     api.PayIns.getRecurringPayin(recurring.Id, function (data, response) {
                         getRecurring = data;
-                    }).then(function(){
-                        updateObj = {
-                            Billing: {
-                                FirstName: 'TEST',
-                                LastName: 'TEST',
-                                Address: {
-                                    AddressLine1: '1 MangoPay Street',
-                                    AddressLine2: 'The Loop',
-                                    City: 'Paris',
-                                    Region: 'Ile de France',
-                                    PostalCode: '75001',
-                                    Country: 'FR'
-                                }
-                            },
-                            Shipping: {
-                                FirstName: 'TEST',
-                                LastName: 'TEST',
-                                Address: {
-                                    AddressLine1: '1 MangoPay Street',
-                                    AddressLine2: 'The Loop',
-                                    City: 'Paris',
-                                    Region: 'Ile de France',
-                                    PostalCode: '75001',
-                                    Country: 'FR'
-                                }
-                            }
-                        };
-
-                        api.PayIns.updateRecurringPayin(recurring.Id, updateObj, function (data, response) {
-                            console.log(JSON.stringify(data));
-                            updateRec = data;
-                            done();
-                        });
-                    })
-                })
-            })
+                        done();
+                    });
+                });
+            });
 
             it('should get the RecurringPayin', function () {
                 expect(getRecurring.Id).not.to.be.undefined;
+                expect(getRecurring.Status).not.to.be.undefined;
+            });
+        });
+
+        describe('Update Recurring Payment', function () {
+            var recurring, updateRec;
+            before(function(done){
+                recurringPayin = {
+                    AuthorId: john.Id,
+                    CardId: cardId,
+                    CreditedUserId: john.Id,
+                    CreditedWalletId: walletId,
+                    FirstTransactionDebitedFunds: {
+                        Amount: 10,
+                        Currency: 'EUR'
+                    },
+                    FirstTransactionFees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    Billing: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    Shipping: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    }
+                };
+
+                api.PayIns.createRecurringPayment(recurringPayin, function (data, response) {
+                    recurring = data;
+                }).then(function () {
+                    updateObj = {
+                        Billing: {
+                            FirstName: 'TEST',
+                            LastName: 'TEST',
+                            Address: {
+                                AddressLine1: '1 MangoPay Street',
+                                AddressLine2: 'The Loop',
+                                City: 'Paris',
+                                Region: 'Ile de France',
+                                PostalCode: '75001',
+                                Country: 'FR'
+                            }
+                        },
+                        Shipping: {
+                            FirstName: 'TEST',
+                            LastName: 'TEST',
+                            Address: {
+                                AddressLine1: '1 MangoPay Street',
+                                AddressLine2: 'The Loop',
+                                City: 'Paris',
+                                Region: 'Ile de France',
+                                PostalCode: '75001',
+                                Country: 'FR'
+                            }
+                        },
+                        Status: "ENDED"
+                    };
+
+                    api.PayIns.updateRecurringPayin(recurring.Id, updateObj, function (data, response) {
+                        updateRec = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should get the updated RecurringPayin', function () {
+                expect(updateRec.Id).not.to.be.undefined;
+                expect(updateRec.Status).not.to.be.undefined;
+                expect(updateRec.Status).to.equal("ENDED");
             });
         });
     });
