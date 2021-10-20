@@ -3,6 +3,22 @@ import { Enums } from "../enums";
 import { entityBase } from "./entityBase";
 
 export namespace mandate {
+    /**
+     * - "CREATED" - the mandate has been created
+     * - "SUBMITTED" - the mandate has been submitted to the banks and you can now do payments with this mandate
+     * - "ACTIVE" - the mandate is active and has been accepted by the banks and/or successfully used in a payment
+     * - "FAILED" - the mandate has failed for a variety of reasons and is no longer available for payments
+     */
+    type MandateStatus = ValueOf<Enums.IMandateStatus>;
+
+    type MandateScheme = "SEPA" | "BACS";
+
+    type MandateCultureCode = "EN" | "FR" | "NL" | "DE" | "ES" | "IT" | "PL";
+
+    type MandateExecutionType = "WEB";
+
+    type MandateType = "DIRECT_DEBIT";
+
     interface MandateData extends entityBase.EntityBaseData {
         /**
          * An ID of a Bank Account
@@ -74,20 +90,4 @@ export namespace mandate {
         "Tag",
         "BankAccountId" | "Culture" | "ReturnURL"> {
     }
-
-    /**
-     * - "CREATED" - the mandate has been created
-     * - "SUBMITTED" - the mandate has been submitted to the banks and you can now do payments with this mandate
-     * - "ACTIVE" - the mandate is active and has been accepted by the banks and/or successfully used in a payment
-     * - "FAILED" - the mandate has failed for a variety of reasons and is no longer available for payments
-     */
-    type MandateStatus = ValueOf<Enums.IMandateStatus>;
-
-    type MandateScheme = "SEPA" | "BACS";
-
-    type MandateCultureCode = "EN" | "FR" | "NL" | "DE" | "ES" | "IT" | "PL";
-
-    type MandateExecutionType = "WEB";
-
-    type MandateType = "DIRECT_DEBIT";
 }

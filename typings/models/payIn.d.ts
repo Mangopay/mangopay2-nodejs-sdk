@@ -1,4 +1,4 @@
-import { _3DSVersion, CountryISO, PickPartialRequired, Timestamp, ValueOf, SecureMode } from "../types";
+import { CountryISO, PickPartialRequired, SecureMode, Timestamp, ValueOf } from "../types";
 import { Enums } from "../enums";
 import { transaction } from "./transaction";
 import { card } from "./card";
@@ -14,6 +14,22 @@ export namespace payIn {
     import BrowserInfoData = Base.BrowserInfoData;
     import MoneyData = money.MoneyData;
     import SecurityInfoData = securityInfo.SecurityInfoData;
+
+    type _3DSVersion = "V1" | "V2_1";
+
+    type PayInData =
+        | CardDirectPayInData
+        | CardPreAuthorizedPayInData
+        | CardWebPayInData
+        | BankWireDirectPayInData
+        | PayconiqWebPayInData
+        | DirectDebitDirectPayInData;
+
+    type PayInPaymentType = ValueOf<Enums.IPayInPaymentType>;
+
+    type PayInExecutionType = ValueOf<Enums.IPayInExecutionType> | "EXTERNAL_INSTRUCTION";
+
+    type RecurringType = "CLASSIC_SUBSCRIPTION" | "FRACTIONED_PAYMENT" | "CUSTOM";
 
     interface TemplateURLOptions {
         Payline: string;
@@ -716,18 +732,4 @@ export namespace payIn {
          */
         Country: CountryISO;
     }
-
-    type PayInData =
-        | CardDirectPayInData
-        | CardPreAuthorizedPayInData
-        | CardWebPayInData
-        | BankWireDirectPayInData
-        | PayconiqWebPayInData
-        | DirectDebitDirectPayInData;
-
-    type PayInPaymentType = ValueOf<Enums.IPayInPaymentType>;
-
-    type PayInExecutionType = ValueOf<Enums.IPayInExecutionType> | "EXTERNAL_INSTRUCTION";
-
-    type RecurringType = "CLASSIC_SUBSCRIPTION" | "FRACTIONED_PAYMENT" | "CUSTOM";
 }

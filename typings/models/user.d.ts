@@ -3,6 +3,53 @@ import { address } from "./address";
 import { entityBase } from "./entityBase";
 
 export namespace user {
+    /**
+     * Should be only one of these values:
+     * 1 - for incomes <18K€),
+     * 2 - for incomes between 18 and 30K€,
+     * 3 - for incomes between 30 and 50K€,
+     * 4 - for incomes between 50 and 80K€,
+     * 5 - for incomes between 80 and 120K€,
+     * 6 - for incomes >120K€
+     */
+    type IncomeRange = 1 | 2 | 3 | 4 | 5 | 6;
+
+    type PersonType = "NATURAL" | "LEGAL";
+
+    type KYCLevel = "LIGHT" | "REGULAR";
+
+    type LegalPersonType = "BUSINESS" | "ORGANIZATION" | "SOLETRADER";
+
+    type StaticKeys =
+        | "KYCLevel"
+        | "PersonType"
+        | "Id"
+        | "CreationDate"
+        | "ProofOfIdentity"
+        | "ProofOfAddress"
+        | "ProofOfRegistration"
+        | "LegalRepresentativeProofOfIdentity"
+        | "ShareholderDeclaration"
+        | "Statute";
+
+    type RequiredUserLegalData =
+        | "LegalPersonType"
+        | "Name"
+        | "LegalRepresentativeBirthday"
+        | "LegalRepresentativeCountryOfResidence"
+        | "LegalRepresentativeNationality"
+        | "LegalRepresentativeFirstName"
+        | "LegalRepresentativeLastName"
+        | "Email";
+
+    type RequiredUserNaturalData =
+        | "FirstName"
+        | "LastName"
+        | "Birthday"
+        | "Nationality"
+        | "CountryOfResidence"
+        | "Email";
+
     interface UserData extends entityBase.EntityBaseData {
         /**
          * Type of user
@@ -186,51 +233,4 @@ export namespace user {
     interface CreateUserNaturalData extends MakeKeysRequired<BaseUserNaturalData,
         RequiredUserNaturalData | "PersonType"> {
     }
-
-    /**
-     * Should be only one of these values:
-     * 1 - for incomes <18K€),
-     * 2 - for incomes between 18 and 30K€,
-     * 3 - for incomes between 30 and 50K€,
-     * 4 - for incomes between 50 and 80K€,
-     * 5 - for incomes between 80 and 120K€,
-     * 6 - for incomes >120K€
-     */
-    type IncomeRange = 1 | 2 | 3 | 4 | 5 | 6;
-
-    type PersonType = "NATURAL" | "LEGAL";
-
-    type KYCLevel = "LIGHT" | "REGULAR";
-
-    type LegalPersonType = "BUSINESS" | "ORGANIZATION" | "SOLETRADER";
-
-    type StaticKeys =
-        | "KYCLevel"
-        | "PersonType"
-        | "Id"
-        | "CreationDate"
-        | "ProofOfIdentity"
-        | "ProofOfAddress"
-        | "ProofOfRegistration"
-        | "LegalRepresentativeProofOfIdentity"
-        | "ShareholderDeclaration"
-        | "Statute";
-
-    type RequiredUserLegalData =
-        | "LegalPersonType"
-        | "Name"
-        | "LegalRepresentativeBirthday"
-        | "LegalRepresentativeCountryOfResidence"
-        | "LegalRepresentativeNationality"
-        | "LegalRepresentativeFirstName"
-        | "LegalRepresentativeLastName"
-        | "Email";
-
-    type RequiredUserNaturalData =
-        | "FirstName"
-        | "LastName"
-        | "Birthday"
-        | "Nationality"
-        | "CountryOfResidence"
-        | "Email";
 }

@@ -3,6 +3,43 @@ import { transaction } from "./transaction";
 import { entityBase } from "./entityBase";
 
 export namespace report {
+    type Column =
+        | "Alias"
+        | "AuthorId"
+        | "BankAccountId"
+        | "BankWireRef"
+        | "CardId"
+        | "CardType"
+        | "Country"
+        | "CreationDate"
+        | "CreditedFundsAmount"
+        | "CreditedFundsCurrency"
+        | "CreditedUserId"
+        | "CreditedWalletId"
+        | "Culture"
+        | "DebitedFundsAmount"
+        | "DebitedFundsCurrency"
+        | "DebitedWalletId"
+        | "DeclaredDebitedFundsAmount"
+        | "DeclaredDebitedFundsCurrency"
+        | "DeclaredFeesAmount"
+        | "DeclaredFeesCurrency"
+        | "ExecutionDate"
+        | "ExecutionType"
+        | "ExpirationDate"
+        | "FeesAmount"
+        | "FeesCurrency"
+        | "Id"
+        | "Nature"
+        | "PaymentType"
+        | "PreauthorizationId"
+        | "ResultCode"
+        | "ResultMessage"
+        | "Status"
+        | "Tag"
+        | "Type"
+        | "WireReference";
+
     interface Filters {
         /**
          * To return only resources that have CreationDate BEFORE this date
@@ -137,51 +174,13 @@ export namespace report {
         ResultMessage: string;
     }
 
-    interface CreateReport
-        extends PickPartial<ReportData,
-            | "Tag"
-            | "CallbackURL"
-            | "DownloadFormat"
-            | "Sort"
-            | "Preview"
-            | "Filters"
-            | "Columns"> {
-    }
-
-    type Column =
-        "Alias"
-        | "AuthorId"
-        | "BankAccountId"
-        | "BankWireRef"
-        | "CardId"
-        | "CardType"
-        | "Country"
-        | "CreationDate"
-        | "CreditedFundsAmount"
-        | "CreditedFundsCurrency"
-        | "CreditedUserId"
-        | "CreditedWalletId"
-        | "Culture"
-        | "DebitedFundsAmount"
-        | "DebitedFundsCurrency"
-        | "DebitedWalletId"
-        | "DeclaredDebitedFundsAmount"
-        | "DeclaredDebitedFundsCurrency"
-        | "DeclaredFeesAmount"
-        | "DeclaredFeesCurrency"
-        | "ExecutionDate"
-        | "ExecutionType"
-        | "ExpirationDate"
-        | "FeesAmount"
-        | "FeesCurrency"
-        | "Id"
-        | "Nature"
-        | "PaymentType"
-        | "PreauthorizationId"
-        | "ResultCode"
-        | "ResultMessage"
-        | "Status"
+    interface CreateReport extends PickPartial<ReportData,
         | "Tag"
-        | "Type"
-        | "WireReference";
+        | "CallbackURL"
+        | "DownloadFormat"
+        | "Sort"
+        | "Preview"
+        | "Filters"
+        | "Columns"> {
+    }
 }

@@ -2,6 +2,8 @@ import { CountryISO, PickPartialRequired } from "../types";
 import { entityBase } from "./entityBase";
 
 export namespace bankingAlias {
+    type BankingAliasType = "IBAN";
+
     interface BankingAliasData extends entityBase.EntityBaseData {
         /**
          * The user ID who is credited (defaults to the owner of the wallet)
@@ -54,6 +56,4 @@ export namespace bankingAlias {
     interface CreateIBANBankingAlias extends PickPartialRequired<IBANBankingAliasData,
         "Tag" | "CreditedUserId", "OwnerName" | "Country"> {
     }
-
-    type BankingAliasType = "IBAN";
 }

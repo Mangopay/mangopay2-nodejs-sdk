@@ -2,6 +2,12 @@ import { CurrencyISO } from "../types";
 import { entityBase } from "./entityBase";
 
 export namespace card {
+    type CardType = "CB_VISA_MASTERCARD" | "DINERS" | "MASTERPASS" | "MAESTRO" | "P24" | "IDEAL" | "BCMC" | "PAYLIB";
+
+    type CardStatus = "CREATED" | "VALIDATED" | "ERROR";
+
+    type CardValidity = "UNKNOWN" | "VALID" | "INVALID";
+
     interface CardData extends entityBase.EntityBaseData {
         /**
          * The expiry date of the card - must be in format MMYY
@@ -64,10 +70,4 @@ export namespace card {
         Id: string;
         Active?: false;
     }
-
-    type CardType = "CB_VISA_MASTERCARD" | "DINERS" | "MASTERPASS" | "MAESTRO" | "P24" | "IDEAL" | "BCMC" | "PAYLIB";
-
-    type CardStatus = "CREATED" | "VALIDATED" | "ERROR";
-
-    type CardValidity = "UNKNOWN" | "VALID" | "INVALID";
 }

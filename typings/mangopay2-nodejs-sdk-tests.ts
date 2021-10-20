@@ -908,3 +908,7 @@ api.Reports.get("report-id").then(data => {
 api.Reports.getAll().then(data => {
   const d = data; // $ExpectType ReportData[]
 });
+
+api.Idempotency.get("idempotency-key").then(data => {
+  const d = data; // $ExpectType IdempotencyData
+});

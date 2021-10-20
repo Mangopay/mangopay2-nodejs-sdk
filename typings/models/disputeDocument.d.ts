@@ -2,6 +2,32 @@ import { Timestamp } from "../types";
 import { entityBase } from "./entityBase";
 
 export namespace disputeDocument {
+    type DisputeDocumentType =
+        | "DELIVERY_PROOF"
+        | "INVOICE"
+        | "REFUND_PROOF"
+        | "USER_CORRESPONDANCE"
+        | "USER_ACCEPTANCE_PROOF"
+        | "PRODUCT_REPLACEMENT_PROOF"
+        | "OTHER";
+
+    type DocumentStatus =
+        | "CREATED"
+        | "VALIDATION_ASKED"
+        | "VALIDATED"
+        | "REFUSED"
+        | "OUT_OF_DATE";
+
+    type RefusedReasonType =
+        | "DOCUMENT_UNREADABLE"
+        | "DOCUMENT_NOT_ACCEPTED"
+        | "DOCUMENT_HAS_EXPIRED"
+        | "DOCUMENT_INCOMPLETE"
+        | "DOCUMENT_MISSING"
+        | "SPECIFIC_CASE"
+        | "DOCUMENT_FALSIFIED"
+        | "OTHER";
+
     interface DisputeDocumentData extends entityBase.EntityBaseData {
         /**
          * Gives the type of the KYC document
@@ -90,30 +116,4 @@ export namespace disputeDocument {
          */
         ExpirationDate: Timestamp;
     }
-
-    type DisputeDocumentType =
-        "DELIVERY_PROOF"
-        | "INVOICE"
-        | "REFUND_PROOF"
-        | "USER_CORRESPONDANCE"
-        | "USER_ACCEPTANCE_PROOF"
-        | "PRODUCT_REPLACEMENT_PROOF"
-        | "OTHER";
-
-    type DocumentStatus =
-        "CREATED"
-        | "VALIDATION_ASKED"
-        | "VALIDATED"
-        | "REFUSED"
-        | "OUT_OF_DATE";
-
-    type RefusedReasonType =
-        "DOCUMENT_UNREADABLE"
-        | "DOCUMENT_NOT_ACCEPTED"
-        | "DOCUMENT_HAS_EXPIRED"
-        | "DOCUMENT_INCOMPLETE"
-        | "DOCUMENT_MISSING"
-        | "SPECIFIC_CASE"
-        | "DOCUMENT_FALSIFIED"
-        | "OTHER";
 }

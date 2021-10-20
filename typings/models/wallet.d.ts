@@ -5,6 +5,14 @@ import { money } from "./money";
 export namespace wallet {
     import MoneyData = money.MoneyData;
 
+    type ClientFundsType = "FEES" | "CREDIT";
+
+    type FundsType = "DEFAULT" | ClientFundsType;
+
+    type CreateWallet = UpdateWallet & Pick<WalletData, "Owners" | "Currency" | "Description">;
+
+    type UpdateWallet = PickPartial<WalletData, "Tag" | "Description">;
+
     interface WalletData extends entityBase.EntityBaseData {
         /**
          * An array of userIDs of who own's the wallet. For now, you only can set up a unique owner.
@@ -35,12 +43,4 @@ export namespace wallet {
     interface ClientWalletData extends Omit<WalletData, "Owners" | "Description"> {
         FundsType: ClientFundsType;
     }
-
-    type ClientFundsType = "FEES" | "CREDIT";
-
-    type FundsType = "DEFAULT" | ClientFundsType;
-
-    type CreateWallet = UpdateWallet & Pick<WalletData, "Owners" | "Currency" | "Description">;
-
-    type UpdateWallet = PickPartial<WalletData, "Tag" | "Description">;
 }

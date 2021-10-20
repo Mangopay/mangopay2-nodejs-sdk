@@ -4,6 +4,31 @@ import { address } from "./address";
 import { entityBase } from "./entityBase";
 
 export namespace bankAccount {
+    type CAData = BaseData & CADetails;
+
+    type USData = BaseData & USDetails;
+
+    type BankAccountType = "IBAN" | "GB" | "US" | "CA" | "OTHER";
+
+    type DepositAccountType = "CHECKING" | "SAVINGS";
+
+    type GBData = BaseData & GBDetails;
+
+    type OtherData = BaseData & OtherDetails;
+
+    type IBANData = BaseData & IBANDetails;
+
+    type Data = OtherData | CAData | GBData | IBANData | USData;
+
+    type DataIntersection = OtherData & CAData & GBData & IBANData & USData;
+
+    type CreationDetails =
+        | OtherDetails
+        | CADetails
+        | GBDetails
+        | IBANDetails
+        | USDetails;
+
     interface BaseData extends entityBase.EntityBaseData {
         /**
          * The object owner's UserId
@@ -207,29 +232,4 @@ export namespace bankAccount {
          */
         Country: CountryISO;
     }
-
-    type CAData = BaseData & CADetails;
-
-    type USData = BaseData & USDetails;
-
-    type BankAccountType = "IBAN" | "GB" | "US" | "CA" | "OTHER";
-
-    type DepositAccountType = "CHECKING" | "SAVINGS";
-
-    type GBData = BaseData & GBDetails;
-
-    type OtherData = BaseData & OtherDetails;
-
-    type IBANData = BaseData & IBANDetails;
-
-    type Data = OtherData | CAData | GBData | IBANData | USData;
-
-    type DataIntersection = OtherData & CAData & GBData & IBANData & USData;
-
-    type CreationDetails =
-        | OtherDetails
-        | CADetails
-        | GBDetails
-        | IBANDetails
-        | USDetails;
 }

@@ -2,10 +2,32 @@
 
 /// <reference types="node" />
 
-import { ApiMethod, AVSResult, DeepPartial } from "./types";
+import { ApiMethod } from "./types";
 import { Base } from "./base";
-import { Services } from "./services";
 import { Models } from "./models";
+import { Users } from "./services/Users";
+import { BankAccounts } from "./services/BankAccounts";
+import { BankingAliases } from "./services/BankingAliases";
+import { DisputeDocuments } from "./services/DisputeDocuments";
+import { Wallets } from "./services/Wallets";
+import { KycDocuments } from "./services/KycDocuments";
+import { UboDeclarations } from "./services/UboDeclarations";
+import { Cards } from "./services/Cards";
+import { CardRegistrations } from "./services/CardRegistrations";
+import { CardPreAuthorizations } from "./services/CardPreauthorizations";
+import { PayIns } from "./services/PayIns";
+import { Transfers } from "./services/Transfers";
+import { PayOuts } from "./services/PayOuts";
+import { Refunds } from "./services/Refunds";
+import { Clients } from "./services/Clients";
+import { Disputes } from "./services/Disputes";
+import { Repudiations } from "./services/Repudiations";
+import { Events } from "./services/Events";
+import { Responses } from "./services/Responses";
+import { Mandates } from "./services/Mandates";
+import { Hooks } from "./services/Hooks";
+import { Reports } from "./services/Reports";
+import { Idempotency } from "./services/Idempotency";
 
 export = MangoPay;
 
@@ -14,28 +36,29 @@ declare class MangoPay {
 
     config: Base.Config;
     requestOptions: Base.RequestOptions;
-    Users: Services.Users;
-    BankAccounts: Services.BankAccounts;
-    BankingAliases: Services.BankingAliases;
-    DisputeDocuments: Services.DisputeDocuments;
-    Wallets: Services.Wallets;
-    KycDocuments: Services.KycDocuments;
-    UboDeclarations: Services.UboDeclarations;
-    Cards: Services.Cards;
-    CardRegistrations: Services.CardRegistrations;
-    CardPreAuthorizations: Services.CardPreAuthorizations;
-    PayIns: Services.PayIns;
-    Transfers: Services.Transfers;
-    PayOuts: Services.PayOuts;
-    Refunds: Services.Refunds;
-    Clients: Services.Clients;
-    Disputes: Services.Disputes;
-    Repudiations: Services.Repudiations;
-    Events: Services.Events;
-    Responses: Services.Responses;
-    Mandates: Services.Mandates;
-    Hooks: Services.Hooks;
-    Reports: Services.Reports;
+    Users: Users;
+    BankAccounts: BankAccounts;
+    BankingAliases: BankingAliases;
+    DisputeDocuments: DisputeDocuments;
+    Wallets: Wallets;
+    KycDocuments: KycDocuments;
+    UboDeclarations: UboDeclarations;
+    Cards: Cards;
+    CardRegistrations: CardRegistrations;
+    CardPreAuthorizations: CardPreAuthorizations;
+    PayIns: PayIns;
+    Transfers: Transfers;
+    PayOuts: PayOuts;
+    Refunds: Refunds;
+    Clients: Clients;
+    Disputes: Disputes;
+    Repudiations: Repudiations;
+    Events: Events;
+    Responses: Responses;
+    Mandates: Mandates;
+    Hooks: Hooks;
+    Reports: Reports;
+    Idempotency: Idempotency;
 
     models: typeof Models;
 

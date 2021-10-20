@@ -2,6 +2,32 @@ import { Timestamp } from "../types";
 import { entityBase } from "./entityBase";
 
 export namespace kycDocument {
+    type KycDocumentType =
+        | "IDENTITY_PROOF"
+        | "REGISTRATION_PROOF"
+        | "ARTICLES_OF_ASSOCIATION"
+        | "SHAREHOLDER_DECLARATION"
+        | "ADDRESS_PROOF";
+
+    type DocumentStatus =
+        | "CREATED"
+        | "VALIDATION_ASKED"
+        | "VALIDATED"
+        | "REFUSED";
+
+    type KYCDocumentRefusedReasonType =
+        | "DOCUMENT_UNREADABLE"
+        | "DOCUMENT_NOT_ACCEPTED"
+        | "DOCUMENT_HAS_EXPIRED"
+        | "DOCUMENT_INCOMPLETE"
+        | "DOCUMENT_MISSING"
+        | "DOCUMENT_DO_NOT_MATCH_USER_DATA"
+        | "DOCUMENT_DO_NOT_MATCH_ACCOUNT_DATA"
+        | "SPECIFIC_CASE"
+        | "DOCUMENT_FALSIFIED"
+        | "UNDERAGE_PERSON"
+        | "SPECIFIC_CASE";
+
     interface KycDocumentData extends entityBase.EntityBaseData {
         /**
          * Gives the type of the KYC document
@@ -91,29 +117,4 @@ export namespace kycDocument {
          */
         File: string;
     }
-
-    type KycDocumentType =
-        "IDENTITY_PROOF"
-        | "REGISTRATION_PROOF"
-        | "ARTICLES_OF_ASSOCIATION"
-        | "SHAREHOLDER_DECLARATION"
-        | "ADDRESS_PROOF";
-    type DocumentStatus =
-        "CREATED"
-        | "VALIDATION_ASKED"
-        | "VALIDATED"
-        | "REFUSED";
-
-    type KYCDocumentRefusedReasonType =
-        "DOCUMENT_UNREADABLE"
-        | "DOCUMENT_NOT_ACCEPTED"
-        | "DOCUMENT_HAS_EXPIRED"
-        | "DOCUMENT_INCOMPLETE"
-        | "DOCUMENT_MISSING"
-        | "DOCUMENT_DO_NOT_MATCH_USER_DATA"
-        | "DOCUMENT_DO_NOT_MATCH_ACCOUNT_DATA"
-        | "SPECIFIC_CASE"
-        | "DOCUMENT_FALSIFIED"
-        | "UNDERAGE_PERSON"
-        | "SPECIFIC_CASE";
 }

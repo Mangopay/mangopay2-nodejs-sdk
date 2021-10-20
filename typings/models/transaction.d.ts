@@ -5,6 +5,12 @@ import { money } from "./money";
 export namespace transaction {
     import MoneyData = money.MoneyData;
 
+    type TransactionNature = "REGULAR" | "REPUDIATION" | "REFUND" | "SETTLEMENT";
+
+    type TransactionType = "PAYIN" | "TRANSFER" | "PAYOUT";
+
+    type TransactionStatus = "CREATED" | "SUCCEEDED" | "FAILED";
+
     interface TransactionData extends entityBase.EntityBaseData {
         /**
          * Information about the funds that are being debited
@@ -71,10 +77,4 @@ export namespace transaction {
          */
         Type: TransactionType;
     }
-
-    type TransactionNature = "REGULAR" | "REPUDIATION" | "REFUND" | "SETTLEMENT";
-
-    type TransactionType = "PAYIN" | "TRANSFER" | "PAYOUT";
-
-    type TransactionStatus = "CREATED" | "SUCCEEDED" | "FAILED";
 }

@@ -1,11 +1,4 @@
-import {
-    PickPartialRequired,
-    PreAuthorizationExecutionType,
-    PreAuthorizationStatus,
-    Timestamp,
-    PaymentStatus,
-    SecureMode
-} from "../types";
+import { PickPartialRequired, SecureMode, Timestamp } from "../types";
 import { entityBase } from "./entityBase";
 import { billing } from "./billing";
 import { Base } from "../base";
@@ -17,6 +10,19 @@ export namespace cardPreAuthorization {
     import BrowserInfoData = Base.BrowserInfoData;
     import MoneyData = money.MoneyData;
     import SecurityInfoData = securityInfo.SecurityInfoData;
+
+    type PreAuthorizationExecutionType = "DIRECT";
+
+    type PaymentStatus = "WAITING" | "CANCELED" | "EXPIRED" | "VALIDATED";
+
+    type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
+
+    type CreateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
+        "Tag" | "Billing" | "SecureMode", "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo">;
+
+    type UpdateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
+        "Tag",
+        "PaymentStatus" | "Id">;
 
     interface CardPreAuthorizationData extends entityBase.EntityBaseData {
         /**
@@ -105,11 +111,4 @@ export namespace cardPreAuthorization {
 
         BrowserInfo: BrowserInfoData;
     }
-
-    type CreateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
-        "Tag" | "Billing" | "SecureMode", "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo">;
-
-    type UpdateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
-        "Tag",
-        "PaymentStatus" | "Id">;
 }

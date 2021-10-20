@@ -3,6 +3,10 @@ import { PickPartialRequired } from "../types";
 import { entityBase } from "./entityBase";
 
 export namespace hook {
+    type HookValidity = "UNKNOWN" | "VALID" | "INVALID";
+
+    type HookStatus = "DISABLED" | "ENABLED";
+
     interface HookData extends entityBase.EntityBaseData {
         /**
          * This is the URL where your receive notification for each EventType
@@ -32,8 +36,4 @@ export namespace hook {
         "EventType" | "Url" | "Tag",
         "Id"> {
     }
-
-    type HookValidity = "UNKNOWN" | "VALID" | "INVALID";
-
-    type HookStatus = "DISABLED" | "ENABLED";
 }

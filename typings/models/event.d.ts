@@ -1,25 +1,8 @@
 import { Timestamp } from "../types";
 
 export namespace event {
-    interface EventData {
-        /**
-         * The ID of whatever the event is
-         */
-        ResourceId: string;
-
-        /**
-         * When the event happened
-         */
-        Date: Timestamp;
-
-        /**
-         * The event type
-         */
-        EventType: EventType;
-    }
-
     type EventType =
-        "PAYIN_NORMAL_CREATED"
+        | "PAYIN_NORMAL_CREATED"
         | "PAYIN_NORMAL_SUCCEEDED"
         | "PAYIN_NORMAL_FAILED"
         | "PAYOUT_NORMAL_CREATED"
@@ -83,4 +66,21 @@ export namespace event {
         | "PREAUTHORIZATION_CREATED"
         | "PREAUTHORIZATION_SUCCEEDED"
         | "PREAUTHORIZATION_FAILED";
+
+    interface EventData {
+        /**
+         * The ID of whatever the event is
+         */
+        ResourceId: string;
+
+        /**
+         * When the event happened
+         */
+        Date: Timestamp;
+
+        /**
+         * The event type
+         */
+        EventType: EventType;
+    }
 }

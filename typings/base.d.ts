@@ -1,7 +1,11 @@
-import { ColumnAndDirection, DeepPartial, Timestamp } from "./types";
+import { DeepPartial, Timestamp } from "./types";
 import { Models } from "./models";
 
 export namespace Base {
+    type WithToJson<T extends object> = T & { toJSON(): any };
+
+    type ColumnAndDirection = "ASC" | "DESC";
+
     interface Config {
         /**
          * API Client Id
@@ -153,12 +157,15 @@ export namespace Base {
 
     interface FallbackReasonData {
         Code: string;
+
         Message: string;
     }
 
     interface WithResponse<T> {
         statusCode: number;
+
         body: T;
+
         headers: Headers;
     }
 
@@ -257,6 +264,4 @@ export namespace Base {
     interface MethodOptionWithoutResponse extends MethodOptions {
         resolveWithFullResponse?: false;
     }
-
-    type WithToJson<T extends object> = T & { toJSON(): any };
 }

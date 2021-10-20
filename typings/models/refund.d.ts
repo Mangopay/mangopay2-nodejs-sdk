@@ -4,6 +4,14 @@ import { money } from "./money";
 export namespace refund {
     import MoneyData = money.MoneyData;
 
+    type RefundReasonType =
+        | "INITIALIZED_BY_CLIENT"
+        | "BANKACCOUNT_INCORRECT"
+        | "OWNER_DO_NOT_MATCH_BANKACCOUNT"
+        | "BANKACCOUNT_HAS_BEEN_CLOSED"
+        | "WITHDRAWAL_IMPOSSIBLE_ON_SAVINGS_ACCOUNTS"
+        | "OTHER";
+
     interface RefundReason {
         RefundReasonType: RefundReasonType;
     }
@@ -45,12 +53,4 @@ export namespace refund {
 
         Tag?: string;
     }
-
-    type RefundReasonType =
-        "INITIALIZED_BY_CLIENT"
-        | "BANKACCOUNT_INCORRECT"
-        | "OWNER_DO_NOT_MATCH_BANKACCOUNT"
-        | "BANKACCOUNT_HAS_BEEN_CLOSED"
-        | "WITHDRAWAL_IMPOSSIBLE_ON_SAVINGS_ACCOUNTS"
-        | "OTHER";
 }

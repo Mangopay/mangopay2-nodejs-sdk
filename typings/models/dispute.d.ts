@@ -6,6 +6,34 @@ import { money } from "./money";
 export namespace dispute {
     import MoneyData = money.MoneyData;
 
+    type DisputeReasonType =
+        | "DUPLICATE"
+        | "FRAUD"
+        | "PRODUCT_UNACCEPTABLE"
+        | "UNKNOWN"
+        | "OTHER"
+        | "REFUND_CONVERSION_RATE"
+        | "LATE_FAILURE_INSUFFICIENT_FUNDS"
+        | "LATE_FAILURE_CONTACT_USER"
+        | "LATE_FAILURE_BANKACCOUNT_CLOSED"
+        | "LATE_FAILURE_BANKACCOUNT_INCOMPATIBLE"
+        | "LATE_FAILURE_BANKACCOUNT_INCORRECT"
+        | "AUTHORISATION_DISPUTED"
+        | "TRANSACTION_NOT_RECOGNIZED"
+        | "PRODUCT_NOT_PROVIDED"
+        | "CANCELED_REOCCURING_TRANSACTION"
+        | "REFUND_NOT_PROCESSED";
+
+    type DisputeStatus =
+        | "CREATED"
+        | "PENDING_CLIENT_ACTION"
+        | "SUBMITTED"
+        | "PENDING_BANK_ACTION"
+        | "REOPENED_PENDING_CLIENT_ACTION"
+        | "CLOSED";
+
+    type DisputeType = "CONTESTABLE" | "NOT_CONTESTABLE" | "RETRIEVAL";
+
     interface DisputeReason {
         DisputeReasonType: DisputeReasonType;
 
@@ -80,32 +108,4 @@ export namespace dispute {
 
     interface UpdateDispute extends PickPartial<DisputeData, "Tag"> {
     }
-
-    type DisputeReasonType =
-        "DUPLICATE"
-        | "FRAUD"
-        | "PRODUCT_UNACCEPTABLE"
-        | "UNKNOWN"
-        | "OTHER"
-        | "REFUND_CONVERSION_RATE"
-        | "LATE_FAILURE_INSUFFICIENT_FUNDS"
-        | "LATE_FAILURE_CONTACT_USER"
-        | "LATE_FAILURE_BANKACCOUNT_CLOSED"
-        | "LATE_FAILURE_BANKACCOUNT_INCOMPATIBLE"
-        | "LATE_FAILURE_BANKACCOUNT_INCORRECT"
-        | "AUTHORISATION_DISPUTED"
-        | "TRANSACTION_NOT_RECOGNIZED"
-        | "PRODUCT_NOT_PROVIDED"
-        | "CANCELED_REOCCURING_TRANSACTION"
-        | "REFUND_NOT_PROCESSED";
-
-    type DisputeStatus =
-        | "CREATED"
-        | "PENDING_CLIENT_ACTION"
-        | "SUBMITTED"
-        | "PENDING_BANK_ACTION"
-        | "REOPENED_PENDING_CLIENT_ACTION"
-        | "CLOSED";
-
-    type DisputeType = "CONTESTABLE" | "NOT_CONTESTABLE" | "RETRIEVAL";
 }
