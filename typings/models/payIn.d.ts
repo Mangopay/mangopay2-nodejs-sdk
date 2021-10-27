@@ -35,6 +35,8 @@ export namespace payIn {
 
     type DirectDebitType = "SOFORT" | "GIROPAY";
 
+    type FrequencyType = "Daily" | "Weekly" | "TwiceAMonth" | "Monthly" | "Bimonthly" | "Quarterly" | "Semiannual" | "Annual" | "Biannual";
+
     interface TemplateURLOptions {
         Payline: string;
 
@@ -653,7 +655,7 @@ export namespace payIn {
         /**
          * Frequency at which the recurring payments will be made
          */
-        Frequency: string;
+        Frequency: FrequencyType;
 
         /**
          * Indicates whether the payment amount is likely to change during the payment period
@@ -744,7 +746,7 @@ export namespace payIn {
         /**
          * Frequency at which the recurring payments will be made
          */
-        Frequency?: number;
+        Frequency?: FrequencyType;
 
         /**
          * Indicates whether the payment amount is likely to change during the payment period
