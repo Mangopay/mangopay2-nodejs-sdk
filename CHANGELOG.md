@@ -1,3 +1,12 @@
+## [1.23.0] - 2021-10-20
+## Added
+
+You can now change the status to "ENDED" for a recurring payment.
+
+## Fixed
+
+- "Status" is now available in the response when you request a recurring payment registration.
+
 ## [1.22.1] - 2021-10-11
 ## Added
 
