@@ -37,6 +37,10 @@ export namespace payIn {
 
     type FrequencyType = "Daily" | "Weekly" | "TwiceAMonth" | "Monthly" | "Bimonthly" | "Quarterly" | "Semiannual" | "Annual" | "Biannual";
 
+    type RecurringPaymentStatus = "CREATED" | "AUTHENTICATION_NEEDED" | "IN_PROGRESS" | "ENDED";
+
+    type UpdateRecurringPaymentStatus = "ENDED";
+
     interface TemplateURLOptions {
         Payline: string;
 
@@ -607,7 +611,7 @@ export namespace payIn {
         /**
          * The status of the transaction
          */
-        Status: transaction.TransactionStatus;
+        Status: RecurringPaymentStatus;
 
         CurrentState: PayInRecurringRegistrationState;
 
@@ -783,7 +787,7 @@ export namespace payIn {
 
         Shipping?: BillingOrShippingRecurringPayInData;
 
-        Status?: string;
+        Status?: UpdateRecurringPaymentStatus;
     }
 
     interface RecurringPayInData extends BasePayInData {
