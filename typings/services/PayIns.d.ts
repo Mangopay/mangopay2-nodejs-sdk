@@ -10,17 +10,14 @@ export class PayIns {
      * @param payIn
      * @param options
      */
-    create: MethodOverload<payIn.CreateCardDirectPayIn,
-        payIn.CardDirectPayInData> &
-        MethodOverload<payIn.CreateCardPreAuthorizedPayIn,
-            payIn.CardPreAuthorizedPayInData> &
+    create:
+        MethodOverload<payIn.CreateCardDirectPayIn, payIn.CardDirectPayInData> &
+        MethodOverload<payIn.CreateCardPreAuthorizedPayIn, payIn.CardPreAuthorizedPayInData> &
         MethodOverload<payIn.CreateCardWebPayIn, payIn.CardWebPayInData> &
-        MethodOverload<payIn.CreateBankWireDirectPayIn,
-            payIn.BankWireDirectPayInData> &
-        MethodOverload<payIn.CreatePayconiqWebPayInData,
-            payIn.PayconiqWebPayInData> &
-        MethodOverload<payIn.CreateDirectDebitDirectPayIn,
-            payIn.DirectDebitDirectPayInData>;
+        MethodOverload<payIn.CreateBankWireDirectPayIn, payIn.BankWireDirectPayInData> &
+        MethodOverload<payIn.CreatePayconiqWebPayInData, payIn.PayconiqWebPayInData> &
+        MethodOverload<payIn.CreateDirectDebitDirectPayIn, payIn.DirectDebitDirectPayInData> &
+        MethodOverload<payIn.CreateDirectDebitWebPayIn, payIn.DirectDebitWebPayInData>;
 
     /**
      * Get pay-in

@@ -3,8 +3,8 @@ import { card } from "./card";
 import { entityBase } from "./entityBase";
 
 export namespace cardRegistration {
-    type UpdateCardRegistration = PickPartial<CardRegistrationData,
-        "Tag" | "RegistrationData">;
+    type UpdateCardRegistration = PickPartialRequired<CardRegistrationData,
+        "Tag" | "RegistrationData", "Id">;
 
     interface CardRegistrationData extends entityBase.EntityBaseData {
         /**

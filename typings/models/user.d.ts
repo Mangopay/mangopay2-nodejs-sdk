@@ -40,6 +40,7 @@ export namespace user {
         | "LegalRepresentativeNationality"
         | "LegalRepresentativeFirstName"
         | "LegalRepresentativeLastName"
+        | "LegalRepresentativeAddress"
         | "Email";
 
     type RequiredUserNaturalData =

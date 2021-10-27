@@ -26,14 +26,8 @@ export class Users {
      * @param user
      * @param options
      */
-    update: MethodOverload<
-        Models.UserLegal | user.UpdateUserLegalData,
-        user.UserLegalData
-        > &
-        MethodOverload<
-            Models.UserNatural | user.UpdateUserNaturalData,
-            user.UserNaturalData
-            >;
+    update: MethodOverload<Models.UserLegal | user.UpdateUserLegalData, user.UserLegalData> &
+        MethodOverload<Models.UserNatural | user.UpdateUserNaturalData, user.UserNaturalData>;
 
     /**
      * Get natural or legal user by ID
@@ -69,21 +63,10 @@ export class Users {
      * @param bankAccount
      * @param options
      */
-    createBankAccount: TwoArgsMethodOverload<
-        string,
-        bankAccount.USDetails,
-        bankAccount.USData
-        > &
-        TwoArgsMethodOverload<
-            string,
-            bankAccount.OtherDetails,
-            bankAccount.OtherData
-            > &
-        TwoArgsMethodOverload<
-            string,
-            bankAccount.IBANDetails,
-            bankAccount.IBANData
-            > &
+    createBankAccount:
+        TwoArgsMethodOverload<string, bankAccount.USDetails, bankAccount.USData> &
+        TwoArgsMethodOverload<string, bankAccount.OtherDetails, bankAccount.OtherData> &
+        TwoArgsMethodOverload<string, bankAccount.IBANDetails, bankAccount.IBANData> &
         TwoArgsMethodOverload<string, bankAccount.GBDetails, bankAccount.GBData> &
         TwoArgsMethodOverload<string, bankAccount.CADetails, bankAccount.CAData>;
 
@@ -208,18 +191,6 @@ export class Users {
      * @param options
      */
     getEMoney: MethodOverload<string, money.EMoneyData>;
-
-    // /**
-    //  * Create an UboDeclaration for the user
-    //  * @param userId
-    //  * @param uboDeclaration
-    //  * @param options
-    //  */
-    // createUboDeclaration: TwoArgsMethodOverload<
-    //   string,
-    //   uboDeclaration.CreateUboDeclaration,
-    //   uboDeclaration.UboDeclarationData
-    // >;
 
     /**
      * Get all user preauthorizations

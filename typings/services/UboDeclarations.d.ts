@@ -75,5 +75,5 @@ export class UboDeclarations {
      * @param {String} uboDeclarationId UboDeclaration Uniquer identifier
      * @param {Object} Ubo object
      */
-    updateUbo: ThreeArgsMethodOverload<string, string, uboDeclaration.CreateUbo, uboDeclaration.UboData>;
+    updateUbo: ThreeArgsMethodOverload<string, string, uboDeclaration.UpdateUbo, uboDeclaration.UboData>;
 }

@@ -1,15 +1,17 @@
-import { PickPartialRequired, SecureMode, Timestamp } from "../types";
+import { CountryISO, PickPartialRequired, SecureMode, Timestamp } from "../types";
 import { entityBase } from "./entityBase";
 import { billing } from "./billing";
 import { Base } from "../base";
 import { money } from "./money";
 import { securityInfo } from "./securityInfo";
+import { shipping } from "./shipping";
 
 export namespace cardPreAuthorization {
     import BillingData = billing.BillingData;
     import BrowserInfoData = Base.BrowserInfoData;
     import MoneyData = money.MoneyData;
     import SecurityInfoData = securityInfo.SecurityInfoData;
+    import ShippingData = shipping.ShippingData;
 
     type PreAuthorizationExecutionType = "DIRECT";
 
@@ -18,7 +20,7 @@ export namespace cardPreAuthorization {
     type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
 
     type CreateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
-        "Tag" | "Billing" | "SecureMode", "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo">;
+        "Tag" | "Billing" | "SecureMode" | "Culture" | "StatementDescriptor" | "Shipping", "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo">;
 
     type UpdateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
         "Tag",
@@ -68,6 +70,11 @@ export namespace cardPreAuthorization {
         SecureMode: SecureMode;
 
         /**
+         * The language to use for the payment page - needs to be the ISO code of the language
+         */
+        Culture: CountryISO;
+
+        /**
          * The ID of a card
          */
         CardId: string;
@@ -86,6 +93,13 @@ export namespace cardPreAuthorization {
          * This is the URL where users are automatically redirected after 3D secure validation (if activated)
          */
         SecureModeReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement.
+         * It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
 
         /**
          * The date when the payment is to be processed by
@@ -107,8 +121,19 @@ export namespace cardPreAuthorization {
          */
         SecurityInfo: SecurityInfoData;
 
+        /**
+         * IP Address of the end user (format IPV4 or IPV6)
+         */
         IpAddress: string;
 
+        /**
+         * This object describes the Browser being user by an end user
+         */
         BrowserInfo: BrowserInfoData;
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping: ShippingData;
     }
 }

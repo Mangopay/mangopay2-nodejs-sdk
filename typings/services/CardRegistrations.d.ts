@@ -26,7 +26,7 @@ export class CardRegistrations {
         >;
 
     /**
-     * Create new card registration
+     * View a card registration
      * @param cardRegistrationId
      * @param options
      */

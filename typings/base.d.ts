@@ -66,6 +66,7 @@ export namespace Base {
         requestConfig: {
             timeout: number;
         };
+
         responseConfig: {
             timeout: number;
         };
@@ -78,13 +79,17 @@ export namespace Base {
             apiVersion: string;
             readonly id: string;
         };
+
         headers: Partial<Headers>;
     }
 
     interface Headers {
         "Content-Type": string;
+
         "User-Agent": string;
+
         "Idempotency-Key": string;
+
         Authorization: string;
 
         [header: string]: string | undefined;
@@ -92,7 +97,9 @@ export namespace Base {
 
     interface AuthorizationData {
         access_token: string;
+
         token_type: string;
+
         expires_in: number;
     }
 

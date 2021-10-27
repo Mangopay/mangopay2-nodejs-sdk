@@ -38,6 +38,10 @@ export namespace uboDeclaration {
         Nationality: string;
 
         Birthday: Timestamp;
+
+        Birthplace: birthplace.Birthplace;
+
+        isActive: boolean;
     }
 
     interface CreateUbo {
@@ -52,6 +56,22 @@ export namespace uboDeclaration {
         Birthday: Timestamp;
 
         Birthplace: birthplace.Birthplace;
+    }
+
+    interface UpdateUbo {
+        FirstName?: string;
+
+        LastName?: string;
+
+        Address?: address.AddressType;
+
+        Nationality?: string;
+
+        Birthday?: Timestamp;
+
+        Birthplace?: birthplace.Birthplace;
+
+        isActive?: boolean;
     }
 
     interface CreateUboDeclaration {

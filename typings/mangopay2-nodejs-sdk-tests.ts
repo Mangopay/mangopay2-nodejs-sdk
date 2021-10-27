@@ -44,6 +44,14 @@ const legalUser = new api.models.UserLegal({
     PostalCode: "20007",
     Country: "US"
   }),
+  LegalRepresentativeAddress: new api.models.Address({
+    AddressLine1: "4101 Reservoir Rd NW",
+    AddressLine2: "",
+    City: "Washington",
+    Region: "District of Columbia",
+    PostalCode: "20007",
+    Country: "US"
+  }),
   LegalRepresentativeBirthday: 1300186358,
   LegalRepresentativeNationality: "FR",
   LegalRepresentativeCountryOfResidence: "FR",
@@ -72,6 +80,14 @@ api.Users.create(
     LegalRepresentativeLastName: "Pay",
     LegalRepresentativeEmail: "mango@mangopay.com",
     HeadquartersAddress: new api.models.Address({
+      AddressLine1: "4101 Reservoir Rd NW",
+      AddressLine2: "",
+      City: "Washington",
+      Region: "District of Columbia",
+      PostalCode: "20007",
+      Country: "US"
+    }),
+    LegalRepresentativeAddress: new api.models.Address({
       AddressLine1: "4101 Reservoir Rd NW",
       AddressLine2: "",
       City: "Washington",
@@ -361,6 +377,10 @@ api.Cards.getTransactions("card-id").then(data => {
   const d = data; // $ExpectType TransactionData[]
 });
 
+api.Cards.validate("id").then(data => {
+  const d = data; // $ExpectType CardData
+});
+
 /* CardRegistrations */
 
 api.CardRegistrations.create({
@@ -375,7 +395,7 @@ api.CardRegistrations.get("reg-id").then(data => {
   const d = data; // $ExpectType CardRegistrationData
 });
 
-api.CardRegistrations.update({ RegistrationData: "hmmm" }).then(data => {
+api.CardRegistrations.update({ RegistrationData: "hmmm" , Id: "Id"}).then(data => {
   const d = data; // $ExpectType CardRegistrationData
 });
 
@@ -453,7 +473,6 @@ api.PayIns.create({
   ExecutionType: "DIRECT",
   AuthorId: "user-id",
   CreditedWalletId: "wallet-id",
-  CreditedUserId: "credited-user-id",
   DeclaredDebitedFunds: { Amount: 10000, Currency: "GBP" },
   DeclaredFees: { Amount: 500, Currency: "GBP" }
 }).then(data => {
@@ -487,6 +506,20 @@ api.PayIns.create({
   MandateId: "mandate-id"
 }).then(data => {
   const d = data; // $ExpectType DirectDebitDirectPayInData
+});
+
+api.PayIns.create({
+  PaymentType: "DIRECT_DEBIT",
+  ExecutionType: "WEB",
+  AuthorId: "user-id",
+  CreditedWalletId: "wallet-id",
+  Fees: { Amount: 100, Currency: "GBP" },
+  DebitedFunds: { Amount: 2000, Currency: "GBP" },
+  ReturnURL: "placeholder",
+  DirectDebitType: "GIROPAY",
+  Culture: "EN"
+}).then(data => {
+  const d = data; // $ExpectType DirectDebitWebPayInData
 });
 
 api.PayIns.get("payin-id").then(data => {
@@ -688,7 +721,6 @@ api.Transfers.getRefunds("transfer-id").then(data => {
 
 api.BankingAliases.create({
   Country: "GB",
-  CreditedUserId: "user-id",
   OwnerName: "owner-id"
 }).then(data => {
   const d = data; // $ExpectType IBANBankingAliasData
@@ -897,7 +929,7 @@ api.Hooks.getAll().then(data => {
 
 /* Reports */
 
-api.Reports.create({ Columns: ["Alias", "AuthorId"] }).then(data => {
+api.Reports.create({ Columns: ["Alias", "AuthorId"], ReportType: "WALLET" }).then(data => {
   const d = data; // $ExpectType ReportData
 });
 

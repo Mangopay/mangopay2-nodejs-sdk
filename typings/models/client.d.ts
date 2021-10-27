@@ -16,7 +16,14 @@ export namespace client {
         | "FURNITURE_GARDEN"
         | "SERVICES_JOBBING_EDUCATION"
         | "SPORT_RECREATION_ACTIVITIES"
-        | "TICKETING";
+        | "TICKETING"
+        | "LOAN"
+        | "EQUITY"
+        | "PROPERTY_EQUITY"
+        | "REWARDS_CHARITY"
+        | "POOL_GROUP_PAYMENT"
+        | "FRANCHISE_"
+        | "OTHER_";
 
     type PlatformType = ValueOf<Enums.IPlatformType>;
 

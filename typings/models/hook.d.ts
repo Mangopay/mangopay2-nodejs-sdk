@@ -1,6 +1,6 @@
 import { event } from "./event";
-import { PickPartialRequired } from "../types";
 import { entityBase } from "./entityBase";
+import { PickPartialRequired } from "../types";
 
 export namespace hook {
     type HookValidity = "UNKNOWN" | "VALID" | "INVALID";
@@ -33,7 +33,7 @@ export namespace hook {
     }
 
     interface UpdateHook extends PickPartialRequired<HookData,
-        "EventType" | "Url" | "Tag",
+        "EventType" | "Url" | "Tag" | "Status",
         "Id"> {
     }
 }

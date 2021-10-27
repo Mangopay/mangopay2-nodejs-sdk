@@ -41,4 +41,14 @@ export class Cards {
      */
     getPreAuthorizations: MethodOverload<string,
         cardPreAuthorization.CardPreAuthorizationData[]>;
+
+    /**
+     * Validate a card
+     * @param cardId
+     * @param callback
+     * @param options
+     * @returns {*|Promise}
+     */
+    validate: MethodOverload<string,
+        card.CardData>;
 }

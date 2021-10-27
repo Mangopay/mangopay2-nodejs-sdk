@@ -6,6 +6,8 @@ import { money } from "./money";
 export namespace payOut {
     import MoneyData = money.MoneyData;
 
+    type PayoutModeRequestedType = "STANDARD" | "INSTANT_PAYMENT";
+
     interface PayOutData extends Omit<transfer.TransferData, "Type"> {
         /**
          * The type of the transaction
@@ -59,5 +61,12 @@ export namespace payOut {
         Tag?: string;
 
         PaymentType: Enums.IPayOutPaymentType["BankWire"];
+
+        /**
+         * Payout mode requested. May take one of the following values:
+         * STANDARD (value by default if no parameter is sent): a standard bank wire is requested and the processing time of the funds is about 48 hours;
+         * INSTANT_PAYMENT: an instant payment bank wire is requested and the processing time is within 25 seconds (subject to prerequisites)
+         */
+        PayoutModeRequested?: PayoutModeRequestedType;
     }
 }

@@ -7,6 +7,7 @@ import { billing } from "./billing";
 import { Base } from "../base";
 import { money } from "./money";
 import { securityInfo } from "./securityInfo";
+import { shipping } from "./shipping";
 
 export namespace payIn {
     import BillingData = billing.BillingData;
@@ -14,6 +15,7 @@ export namespace payIn {
     import BrowserInfoData = Base.BrowserInfoData;
     import MoneyData = money.MoneyData;
     import SecurityInfoData = securityInfo.SecurityInfoData;
+    import ShippingData = shipping.ShippingData;
 
     type _3DSVersion = "V1" | "V2_1";
 
@@ -30,6 +32,8 @@ export namespace payIn {
     type PayInExecutionType = ValueOf<Enums.IPayInExecutionType> | "EXTERNAL_INSTRUCTION";
 
     type RecurringType = "CLASSIC_SUBSCRIPTION" | "FRACTIONED_PAYMENT" | "CUSTOM";
+
+    type DirectDebitType = "SOFORT" | "GIROPAY";
 
     interface TemplateURLOptions {
         Payline: string;
@@ -220,6 +224,16 @@ export namespace payIn {
          * can only include alphanumeric characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
         StatementDescriptor?: string;
+
+        /**
+         * Contains useful information related to the user billing
+         */
+        Billing?: BillingData;
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping?: ShippingData;
     }
 
     interface CardDirectPayInData extends BasePayInData {
@@ -322,23 +336,49 @@ export namespace payIn {
         Billing?: BillingData;
 
         /**
+         * The language to use for the payment page - needs to be the ISO code of the language
+         */
+        Culture?: CountryISO;
+
+        /**
          * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
          * See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
         StatementDescriptor?: string;
 
         /**
-         * The ip address
+         * IP Address of the end user (format IPV4 or IPV6)
          */
         IpAddress?: string;
 
+        /**
+         * This object describes the Browser being user by an end user
+         */
         BrowserInfo?: BrowserInfoData;
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping?: ShippingData;
     }
 
     interface DirectDebitDirectPayInData extends BasePayInData {
+        /**
+         * The date the user will be charged. Note that for direct debit payments, it will take one more day more the payment becomes successful
+         */
         ChargeDate: Timestamp;
 
+        /**
+         * The ID of a Mandate
+         */
         MandateId: string;
+
+        /**
+         * A custom description to appear on the user's bank statement.
+         * It can be up to 100 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info and note that this functionality is only available for SEPA payments.
+         */
+        StatementDescriptor: string;
     }
 
     interface CreateDirectDebitDirectPayIn {
@@ -359,6 +399,87 @@ export namespace payIn {
         MandateId: string;
 
         StatementDescriptor?: string;
+    }
+
+    interface DirectDebitWebPayInData extends BasePayInData {
+        /**
+         * The language to use for the payment page - needs to be the ISO code of the language
+         */
+        Culture: CountryISO;
+
+        /**
+         * The type of web direct debit
+         */
+        DirectDebitType: DirectDebitType;
+
+        /**
+         * The URL to redirect to after payment (whether successful or not)
+         */
+        ReturnUrl: string;
+
+        /**
+         * The SecureMode is used to select a 3DS1 and 3DS2 protocol for CB Visa and MasterCard.
+         * The field lets you ask for an Frictionless payment with the value "DEFAULT".
+         * The value "NO_CHOICE" will allow you to make the transaction eligible for Frictionless, but the exemption will be applied by the other payment actors.
+         * The value force "FORCE" will force customer authentification.
+         */
+        SecureMode: SecureMode;
+
+        /**
+         * The URL to use for the payment page template
+         */
+        TemplateURL: string;
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        ReturnURL: string;
+    }
+
+    interface CreateDirectDebitWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "DIRECT_DEBIT";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The user ID who is credited (defaults to the owner of the wallet)
+         */
+        CreditedUserId?: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The URL to redirect to after payment (whether successful or not)
+         */
+        ReturnURL: string;
+
+        /**
+         * The language to use for the payment page - needs to be the ISO code of the language
+         */
+        Culture: CountryISO;
+
+        /**
+         * The type of web direct debit
+         */
+        DirectDebitType: DirectDebitType;
     }
 
     interface CardPreAuthorizedPayInData extends BasePayInData {
@@ -382,7 +503,7 @@ export namespace payIn {
         /**
          * A user's ID
          */
-        AuthorId: string;
+        AuthorId?: string;
 
         /**
          * The user ID who is credited (defaults to the owner of the wallet)
@@ -464,8 +585,8 @@ export namespace payIn {
     }
 
     interface CreateBankWireDirectPayIn extends PickPartialRequired<BankWireDirectPayInData,
-        "Tag",
-        "AuthorId" | "CreditedUserId" | "CreditedWalletId" | "DeclaredDebitedFunds" | "DeclaredFees"> {
+        "Tag" | "CreditedUserId",
+        "AuthorId" | "CreditedWalletId" | "DeclaredDebitedFunds" | "DeclaredFees"> {
         ExecutionType: "DIRECT";
         PaymentType: "BANK_WIRE";
     }
@@ -514,60 +635,142 @@ export namespace payIn {
          */
         CreditedWalletId: string;
 
+        /**
+         * Contains every useful informations related to the user billing
+         */
         Billing: BillingOrShippingRecurringPayInData;
 
+        /**
+         * Contains every useful information's related to the user shipping
+         */
         Shipping: BillingOrShippingRecurringPayInData;
 
+        /**
+         * Date on which the recurring payments will end
+         */
         EndDate: Timestamp;
 
+        /**
+         * Frequency at which the recurring payments will be made
+         */
         Frequency: string;
 
+        /**
+         * Indicates whether the payment amount is likely to change during the payment period
+         */
         FixedNextAmount: boolean;
 
+        /**
+         * Indicates whether this recurring payment is a payment in installments in N times
+         */
         FractionedPayment: boolean;
 
         FreeCycles: number;
 
+        /**
+         * Amount of the first payment. This amount may be different from the NextTransactionDebitedFunds.
+         */
         FirstTransactionDebitedFunds: MoneyData;
 
+        /**
+         * Amount of the first payment fees. This amount may be different from the NextTransactionFees.
+         */
         FirstTransactionFees: MoneyData;
 
+        /**
+         * Amount of subsequent payments. If this field is empty and either FixedNextAmount or FractionedPayment are TRUE,
+         * we will take the amount of the FirstTransactionDebitedFunds as the subsequent payment amount.
+         */
         NextTransactionDebitedFunds: MoneyData;
 
+        /**
+         * Amount of subsequent fees. If this field is empty and either FixedNextAmount or FractionedPayment are TRUE,
+         * we will take the amount of the FirstTransactionFees as the subsequent fees.
+         */
         NextTransactionFees: MoneyData;
 
+        /**
+         * Indicates whether the object is being used to attempt registration of an existing recurring payment
+         */
         Migration: boolean;
     }
 
     interface CreatePayInRecurringRegistration {
+        /**
+         * A user's ID
+         */
         AuthorId: string;
 
+        /**
+         * The ID of a card
+         */
         CardId: string;
 
+        /**
+         * The user ID who is credited (defaults to the owner of the wallet)
+         */
         CreditedUserId?: string;
 
+        /**
+         * The ID of the wallet where money will be credited
+         */
         CreditedWalletId: string;
 
+        /**
+         * Amount of the first payment. This amount may be different from the NextTransactionDebitedFunds.
+         */
         FirstTransactionDebitedFunds: MoneyData;
 
+        /**
+         * Amount of the first payment fees. This amount may be different from the NextTransactionFees.
+         */
         FirstTransactionFees: MoneyData;
 
+        /**
+         * Contains every useful informations related to the user billing
+         */
         Billing?: BillingOrShippingRecurringPayInData;
 
+        /**
+         * Contains every useful information's related to the user shipping
+         */
         Shipping?: BillingOrShippingRecurringPayInData;
 
+        /**
+         * Date on which the recurring payments will end
+         */
         EndDate?: Timestamp;
 
+        /**
+         * Frequency at which the recurring payments will be made
+         */
         Frequency?: number;
 
+        /**
+         * Indicates whether the payment amount is likely to change during the payment period
+         */
         FixedNextAmount?: boolean;
 
+        /**
+         * Indicates whether this recurring payment is a payment in installments in N times
+         */
         FractionedPayment?: boolean;
 
+        /**
+         * Indicates whether the object is being used to attempt registration of an existing recurring payment
+         */
         Migration?: boolean;
 
+        /**
+         * Amount of subsequent payments. If this field is empty and either FixedNextAmount or FractionedPayment are TRUE,
+         * we will take the amount of the FirstTransactionDebitedFunds as the subsequent payment amount.
+         */
         NextTransactionDebitedFunds?: MoneyData;
 
+        /**
+         * Amount of subsequent fees. If this field is empty and either FixedNextAmount or FractionedPayment are TRUE,
+         * we will take the amount of the FirstTransactionFees as the subsequent fees.
+         */
         NextTransactionFees?: MoneyData;
     }
 
@@ -577,6 +780,8 @@ export namespace payIn {
         Billing?: BillingOrShippingRecurringPayInData;
 
         Shipping?: BillingOrShippingRecurringPayInData;
+
+        Status?: string;
     }
 
     interface RecurringPayInData extends BasePayInData {
@@ -639,32 +844,78 @@ export namespace payIn {
     }
 
     interface CreateRecurringPayInCIT {
+        /**
+         * The recurring's ID
+         */
         RecurringPayinRegistrationId: string;
 
+        /**
+         * This object describes the Browser being user by an end user
+         */
         BrowserInfo: BrowserInfoData;
 
+        /**
+         * IP Address of the end user (format IPV4 or IPV6)
+         */
         IpAddress: string;
 
+        /**
+         * This is the URL where users are automatically redirected after 3D secure validation (if activated)
+         */
         SecureModeReturnURL: string;
 
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long,
+         * and can only include alphanumeric characters or spaces. See here for important info.
+         * Note that each bank handles this information differently, some show less or no information.
+         */
         StatementDescriptor?: string;
 
+        /**
+         * Custom data that you can add to this item
+         */
         Tag?: string;
 
+        /**
+         * Amount of the subsequent payment. If this field is empty we will take the amount entered in the NextTransactionDebitedFunds of the Recurring PayIn Registration.
+         * An amount must be transmitted during either registration or pay-in (if it’s different from the registration one).
+         */
         DebitedFunds?: MoneyData;
 
+        /**
+         * Amount of the subsequent fees. If this field is empty we will take the amount entered in the NextTransactionFees
+         * of the Recurring PayIn Registration. An amount must be transmitted during either registration or pay-in.
+         */
         Fees?: MoneyData;
     }
 
     interface CreateRecurringPayInMIT {
+        /**
+         * The recurring's ID
+         */
         RecurringPayinRegistrationId: string;
 
+        /**
+         * Amount of the subsequent payment. If this field is empty we will take the amount entered in the NextTransactionDebitedFunds
+         * of the Recurring PayIn Registration. An amount must be transmitted during either registration or pay-in (if it’s different from the registration one).
+         */
         DebitedFunds?: MoneyData;
 
+        /**
+         * Amount of the subsequent fees. If this field is empty we will take the amount entered in the NextTransactionFees
+         * of the Recurring PayIn Registration. An amount must be transmitted during either registration or pay-in.
+         */
         Fees?: MoneyData;
 
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
         StatementDescriptor?: string;
 
+        /**
+         * Custom data that you can add to this item
+         */
         Tag?: string;
     }
 
