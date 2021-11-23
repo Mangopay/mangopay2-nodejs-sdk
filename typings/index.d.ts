@@ -57,6 +57,8 @@ declare class MangoPay {
     callback: (...args: any[]) => void,
     options: MangoPay.RequestOptions
   ): any;
+
+  rateLimits: MangoPay.RateLimit[];
 }
 
 declare namespace MangoPay {
@@ -72,6 +74,13 @@ declare namespace MangoPay {
     "Idempotency-Key": string;
     Authorization: string;
     [header: string]: string | undefined;
+  }
+
+  interface RateLimit {
+    minutesInterval: number;
+    callsMade: number;
+    callsRemaining: number;
+    resetTimeMillis: number;
   }
 
   /** A UTC timestamp in seconds */
