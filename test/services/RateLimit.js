@@ -13,7 +13,6 @@ describe('Rate Limits', function () {
 
     before(function (done) {
         api.Users.create(john).then(function () {
-            console.log(api.rateLimits);
             done();
         });
     });
