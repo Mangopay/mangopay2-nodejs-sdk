@@ -1,3 +1,18 @@
+## [1.24.0] - 2021-11-25
+## Added
+
+Following numerous requests, we are happy to announce an update in the MANGOPAY Node.JS SDK. This update greatly improves the compatibility of the Node.JS SDK with Typescript.
+
+## Breaking Change
+
+LegalRepresentativeAddress is mandatory to create a legal user
+
+## Other notable changes
+- The CardRegistrationId becomes mandatory to update a CardRegistration
+- The CreditedUserId becomes optional during the creation of a BANK_WIRE DIRECT PayIn
+- Addition of missing types of PayIn WEB DIRECT_DEBIT
+- Addition of ReportType (WALLET, TRANSACTION) to the object Report
+
 ## [1.23.0] - 2021-10-20
 ## Added
 
