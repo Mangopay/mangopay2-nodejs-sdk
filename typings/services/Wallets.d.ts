@@ -1,8 +1,8 @@
 import { wallet } from "../models/wallet";
 import { Models } from "../models";
 import { transaction } from "../models/transaction";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
 
 export class Wallets {
     /**

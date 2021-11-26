@@ -1,9 +1,9 @@
 import { mandate } from "../models/mandate";
 import { transaction } from "../models/transaction";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
-import NoArgMethodOverload = Base.NoArgMethodOverload;
-import TwoArgsMethodOverload = Base.TwoArgsMethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
+import NoArgMethodOverload = base.NoArgMethodOverload;
+import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
 
 export class Mandates {
     /**

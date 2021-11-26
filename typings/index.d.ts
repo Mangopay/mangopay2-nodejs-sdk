@@ -3,7 +3,7 @@
 /// <reference types="node" />
 
 import { ApiMethod, MakeKeysRequired } from "./types";
-import { Base } from "./base";
+import { base } from "./base";
 import { Users } from "./services/Users";
 import { BankAccounts } from "./services/BankAccounts";
 import { BankingAliases } from "./services/BankingAliases";
@@ -55,14 +55,19 @@ import { mandate } from "./models/mandate";
 import { hook } from "./models/hook";
 import { report } from "./models/report";
 import { billing } from "./models/billing";
+import { birthplace } from "./models/birthplace";
+import { event } from "./models/event";
+import { idempotency } from "./models/idempotency";
+import { securityInfo } from "./models/securityInfo";
+import { shipping } from "./models/shipping";
 
 export = MangoPay;
 
 declare class MangoPay {
-    constructor(config: Base.Config);
+    constructor(config: base.Config);
 
-    config: Base.Config;
-    requestOptions: Base.RequestOptions;
+    config: base.Config;
+    requestOptions: base.RequestOptions;
     Users: Users;
     BankAccounts: BankAccounts;
     BankingAliases: BankingAliases;
@@ -91,9 +96,9 @@ declare class MangoPay {
 
     Log(...args: any[]): void;
 
-    authorize(callback: (data: Base.AuthorizationData) => void): void;
+    authorize(callback: (data: base.AuthorizationData) => void): void;
 
-    authorize(): Promise<Base.AuthorizationData>;
+    authorize(): Promise<base.AuthorizationData>;
 
     buildRequestData(entity: any): any;
 
@@ -104,13 +109,13 @@ declare class MangoPay {
     method(
         method: ApiMethod,
         callback: (...args: any[]) => void,
-        options: Base.RequestOptions
+        options: base.RequestOptions
     ): any;
 }
 
 declare namespace MangoPay {
     namespace models {
-        import DependsObject = Base.DependsObject;
+        import DependsObject = base.DependsObject;
         import MoneyData = money.MoneyData;
         import BillingData = billing.BillingData;
         const PayInExecutionType: Enums.IPayInExecutionType;
@@ -619,4 +624,41 @@ declare namespace MangoPay {
         interface DebitedBankAccount extends bankAccount.DebitedBankAccountData {
         }
     }
+
+    export {
+        models,
+        base,
+        address,
+        bankAccount,
+        bankingAlias,
+        billing,
+        birthplace,
+        card,
+        cardPreAuthorization,
+        cardRegistration,
+        client,
+        dispute,
+        disputeDocument,
+        entityBase,
+        event,
+        hook,
+        idempotency,
+        kycDocument,
+        mandate,
+        money,
+        payIn,
+        payOut,
+        refund,
+        report,
+        repudiation,
+        securityInfo,
+        settlementTransfer,
+        shipping,
+        shippingAddress,
+        transaction,
+        transfer,
+        uboDeclaration,
+        user,
+        wallet
+    };
 }

@@ -1,6 +1,6 @@
 import { cardRegistration } from "../models/cardRegistration";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
 
 /**
  * You need to register a card in order to process a Direct PayIn. Card registration enables you to tokenize a Card. These are the steps to follow:

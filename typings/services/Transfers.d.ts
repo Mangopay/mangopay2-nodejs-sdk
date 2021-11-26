@@ -1,8 +1,8 @@
 import { transfer } from "../models/transfer";
 import { refund } from "../models/refund";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
-import TwoArgsMethodOverload = Base.TwoArgsMethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
+import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
 
 export class Transfers {
     /**

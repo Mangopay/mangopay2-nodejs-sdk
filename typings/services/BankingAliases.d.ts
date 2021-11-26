@@ -1,8 +1,8 @@
 import { bankingAlias } from "../models/bankingAlias";
 import { Omit } from "../types";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
-import NoArgMethodOverload = Base.NoArgMethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
+import NoArgMethodOverload = base.NoArgMethodOverload;
 
 export class BankingAliases {
     /**

@@ -2,13 +2,13 @@ import { MakeKeysRequired } from "./types";
 import { wallet } from "./models/wallet";
 import { user } from "./models/user";
 import { address } from "./models/address";
-import { Base } from "./base";
+import { base } from "./base";
 import MangoPay = require("./index");
 
 export namespace Models {
     import EntityBase = MangoPay.models.EntityBase;
     import ModelMethods = MangoPay.models.ModelMethods;
-    import DependsObject = Base.DependsObject;
+    import DependsObject = base.DependsObject;
 
     class Model<T = any> implements ModelMethods<T> {
         initialize(): void;

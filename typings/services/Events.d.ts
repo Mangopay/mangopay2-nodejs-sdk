@@ -1,6 +1,6 @@
 import { event } from "../models/event";
-import { Base } from "../base";
-import NoArgMethodOverload = Base.NoArgMethodOverload;
+import { base } from "../base";
+import NoArgMethodOverload = base.NoArgMethodOverload;
 
 export class Events {
     /**

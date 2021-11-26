@@ -1,7 +1,7 @@
 import { kycDocument } from "../models/kycDocument";
-import { Base } from "../base";
-import NoArgMethodOverload = Base.NoArgMethodOverload;
-import MethodOverload = Base.MethodOverload;
+import { base } from "../base";
+import NoArgMethodOverload = base.NoArgMethodOverload;
+import MethodOverload = base.MethodOverload;
 
 /**
  * You need to create document in order to upload pages on this document.

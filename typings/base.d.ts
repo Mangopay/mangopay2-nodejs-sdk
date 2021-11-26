@@ -1,7 +1,7 @@
 import { DeepPartial, Timestamp } from "./types";
 import { Models } from "./models";
 
-export namespace Base {
+export namespace base {
     type WithToJson<T extends object> = T & { toJSON(): any };
 
     type ColumnAndDirection = "ASC" | "DESC";
