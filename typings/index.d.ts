@@ -2,7 +2,7 @@
 
 /// <reference types="node" />
 
-import { ApiMethod, MakeKeysRequired } from "./types";
+import { ApiMethod, MakeKeysRequired, Timestamp, SecureMode } from "./types";
 import { base } from "./base";
 import { Users } from "./services/Users";
 import { BankAccounts } from "./services/BankAccounts";
@@ -28,7 +28,7 @@ import { Hooks } from "./services/Hooks";
 import { Reports } from "./services/Reports";
 import { Idempotency } from "./services/Idempotency";
 import { address } from "./models/address";
-import { Enums } from "./enums";
+import { enums } from "./enums";
 import { bankingAlias } from "./models/bankingAlias";
 import { bankAccount } from "./models/bankAccount";
 import { transaction } from "./models/transaction";
@@ -118,21 +118,21 @@ declare namespace MangoPay {
         import DependsObject = base.DependsObject;
         import MoneyData = money.MoneyData;
         import BillingData = billing.BillingData;
-        const PayInExecutionType: Enums.IPayInExecutionType;
-        const PayInPaymentType: Enums.IPayInPaymentType;
-        const MandateStatus: Enums.IMandateStatus;
-        const LegalPersonType: Enums.ILegalPersonType;
-        const PersonType: Enums.IPersonType;
-        const BankAccountType: Enums.IBankAccountType;
-        const DeclaredUboStatus: Enums.IDeclaredUboStatus;
-        const KycDocumentStatus: Enums.IKycDocumentStatus;
-        const KycDocumentType: Enums.IKycDocumentType;
-        const PayOutPaymentType: Enums.IPayOutPaymentType;
-        const PlatformType: Enums.IPlatformType;
-        const UboDeclarationRefusedReasonType: Enums.IUboDeclarationRefusedReasonType;
-        const UboDeclarationStatus: Enums.IUboDeclarationStatus;
-        const UboRefusedReasonType: Enums.IUboRefusedReasonType;
-        const UserNaturalCapacity: Enums.IUserNaturalCapacity;
+        const PayInExecutionType: enums.IPayInExecutionType;
+        const PayInPaymentType: enums.IPayInPaymentType;
+        const MandateStatus: enums.IMandateStatus;
+        const LegalPersonType: enums.ILegalPersonType;
+        const PersonType: enums.IPersonType;
+        const BankAccountType: enums.IBankAccountType;
+        const DeclaredUboStatus: enums.IDeclaredUboStatus;
+        const KycDocumentStatus: enums.IKycDocumentStatus;
+        const KycDocumentType: enums.IKycDocumentType;
+        const PayOutPaymentType: enums.IPayOutPaymentType;
+        const PlatformType: enums.IPlatformType;
+        const UboDeclarationRefusedReasonType: enums.IUboDeclarationRefusedReasonType;
+        const UboDeclarationStatus: enums.IUboDeclarationStatus;
+        const UboRefusedReasonType: enums.IUboRefusedReasonType;
+        const UserNaturalCapacity: enums.IUserNaturalCapacity;
 
         interface ModelMethods<T extends {}> {
             initialize(): void;
@@ -659,6 +659,9 @@ declare namespace MangoPay {
         transfer,
         uboDeclaration,
         user,
-        wallet
+        wallet,
+        Timestamp,
+        SecureMode,
+        enums
     };
 }

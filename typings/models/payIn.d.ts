@@ -1,5 +1,5 @@
 import { CountryISO, PickPartialRequired, SecureMode, Timestamp, ValueOf } from "../types";
-import { Enums } from "../enums";
+import { enums } from "../enums";
 import { transaction } from "./transaction";
 import { card } from "./card";
 import { entityBase } from "./entityBase";
@@ -27,9 +27,9 @@ export namespace payIn {
         | PayconiqWebPayInData
         | DirectDebitDirectPayInData;
 
-    type PayInPaymentType = ValueOf<Enums.IPayInPaymentType>;
+    type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
-    type PayInExecutionType = ValueOf<Enums.IPayInExecutionType> | "EXTERNAL_INSTRUCTION";
+    type PayInExecutionType = ValueOf<enums.IPayInExecutionType> | "EXTERNAL_INSTRUCTION";
 
     type RecurringType = "CLASSIC_SUBSCRIPTION" | "FRACTIONED_PAYMENT" | "CUSTOM";
 
@@ -561,7 +561,7 @@ export namespace payIn {
         /**
          * The type of bank account
          */
-        Type: ValueOf<Enums.IBankAccountType>;
+        Type: ValueOf<enums.IBankAccountType>;
     }
 
     interface BankWireDirectPayInData extends BasePayInData {

@@ -1050,6 +1050,10 @@ const createUboDeclaration: Mangopay.uboDeclaration.CreateUboDeclaration = {
     Ubos: []
 };
 
-const personType: Mangopay.user.PersonType = "LEGAL";
+const personType: Mangopay.user.PersonType = Mangopay.models.PersonType.Legal;
 
 const clientFundsType: Mangopay.wallet.ClientFundsType = "CREDIT";
+
+const timestamp: Mangopay.Timestamp = 1234;
+
+const secureMode: Mangopay.SecureMode = "DEFAULT";
