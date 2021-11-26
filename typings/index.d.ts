@@ -2,8 +2,8 @@
 
 /// <reference types="node" />
 
-import { ApiMethod, MakeKeysRequired } from "./types";
-import { Base } from "./base";
+import { ApiMethod, MakeKeysRequired, Timestamp, SecureMode } from "./types";
+import { base } from "./base";
 import { Users } from "./services/Users";
 import { BankAccounts } from "./services/BankAccounts";
 import { BankingAliases } from "./services/BankingAliases";
@@ -28,7 +28,7 @@ import { Hooks } from "./services/Hooks";
 import { Reports } from "./services/Reports";
 import { Idempotency } from "./services/Idempotency";
 import { address } from "./models/address";
-import { Enums } from "./enums";
+import { enums } from "./enums";
 import { bankingAlias } from "./models/bankingAlias";
 import { bankAccount } from "./models/bankAccount";
 import { transaction } from "./models/transaction";
@@ -55,14 +55,19 @@ import { mandate } from "./models/mandate";
 import { hook } from "./models/hook";
 import { report } from "./models/report";
 import { billing } from "./models/billing";
+import { birthplace } from "./models/birthplace";
+import { event } from "./models/event";
+import { idempotency } from "./models/idempotency";
+import { securityInfo } from "./models/securityInfo";
+import { shipping } from "./models/shipping";
 
 export = MangoPay;
 
 declare class MangoPay {
-    constructor(config: Base.Config);
+    constructor(config: base.Config);
 
-    config: Base.Config;
-    requestOptions: Base.RequestOptions;
+    config: base.Config;
+    requestOptions: base.RequestOptions;
     Users: Users;
     BankAccounts: BankAccounts;
     BankingAliases: BankingAliases;
@@ -91,9 +96,9 @@ declare class MangoPay {
 
     Log(...args: any[]): void;
 
-    authorize(callback: (data: Base.AuthorizationData) => void): void;
+    authorize(callback: (data: base.AuthorizationData) => void): void;
 
-    authorize(): Promise<Base.AuthorizationData>;
+    authorize(): Promise<base.AuthorizationData>;
 
     buildRequestData(entity: any): any;
 
@@ -104,30 +109,30 @@ declare class MangoPay {
     method(
         method: ApiMethod,
         callback: (...args: any[]) => void,
-        options: Base.RequestOptions
+        options: base.RequestOptions
     ): any;
 }
 
 declare namespace MangoPay {
     namespace models {
-        import DependsObject = Base.DependsObject;
+        import DependsObject = base.DependsObject;
         import MoneyData = money.MoneyData;
         import BillingData = billing.BillingData;
-        const PayInExecutionType: Enums.IPayInExecutionType;
-        const PayInPaymentType: Enums.IPayInPaymentType;
-        const MandateStatus: Enums.IMandateStatus;
-        const LegalPersonType: Enums.ILegalPersonType;
-        const PersonType: Enums.IPersonType;
-        const BankAccountType: Enums.IBankAccountType;
-        const DeclaredUboStatus: Enums.IDeclaredUboStatus;
-        const KycDocumentStatus: Enums.IKycDocumentStatus;
-        const KycDocumentType: Enums.IKycDocumentType;
-        const PayOutPaymentType: Enums.IPayOutPaymentType;
-        const PlatformType: Enums.IPlatformType;
-        const UboDeclarationRefusedReasonType: Enums.IUboDeclarationRefusedReasonType;
-        const UboDeclarationStatus: Enums.IUboDeclarationStatus;
-        const UboRefusedReasonType: Enums.IUboRefusedReasonType;
-        const UserNaturalCapacity: Enums.IUserNaturalCapacity;
+        const PayInExecutionType: enums.IPayInExecutionType;
+        const PayInPaymentType: enums.IPayInPaymentType;
+        const MandateStatus: enums.IMandateStatus;
+        const LegalPersonType: enums.ILegalPersonType;
+        const PersonType: enums.IPersonType;
+        const BankAccountType: enums.IBankAccountType;
+        const DeclaredUboStatus: enums.IDeclaredUboStatus;
+        const KycDocumentStatus: enums.IKycDocumentStatus;
+        const KycDocumentType: enums.IKycDocumentType;
+        const PayOutPaymentType: enums.IPayOutPaymentType;
+        const PlatformType: enums.IPlatformType;
+        const UboDeclarationRefusedReasonType: enums.IUboDeclarationRefusedReasonType;
+        const UboDeclarationStatus: enums.IUboDeclarationStatus;
+        const UboRefusedReasonType: enums.IUboRefusedReasonType;
+        const UserNaturalCapacity: enums.IUserNaturalCapacity;
 
         interface ModelMethods<T extends {}> {
             initialize(): void;
@@ -619,4 +624,44 @@ declare namespace MangoPay {
         interface DebitedBankAccount extends bankAccount.DebitedBankAccountData {
         }
     }
+
+    export {
+        models,
+        base,
+        address,
+        bankAccount,
+        bankingAlias,
+        billing,
+        birthplace,
+        card,
+        cardPreAuthorization,
+        cardRegistration,
+        client,
+        dispute,
+        disputeDocument,
+        entityBase,
+        event,
+        hook,
+        idempotency,
+        kycDocument,
+        mandate,
+        money,
+        payIn,
+        payOut,
+        refund,
+        report,
+        repudiation,
+        securityInfo,
+        settlementTransfer,
+        shipping,
+        shippingAddress,
+        transaction,
+        transfer,
+        uboDeclaration,
+        user,
+        wallet,
+        Timestamp,
+        SecureMode,
+        enums
+    };
 }

@@ -1,6 +1,6 @@
 import { Omit } from "../types";
 import { transfer } from "./transfer";
-import { Enums } from "../enums";
+import { enums } from "../enums";
 import { money } from "./money";
 
 export namespace payOut {
@@ -14,7 +14,7 @@ export namespace payOut {
          */
         Type: "PAYOUT";
 
-        PaymentType: Enums.IPayOutPaymentType["BankWire"];
+        PaymentType: enums.IPayOutPaymentType["BankWire"];
 
         /**
          * An ID of a Bank Account
@@ -60,7 +60,7 @@ export namespace payOut {
 
         Tag?: string;
 
-        PaymentType: Enums.IPayOutPaymentType["BankWire"];
+        PaymentType: enums.IPayOutPaymentType["BankWire"];
 
         /**
          * Payout mode requested. May take one of the following values:

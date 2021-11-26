@@ -7,11 +7,11 @@ import { card } from "../models/card";
 import { kycDocument } from "../models/kycDocument";
 import { money } from "../models/money";
 import { cardPreAuthorization } from "../models/cardPreauthorization";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
-import NoArgMethodOverload = Base.NoArgMethodOverload;
-import TwoArgsMethodOverload = Base.TwoArgsMethodOverload;
-import ThreeArgsMethodOverload = Base.ThreeArgsMethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
+import NoArgMethodOverload = base.NoArgMethodOverload;
+import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
+import ThreeArgsMethodOverload = base.ThreeArgsMethodOverload;
 
 export class Users {
     /**

@@ -1,5 +1,5 @@
 import { PickPartialRequired, ValueOf } from "../types";
-import { Enums } from "../enums";
+import { enums } from "../enums";
 import { entityBase } from "./entityBase";
 
 export namespace mandate {
@@ -9,7 +9,7 @@ export namespace mandate {
      * - "ACTIVE" - the mandate is active and has been accepted by the banks and/or successfully used in a payment
      * - "FAILED" - the mandate has failed for a variety of reasons and is no longer available for payments
      */
-    type MandateStatus = ValueOf<Enums.IMandateStatus>;
+    type MandateStatus = ValueOf<enums.IMandateStatus>;
 
     type MandateScheme = "SEPA" | "BACS";
 

@@ -1,6 +1,6 @@
 import { cardPreAuthorization } from "../models/cardPreauthorization";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
 
 /**
  * The PreAuthorization Object ensures the solvency of a registered card for 7 days. The overall process is as follows:

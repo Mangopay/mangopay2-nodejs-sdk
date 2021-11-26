@@ -3,13 +3,13 @@ import { transaction } from "../models/transaction";
 import { repudiation } from "../models/repudiation";
 import { settlementTransfer } from "../models/settlementTransfer";
 import { disputeDocument } from "../models/disputeDocument";
-import { Base } from "../base";
-import MethodOverload = Base.MethodOverload;
-import NoArgMethodOverload = Base.NoArgMethodOverload;
-import TwoArgsMethodOverload = Base.TwoArgsMethodOverload;
+import { base } from "../base";
+import MethodOverload = base.MethodOverload;
+import NoArgMethodOverload = base.NoArgMethodOverload;
+import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
 import { money } from "../models/money";
 import MoneyData = money.MoneyData;
-import ThreeArgsMethodOverload = Base.ThreeArgsMethodOverload;
+import ThreeArgsMethodOverload = base.ThreeArgsMethodOverload;
 
 export class Disputes {
     /**

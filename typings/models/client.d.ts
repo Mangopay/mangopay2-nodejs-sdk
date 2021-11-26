@@ -1,5 +1,5 @@
 import { ValueOf } from "../types";
-import { Enums } from "../enums";
+import { enums } from "../enums";
 import { address } from "./address";
 import { entityBase } from "./entityBase";
 
@@ -25,7 +25,7 @@ export namespace client {
         | "FRANCHISE_"
         | "OTHER_";
 
-    type PlatformType = ValueOf<Enums.IPlatformType>;
+    type PlatformType = ValueOf<enums.IPlatformType>;
 
     interface PlatformCategorization {
         Sector: Sector;

@@ -1,7 +1,7 @@
 import { disputeDocument } from "../models/disputeDocument";
-import { Base } from "../base";
-import NoArgMethodOverload = Base.NoArgMethodOverload;
-import MethodOverload = Base.MethodOverload;
+import { base } from "../base";
+import NoArgMethodOverload = base.NoArgMethodOverload;
+import MethodOverload = base.MethodOverload;
 
 export class DisputeDocuments {
     /**

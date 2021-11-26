@@ -1,8 +1,8 @@
 import { uboDeclaration } from "../models/uboDeclaration";
-import { Base } from "../base";
-import TwoArgsMethodOverload = Base.TwoArgsMethodOverload;
-import MethodOverload = Base.MethodOverload;
-import ThreeArgsMethodOverload = Base.ThreeArgsMethodOverload;
+import { base } from "../base";
+import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
+import MethodOverload = base.MethodOverload;
+import ThreeArgsMethodOverload = base.ThreeArgsMethodOverload;
 
 /**
  * An UBO Declaration is an electronic version of the previous KYC document "Shareholder Declaration", in order to declare all the Ultimate Beneficial Owners of a BUSINESS-typed legal User

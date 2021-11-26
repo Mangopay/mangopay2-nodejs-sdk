@@ -1,6 +1,6 @@
-import { Base } from "../base";
+import { base } from "../base";
 import { idempotency } from "../models/idempotency";
-import MethodOverload = Base.MethodOverload;
+import MethodOverload = base.MethodOverload;
 
 export class Idempotency {
     get: MethodOverload<string, idempotency.IdempotencyData>;

@@ -2,10 +2,10 @@ import { client } from "../models/client";
 import { wallet } from "../models/wallet";
 import { CurrencyISO } from "../types";
 import { transaction } from "../models/transaction";
-import { Base } from "../base";
-import NoArgMethodOverload = Base.NoArgMethodOverload;
-import MethodOverload = Base.MethodOverload;
-import TwoArgsMethodOverload = Base.TwoArgsMethodOverload;
+import { base } from "../base";
+import NoArgMethodOverload = base.NoArgMethodOverload;
+import MethodOverload = base.MethodOverload;
+import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
 
 export class Clients {
     /**

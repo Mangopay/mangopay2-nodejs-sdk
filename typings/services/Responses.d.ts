@@ -1,5 +1,5 @@
-import { Base } from "../base";
-import NoArgMethodOverload = Base.NoArgMethodOverload;
+import { base } from "../base";
+import NoArgMethodOverload = base.NoArgMethodOverload;
 
 export class Responses {
     /**

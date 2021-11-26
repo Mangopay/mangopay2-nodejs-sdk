@@ -1,14 +1,14 @@
 import { CountryISO, PickPartialRequired, SecureMode, Timestamp } from "../types";
 import { entityBase } from "./entityBase";
 import { billing } from "./billing";
-import { Base } from "../base";
+import { base } from "../base";
 import { money } from "./money";
 import { securityInfo } from "./securityInfo";
 import { shipping } from "./shipping";
 
 export namespace cardPreAuthorization {
     import BillingData = billing.BillingData;
-    import BrowserInfoData = Base.BrowserInfoData;
+    import BrowserInfoData = base.BrowserInfoData;
     import MoneyData = money.MoneyData;
     import SecurityInfoData = securityInfo.SecurityInfoData;
     import ShippingData = shipping.ShippingData;

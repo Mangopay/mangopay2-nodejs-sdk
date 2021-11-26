@@ -1,13 +1,11 @@
 import Mangopay = require("mangopay2-nodejs-sdk");
-import { Base } from "base";
-import { address } from "models/address";
 
 // $ExpectError
-const invalidConfig: Base.Config = {};
+const invalidConfig: Mangopay.base.Config = {};
 
 /* General Types */
 
-const validConfig: Base.Config = {
+const validConfig: Mangopay.base.Config = {
   clientId: "your_client_id",
   clientApiKey: "your_client_api_key",
   baseUrl: "https://api.mangopay.com"
@@ -17,7 +15,7 @@ const api = new Mangopay(validConfig); // $ExpectType MangoPay
 const payIn: Mangopay.models.PayIn = new api.models.PayIn({}); // $ExpectType PayIn
 const address: Mangopay.models.Address = new api.models.Address({}); // $ExpectType Address
 
-const addressData: address.AddressData = {
+const addressData: Mangopay.address.AddressData = {
   AddressLine1: "20 T Street",
   AddressLine2: "",
   City: "London",
@@ -943,3 +941,119 @@ api.Reports.getAll().then(data => {
 api.Idempotency.get("idempotency-key").then(data => {
   const d = data; // $ExpectType IdempotencyData
 });
+
+/* Namespace Access */
+
+const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
+
+const bankingAliasType: Mangopay.bankingAlias.BankingAliasType = "IBAN";
+
+const billingData: Mangopay.billing.BillingData = {
+    Address: address
+};
+
+const birthplace: Mangopay.birthplace.Birthplace = {
+    City: "palceholder",
+    Country: "FR"
+};
+
+const cardType: Mangopay.card.CardType = "CB_VISA_MASTERCARD";
+
+const paymentStatus: Mangopay.cardPreAuthorization.PaymentStatus = "CANCELED";
+
+const createCardRegistration: Mangopay.cardRegistration.CreateCardRegistration = {
+    UserId: "placeholder",
+    Currency: "AFN"
+};
+
+const businessType: Mangopay.client.BusinessType = "CROWDFUNDING";
+
+const disputeReasonType: Mangopay.dispute.DisputeReasonType = "AUTHORISATION_DISPUTED";
+
+const disputeDocumentType: Mangopay.disputeDocument.DisputeDocumentType = "DELIVERY_PROOF";
+
+const eventType: Mangopay.event.EventType = "DISPUTE_ACTION_REQUIRED";
+
+const hookStatus: Mangopay.hook.HookStatus = "ENABLED";
+
+const idempotency: Mangopay.idempotency.IdempotencyData = {
+    Id: "placeholder",
+    Tag: "placeholder",
+    ContentLength: "123",
+    ContentType: "placeholder",
+    CreationDate: 1234,
+    Date: 1234,
+    RequestURL: "placeholder",
+    Resource: undefined,
+    StatusCode: "1234"
+};
+
+const kycDocumentType: Mangopay.kycDocument.KycDocumentType = "ADDRESS_PROOF";
+
+const mandateStatus: Mangopay.mandate.MandateStatus = "CREATED";
+
+const moneyData: Mangopay.money.MoneyData = {
+    Currency: "AFN",
+    Amount: 1234
+};
+
+const directDebitType: Mangopay.payIn.DirectDebitType = "GIROPAY";
+
+const payoutModeRequestedType: Mangopay.payOut.PayoutModeRequestedType = "INSTANT_PAYMENT";
+
+const refundReasonType: Mangopay.refund.RefundReasonType = "BANKACCOUNT_HAS_BEEN_CLOSED";
+
+const reportColumn: Mangopay.report.Column = "Tag";
+
+const avsResult: Mangopay.securityInfo.AVSResult = "ADDRESS_MATCH_ONLY";
+
+const createSettlementTransfer: Mangopay.settlementTransfer.CreateSettlementTransfer = {
+    AuthorId: "placeholder",
+    DebitedFunds: {
+        Amount: 1234,
+        Currency: "AFN"
+    },
+    Fees: {
+        Amount: 1234,
+        Currency: "AFN"
+    }
+};
+
+const shippingData: Mangopay.shipping.ShippingData = {
+    Address: address,
+    FirstName: "placeholder",
+    LastName: "placeholder"
+};
+
+const shippingAddressData: Mangopay.shippingAddress.ShippingAddressData = {
+    Address: address,
+    RecipientName: "placeholder"
+};
+
+const transactionType: Mangopay.transaction.TransactionType = "TRANSFER";
+
+const createTransfer: Mangopay.transfer.CreateTransfer = {
+    AuthorId: "placeholder",
+    Fees: {
+        Amount: 1234,
+        Currency: "AFN"
+    },
+    DebitedFunds: {
+        Amount: 1234,
+        Currency: "AFN"
+    },
+    CreditedWalletId: "placeholder",
+    DebitedWalletId: "placeholder"
+};
+
+const createUboDeclaration: Mangopay.uboDeclaration.CreateUboDeclaration = {
+    Ubos: []
+};
+
+const personType: Mangopay.user.PersonType = Mangopay.models.PersonType.Legal;
+
+const clientFundsType: Mangopay.wallet.ClientFundsType = "CREDIT";
+
+const timestamp: Mangopay.Timestamp = 1234;
+
+const secureMode: Mangopay.SecureMode = "DEFAULT";

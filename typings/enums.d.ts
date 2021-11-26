@@ -1,4 +1,4 @@
-export namespace Enums {
+export namespace enums {
     interface IPayInExecutionType {
         Direct: "DIRECT";
         Web: "WEB";
