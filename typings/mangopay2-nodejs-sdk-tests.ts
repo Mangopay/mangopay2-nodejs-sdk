@@ -59,6 +59,8 @@ api.Users.create(legalUser).then(data => {
   const d = data; // $ExpectType UserLegalData
   const value = data.PersonType; // $ExpectType "LEGAL"
 
+  const rateLimits = api.rateLimits; // $ExpectType RateLimit[]
+
   console.log(`${legalUser.Name} user created at ${legalUser.CreationDate}`);
 });
 

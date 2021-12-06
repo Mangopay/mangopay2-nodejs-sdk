@@ -94,6 +94,8 @@ declare class MangoPay {
 
     models: typeof MangoPay.models;
 
+    rateLimits: MangoPay.models.RateLimit[];
+
     Log(...args: any[]): void;
 
     authorize(callback: (data: base.AuthorizationData) => void): void;
@@ -201,6 +203,13 @@ declare namespace MangoPay {
             parse(): void;
 
             toJSON(): any;
+        }
+
+        interface RateLimit {
+            minutesInterval: number;
+            callsMade: number;
+            callsRemaining: number;
+            resetTimeMillis: number;
         }
 
         class Money extends EntityBase<MoneyData> {
