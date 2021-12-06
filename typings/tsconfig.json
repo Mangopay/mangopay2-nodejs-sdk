@@ -15,7 +15,5 @@
     "paths": { "mangopay2-nodejs-sdk": ["./"] },
     "types": [],
     "typeRoots": ["../"]
-  },
-
-  "files": ["index.d.ts", "types.d.ts", "mangopay2-nodejs-sdk-tests.ts"]
+  }
 }

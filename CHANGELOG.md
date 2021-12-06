@@ -1,3 +1,29 @@
+## [1.24.1] - 2021-11-26
+##Fixed
+Missing namespaces and exports
+
+## [1.24.0] - 2021-11-25
+## Added
+
+Following numerous requests, we are happy to announce an update in the MANGOPAY Node.JS SDK. This update greatly improves the compatibility of the Node.JS SDK with Typescript.
+
+## Breaking Change
+
+LegalRepresentativeAddress is mandatory to create a legal user
+
+## Other notable changes
+- The CardRegistrationId becomes mandatory to update a CardRegistration
+- The CreditedUserId becomes optional during the creation of a BANK_WIRE DIRECT PayIn
+- Addition of missing types of PayIn WEB DIRECT_DEBIT
+- Addition of ReportType (WALLET, TRANSACTION) to the object Report
+- Items moved to the “base” namespace: AuthorizationDate, Headers, ColumnAndDirection, Config, RequestOptions, PaginationOptions, FilterOptions, BrowserInfoData, FallbackReasonData
+- Items moved to the “securityInfo” namespace: AVSResult, SecurityInfoData
+- Items moved to the “cardPreauthorization” namespace: PreAuthorizationExecutionType, PaymentStatus, PreAuthorizationStatus
+- Items moved to the “billing” namespace: BillingData, BillingOrShippingRecurringPayInData
+- Items moved to the “money” namespace: MoneyData
+- Items moved to the “payIn” namespace: _3DSVersion
+- Items moved to the “enums” namespace: IPayInExecutionType, IPayInPaymentType, IMandateStatus, ILegalPersonType, IPersonType, IBankAccountType, IDeclaredUboStats, IKycDocumentStatus, IKycDocumentType, IPayOutPaymentType, IPlatformType, IUboDeclarationRefusedReasonType, IUboDeclarationStatus, IUboRefusedReasonType, IUserNaturalCapacity
+
 ## [1.23.0] - 2021-10-20
 ## Added
 

@@ -1,11 +1,11 @@
 import Mangopay = require("mangopay2-nodejs-sdk");
 
 // $ExpectError
-const invalidConfig: Mangopay.Config = {};
+const invalidConfig: Mangopay.base.Config = {};
 
 /* General Types */
 
-const validConfig: Mangopay.Config = {
+const validConfig: Mangopay.base.Config = {
   clientId: "your_client_id",
   clientApiKey: "your_client_api_key",
   baseUrl: "https://api.mangopay.com"
@@ -41,6 +41,14 @@ const legalUser = new api.models.UserLegal({
     PostalCode: "20007",
     Country: "US"
   }),
+  LegalRepresentativeAddress: new api.models.Address({
+    AddressLine1: "4101 Reservoir Rd NW",
+    AddressLine2: "",
+    City: "Washington",
+    Region: "District of Columbia",
+    PostalCode: "20007",
+    Country: "US"
+  }),
   LegalRepresentativeBirthday: 1300186358,
   LegalRepresentativeNationality: "FR",
   LegalRepresentativeCountryOfResidence: "FR",
@@ -69,6 +77,14 @@ api.Users.create(
     LegalRepresentativeLastName: "Pay",
     LegalRepresentativeEmail: "mango@mangopay.com",
     HeadquartersAddress: new api.models.Address({
+      AddressLine1: "4101 Reservoir Rd NW",
+      AddressLine2: "",
+      City: "Washington",
+      Region: "District of Columbia",
+      PostalCode: "20007",
+      Country: "US"
+    }),
+    LegalRepresentativeAddress: new api.models.Address({
       AddressLine1: "4101 Reservoir Rd NW",
       AddressLine2: "",
       City: "Washington",
@@ -358,6 +374,10 @@ api.Cards.getTransactions("card-id").then(data => {
   const d = data; // $ExpectType TransactionData[]
 });
 
+api.Cards.validate("id").then(data => {
+  const d = data; // $ExpectType CardData
+});
+
 /* CardRegistrations */
 
 api.CardRegistrations.create({
@@ -372,7 +392,7 @@ api.CardRegistrations.get("reg-id").then(data => {
   const d = data; // $ExpectType CardRegistrationData
 });
 
-api.CardRegistrations.update({ RegistrationData: "hmmm" }).then(data => {
+api.CardRegistrations.update({ RegistrationData: "hmmm" , Id: "Id"}).then(data => {
   const d = data; // $ExpectType CardRegistrationData
 });
 
@@ -450,7 +470,6 @@ api.PayIns.create({
   ExecutionType: "DIRECT",
   AuthorId: "user-id",
   CreditedWalletId: "wallet-id",
-  CreditedUserId: "credited-user-id",
   DeclaredDebitedFunds: { Amount: 10000, Currency: "GBP" },
   DeclaredFees: { Amount: 500, Currency: "GBP" }
 }).then(data => {
@@ -484,6 +503,20 @@ api.PayIns.create({
   MandateId: "mandate-id"
 }).then(data => {
   const d = data; // $ExpectType DirectDebitDirectPayInData
+});
+
+api.PayIns.create({
+  PaymentType: "DIRECT_DEBIT",
+  ExecutionType: "WEB",
+  AuthorId: "user-id",
+  CreditedWalletId: "wallet-id",
+  Fees: { Amount: 100, Currency: "GBP" },
+  DebitedFunds: { Amount: 2000, Currency: "GBP" },
+  ReturnURL: "placeholder",
+  DirectDebitType: "GIROPAY",
+  Culture: "EN"
+}).then(data => {
+  const d = data; // $ExpectType DirectDebitWebPayInData
 });
 
 api.PayIns.get("payin-id").then(data => {
@@ -526,7 +559,7 @@ api.PayIns.createRecurringPayment({
     }
   },
   EndDate: 1234,
-  Frequency: 10,
+  Frequency: "Monthly",
   FixedNextAmount: false,
   FractionedPayment: false,
   Migration: false,
@@ -685,7 +718,6 @@ api.Transfers.getRefunds("transfer-id").then(data => {
 
 api.BankingAliases.create({
   Country: "GB",
-  CreditedUserId: "user-id",
   OwnerName: "owner-id"
 }).then(data => {
   const d = data; // $ExpectType IBANBankingAliasData
@@ -894,7 +926,7 @@ api.Hooks.getAll().then(data => {
 
 /* Reports */
 
-api.Reports.create({ Columns: ["Alias", "AuthorId"] }).then(data => {
+api.Reports.create({ Columns: ["Alias", "AuthorId"], ReportType: "WALLET" }).then(data => {
   const d = data; // $ExpectType ReportData
 });
 
@@ -905,3 +937,123 @@ api.Reports.get("report-id").then(data => {
 api.Reports.getAll().then(data => {
   const d = data; // $ExpectType ReportData[]
 });
+
+api.Idempotency.get("idempotency-key").then(data => {
+  const d = data; // $ExpectType IdempotencyData
+});
+
+/* Namespace Access */
+
+const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
+
+const bankingAliasType: Mangopay.bankingAlias.BankingAliasType = "IBAN";
+
+const billingData: Mangopay.billing.BillingData = {
+    Address: address
+};
+
+const birthplace: Mangopay.birthplace.Birthplace = {
+    City: "palceholder",
+    Country: "FR"
+};
+
+const cardType: Mangopay.card.CardType = "CB_VISA_MASTERCARD";
+
+const paymentStatus: Mangopay.cardPreAuthorization.PaymentStatus = "CANCELED";
+
+const createCardRegistration: Mangopay.cardRegistration.CreateCardRegistration = {
+    UserId: "placeholder",
+    Currency: "AFN"
+};
+
+const businessType: Mangopay.client.BusinessType = "CROWDFUNDING";
+
+const disputeReasonType: Mangopay.dispute.DisputeReasonType = "AUTHORISATION_DISPUTED";
+
+const disputeDocumentType: Mangopay.disputeDocument.DisputeDocumentType = "DELIVERY_PROOF";
+
+const eventType: Mangopay.event.EventType = "DISPUTE_ACTION_REQUIRED";
+
+const hookStatus: Mangopay.hook.HookStatus = "ENABLED";
+
+const idempotency: Mangopay.idempotency.IdempotencyData = {
+    Id: "placeholder",
+    Tag: "placeholder",
+    ContentLength: "123",
+    ContentType: "placeholder",
+    CreationDate: 1234,
+    Date: 1234,
+    RequestURL: "placeholder",
+    Resource: undefined,
+    StatusCode: "1234"
+};
+
+const kycDocumentType: Mangopay.kycDocument.KycDocumentType = "ADDRESS_PROOF";
+
+const mandateStatus: Mangopay.mandate.MandateStatus = "CREATED";
+
+const moneyData: Mangopay.money.MoneyData = {
+    Currency: "AFN",
+    Amount: 1234
+};
+
+const directDebitType: Mangopay.payIn.DirectDebitType = "GIROPAY";
+
+const payoutModeRequestedType: Mangopay.payOut.PayoutModeRequestedType = "INSTANT_PAYMENT";
+
+const refundReasonType: Mangopay.refund.RefundReasonType = "BANKACCOUNT_HAS_BEEN_CLOSED";
+
+const reportColumn: Mangopay.report.Column = "Tag";
+
+const avsResult: Mangopay.securityInfo.AVSResult = "ADDRESS_MATCH_ONLY";
+
+const createSettlementTransfer: Mangopay.settlementTransfer.CreateSettlementTransfer = {
+    AuthorId: "placeholder",
+    DebitedFunds: {
+        Amount: 1234,
+        Currency: "AFN"
+    },
+    Fees: {
+        Amount: 1234,
+        Currency: "AFN"
+    }
+};
+
+const shippingData: Mangopay.shipping.ShippingData = {
+    Address: address,
+    FirstName: "placeholder",
+    LastName: "placeholder"
+};
+
+const shippingAddressData: Mangopay.shippingAddress.ShippingAddressData = {
+    Address: address,
+    RecipientName: "placeholder"
+};
+
+const transactionType: Mangopay.transaction.TransactionType = "TRANSFER";
+
+const createTransfer: Mangopay.transfer.CreateTransfer = {
+    AuthorId: "placeholder",
+    Fees: {
+        Amount: 1234,
+        Currency: "AFN"
+    },
+    DebitedFunds: {
+        Amount: 1234,
+        Currency: "AFN"
+    },
+    CreditedWalletId: "placeholder",
+    DebitedWalletId: "placeholder"
+};
+
+const createUboDeclaration: Mangopay.uboDeclaration.CreateUboDeclaration = {
+    Ubos: []
+};
+
+const personType: Mangopay.user.PersonType = Mangopay.models.PersonType.Legal;
+
+const clientFundsType: Mangopay.wallet.ClientFundsType = "CREDIT";
+
+const timestamp: Mangopay.Timestamp = 1234;
+
+const secureMode: Mangopay.SecureMode = "DEFAULT";
