@@ -1059,3 +1059,7 @@ const clientFundsType: Mangopay.wallet.ClientFundsType = "CREDIT";
 const timestamp: Mangopay.Timestamp = 1234;
 
 const secureMode: Mangopay.SecureMode = "DEFAULT";
+
+const countryISO: Mangopay.CountryISO = "FR";
+
+const currencyISO: Mangopay.CurrencyISO = "EUR";

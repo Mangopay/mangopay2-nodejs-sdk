@@ -2,7 +2,7 @@
 
 /// <reference types="node" />
 
-import { ApiMethod, MakeKeysRequired, Timestamp, SecureMode } from "./types";
+import { ApiMethod, MakeKeysRequired, Timestamp, SecureMode, CountryISO, CurrencyISO } from "./types";
 import { base } from "./base";
 import { Users } from "./services/Users";
 import { BankAccounts } from "./services/BankAccounts";
@@ -671,6 +671,8 @@ declare namespace MangoPay {
         wallet,
         Timestamp,
         SecureMode,
-        enums
+        enums,
+        CountryISO,
+        CurrencyISO
     };
 }
