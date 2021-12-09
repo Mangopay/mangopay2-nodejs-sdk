@@ -1,3 +1,11 @@
+## [1.25.0] - 2021-12-09
+##Added
+You can now view the rate limiting status in the NodeJS SDK.
+This test will show you all available properties in rateLimits : test/services/RateLimit.js.
+
+##Fixed
+Export CurrencyISO and CountryISO
+
 ## [1.24.1] - 2021-11-26
 ##Fixed
 Missing namespaces and exports
