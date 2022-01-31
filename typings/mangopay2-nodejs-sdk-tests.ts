@@ -305,6 +305,7 @@ api.UboDeclarations.getUbo("userId", "uboDeclarationId", "uboId").then(data => {
 });
 
 api.UboDeclarations.updateUbo("userId", "uboDeclarationId", {
+  Id: "uboId",
   Address: address,
   Birthday: 1300186358,
   FirstName: "John",
