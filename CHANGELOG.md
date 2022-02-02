@@ -1,3 +1,9 @@
+## [1.25.1] - 2022-02-02
+##Fixed
+- Typescript is now a dev dependency
+- Recurring Registration model is now exported (Thanks to @sengdaliu)
+- Added missing ID in UpdateUbo
+
 ## [1.25.0] - 2021-12-09
 ##Added
 You can now view the rate limiting status in the NodeJS SDK.
