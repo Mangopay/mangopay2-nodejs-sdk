@@ -1,27 +1,28 @@
-import { Timestamp } from "../types";
+import { Timestamp, ValueOf } from "../types";
 import { birthplace } from "./birthplace";
 import { address } from "./address";
 import { entityBase } from "./entityBase";
+import { enums } from "../enums";
 
 export namespace uboDeclaration {
     interface UboDeclarationData extends entityBase.EntityBaseData {
         /**
          * cannot be modified by clients
          */
-        ProcessedDate: null;
+        ProcessedDate: Timestamp;
         /**
          * Declaration status (one of UboDeclarationStatus)
          */
-        Status: null;
+        Status: ValueOf<enums.IUboDeclarationStatus>;
         /**
          * Array of reasons why the declaration was refused
          * Values as declared in UboDeclarationRefusedReasonType.
          */
-        Reason: null;
+        Reason: ValueOf<enums.IUboDeclarationRefusedReasonType>;
         /**
          * Explanation of why the declaration was refused.
          */
-        Message: null;
+        Message: string;
         /**
          * Table of ubos (declared in Ubo)
          */
@@ -59,6 +60,8 @@ export namespace uboDeclaration {
     }
 
     interface UpdateUbo {
+        Id: string;
+
         FirstName?: string;
 
         LastName?: string;
