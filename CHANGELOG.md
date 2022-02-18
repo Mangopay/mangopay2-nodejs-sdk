@@ -1,3 +1,7 @@
+## [1.25.2] - 2022-02-18
+##Fixed
+- Added Tag property in the CreateCardDirectPayIn interface.
+
 ## [1.25.1] - 2022-02-02
 ##Fixed
 - Typescript is now a dev dependency
