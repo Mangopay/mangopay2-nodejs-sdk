@@ -366,6 +366,11 @@ export namespace payIn {
          * Contains every useful information's related to the user shipping
          */
         Shipping?: ShippingData;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
     }
 
     interface DirectDebitDirectPayInData extends BasePayInData {
