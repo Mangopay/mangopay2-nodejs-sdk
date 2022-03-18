@@ -76,4 +76,21 @@ describe('PayOuts', function() {
             expect(getRefunds).to.be.an('array');
         })
     })
+
+    describe('Check Eligibility', function() {
+        var eligibility;
+
+        before(function(done) {
+            api.PayOuts.checkEligibility(payOut, function(data, response) {
+                eligibility = data;
+                done();
+            });
+        });
+
+        it('should be retrieved', function() {
+            expect(eligibility.InstantPayout).not.to.be.undefined;
+            expect(eligibility.InstantPayout.IsReachable).not.to.be.undefined;
+            expect(eligibility.InstantPayout.UnreachableReason).not.to.be.undefined;
+        })
+    })
 });

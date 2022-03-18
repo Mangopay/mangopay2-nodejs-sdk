@@ -691,6 +691,16 @@ api.PayOuts.getRefunds("payout-id").then(data => {
   const d = data; // $ExpectType RefundData[]
 });
 
+api.PayOuts.checkEligibility({
+  AuthorId: "user-id",
+  DebitedFunds: { Amount: 2000, Currency: "GBP" },
+  BankAccountId: "bank-id",
+  PayoutModeRequested: "INSTANT_PAYMENT",
+  PaymentType: api.models.PayOutPaymentType.BankWire
+}).then(data => {
+  const d = data; // $ExpectType CheckPayOutEligibilityData
+});
+
 /* Transfers */
 
 api.Transfers.create({
