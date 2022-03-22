@@ -81,16 +81,26 @@ describe('PayOuts', function() {
         var eligibility;
 
         before(function(done) {
-            api.PayOuts.checkEligibility(payOut, function(data, response) {
-                eligibility = data;
-                done();
+            helpers.getNewPayoutBankWire(api, john, function(data, response){
+                var eligibilityDto = {
+                    AuthorId: data.AuthorId,
+                    DebitedFunds: data.DebitedFunds,
+                    BankAccountId: data.BankAccountId,
+                    DebitedWalletId: data.DebitedWalletId,
+                    PayoutModeRequested: "INSTANT_PAYMENT"
+                };
+
+                api.PayOuts.checkEligibility(eligibilityDto, function(data, response) {
+                    eligibility = data;
+                    done();
+                });
             });
         });
 
         it('should be retrieved', function() {
             expect(eligibility.InstantPayout).not.to.be.undefined;
             expect(eligibility.InstantPayout.IsReachable).not.to.be.undefined;
-            expect(eligibility.InstantPayout.UnreachableReason).not.to.be.undefined;
+            expect(eligibility.InstantPayout.UnreachableReason).not.to.be.undefined; //will be undefined if IsReachable true
         })
     })
 });

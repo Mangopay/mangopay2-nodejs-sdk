@@ -118,10 +118,10 @@ export namespace payOut {
     }
 
     interface CheckPayOutEligibilityData {
-        InstantPayout: InstantPayOutData;
+        InstantPayout: InstantPayOutEligibilityData;
     }
 
-    interface InstantPayOutData {
+    interface InstantPayOutEligibilityData {
         IsReachable: boolean;
 
         UnreachableReason?: FallbackReasonData;
