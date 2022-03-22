@@ -98,7 +98,7 @@ export namespace payOut {
         /**
          * The ID of the wallet that was debited
          */
-        DebitedWalletId?: string;
+        DebitedWalletId: string;
 
         /**
          * A custom reference you wish to appear on the user’s bank statement (your Client Name is already shown). This reference can contain max 12 characters

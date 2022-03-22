@@ -696,6 +696,7 @@ api.PayOuts.checkEligibility({
   DebitedFunds: { Amount: 2000, Currency: "GBP" },
   BankAccountId: "bank-id",
   PayoutModeRequested: "INSTANT_PAYMENT",
+  DebitedWalletId: "wallet_id",
   PaymentType: api.models.PayOutPaymentType.BankWire
 }).then(data => {
   const d = data; // $ExpectType CheckPayOutEligibilityData
