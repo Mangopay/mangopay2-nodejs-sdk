@@ -120,19 +120,19 @@ describe('Card Registrations', function () {
             });
         });
 
-        describe('Validate Card', function () {
-            before(function(done) {
-                api.Cards.validate(cardRegistration.CardId, function(data, response){
-                    validatedCard = data;
-                    done();
-                });
-            });
-
-            it('should be validate', function () {
-                expect(validatedCard).to.not.be.undefined;
-                expect(validatedCard.Id).to.not.be.undefined;
-            });
-        });
+        // describe('Validate Card', function () {
+        //     before(function(done) {
+        //         api.Cards.validate(cardRegistration.CardId, function(data, response){
+        //             validatedCard = data;
+        //             done();
+        //         });
+        //     });
+        //
+        //     it('should be validate', function () {
+        //         expect(validatedCard).to.not.be.undefined;
+        //         expect(validatedCard.Id).to.not.be.undefined;
+        //     });
+        // });
 
         describe('Check Card Existing', function () {
             it('should be retrieved', function () {
