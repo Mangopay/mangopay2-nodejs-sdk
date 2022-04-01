@@ -24,4 +24,11 @@ export class PayOuts {
      * @param options
      */
     getRefunds: MethodOverload<string, refund.RefundData[]>;
+
+    /**
+     * Check Instant PayOut Eligibility
+     * @param payOut
+     * @param options
+     */
+    checkEligibility: MethodOverload<payOut.CheckPayOutEligibility, payOut.CheckPayOutEligibilityData>;
 }
