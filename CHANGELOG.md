@@ -1,3 +1,15 @@
+## [1.26.0] - 2022-04-01
+##Added
+###Instant payment eligibility check
+With the function
+`PayOuts.checkEligibility(payOut, callback, options)`
+the destination bank reachability can now be verified prior to making an instant payout. 
+This results in a better user experience, as this preliminary check will allow the platform to propose the instant payout option only to end users whose bank is eligible.
+### Instant payment mode only
+Instant Payment requests can now be automatically cancelled when an issue is encountered (rather than falling back to the standard payout mode).
+
+This is possible by using the new `INSTANT_PAYMENT_ONLY` option that has been added to the PayoutModeRequested parameter.
+
 ## [1.25.2] - 2022-02-18
 ##Fixed
 - Added Tag property in the CreateCardDirectPayIn interface.
