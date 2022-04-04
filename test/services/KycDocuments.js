@@ -10,7 +10,8 @@ describe('KycDocuments', function() {
         api.Users.create(john).then(function(){
             api.Users.createKycDocument(john.Id, {
                 Status: 'CREATED',
-                Type: 'IDENTITY_PROOF'
+                Type: 'IDENTITY_PROOF',
+                Tag: "custom meta"
             }).then(function(data){
                 document = data;
                 done();

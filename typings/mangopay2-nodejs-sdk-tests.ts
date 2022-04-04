@@ -203,7 +203,7 @@ api.Users.getCards("user-id").then(data => {
   const d = data; // $ExpectType CardData[]
 });
 
-api.Users.createKycDocument("user-id", { Type: "ADDRESS_PROOF" }).then(data => {
+api.Users.createKycDocument("user-id", { Type: "ADDRESS_PROOF", Tag: "custom meta" }).then(data => {
   const d = data; // $ExpectType KycDocumentData
 });
 

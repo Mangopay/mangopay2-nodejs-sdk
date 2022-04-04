@@ -71,15 +71,9 @@ export namespace kycDocument {
          */
         Type: KycDocumentType;
 
-        Tag?: string;
-    }
-
-    interface CreateKycDocument {
         /**
-         * Gives the type of the KYC document
+         * Custom data that you can add to this item
          */
-        Type: KycDocumentType;
-
         Tag?: string;
     }
 
