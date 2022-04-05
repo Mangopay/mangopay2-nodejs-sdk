@@ -66,6 +66,11 @@ export namespace user {
          * KYC Level (LIGHT or REGULAR)
          */
         KYCLevel: KYCLevel;
+
+        /**
+         * Whether or not the user has accepted the MANGOPAY Terms and Conditions.
+         */
+        TermsAndConditionsAccepted?: boolean;
     }
 
     interface UserLegalData extends UserData {
@@ -206,7 +211,8 @@ export namespace user {
         | "LegalRepresentativeEmail"
         | "LegalRepresentativeAddress"
         | "HeadquartersAddress"
-        | "Tag"> {
+        | "Tag"
+        | "TermsAndConditionsAccepted"> {
         PersonType: "LEGAL";
     }
 
@@ -223,7 +229,8 @@ export namespace user {
         | "Address"
         | "Occupation"
         | "IncomeRange"
-        | "Tag"> {
+        | "Tag"
+        | "TermsAndConditionsAccepted"> {
         PersonType: "NATURAL";
     }
 

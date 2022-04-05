@@ -164,9 +164,19 @@ api.Users.update({
   FirstName: "Sara",
   LastName: "McNick",
   CountryOfResidence: "GB",
-  Nationality: "US"
+  Nationality: "US",
+  TermsAndConditionsAccepted: true
 }).then(data => {
   const d = data; // $ExpectType UserNaturalData
+});
+
+api.Users.update({
+  Id: "1234",
+  PersonType: "LEGAL",
+  Tag: "custom meta",
+  TermsAndConditionsAccepted: true
+}).then(data => {
+  const d = data; // $ExpectType UserLegalData
 });
 
 api.Users.createBankAccount("user-id", {
