@@ -183,7 +183,7 @@ api.Users.getBankAccount("user-id", "bankAccount-id").then(data => {
   const d = data; // $ExpectType Data
 });
 
-api.Users.getBankAccounts("user-id").then(data => {
+api.Users.getBankAccounts("user-id", {parameters: {Sort: "CreationDate:ASC"}}).then(data => {
   const d = data; // $ExpectType Data[]
 });
 
