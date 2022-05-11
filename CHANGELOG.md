@@ -1,3 +1,9 @@
+## [1.27.0] - 2022-05-11
+##Added
+- When you create a KYC Document you can now add a Tag ( custom data ).
+##Fixed
+- Issue #309 (Sort with column and direction using typescript)
+
 ## [1.26.1] - 2022-04-21
 ##Fixed
 - Typescript check for GitHub runner
