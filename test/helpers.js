@@ -18,7 +18,7 @@ module.exports = {
                     "PostalCode": "20007",
                     "Country": "US"
                 }),
-                Birthday: new Date('12/21/1975').getTime(),
+                Birthday: 188301600,
                 Nationality: 'FR',
                 CountryOfResidence: 'FR',
                 Occupation: 'programmer',
@@ -45,7 +45,7 @@ module.exports = {
                     "Country": "US"
                 }),
                 Nationality: 'FR',
-                Birthday: new Date('12/21/1975').getTime(),
+                Birthday: 188301600,
                 Birthplace: {
                     "City": "Paris",
                     "Country": "FR"
@@ -76,7 +76,7 @@ module.exports = {
                     "PostalCode": "20007",
                     "Country": "US"
                 },
-                LegalRepresentativeBirthday: new Date('12/21/1975').getTime(),
+                LegalRepresentativeBirthday: 188301600,
                 LegalRepresentativeNationality: 'FR',
                 LegalRepresentativeCountryOfResidence: 'FR',
                 CompanyNumber: 123456789,
