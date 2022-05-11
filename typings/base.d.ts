@@ -4,8 +4,6 @@ import { Models } from "./models";
 export namespace base {
     type WithToJson<T extends object> = T & { toJSON(): any };
 
-    type ColumnAndDirection = "ASC" | "DESC";
-
     interface Config {
         /**
          * API Client Id
@@ -119,9 +117,9 @@ export namespace base {
 
     interface FilterOptions extends Record<string, any> {
         /**
-         * The column to sort against and direction - only CreationDate (or Date for the events) is available and ASC or DESC for the direction
+         * The column to sort against and direction - only CreationDate (or Date for the events) is available and ASC or DESC for the direction. E.g. "CreationDate:ASC"
          */
-        Sort?: ColumnAndDirection;
+        Sort?: string;
 
         /**
          * To return only resources that have CreationDate BEFORE this date
