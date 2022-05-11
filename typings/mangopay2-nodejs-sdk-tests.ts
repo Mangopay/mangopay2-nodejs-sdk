@@ -97,7 +97,8 @@ api.Users.create(
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: "FR",
     LegalRepresentativeCountryOfResidence: "FR",
-    Tag: "custom tag"
+    Tag: "custom tag",
+    TermsAndConditionsAccepted: true
   },
   { headers: {} }
 ).then(data => {
@@ -128,7 +129,8 @@ api.Users.create(
     LastName: "McNick",
     CountryOfResidence: "GB",
     Nationality: "US",
-    Tag: "natural-user"
+    Tag: "natural-user",
+    TermsAndConditionsAccepted: true
   },
   data => {
     const d = data; // $ExpectType UserNaturalData
@@ -164,9 +166,19 @@ api.Users.update({
   FirstName: "Sara",
   LastName: "McNick",
   CountryOfResidence: "GB",
-  Nationality: "US"
+  Nationality: "US",
+  TermsAndConditionsAccepted: true
 }).then(data => {
   const d = data; // $ExpectType UserNaturalData
+});
+
+api.Users.update({
+  Id: "1234",
+  PersonType: "LEGAL",
+  Tag: "custom meta",
+  TermsAndConditionsAccepted: true
+}).then(data => {
+  const d = data; // $ExpectType UserLegalData
 });
 
 api.Users.createBankAccount("user-id", {
