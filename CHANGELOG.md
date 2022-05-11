@@ -1,3 +1,25 @@
+## [1.28.0] - 2022-05-11
+##Added
+<b>Terms and conditions acceptance parameter</b>
+<br>
+The acceptance of the MANGOPAY terms and conditions by the end user can now be registered via the SDK.
+
+This information can be managed by using the new TermsAndConditionsAccepted parameter added to the User object.
+
+The following API endpoints have been updated to take into account the new TermsAndConditionsAccepted parameter:
+
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e255_create-a-natural-user">Create a Natural User</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e260_update-a-natural-user">Update a Natural User</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e259_create-a-legal-user">Create a Legal User</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e261_update-a-legal-user">Update a Legal User</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e256_view-a-user">View a User</a>
+
+
+⚠️ Please note that:
+
+- Existing users have to be updated to include the terms and conditions acceptance information.
+- Once accepted, the terms and conditions cannot be revoked.
+
 ## [1.27.0] - 2022-05-11
 ##Added
 - When you create a KYC Document you can now add a Tag ( custom data ).
