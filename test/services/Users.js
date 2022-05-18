@@ -40,12 +40,14 @@ describe('Users', function() {
         expect(john.Id).not.to.be.undefined;
         expect(john.PersonType).to.equal(PersonType.Natural);
         expect(john.TermsAndConditionsAccepted).to.be.false;
+        expect(john.UserCategory).to.equal('PAYER');
     });
 
     it('Create Legal', function() {
         expect(matrix.Id).not.to.be.undefined;
         expect(matrix.PersonType).to.equal(PersonType.Legal);
         expect(matrix.TermsAndConditionsAccepted).to.be.false;
+        expect(matrix.UserCategory).to.equal('PAYER');
     });
 
     it('Create Legal Fails If Required Properties Not Provided', function(done){
@@ -72,6 +74,8 @@ describe('Users', function() {
             expect(_.isMatch(john2, _.omit(john.data, 'Address'))).to.be.true;
             expect(john1.TermsAndConditionsAccepted).to.be.false;
             expect(john2.TermsAndConditionsAccepted).to.be.false;
+            expect(john1.UserCategory).to.equal('PAYER');
+            expect(john2.UserCategory).to.equal('PAYER');
         });
 
         it('Fails for Legal User', function(done) {
@@ -97,6 +101,8 @@ describe('Users', function() {
             expect(_.isMatch(matrix2, _.omit(matrix.data, 'HeadquartersAddress', 'LegalRepresentativeAddress'))).to.be.true;
             expect(matrix1.TermsAndConditionsAccepted).to.be.false;
             expect(matrix2.TermsAndConditionsAccepted).to.be.false;
+            expect(matrix1.UserCategory).to.equal('PAYER');
+            expect(matrix2.UserCategory).to.equal('PAYER');
         });
 
         it('Fails for Natural User', function(done) {
@@ -109,11 +115,15 @@ describe('Users', function() {
 
     describe('Save Natural', function(){
         var updatedJohn;
-        var johnPut = new UserNaturalPut();
-        johnPut.LastName = john.LastName + " - CHANGED";
-        johnPut.TermsAndConditionsAccepted = true;
         before(function(done){
-            api.Users.updateNatural(johnPut, john).then(function(){
+            john.LastName = john.LastName + " - CHANGED";
+            john.TermsAndConditionsAccepted = true;
+            john.UserCategory = 'OWNER';
+            john.CountryOfResidence = 'FR';
+            john.Birthday = 188301600;
+            john.Nationality = 'FR';
+
+            api.Users.update(john).then(function(){
                 api.Users.get(john.Id).then(function(user){
                     updatedJohn = user;
                     done();
@@ -122,8 +132,9 @@ describe('Users', function() {
         });
 
         it('Models should be the same', function() {
-            expect(_.isMatch(john.LastName, johnPut.LastName)).to.be.true
+            expect(_.isMatch(john.LastName, updatedJohn.LastName)).to.be.true
             expect(updatedJohn.TermsAndConditionsAccepted).to.be.true;
+            expect(updatedJohn.UserCategory).to.equal('OWNER');
         });
     });
 
@@ -150,6 +161,20 @@ describe('Users', function() {
         before(function(done){
             matrix.Name += ' - CHANGED';
             matrix.TermsAndConditionsAccepted = true;
+            matrix.UserCategory = 'OWNER';
+            matrix.HeadquartersAddress = {
+                "AddressLine1": "4101 Reservoir Rd NW",
+                    "AddressLine2": "",
+                    "City": "Washington",
+                    "Region": "District of Columbia",
+                    "PostalCode": "20007",
+                    "Country": "US"
+            };
+            matrix.CompanyNumber = 123456789;
+            matrix.LegalRepresentativeNationality = 'FR';
+            matrix.LegalRepresentativeCountryOfResidence = 'FR';
+            matrix.LegalRepresentativeBirthday = 188301600;
+
             api.Users.update(matrix).then(function(){
                 api.Users.get(matrix.Id).then(function(user){
                     updatedMatrix = user;
@@ -161,6 +186,7 @@ describe('Users', function() {
         it('Models should be the same', function(){
             expect(_.isMatch(matrix.Name, updatedMatrix.Name)).to.be.true;
             expect(updatedMatrix.TermsAndConditionsAccepted).to.be.true;
+            expect(updatedMatrix.UserCategory).to.equal('OWNER');
         });
     });
 

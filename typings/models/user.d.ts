@@ -51,6 +51,8 @@ export namespace user {
         | "CountryOfResidence"
         | "Email";
 
+    type UserCategory = "PAYER" | "OWNER";
+
     interface UserData extends entityBase.EntityBaseData {
         /**
          * Type of user
@@ -71,6 +73,13 @@ export namespace user {
          * Whether or not the user has accepted the MANGOPAY Terms and Conditions.
          */
         TermsAndConditionsAccepted?: boolean;
+
+        /**
+         * Category of the user. May take one of the following values:
+         * PAYER - Users who only use MANGOPAY to give money to other users
+         * OWNER - Users who use MANGOPAY to receive funds. Please note that a user needs to be KYC validated to perform payouts
+         */
+        UserCategory?: UserCategory;
     }
 
     interface UserLegalData extends UserData {
