@@ -26,6 +26,12 @@ describe('Users', function() {
     var john = new UserNatural(helpers.data.getUserNatural());
     var matrix = new UserLegal(helpers.data.getUserLegal());
 
+    var johnPayer = new UserNatural(helpers.data.getUserNaturalPayer());
+    var johnOwner = new UserNatural(helpers.data.getUserNaturalOwner());
+
+    var matrixPayer = new UserLegal(helpers.data.getUserLegalPayer());
+    var matrixOwner = new UserLegal(helpers.data.getUserLegalOwner());
+
     before(function(done){
         api.Users.create(john).then(function(data){
             john = data;
@@ -36,18 +42,62 @@ describe('Users', function() {
         });
     });
 
+    before(function(done){
+        api.Users.create(johnPayer).then(function(data){
+            johnPayer = data;
+            api.Users.create(johnOwner).then(function(data){
+                johnOwner = data;
+                done();
+            });
+        });
+    });
+
+    before(function(done){
+        api.Users.create(matrixPayer).then(function(data){
+            matrixPayer = data;
+            api.Users.create(matrixOwner).then(function(data){
+                matrixOwner = data;
+                done();
+            });
+        });
+    });
+
     it('Create Natural', function(){
         expect(john.Id).not.to.be.undefined;
         expect(john.PersonType).to.equal(PersonType.Natural);
         expect(john.TermsAndConditionsAccepted).to.be.false;
-        expect(john.UserCategory).to.equal('PAYER');
+        expect(john.UserCategory).to.equal('UNKNOWN');
     });
 
     it('Create Legal', function() {
         expect(matrix.Id).not.to.be.undefined;
         expect(matrix.PersonType).to.equal(PersonType.Legal);
         expect(matrix.TermsAndConditionsAccepted).to.be.false;
-        expect(matrix.UserCategory).to.equal('PAYER');
+        expect(matrix.UserCategory).to.equal('UNKNOWN');
+    });
+
+    it('Create Natural Payer', function(){
+        expect(johnPayer.Id).not.to.be.undefined;
+        expect(johnPayer.PersonType).to.equal(PersonType.Natural);
+        expect(johnPayer.UserCategory).to.equal('PAYER');
+    });
+
+    it('Create Natural Owner', function(){
+        expect(johnOwner.Id).not.to.be.undefined;
+        expect(johnOwner.PersonType).to.equal(PersonType.Natural);
+        expect(johnOwner.UserCategory).to.equal('OWNER');
+    });
+
+    it('Create Legal Payer', function() {
+        expect(matrixPayer.Id).not.to.be.undefined;
+        expect(matrixPayer.PersonType).to.equal(PersonType.Legal);
+        expect(matrixPayer.UserCategory).to.equal('PAYER');
+    });
+
+    it('Create Legal Owner', function() {
+        expect(matrixOwner.Id).not.to.be.undefined;
+        expect(matrixOwner.PersonType).to.equal(PersonType.Legal);
+        expect(matrixOwner.UserCategory).to.equal('OWNER');
     });
 
     it('Create Legal Fails If Required Properties Not Provided', function(done){
@@ -74,8 +124,6 @@ describe('Users', function() {
             expect(_.isMatch(john2, _.omit(john.data, 'Address'))).to.be.true;
             expect(john1.TermsAndConditionsAccepted).to.be.false;
             expect(john2.TermsAndConditionsAccepted).to.be.false;
-            expect(john1.UserCategory).to.equal('PAYER');
-            expect(john2.UserCategory).to.equal('PAYER');
         });
 
         it('Fails for Legal User', function(done) {
@@ -83,6 +131,44 @@ describe('Users', function() {
                 expect(data.errors).to.exist;
                 done();
             });
+        });
+    });
+
+    describe('Get Natural Payer', function() {
+        var johnPayer1, johnPayer2;
+        before(function(done){
+            Promise.all([api.Users.get(johnPayer.Id), api.Users.getNatural(johnPayer.Id)]).then(function(res){
+                johnPayer1 = res[0];
+                johnPayer2 = res[1];
+                done();
+            })
+        });
+
+        it('John Payer should be the same', function(){
+            expect(johnPayer1.Id).to.equal(johnPayer.Id);
+            expect(johnPayer2.Id).to.equal(johnPayer.Id);
+
+            expect(johnPayer1.UserCategory).to.equal('PAYER');
+            expect(johnPayer2.UserCategory).to.equal('PAYER');
+        });
+    });
+
+    describe('Get Natural Owner', function() {
+        var johnOwner1, johnOwner2;
+        before(function(done){
+            Promise.all([api.Users.get(johnOwner.Id), api.Users.getNatural(johnOwner.Id)]).then(function(res){
+                johnOwner1 = res[0];
+                johnOwner2 = res[1];
+                done();
+            })
+        });
+
+        it('John Owner should be the same', function(){
+            expect(johnOwner1.Id).to.equal(johnOwner.Id);
+            expect(johnOwner2.Id).to.equal(johnOwner.Id);
+
+            expect(johnOwner1.UserCategory).to.equal('OWNER');
+            expect(johnOwner2.UserCategory).to.equal('OWNER');
         });
     });
 
@@ -101,8 +187,6 @@ describe('Users', function() {
             expect(_.isMatch(matrix2, _.omit(matrix.data, 'HeadquartersAddress', 'LegalRepresentativeAddress'))).to.be.true;
             expect(matrix1.TermsAndConditionsAccepted).to.be.false;
             expect(matrix2.TermsAndConditionsAccepted).to.be.false;
-            expect(matrix1.UserCategory).to.equal('PAYER');
-            expect(matrix2.UserCategory).to.equal('PAYER');
         });
 
         it('Fails for Natural User', function(done) {
@@ -113,15 +197,49 @@ describe('Users', function() {
         });
     });
 
+    describe('Get Legal Payer', function() {
+        var matrixPayer1, matrixPayer2;
+        before(function(done){
+            Promise.all([api.Users.get(matrixPayer.Id), api.Users.getLegal(matrixPayer.Id)]).then(function(res){
+                matrixPayer1 = res[0];
+                matrixPayer2 = res[1];
+                done();
+            })
+        });
+
+        it('Legal Payer should be the same', function(){
+            expect(matrixPayer1.Id).to.equal(matrixPayer.Id);
+            expect(matrixPayer2.Id).to.equal(matrixPayer.Id);
+
+            expect(matrixPayer1.UserCategory).to.equal('PAYER');
+            expect(matrixPayer2.UserCategory).to.equal('PAYER');
+        });
+    });
+
+    describe('Get Legal Owner', function() {
+        var matrixOwner1, matrixOwner2;
+        before(function(done){
+            Promise.all([api.Users.get(matrixOwner.Id), api.Users.getLegal(matrixOwner.Id)]).then(function(res){
+                matrixOwner1 = res[0];
+                matrixOwner2 = res[1];
+                done();
+            })
+        });
+
+        it('Legal Owner should be the same', function(){
+            expect(matrixOwner1.Id).to.equal(matrixOwner.Id);
+            expect(matrixOwner2.Id).to.equal(matrixOwner.Id);
+
+            expect(matrixOwner1.UserCategory).to.equal('OWNER');
+            expect(matrixOwner2.UserCategory).to.equal('OWNER');
+        });
+    });
+
     describe('Save Natural', function(){
         var updatedJohn;
         before(function(done){
             john.LastName = john.LastName + " - CHANGED";
             john.TermsAndConditionsAccepted = true;
-            john.UserCategory = 'OWNER';
-            john.CountryOfResidence = 'FR';
-            john.Birthday = 188301600;
-            john.Nationality = 'FR';
 
             api.Users.update(john).then(function(){
                 api.Users.get(john.Id).then(function(user){
@@ -134,46 +252,41 @@ describe('Users', function() {
         it('Models should be the same', function() {
             expect(_.isMatch(john.LastName, updatedJohn.LastName)).to.be.true
             expect(updatedJohn.TermsAndConditionsAccepted).to.be.true;
-            expect(updatedJohn.UserCategory).to.equal('OWNER');
         });
     });
 
-    // describe('Save Natural No Address', function () {
-    //     before(function (done) {
-    //         john.LastName += ' - CHANGED';
-    //         john.Address = null;
-    //         api.Users.update(john).then(function () {
-    //             api.Users.get(john.Id).then(function (user) {
-    //                 johnClone = user;
-    //                 done();
-    //             });
-    //         });
-    //     });
+    describe('Save Natural Payer to Owner', function(){
+        var updatedJohn;
+        before(function(done){
+            johnPayer.Name += ' - CHANGED';
+            johnPayer.TermsAndConditionsAccepted = true;
+            johnPayer.UserCategory = 'OWNER';
 
-    //     it('Models should be the same', function () {
-    //         expect(_.isMatch(john, johnClone)).to.be.true;
+            //when changing the UserCategory, we need to add the missing fields for the new Category
+            johnPayer.CountryOfResidence = 'FR';
+            johnPayer.Birthday = 188301600;
+            johnPayer.Nationality = 'FR';
 
-    //     });
-    // });
+            api.Users.update(johnPayer).then(function(){
+                api.Users.get(johnPayer.Id).then(function(user){
+                    updatedJohn = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function() {
+            expect(_.isMatch(johnPayer.LastName, updatedJohn.LastName)).to.be.true
+            expect(updatedJohn.TermsAndConditionsAccepted).to.be.true;
+            expect(updatedJohn.UserCategory).to.equal('OWNER');
+        });
+    });
 
     describe('Save Legal', function(){
         var updatedMatrix;
         before(function(done){
             matrix.Name += ' - CHANGED';
             matrix.TermsAndConditionsAccepted = true;
-            matrix.UserCategory = 'OWNER';
-            matrix.HeadquartersAddress = {
-                "AddressLine1": "4101 Reservoir Rd NW",
-                    "AddressLine2": "",
-                    "City": "Washington",
-                    "Region": "District of Columbia",
-                    "PostalCode": "20007",
-                    "Country": "US"
-            };
-            matrix.CompanyNumber = 123456789;
-            matrix.LegalRepresentativeNationality = 'FR';
-            matrix.LegalRepresentativeCountryOfResidence = 'FR';
-            matrix.LegalRepresentativeBirthday = 188301600;
 
             api.Users.update(matrix).then(function(){
                 api.Users.get(matrix.Id).then(function(user){
@@ -185,6 +298,41 @@ describe('Users', function() {
 
         it('Models should be the same', function(){
             expect(_.isMatch(matrix.Name, updatedMatrix.Name)).to.be.true;
+            expect(updatedMatrix.TermsAndConditionsAccepted).to.be.true;
+        });
+    });
+
+    describe('Save Legal Payer to Owner', function(){
+        var updatedMatrix;
+        before(function(done){
+            matrixPayer.Name += ' - CHANGED';
+            matrixPayer.TermsAndConditionsAccepted = true;
+            matrixPayer.UserCategory = 'OWNER';
+
+            //when changing the UserCategory, we need to add the missing fields for the new Category
+            matrixPayer.HeadquartersAddress = {
+                "AddressLine1": "4101 Reservoir Rd NW",
+                "AddressLine2": "",
+                "City": "Washington",
+                "Region": "District of Columbia",
+                "PostalCode": "20007",
+                "Country": "US"
+            };
+            matrixPayer.CompanyNumber = 123456789;
+            matrixPayer.LegalRepresentativeNationality = 'FR';
+            matrixPayer.LegalRepresentativeCountryOfResidence = 'FR';
+            matrixPayer.LegalRepresentativeBirthday = 188301600;
+
+            api.Users.update(matrixPayer).then(function(){
+                api.Users.get(matrixPayer.Id).then(function(user){
+                    updatedMatrix = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function(){
+            expect(_.isMatch(matrixPayer.Name, updatedMatrix.Name)).to.be.true;
             expect(updatedMatrix.TermsAndConditionsAccepted).to.be.true;
             expect(updatedMatrix.UserCategory).to.equal('OWNER');
         });
