@@ -1,3 +1,31 @@
+## [1.29.0] - 2022-05-20
+##Added
+Users can now be differentiated depending on their MANGOPAY usage.
+
+This is possible with the new UserCategory parameter, whose value can be set to:
+
+- Payer – For users who are only using MANGOPAY to give money to other users (i.e., only pay).
+- Owner – For users who are using MANGOPAY to receive funds (and who are therefore required to accept MANGOPAY’s terms and conditions).
+
+Please note that the following parameters become required as soon as the UserCategory is set to “Owner”:
+
+- HeadquartersAddress
+- CompanyNumber (if the LegalPersonType is “Business”)
+- TermsAndConditionsAccepted.
+
+The documentation of user-related endpoints has been updated and reorganised to take into account the new parameter:
+
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e255_create-a-natural-user">Create a Natural User (Payer)</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e1059_create-a-natural-user-owner">Create a Natural User (Owner)</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e260_update-a-natural-user">Update a Natural User</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e259_create-a-legal-user">Create a Legal User (Payer)</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e1060_create-a-legal-user-owner">Create a Legal User (Owner)</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e261_update-a-legal-user">Update a Legal User</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e256_view-a-user">View a User</a>
+- <a href="https://docs.mangopay.com/endpoints/v2.01/users#e257_list-all-users">List all Users</a>
+
+Differentiating the platform users results in a smoother user experience for “Payers” as they will have less declarative data to provide.
+
 ## [1.28.0] - 2022-05-11
 ##Added
 <b>Terms and conditions acceptance parameter</b>
