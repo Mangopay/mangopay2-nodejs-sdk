@@ -51,6 +51,48 @@ export namespace user {
         | "CountryOfResidence"
         | "Email";
 
+    type RequiredUserNaturalPayerData =
+        | "FirstName"
+        | "LastName"
+        | "Email"
+        | "UserCategory";
+
+    type RequiredUserNaturalOwnerData =
+        | "UserCategory"
+        | "FirstName"
+        | "LastName"
+        | "Email"
+        | "Birthday"
+        | "Nationality"
+        | "CountryOfResidence"
+        | "TermsAndConditionsAccepted";
+
+    type RequiredUserLegalPayerData =
+        | "UserCategory"
+        | "LegalPersonType"
+        | "Name"
+        | "LegalRepresentativeAddress"
+        | "LegalRepresentativeFirstName"
+        | "LegalRepresentativeLastName"
+        | "Email";
+
+    type RequiredUserLegalOwnerData =
+        | "UserCategory"
+        | "HeadquartersAddress"
+        | "LegalPersonType"
+        | "Name"
+        | "LegalRepresentativeAddress"
+        | "LegalRepresentativeBirthday"
+        | "LegalRepresentativeCountryOfResidence"
+        | "LegalRepresentativeNationality"
+        | "LegalRepresentativeFirstName"
+        | "LegalRepresentativeLastName"
+        | "Email"
+        | "CompanyNumber"
+        | "TermsAndConditionsAccepted";
+
+    type UserCategory = "PAYER" | "OWNER";
+
     interface UserData extends entityBase.EntityBaseData {
         /**
          * Type of user
@@ -71,6 +113,13 @@ export namespace user {
          * Whether or not the user has accepted the MANGOPAY Terms and Conditions.
          */
         TermsAndConditionsAccepted?: boolean;
+
+        /**
+         * Category of the user. May take one of the following values:
+         * PAYER - Users who only use MANGOPAY to give money to other users
+         * OWNER - Users who use MANGOPAY to receive funds. Please note that a user needs to be KYC validated to perform payouts
+         */
+        UserCategory?: UserCategory;
     }
 
     interface UserLegalData extends UserData {
@@ -240,5 +289,21 @@ export namespace user {
 
     interface CreateUserNaturalData extends MakeKeysRequired<BaseUserNaturalData,
         RequiredUserNaturalData | "PersonType"> {
+    }
+
+    interface CreateUserNaturalPayerData extends MakeKeysRequired<BaseUserNaturalData, RequiredUserNaturalPayerData | "PersonType">,
+        PickPartial<UserNaturalData, "Address" | "Tag" | "TermsAndConditionsAccepted"> {
+    }
+
+    interface CreateUserNaturalOwnerData extends MakeKeysRequired<BaseUserNaturalData, RequiredUserNaturalOwnerData | "PersonType">,
+        PickPartial<UserNaturalData, "Address" | "Tag" | "Occupation" | "IncomeRange"> {
+    }
+
+    interface CreateUserLegalPayerData extends MakeKeysRequired<BaseUserLegalData, RequiredUserLegalPayerData | "PersonType">,
+        PickPartial<UserLegalData, "Tag" | "TermsAndConditionsAccepted"> {
+    }
+
+    interface CreateUserLegalOwnerData extends MakeKeysRequired<BaseUserLegalData, RequiredUserLegalOwnerData | "PersonType">,
+        PickPartial<UserLegalData, "Tag" | "LegalRepresentativeEmail"> {
     }
 }
