@@ -34,6 +34,11 @@ export namespace enums {
         Legal: "LEGAL";
     }
 
+    interface IUserCategory {
+        Payer: "PAYER";
+        Owner: "OWNER";
+    }
+
     interface IBankAccountType {
         NotSpecified: "NotSpecified";
         IBAN: "IBAN";

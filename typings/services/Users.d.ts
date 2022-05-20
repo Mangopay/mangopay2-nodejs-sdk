@@ -19,7 +19,11 @@ export class Users {
      * @param user
      */
     create: MethodOverload<user.CreateUserLegalData, user.UserLegalData> &
-        MethodOverload<user.CreateUserNaturalData, user.UserNaturalData>;
+        MethodOverload<user.CreateUserNaturalData, user.UserNaturalData> &
+        MethodOverload<user.CreateUserNaturalPayerData, user.UserNaturalData> &
+        MethodOverload<user.CreateUserNaturalOwnerData, user.UserNaturalData> &
+        MethodOverload<user.CreateUserLegalPayerData, user.UserLegalData> &
+        MethodOverload<user.CreateUserLegalOwnerData, user.UserLegalData>;
 
     /**
      * Update a user

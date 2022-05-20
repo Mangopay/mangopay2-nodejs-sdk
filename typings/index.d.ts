@@ -125,6 +125,7 @@ declare namespace MangoPay {
         const MandateStatus: enums.IMandateStatus;
         const LegalPersonType: enums.ILegalPersonType;
         const PersonType: enums.IPersonType;
+        const UserCategory: enums.IUserCategory;
         const BankAccountType: enums.IBankAccountType;
         const DeclaredUboStatus: enums.IDeclaredUboStatus;
         const KycDocumentStatus: enums.IKycDocumentStatus;
@@ -433,6 +434,78 @@ declare namespace MangoPay {
         }
 
         interface UserNatural extends user.UserNaturalData {
+        }
+
+        class UserNaturalPayer extends EntityBase<user.UserNaturalData> {
+            PersonType: "NATURAL";
+
+            constructor(
+                data: MakeKeysRequired<Partial<user.UserNaturalData>,
+                    user.RequiredUserNaturalPayerData>
+            );
+
+            /**
+             * Sets the person type for the model
+             * @param personType
+             */
+            setPersonType(type: user.PersonType): void;
+        }
+
+        interface UserNaturalPayer extends user.UserNaturalData {
+        }
+
+        class UserNaturalOwner extends EntityBase<user.UserNaturalData> {
+            PersonType: "NATURAL";
+
+            constructor(
+                data: MakeKeysRequired<Partial<user.UserNaturalData>,
+                    user.RequiredUserNaturalOwnerData>
+            );
+
+            /**
+             * Sets the person type for the model
+             * @param personType
+             */
+            setPersonType(type: user.PersonType): void;
+        }
+
+        interface UserNaturalOwner extends user.UserNaturalData {
+        }
+
+        class UserLegalPayer extends EntityBase<user.UserLegalData> {
+            PersonType: "LEGAL";
+
+            constructor(
+                data: MakeKeysRequired<Partial<user.UserLegalData>,
+                    user.RequiredUserLegalPayerData>
+            );
+
+            /**
+             * Sets the person type for the model
+             * @param personType
+             */
+            setPersonType(type: user.PersonType): void;
+        }
+
+        interface UserLegalPayer extends user.UserLegalData {
+        }
+
+        class UserLegalOwner extends EntityBase<user.UserLegalData> {
+            PersonType: "LEGAL";
+
+            constructor(
+                data: MakeKeysRequired<Partial<user.UserLegalData>,
+                    user.RequiredUserLegalOwnerData>
+            );
+
+            /**
+             * Sets the person type for the model
+             * @param personType
+             */
+            setPersonType(type: user.PersonType): void;
+        }
+
+        interface UserLegalOwner extends user.UserLegalData {
         }
 
         class User extends EntityBase<user.UserData> {
