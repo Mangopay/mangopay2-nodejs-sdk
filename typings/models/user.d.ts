@@ -261,7 +261,8 @@ export namespace user {
         | "LegalRepresentativeAddress"
         | "HeadquartersAddress"
         | "Tag"
-        | "TermsAndConditionsAccepted"> {
+        | "TermsAndConditionsAccepted"
+        | "UserCategory"> {
         PersonType: "LEGAL";
     }
 
@@ -279,7 +280,8 @@ export namespace user {
         | "Occupation"
         | "IncomeRange"
         | "Tag"
-        | "TermsAndConditionsAccepted"> {
+        | "TermsAndConditionsAccepted"
+        | "UserCategory"> {
         PersonType: "NATURAL";
     }
 
