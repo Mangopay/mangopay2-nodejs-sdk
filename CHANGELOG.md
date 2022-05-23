@@ -1,3 +1,7 @@
+## [1.29.1] - 2022-05-23
+##Fixed
+- missing `UserCategory` added to `User Base classes`
+
 ## [1.29.0] - 2022-05-20
 ##Added
 Users can now be differentiated depending on their MANGOPAY usage.
