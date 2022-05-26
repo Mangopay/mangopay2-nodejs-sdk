@@ -54,11 +54,9 @@ export namespace user {
     type RequiredUserNaturalPayerData =
         | "FirstName"
         | "LastName"
-        | "Email"
-        | "UserCategory";
+        | "Email";
 
     type RequiredUserNaturalOwnerData =
-        | "UserCategory"
         | "FirstName"
         | "LastName"
         | "Email"
@@ -68,7 +66,6 @@ export namespace user {
         | "TermsAndConditionsAccepted";
 
     type RequiredUserLegalPayerData =
-        | "UserCategory"
         | "LegalPersonType"
         | "Name"
         | "LegalRepresentativeAddress"
@@ -77,7 +74,6 @@ export namespace user {
         | "Email";
 
     type RequiredUserLegalOwnerData =
-        | "UserCategory"
         | "HeadquartersAddress"
         | "LegalPersonType"
         | "Name"
@@ -294,18 +290,18 @@ export namespace user {
     }
 
     interface CreateUserNaturalPayerData extends MakeKeysRequired<BaseUserNaturalData, RequiredUserNaturalPayerData | "PersonType">,
-        PickPartial<UserNaturalData, "Address" | "Tag" | "TermsAndConditionsAccepted"> {
+        PickPartial<UserNaturalData, "Address" | "Tag" | "TermsAndConditionsAccepted" | "UserCategory"> {
     }
 
     interface CreateUserNaturalOwnerData extends MakeKeysRequired<BaseUserNaturalData, RequiredUserNaturalOwnerData | "PersonType">,
-        PickPartial<UserNaturalData, "Address" | "Tag" | "Occupation" | "IncomeRange"> {
+        PickPartial<UserNaturalData, "Address" | "Tag" | "Occupation" | "IncomeRange" | "UserCategory"> {
     }
 
     interface CreateUserLegalPayerData extends MakeKeysRequired<BaseUserLegalData, RequiredUserLegalPayerData | "PersonType">,
-        PickPartial<UserLegalData, "Tag" | "TermsAndConditionsAccepted"> {
+        PickPartial<UserLegalData, "Tag" | "TermsAndConditionsAccepted" | "UserCategory"> {
     }
 
     interface CreateUserLegalOwnerData extends MakeKeysRequired<BaseUserLegalData, RequiredUserLegalOwnerData | "PersonType">,
-        PickPartial<UserLegalData, "Tag" | "LegalRepresentativeEmail"> {
+        PickPartial<UserLegalData, "Tag" | "LegalRepresentativeEmail" | "UserCategory"> {
     }
 }
