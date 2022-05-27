@@ -438,6 +438,7 @@ declare namespace MangoPay {
 
         class UserNaturalPayer extends EntityBase<user.UserNaturalData> {
             PersonType: "NATURAL";
+            UserCategory: "PAYER";
 
             constructor(
                 data: MakeKeysRequired<Partial<user.UserNaturalData>,
@@ -449,6 +450,8 @@ declare namespace MangoPay {
              * @param personType
              */
             setPersonType(type: user.PersonType): void;
+
+            setUserCategory(category: user.UserCategory): void;
         }
 
         interface UserNaturalPayer extends user.UserNaturalData {
@@ -456,6 +459,7 @@ declare namespace MangoPay {
 
         class UserNaturalOwner extends EntityBase<user.UserNaturalData> {
             PersonType: "NATURAL";
+            UserCategory: "OWNER";
 
             constructor(
                 data: MakeKeysRequired<Partial<user.UserNaturalData>,
@@ -467,6 +471,8 @@ declare namespace MangoPay {
              * @param personType
              */
             setPersonType(type: user.PersonType): void;
+
+            setUserCategory(category: user.UserCategory): void;
         }
 
         interface UserNaturalOwner extends user.UserNaturalData {
@@ -474,6 +480,7 @@ declare namespace MangoPay {
 
         class UserLegalPayer extends EntityBase<user.UserLegalData> {
             PersonType: "LEGAL";
+            UserCategory: "PAYER";
 
             constructor(
                 data: MakeKeysRequired<Partial<user.UserLegalData>,
@@ -485,6 +492,8 @@ declare namespace MangoPay {
              * @param personType
              */
             setPersonType(type: user.PersonType): void;
+
+            setUserCategory(category: user.UserCategory): void;
         }
 
         interface UserLegalPayer extends user.UserLegalData {
@@ -492,6 +501,7 @@ declare namespace MangoPay {
 
         class UserLegalOwner extends EntityBase<user.UserLegalData> {
             PersonType: "LEGAL";
+            UserCategory: "OWNER";
 
             constructor(
                 data: MakeKeysRequired<Partial<user.UserLegalData>,
@@ -503,6 +513,8 @@ declare namespace MangoPay {
              * @param personType
              */
             setPersonType(type: user.PersonType): void;
+
+            setUserCategory(category: user.UserCategory): void;
         }
 
         interface UserLegalOwner extends user.UserLegalData {
