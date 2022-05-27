@@ -1,3 +1,7 @@
+## [1.29.2] - 2022-05-27
+##Fixed
+- User constructor issue
+
 ## [1.29.1] - 2022-05-23
 ##Fixed
 - missing `UserCategory` added to `User Base classes`
