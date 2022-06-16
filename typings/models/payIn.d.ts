@@ -783,6 +783,8 @@ export namespace payIn {
          * we will take the amount of the FirstTransactionFees as the subsequent fees.
          */
         NextTransactionFees?: MoneyData;
+
+        FreeCycles?: number;
     }
 
     interface UpdatePayInRecurringRegistration {

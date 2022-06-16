@@ -674,7 +674,8 @@ api.PayIns.createRecurringPayment({
     FractionedPayment: false,
     Migration: false,
     NextTransactionDebitedFunds: {Amount: 10000, Currency: "EUR"},
-    NextTransactionFees: {Amount: 10000, Currency: "EUR"}
+    NextTransactionFees: {Amount: 10000, Currency: "EUR"},
+    FreeCycles: 0
 }).then(data => {
     const d = data; // $ExpectType PayInRecurringRegistrationData
 });
