@@ -676,7 +676,7 @@ export namespace payIn {
          */
         FractionedPayment: boolean;
 
-        FreeCycles: number;
+        FreeCycles?: number;
 
         /**
          * Amount of the first payment. This amount may be different from the NextTransactionDebitedFunds.
