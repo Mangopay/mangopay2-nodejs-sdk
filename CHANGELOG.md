@@ -1,3 +1,18 @@
+## [1.30.0] - 2022-06-29
+##Added
+**Recurring: €0 deadlines for CIT**
+
+Setting free recurring payment deadlines is now possible for CIT (customer-initiated transactions) with the **FreeCycles** parameter.
+
+The **FreeCycles** parameter allows platforms to define the number of consecutive deadlines that will be free. The following endpoints have been updated to take into account this new parameter:
+
+<a href="https://docs.mangopay.com/endpoints/v2.01/payins#e1051_create-a-recurring-payin-registration">Create a Recurring PayIn Registration</a><br>
+<a href="https://docs.mangopay.com/endpoints/v2.01/payins#e1056_view-a-recurring-payin-registration">View a Recurring PayIn Registration</a><br>
+
+This feature provides new automation capabilities for platforms with offers such as “Get the first month free” or “free trial” subscriptions.
+
+Please refer to the <a href="https://docs.mangopay.com/guide/recurring-payments-introduction">Recurring payments overview</a> documentation for more information.
+
 ## [1.29.2] - 2022-05-27
 ##Fixed
 - User constructor issue
