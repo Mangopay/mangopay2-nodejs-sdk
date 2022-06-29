@@ -663,7 +663,8 @@ describe('PayIns', function () {
                             PostalCode: '75001',
                             Country: 'FR'
                         }
-                    }
+                    },
+                    FreeCycles: 0
                 };
 
                 api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
@@ -705,6 +706,7 @@ describe('PayIns', function () {
 
             it('should be created', function() {
                 expect(recurring).to.not.be.null;
+                expect(recurring.FreeCycles).to.not.be.null;
                 expect(createCit).to.not.be.null;
             })
         })
@@ -748,7 +750,8 @@ describe('PayIns', function () {
                             PostalCode: '75001',
                             Country: 'FR'
                         }
-                    }
+                    },
+                    FreeCycles: 0
                 };
 
                 api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
@@ -764,6 +767,7 @@ describe('PayIns', function () {
             it('should get the RecurringPayin', function () {
                 expect(getRecurring.Id).not.to.be.undefined;
                 expect(getRecurring.Status).not.to.be.undefined;
+                expect(getRecurring.FreeCycles).not.to.be.undefined;
             });
         });
 

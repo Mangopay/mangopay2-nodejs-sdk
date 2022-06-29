@@ -676,7 +676,7 @@ export namespace payIn {
          */
         FractionedPayment: boolean;
 
-        FreeCycles: number;
+        FreeCycles?: number;
 
         /**
          * Amount of the first payment. This amount may be different from the NextTransactionDebitedFunds.
@@ -783,6 +783,8 @@ export namespace payIn {
          * we will take the amount of the FirstTransactionFees as the subsequent fees.
          */
         NextTransactionFees?: MoneyData;
+
+        FreeCycles?: number;
     }
 
     interface UpdatePayInRecurringRegistration {
