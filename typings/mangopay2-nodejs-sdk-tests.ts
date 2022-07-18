@@ -1064,6 +1064,14 @@ api.Idempotency.get("idempotency-key").then(data => {
     const d = data; // $ExpectType IdempotencyData
 });
 
+api.Regulatory.getCountryAuthorizations("FR").then(data => {
+    const d = data; // $ExpectType CountryAuthorizationData
+});
+
+api.Regulatory.getAllCountriesAuthorizations().then(data => {
+    const d = data; // $ExpectType CountryAuthorizationData[]
+});
+
 /* Namespace Access */
 
 const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
