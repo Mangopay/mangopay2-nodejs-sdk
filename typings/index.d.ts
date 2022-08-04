@@ -213,6 +213,14 @@ declare namespace MangoPay {
             resetTimeMillis: number;
         }
 
+        type ApiError = {
+            Message: string;
+            Type: string;
+            Id: string;
+            Date: number;
+            errors: [string, string];
+        }
+
         class Money extends EntityBase<MoneyData> {
             constructor(data: MoneyData);
         }
