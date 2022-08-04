@@ -213,7 +213,7 @@ declare namespace MangoPay {
             resetTimeMillis: number;
         }
 
-        type ApiError = {
+        interface ApiError {
             Message: string;
             Type: string;
             Id: string;
