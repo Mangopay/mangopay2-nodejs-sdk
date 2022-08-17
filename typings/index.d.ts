@@ -250,7 +250,7 @@ declare namespace MangoPay {
             constructor(data: bankAccount.CreationDetails);
         }
 
-        interface BankAccount extends bankAccount.DataIntersection {
+        interface BankAccount extends bankAccount.BaseData {
         }
 
         class BankAccountDetails {

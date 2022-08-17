@@ -62,7 +62,7 @@ export namespace bankAccount {
     }
 
     interface IBANDetails {
-        Type: string | "IBAN";
+        Type: "IBAN";
 
         /**
          * The address of the owner of the bank account
@@ -86,7 +86,7 @@ export namespace bankAccount {
     }
 
     interface USDetails {
-        Type: string | "US";
+        Type: "US";
 
         /**
          * The address of the owner of the bank account
@@ -115,7 +115,7 @@ export namespace bankAccount {
     }
 
     interface CADetails {
-        Type: string | "CA";
+        Type: "CA";
 
         /**
          * The address of the owner of the bank account
@@ -149,7 +149,7 @@ export namespace bankAccount {
     }
 
     interface GBDetails {
-        Type: string | "GB";
+        Type: "GB";
 
         /**
          * The address of the owner of the bank account
@@ -173,7 +173,7 @@ export namespace bankAccount {
     }
 
     interface OtherDetails {
-        Type: string | "OTHER";
+        Type: "OTHER";
 
         /**
          * The address of the owner of the bank account
