@@ -38,6 +38,11 @@ export namespace cardPreAuthorization {
         DebitedFunds: MoneyData;
 
         /**
+         * Value of the funds remaining on a pre-authorization
+         */
+        RemainingFunds: MoneyData;
+
+        /**
          * Status of the PreAuthorization
          */
         Status: PreAuthorizationStatus;
