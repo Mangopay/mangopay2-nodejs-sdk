@@ -1,3 +1,10 @@
+## [1.30.1] - 2022-08-17
+##Fixed
+- Missing types for error catching. Fix issue [#320](https://github.com/Mangopay/mangopay2-nodejs-sdk/issues/320)
+- Missing types for BankAccount object. Fix issue [#319](https://github.com/Mangopay/mangopay2-nodejs-sdk/issues/319)
+- Missing type for CardPreAuthorizationData. Fix issue [#311 ](https://github.com/Mangopay/mangopay2-nodejs-sdk/issues/311)
+- OAuth token renewal bug fix
+
 ## [1.30.0] - 2022-06-29
 ##Added
 **Recurring: €0 deadlines for CIT**
