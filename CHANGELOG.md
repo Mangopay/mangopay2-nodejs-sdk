@@ -1,3 +1,21 @@
+## [1.31.0] - 2022-08-25
+##Added
+**New country authorizations endpoints**
+
+Country authorizations can now be viewed by using one of the following endpoints:
+
+<a href="https://docs.mangopay.com/endpoints/v2.01/regulatory#e1061_the-country-authorizations-object">View a country's authorizations</a> <br>
+<a href="https://docs.mangopay.com/endpoints/v2.01/regulatory#e1061_the-country-authorizations-object">View all countries' authorizations</a>
+
+With these calls, it is possible to check which countries have:
+
+- Blocked user creation
+- Blocked bank account creation
+- Blocked payout creation
+
+Please refer to the <a href="https://docs.mangopay.com/guide/restrictions-by-country">Restrictions by country</a>
+article for more information.
+
 ## [1.30.1] - 2022-08-17
 ##Fixed
 - Missing types for error catching. Fix issue [#320](https://github.com/Mangopay/mangopay2-nodejs-sdk/issues/320)
