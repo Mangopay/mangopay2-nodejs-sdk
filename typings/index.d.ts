@@ -60,6 +60,8 @@ import { event } from "./models/event";
 import { idempotency } from "./models/idempotency";
 import { securityInfo } from "./models/securityInfo";
 import { shipping } from "./models/shipping";
+import { countryAuthorization } from "./models/countryAuthorization";
+import { Regulatory } from "./services/Regulatory";
 
 export = MangoPay;
 
@@ -91,6 +93,7 @@ declare class MangoPay {
     Hooks: Hooks;
     Reports: Reports;
     Idempotency: Idempotency;
+    Regulatory: Regulatory;
 
     models: typeof MangoPay.models;
 
@@ -725,6 +728,13 @@ declare namespace MangoPay {
 
         interface DebitedBankAccount extends bankAccount.DebitedBankAccountData {
         }
+
+        class CountryAuthorization extends EntityBase<countryAuthorization.CountryAuthorizationData> {
+            constructor(data?: Partial<countryAuthorization.CountryAuthorizationData>);
+        }
+
+        interface CountryAuthorization extends countryAuthorization.CountryAuthorizationData {
+        }
     }
 
     export {
@@ -766,6 +776,7 @@ declare namespace MangoPay {
         SecureMode,
         enums,
         CountryISO,
-        CurrencyISO
+        CurrencyISO,
+        countryAuthorization
     };
 }
