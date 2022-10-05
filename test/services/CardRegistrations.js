@@ -58,7 +58,7 @@ describe('Card Registrations', function () {
                 data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4970101122334422',
+                    cardNumber: '4970105191923460',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
