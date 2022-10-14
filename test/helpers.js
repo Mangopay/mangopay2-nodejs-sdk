@@ -196,7 +196,7 @@ module.exports = {
                 data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4972485830400064',
+                    cardNumber: '4970105191923460',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
@@ -228,7 +228,19 @@ module.exports = {
                                 "PostalCode": "80400",
                                 "Country": "US"
                             }
-                        }
+                        },
+                        BrowserInfo: {
+                            AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                            JavaEnabled: true,
+                            Language: "FR-FR",
+                            ColorDepth: 4,
+                            ScreenHeight: 1800,
+                            ScreenWidth: 400,
+                            JavascriptEnabled: true,
+                            TimeZoneOffset: "+60",
+                            UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                        },
+                        IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
                     };
 
                     api.CardPreAuthorizations.create(preAuthorization, function(data, response){
@@ -277,7 +289,19 @@ module.exports = {
                           "PostalCode": "68400",
                           "Country": "US"
                         }
-                    }
+                    },
+                    BrowserInfo: {
+                        AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                        JavaEnabled: true,
+                        Language: "FR-FR",
+                        ColorDepth: 4,
+                        ScreenHeight: 1800,
+                        ScreenWidth: 400,
+                        JavascriptEnabled: true,
+                        TimeZoneOffset: "+60",
+                        UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                    },
+                    IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
                 };
                 api.PayIns.create(payIn, callback)
             });
@@ -380,7 +404,7 @@ module.exports = {
             data: {
                 data: cardRegistration.PreregistrationData,
                 accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4972485830400064',
+                cardNumber: '4970105191923460',
                 cardExpirationDate: '1224',
                 cardCvx: '123'
             },

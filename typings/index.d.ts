@@ -164,7 +164,7 @@ declare namespace MangoPay {
             parse(): void;
         }
 
-        class Model<T = any> implements ModelMethods<T> {
+        class Model<T extends {} = any> implements ModelMethods<T> {
             initialize(): void;
 
             getData<K extends keyof T>(attribute: K): T[K];
@@ -184,7 +184,7 @@ declare namespace MangoPay {
             constructor(data: T);
         }
 
-        class EntityBase<T = any> extends Model<T> {
+        class EntityBase<T extends {} = any> extends Model<T> {
             initialize(): void;
 
             /**
