@@ -1,3 +1,11 @@
+## [1.31.1] - 2022-10-14
+### Fixed
+
+- Compiling fails in Typescript 4.8 #335
+- KYC's DocumentStatus missing value #333
+- Fixed untyped property for CountryAuthorization
+- Added missing UserId to UboDeclarationData
+
 ## [1.31.0] - 2022-08-25
 ##Added
 **New country authorizations endpoints**
