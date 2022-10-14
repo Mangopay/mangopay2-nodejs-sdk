@@ -7,6 +7,10 @@ import { enums } from "../enums";
 export namespace uboDeclaration {
     interface UboDeclarationData extends entityBase.EntityBaseData {
         /**
+         * ID of the user
+         */
+        UserId: string;
+        /**
          * cannot be modified by clients
          */
         ProcessedDate: Timestamp;
