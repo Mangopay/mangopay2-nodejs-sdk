@@ -10,7 +10,7 @@ export namespace Models {
     import ModelMethods = MangoPay.models.ModelMethods;
     import DependsObject = base.DependsObject;
 
-    class Model<T = any> implements ModelMethods<T> {
+    class Model<T extends {} = any> implements ModelMethods<T> {
         initialize(): void;
 
         getData<K extends keyof T>(attribute: K): T[K];
