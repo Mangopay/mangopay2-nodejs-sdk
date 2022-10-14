@@ -13,7 +13,8 @@ export namespace kycDocument {
         | "CREATED"
         | "VALIDATION_ASKED"
         | "VALIDATED"
-        | "REFUSED";
+        | "REFUSED"
+        | "OUT_OF_DATE";
 
     type KYCDocumentRefusedReasonType =
         | "DOCUMENT_UNREADABLE"
@@ -23,7 +24,6 @@ export namespace kycDocument {
         | "DOCUMENT_MISSING"
         | "DOCUMENT_DO_NOT_MATCH_USER_DATA"
         | "DOCUMENT_DO_NOT_MATCH_ACCOUNT_DATA"
-        | "SPECIFIC_CASE"
         | "DOCUMENT_FALSIFIED"
         | "UNDERAGE_PERSON"
         | "SPECIFIC_CASE";
