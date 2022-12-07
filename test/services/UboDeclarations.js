@@ -98,7 +98,7 @@ describe('UBO Declarations', function () {
         before(function (done) {
 
             uboResponse = new Ubo(ubo);
-            uboResponse.FirstName = 'John_NodejsSDK';
+            uboResponse.FirstName = 'John NodejsSDK';
             uboResponse.LastName = 'Michael_NodejsSDK';
 
             api.UboDeclarations.updateUbo(user.Id, uboDeclaration.Id, uboResponse, function (data, response) {
@@ -109,7 +109,7 @@ describe('UBO Declarations', function () {
         it('should be updated', function () {
             expect(uboResponse).not.to.be.null;
             expect(uboResponse.Id).to.equal(ubo.Id);
-            expect(uboResponse.FirstName).to.equal('John_NodejsSDK');
+            expect(uboResponse.FirstName).to.equal('John NodejsSDK');
             expect(uboResponse.LastName).to.equal('Michael_NodejsSDK');
         });
     });

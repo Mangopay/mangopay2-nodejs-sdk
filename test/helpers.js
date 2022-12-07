@@ -2,13 +2,14 @@ var _ = require('underscore');
 var Address = require('../lib/models/Address');
 var Birthplace = require('../lib/models/Birthplace');
 var UserNaturalCapacity = require('../lib/models/UserNaturalCapacity');
+var UserNatural = require('../lib/models/UserNatural');
 
 module.exports = {
     data: {
         getUserNatural: function() {
             return {
-                FirstName: 'John_NodejsSDK',
-                LastName: 'Doe_NodejsSDK',
+                FirstName: 'John NodejsSDK',
+                LastName: 'Doe NodejsSDK',
                 Email: 'john.doe@sample.org',
                 Address: new Address({
                     "AddressLine1": "4101 Reservoir Rd NW",
@@ -30,8 +31,8 @@ module.exports = {
         getUserNaturalPayer: function() {
             return {
                 PersonType: 'NATURAL',
-                FirstName: 'John_NodejsSDK',
-                LastName: 'Doe_NodejsSDK',
+                FirstName: 'John NodejsSDK',
+                LastName: 'Doe NodejsSDK',
                 Email: 'john.doe@sample.org',
                 Address: new Address({
                     "AddressLine1": "4101 Reservoir Rd NW",
@@ -48,8 +49,8 @@ module.exports = {
         getUserNaturalOwner: function() {
             return {
                 PersonType: 'NATURAL',
-                FirstName: 'John_NodejsSDK',
-                LastName: 'Doe_NodejsSDK',
+                FirstName: 'John NodejsSDK',
+                LastName: 'Doe NodejsSDK',
                 Email: 'john.doe@sample.org',
                 Address: new Address({
                     "AddressLine1": "4101 Reservoir Rd NW",
@@ -75,8 +76,8 @@ module.exports = {
         },
         getUbo: function () {
             return {
-                FirstName: 'John_NodejsSDK',
-                LastName: 'Doe_NodejsSDK',
+                FirstName: 'John NodejsSDK',
+                LastName: 'Doe NodejsSDK',
                 Address: new Address({
                     "AddressLine1": "4101 Reservoir Rd NW",
                     "AddressLine2": "",
@@ -106,8 +107,8 @@ module.exports = {
                     "PostalCode": "20007",
                     "Country": "US"
                 },
-                LegalRepresentativeFirstName: 'John_NodejsSDK',
-                LegalRepresentativeLastName: 'Doe_NodejsSDK',
+                LegalRepresentativeFirstName: 'John NodejsSDK',
+                LegalRepresentativeLastName: 'Doe NodejsSDK',
                 LegalRepresentativeEmail: 'john.doe@sample.org',
                 LegalRepresentativeAddress: {
                     "AddressLine1": "4101 Reservoir Rd NW",
@@ -130,8 +131,8 @@ module.exports = {
                 Name: 'MartixSampleOrg_NodejsSDK',
                 Email: 'mail@test.com',
                 LegalPersonType: 'BUSINESS',
-                LegalRepresentativeFirstName: 'John_NodejsSDK',
-                LegalRepresentativeLastName: 'Doe_NodejsSDK',
+                LegalRepresentativeFirstName: 'John NodejsSDK',
+                LegalRepresentativeLastName: 'Doe NodejsSDK',
                 LegalRepresentativeAddress: {
                     "AddressLine1": "4101 Reservoir Rd NW",
                     "AddressLine2": "",
@@ -158,8 +159,8 @@ module.exports = {
                     "PostalCode": "20007",
                     "Country": "US"
                 },
-                LegalRepresentativeFirstName: 'John_NodejsSDK',
-                LegalRepresentativeLastName: 'Doe_NodejsSDK',
+                LegalRepresentativeFirstName: 'John NodejsSDK',
+                LegalRepresentativeLastName: 'Doe NodejsSDK',
                 LegalRepresentativeEmail: 'john.doe@sample.org',
                 LegalRepresentativeAddress: {
                     "AddressLine1": "4101 Reservoir Rd NW",
@@ -419,6 +420,29 @@ module.exports = {
         }, options);
     },
 
+    getPaylineCorrectRegistartionDataForDeposit: function(cardRegistration, callback) {
+        /*
+         ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
+         */
+        var options = {
+            data: {
+                data: cardRegistration.PreregistrationData,
+                accessKeyRef: cardRegistration.AccessKey,
+                cardNumber: '4970105181818183',
+                cardExpirationDate: '1224',
+                cardCvx: '123'
+            },
+            url: cardRegistration.CardRegistrationURL,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+
+        return api.method('post', function (data, response) {
+            callback(Buffer.from(data).toString(), response);
+        }, options);
+    },
+
     getPaylineCorrectRegistartionData3DSecure: function(cardRegistration, callback) {
         var options = {
             data: {
@@ -477,6 +501,144 @@ module.exports = {
 
     generateRandomString: function () {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    }
+    },
 
+    getNewDeposit: function(cardId, authorId) {
+        return {
+            AuthorId: authorId,
+            CardId: cardId,
+            DebitedFunds: {
+                Amount: 1000,
+                Currency: 'EUR'
+            },
+            SecureModeReturnURL: 'http://mangopay-sandbox-test.com',
+            StatementDescriptor: 'lorem',
+            Culture: 'FR',
+            IpAddress: '2001:0620:0000:0000:0211:24FF:FE80:C12C',
+            BrowserInfo: {
+                AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                JavaEnabled: true,
+                Language: "FR-FR",
+                ColorDepth: 4,
+                ScreenHeight: 1800,
+                ScreenWidth: 400,
+                JavascriptEnabled: true,
+                TimeZoneOffset: "+60",
+                UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+            },
+            Address: {
+                AddressLine1: 'Main Street no 5',
+                City: 'Paris',
+                Country: 'FR',
+                PostalCode: '68400',
+                Region: 'Europe'
+            },
+            Billing: {
+                FirstName: "John",
+                LastName: "Doe",
+                Address: {
+                    "AddressLine1": "4101 Reservoir Rd NW",
+                    "AddressLine2": "",
+                    "City": "Washington",
+                    "Region": "District of Columbia",
+                    "PostalCode": "80400",
+                    "Country": "US"
+                }
+            },
+            Shipping: {
+                FirstName: 'Joe',
+                LastName: 'Blogs',
+                Address: {
+                    AddressLine1: '1 MangoPay Street',
+                    AddressLine2: 'The Loop',
+                    City: 'Paris',
+                    Region: 'Ile de France',
+                    PostalCode: '75001',
+                    Country: 'FR'
+                }
+            }
+        };
+    },
+
+    createNewDeposit: function(callback) {
+        var self = this;
+        var john = new UserNatural(this.data.getUserNatural());
+
+        api.Users.create(john).then(function (data, response) {
+            john = data;
+
+            var cardRegistration = {
+                UserId: john.Id,
+                Currency: 'EUR'
+            };
+
+            api.CardRegistrations.create(cardRegistration, function () {
+                self.getPaylineCorrectRegistartionDataForDeposit(cardRegistration, function (data, response) {
+                    cardRegistration.RegistrationData = data;
+
+                    api.CardRegistrations.update(cardRegistration).then(function (data) {
+                        cardRegistration = data;
+
+                        var newDeposit = self.getNewDeposit(cardRegistration.CardId, john.Id);
+
+                        api.Deposits.create(newDeposit, callback);
+                    });
+                });
+            });
+        });
+    },
+
+    createNewCardPreAuthorizedDepositPayIn: function(callback) {
+        var self = this;
+        var john = new UserNatural(this.data.getUserNatural());
+
+        api.Users.create(john).then(function (data, response) {
+            john = data;
+
+            var cardRegistration = {
+                UserId: john.Id,
+                Currency: 'EUR'
+            };
+
+            api.CardRegistrations.create(cardRegistration, function () {
+                self.getPaylineCorrectRegistartionDataForDeposit(cardRegistration, function (data, response) {
+                    cardRegistration.RegistrationData = data;
+
+                    api.CardRegistrations.update(cardRegistration).then(function (data) {
+                        cardRegistration = data;
+
+                        var wallet = {
+                            Owners: [john.Id],
+                            Currency: 'EUR',
+                            Description: 'WALLET IN EUR'
+                        };
+
+                        api.Wallets.create(wallet).then(function () {
+                            var newDeposit = self.getNewDeposit(cardRegistration.CardId, john.Id);
+
+                            api.Deposits.create(newDeposit, function (data, response) {
+                                newDeposit = data;
+
+                                var payIn = {
+                                    AuthorId: john.Id,
+                                    CreditedWalletId: wallet.Id,
+                                    DebitedFunds: {
+                                        Currency: 'EUR',
+                                        Amount: 1000
+                                    },
+                                    Fees: {
+                                        Currency: 'EUR',
+                                        Amount: 0
+                                    },
+                                    DepositId: newDeposit.Id
+                                };
+
+                                api.PayIns.createCardPreAuthorizedDepositPayIn(payIn, callback);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    }
 };

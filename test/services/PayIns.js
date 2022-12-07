@@ -925,4 +925,20 @@ describe('PayIns', function () {
             });
         });
     });
+
+    // describe('Card PreAuthorized Deposit', function () {
+    //     var payIn;
+    //
+    //     before(function (done) {
+    //         helpers.createNewCardPreAuthorizedDepositPayIn(function (data, response) {
+    //             payIn = data;
+    //             done();
+    //         });
+    //     });
+    //
+    //     it('should be fetched', function () {
+    //         expect(payIn).not.to.be.undefined;
+    //         expect(payIn.Status).to.equal('SUCCEEDED');
+    //     });
+    // });
 });
