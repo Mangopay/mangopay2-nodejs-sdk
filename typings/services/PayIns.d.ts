@@ -70,4 +70,7 @@ export class PayIns {
 
     createRecurringPayInRegistrationMIT: MethodOverload<payIn.CreateRecurringPayInMIT,
         payIn.RecurringPayInData>;
+
+    createCardPreAuthorizedDepositPayIn:
+        MethodOverload<payIn.CreateCardPreAuthorizedDepositPayIn, payIn.CardPreAuthorizedDepositPayInData>;
 }

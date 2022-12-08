@@ -156,4 +156,15 @@ export namespace enums {
          */
         Declarative: "DECLARATIVE";
     }
+
+    interface IDepositStatus {
+        Created: "CREATED";
+        Succeeded: "SUCCEEDED";
+        Failed: "FAILED";
+    }
+
+    interface IPaymentStatus {
+        Waiting: "WAITING";
+        Canceled: "CANCELED";
+    }
 }

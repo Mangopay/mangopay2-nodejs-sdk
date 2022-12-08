@@ -996,4 +996,48 @@ export namespace payIn {
          */
         Country: CountryISO;
     }
+
+    interface CreateCardPreAuthorizedDepositPayIn {
+        AuthorId?: string;
+
+        CreditedWalletId: string;
+
+        DebitedFunds: MoneyData;
+
+        Fees: MoneyData;
+
+        DepositId: string;
+
+        Tag?: string;
+    }
+
+    interface CardPreAuthorizedDepositPayInData extends entityBase.EntityBaseData {
+        AuthorId: string;
+
+        CreditedUserId: string;
+
+        DepositId: string;
+
+        ResultCode: string;
+
+        ResultMessage: string;
+
+        Status: transaction.TransactionStatus;
+
+        ExecutionDate: Timestamp;
+
+        Type: transaction.TransactionType;
+
+        Nature: transaction.TransactionNature;
+
+        PaymentType: PayInPaymentType;
+
+        ExecutionType: PayInExecutionType;
+
+        DebitedFunds: MoneyData;
+
+        CreditedFunds: MoneyData;
+
+        Fees: MoneyData;
+    }
 }
