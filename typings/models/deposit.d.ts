@@ -2,7 +2,7 @@ import { CountryISO, Timestamp, ValueOf } from "../types";
 import { entityBase } from "./entityBase";
 import { money } from "./money";
 import { enums } from "../enums";
-import { _3DSVersion, payIn } from "./payIn";
+import { payIn } from "./payIn";
 import { base } from "../base";
 import { billing } from "./billing";
 import { shipping } from "./shipping";
@@ -14,6 +14,7 @@ export namespace deposit {
     import BrowserInfoData = base.BrowserInfoData;
     import ShippingData = shipping.ShippingData;
     import CompleteBillingData = billing.CompleteBillingData;
+    import _3DSVersion = payIn._3DSVersion;
 
     type DepositStatus = ValueOf<enums.IDepositStatus>;
 
@@ -28,7 +29,7 @@ export namespace deposit {
 
         PaymentStatus: PaymentStatus;
 
-        PayinsLinked: PayinsLinkedDatap[];
+        PayinsLinked: PayinsLinkedData[];
 
         ResultCode: string;
 
