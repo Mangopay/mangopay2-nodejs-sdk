@@ -1072,6 +1072,53 @@ api.Regulatory.getAllCountriesAuthorizations().then(data => {
     const d = data; // $ExpectType CountryAuthorizationData[]
 });
 
+api.Deposits.create(new api.models.Deposit({
+    AuthorId: "placeholder",
+    DebitedFunds: {
+        Amount: 1000,
+        Currency: "EUR"
+    },
+    CardId: "placeholder",
+    SecureModeReturnURL: "https://lorem",
+    IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+    BrowserInfo: {
+        AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+        ColorDepth: 4,
+        JavaEnabled: true,
+        JavascriptEnabled: true,
+        Language: 'FR-FR',
+        ScreenHeight: 1800,
+        ScreenWidth: 400,
+        TimeZoneOffset: "+60",
+        UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+    }
+}), data => {
+    const d = data; // $ExpectType DepositData
+});
+
+api.Deposits.get("placeholder", data => {
+    const d = data; // $ExpectType DepositData
+});
+
+api.Deposits.cancel("placeholder", data => {
+    const d = data; // $ExpectType DepositData
+});
+
+api.PayIns.createCardPreAuthorizedDepositPayIn({
+    CreditedWalletId: "placeholder",
+    DebitedFunds: {
+        Amount: 1000,
+        Currency: "EUR"
+    },
+    Fees: {
+        Amount: 1000,
+        Currency: "EUR"
+    },
+    DepositId: "placeholder"
+}, data => {
+    const d = data; // $ExpectType CardPreAuthorizedDepositPayInData
+});
+
 /* Namespace Access */
 
 const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";

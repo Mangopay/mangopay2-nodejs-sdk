@@ -55,6 +55,7 @@ import { mandate } from "./models/mandate";
 import { hook } from "./models/hook";
 import { report } from "./models/report";
 import { billing } from "./models/billing";
+import { deposit } from "./models/deposit";
 import { birthplace } from "./models/birthplace";
 import { event } from "./models/event";
 import { idempotency } from "./models/idempotency";
@@ -62,6 +63,7 @@ import { securityInfo } from "./models/securityInfo";
 import { shipping } from "./models/shipping";
 import { countryAuthorization } from "./models/countryAuthorization";
 import { Regulatory } from "./services/Regulatory";
+import { Deposits } from "./services/Deposits";
 
 export = MangoPay;
 
@@ -94,6 +96,7 @@ declare class MangoPay {
     Reports: Reports;
     Idempotency: Idempotency;
     Regulatory: Regulatory;
+    Deposits: Deposits;
 
     models: typeof MangoPay.models;
 
@@ -139,6 +142,8 @@ declare namespace MangoPay {
         const UboDeclarationStatus: enums.IUboDeclarationStatus;
         const UboRefusedReasonType: enums.IUboRefusedReasonType;
         const UserNaturalCapacity: enums.IUserNaturalCapacity;
+        const DepositStatus: enums.IDepositStatus;
+        const PaymentStatus: enums.IPaymentStatus;
 
         interface ModelMethods<T extends {}> {
             initialize(): void;
@@ -735,6 +740,13 @@ declare namespace MangoPay {
 
         interface CountryAuthorization extends countryAuthorization.CountryAuthorizationData {
         }
+
+        class Deposit extends EntityBase<deposit.DepositData> {
+            constructor(data?: Partial<deposit.CreateDeposit>);
+        }
+
+        interface Deposit extends deposit.DepositData {
+        }
     }
 
     export {
@@ -777,6 +789,7 @@ declare namespace MangoPay {
         enums,
         CountryISO,
         CurrencyISO,
-        countryAuthorization
+        countryAuthorization,
+        deposit
     };
 }
