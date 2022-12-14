@@ -29,7 +29,7 @@ export namespace deposit {
 
         PaymentStatus: PaymentStatus;
 
-        PayinsLinked: PayinsLinkedData[];
+        PayinsLinked: PayinsLinkedData;
 
         ResultCode: string;
 
