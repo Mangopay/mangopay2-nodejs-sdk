@@ -1,3 +1,8 @@
+## [1.32.1] - 2022-12-15
+### Fixed
+
+- Fix type on property PayinsLinked
+
 ## [1.32.0] - 2022-12-09
 ### Added
 
