@@ -18,7 +18,7 @@ export namespace user {
 
     type KYCLevel = "LIGHT" | "REGULAR";
 
-    type LegalPersonType = "BUSINESS" | "ORGANIZATION" | "SOLETRADER";
+    type LegalPersonType = "BUSINESS" | "ORGANIZATION" | "SOLETRADER" | "PARTNERSHIP";
 
     type StaticKeys =
         | "KYCLevel"
