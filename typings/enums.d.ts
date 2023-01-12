@@ -26,6 +26,7 @@ export namespace enums {
         Business: "BUSINESS";
         Organization: "ORGANIZATION";
         Soletrader: "SOLETRADER";
+        Partnership: "PARTNERSHIP";
     }
 
     interface IPersonType {
