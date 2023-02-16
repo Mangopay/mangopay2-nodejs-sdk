@@ -82,7 +82,7 @@ export class Disputes {
      * @param repudiationId
      * @param options
      */
-    getRepudiation: MethodOverload<string, repudiation.RepudiationData[]>;
+    getRepudiation: MethodOverload<string, repudiation.RepudiationData>;
 
     /**
      * Creates settlement transfer
