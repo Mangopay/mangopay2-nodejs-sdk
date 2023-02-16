@@ -1,3 +1,8 @@
+## [1.33.1] - 2023-02-16
+### Fixed
+
+- Wrong return type in Disputes.getRepudiation() #339
+
 ## [1.33.0] - 2023-01-12
 ### Added
 
