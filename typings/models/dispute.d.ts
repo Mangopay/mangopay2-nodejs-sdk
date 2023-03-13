@@ -97,6 +97,11 @@ export namespace dispute {
         ContestDeadlineDate: Timestamp;
 
         /**
+         * The date and time the dispute was closed
+         */
+        ClosedDate: Timestamp;
+
+        /**
          * The ID of the associated repudiation transaction
          */
         RepudiationId: string;
