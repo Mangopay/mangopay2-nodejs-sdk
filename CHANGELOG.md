@@ -1,3 +1,22 @@
+## [1.34.0] - 2023-03-17
+### Added
+
+Knowing when a dispute was closed is now possible thanks to the new ClosedDate parameter for the Dispute object.
+
+The following endpoints have been updated accordingly:
+
+[Vew a Dispute](ttps://docs.mangopay.com/endpoints/v2.01/disputes#e240_view-a-dispute)
+
+[List Disputes for a User](https://docs.mangopay.com/endpoints/v2.01/disputes#e817_list-a-users-disputes)
+
+[List Disputes for a Wallet](https://docs.mangopay.com/endpoints/v2.01/disputes#e816_list-a-wallets-disputes)
+
+[List all Disputes](https://docs.mangopay.com/endpoints/v2.01/disputes#e241_list-all-disputes)
+
+[List Disputes that need settling](https://docs.mangopay.com/endpoints/v2.01/disputes#e980_list-disputes-that-need-settling)
+
+Please note that the new ClosedDate field will only display values for the Disputes closed after this release. Otherwise, a null value will be returned.
+
 ## [1.33.1] - 2023-02-16
 ### Fixed
 
