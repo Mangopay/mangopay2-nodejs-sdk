@@ -926,6 +926,48 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Mbway Direct', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInMbwayDirect(api, john, function (data, response) {
+                payIn = data;
+                console.log("asd")
+                console.log(payIn);
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('MBWAY');
+                expect(payIn.ExecutionType).to.equal('DIRECT');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Status).to.equal('CREATED');
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.PhoneNumber).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('MBWAY');
+                expect(getPayIn.ExecutionType).to.equal('DIRECT');
+                expect(getPayIn.PhoneNumber).not.to.be.null;
+            });
+        });
+    });
+
     // describe('Card PreAuthorized Deposit', function () {
     //     var payIn;
     //

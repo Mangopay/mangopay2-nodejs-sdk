@@ -11,6 +11,7 @@ export namespace enums {
         Preauthorized: "PREAUTHORIZED";
         PayPal: "PAYPAL";
         Payconiq: "PAYCONIQ";
+        Mbway: "MBWAY";
     }
 
     interface IMandateStatus {

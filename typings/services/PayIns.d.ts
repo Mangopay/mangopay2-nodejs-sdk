@@ -17,7 +17,8 @@ export class PayIns {
         MethodOverload<payIn.CreateBankWireDirectPayIn, payIn.BankWireDirectPayInData> &
         MethodOverload<payIn.CreatePayconiqWebPayInData, payIn.PayconiqWebPayInData> &
         MethodOverload<payIn.CreateDirectDebitDirectPayIn, payIn.DirectDebitDirectPayInData> &
-        MethodOverload<payIn.CreateDirectDebitWebPayIn, payIn.DirectDebitWebPayInData>;
+        MethodOverload<payIn.CreateDirectDebitWebPayIn, payIn.DirectDebitWebPayInData> &
+        MethodOverload<payIn.CreateMbwayDirectPayIn, payIn.MbwayDirectPayInData>;
 
     /**
      * Get pay-in
