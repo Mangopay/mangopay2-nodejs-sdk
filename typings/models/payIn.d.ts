@@ -25,7 +25,8 @@ export namespace payIn {
         | CardWebPayInData
         | BankWireDirectPayInData
         | PayconiqWebPayInData
-        | DirectDebitDirectPayInData;
+        | DirectDebitDirectPayInData
+        | MbwayDirectPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -290,6 +291,24 @@ export namespace payIn {
         SecureModeRedirectURL: string;
     }
 
+    interface MbwayDirectPayInData extends BasePayInData {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "MBWAY";
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+
+        /**
+         * The mobile phone number of the user initiating the pay-in
+         * Country code followed by hash symbol (#) followed by the rest of the number. Only digits and hash allowed
+         */
+        PhoneNumber: string;
+    }
+
     interface CreateCardDirectPayIn {
         ExecutionType: "DIRECT";
 
@@ -366,6 +385,49 @@ export namespace payIn {
          * Contains every useful information's related to the user shipping
          */
         Shipping?: ShippingData;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+    }
+
+    interface CreateMbwayDirectPayIn {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "MBWAY";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The mobile phone number of the user initiating the pay-in
+         * Country code followed by hash symbol (#) followed by the rest of the number. Only digits and hash allowed
+         */
+        PhoneNumber: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
 
         /**
          * Custom data that you can add to this item

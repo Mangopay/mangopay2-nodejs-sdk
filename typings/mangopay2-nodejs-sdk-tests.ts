@@ -562,6 +562,20 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "MBWAY",
+    ExecutionType: "DIRECT",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    PhoneNumber: "351#269458236",
+    Tag: "test tag",
+    StatementDescriptor: "test"
+}).then(data => {
+    const d = data; // $ExpectType MbwayDirectPayInData
+});
+
+api.PayIns.create({
     PaymentType: "CARD",
     ExecutionType: "WEB",
     AuthorId: "user-id",

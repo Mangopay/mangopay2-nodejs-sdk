@@ -309,6 +309,35 @@ module.exports = {
         });
     },
 
+    getNewPayInMbwayDirect: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = {
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                PaymentType: 'MBWAY',
+                ExecutionType: 'DIRECT',
+                StatementDescriptor: "test",
+                PhoneNumber: "351#269458236",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
     getNewPayoutBankWire: function(api, user, callback) {
         var self = this;
 
