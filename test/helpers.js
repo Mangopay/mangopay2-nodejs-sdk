@@ -331,7 +331,7 @@ module.exports = {
                 PaymentType: 'MBWAY',
                 ExecutionType: 'DIRECT',
                 StatementDescriptor: "test",
-                PhoneNumber: "351#269458236",
+                Phone: "351#269458236",
                 Tag: "test tag"
             };
             api.PayIns.create(payIn, callback);

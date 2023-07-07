@@ -306,7 +306,7 @@ export namespace payIn {
          * The mobile phone number of the user initiating the pay-in
          * Country code followed by hash symbol (#) followed by the rest of the number. Only digits and hash allowed
          */
-        PhoneNumber: string;
+        Phone: string;
     }
 
     interface CreateCardDirectPayIn {
@@ -416,7 +416,7 @@ export namespace payIn {
          * The mobile phone number of the user initiating the pay-in
          * Country code followed by hash symbol (#) followed by the rest of the number. Only digits and hash allowed
          */
-        PhoneNumber: string;
+        Phone: string;
 
         /**
          * The ID of the wallet where money will be credited

@@ -568,7 +568,7 @@ api.PayIns.create({
     CreditedWalletId: "wallet-id",
     Fees: {Amount: 100, Currency: "GBP"},
     DebitedFunds: {Amount: 2000, Currency: "GBP"},
-    PhoneNumber: "351#269458236",
+    Phone: "351#269458236",
     Tag: "test tag",
     StatementDescriptor: "test"
 }).then(data => {
