@@ -932,8 +932,6 @@ describe('PayIns', function () {
         before(function (done) {
             helpers.getNewPayInMbwayDirect(api, john, function (data, response) {
                 payIn = data;
-                console.log("asd")
-                console.log(payIn);
                 done();
             });
         });
@@ -946,7 +944,7 @@ describe('PayIns', function () {
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('CREATED');
                 expect(payIn.Type).to.equal('PAYIN');
-                expect(payIn.PhoneNumber).not.to.be.null;
+                expect(payIn.Phone).not.to.be.null;
             });
         });
 
@@ -963,7 +961,7 @@ describe('PayIns', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.PaymentType).to.equal('MBWAY');
                 expect(getPayIn.ExecutionType).to.equal('DIRECT');
-                expect(getPayIn.PhoneNumber).not.to.be.null;
+                expect(getPayIn.Phone).not.to.be.null;
             });
         });
     });
