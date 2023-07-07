@@ -932,8 +932,6 @@ describe('PayIns', function () {
         before(function (done) {
             helpers.getNewPayInMbwayDirect(api, john, function (data, response) {
                 payIn = data;
-                console.log("asd")
-                console.log(payIn);
                 done();
             });
         });
@@ -964,6 +962,45 @@ describe('PayIns', function () {
                 expect(getPayIn.PaymentType).to.equal('MBWAY');
                 expect(getPayIn.ExecutionType).to.equal('DIRECT');
                 expect(getPayIn.PhoneNumber).not.to.be.null;
+            });
+        });
+    });
+
+    describe('PayPal Direct', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInPayPalDirect(api, john, function (data, response) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('PAYPAL');
+                expect(payIn.ExecutionType).to.equal('DIRECT');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Status).to.equal('CREATED');
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.LineItems).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('PAYPAL');
+                expect(getPayIn.ExecutionType).to.equal('DIRECT');
             });
         });
     });
