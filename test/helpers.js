@@ -338,6 +338,64 @@ module.exports = {
         });
     },
 
+    getNewPayInPayPalDirect: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = {
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 1000,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                CreditedWalletId: wallet.Id,
+                PaymentType: 'PAYPAL',
+                ExecutionType: 'DIRECT',
+                ReturnURL: 'http://example.com',
+                Shipping: {
+                    FirstName: user.FirstName,
+                    LastName: user.LastName,
+                    Address: {
+                        "AddressLine1": "4101 Reservoir Rd NW",
+                        "AddressLine2": "",
+                        "City": "Washington",
+                        "Region": "District of Columbia",
+                        "PostalCode": "20007",
+                        "Country": "US"
+                    }
+                },
+                LineItems: [
+                    {
+                        Name: "running shoes",
+                        Quantity: 1,
+                        UnitAmount: 500,
+                        TaxAmount: 0,
+                        Description: "seller1 ID"
+                    },
+                    {
+                        Name: "running shoes",
+                        Quantity: 1,
+                        UnitAmount: 500,
+                        TaxAmount: 0,
+                        Description: "seller2 ID"
+                    }
+                ],
+                Tag: "tag",
+                StatementDescriptor: "test"
+            };
+
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
     getNewPayoutBankWire: function(api, user, callback) {
         var self = this;
 

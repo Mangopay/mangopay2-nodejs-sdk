@@ -590,6 +590,42 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "PAYPAL",
+    ExecutionType: "DIRECT",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    LineItems: [
+        {
+            Name: "test",
+            Quantity: 100,
+            TaxAmount: undefined,
+            UnitAmount: 10,
+            Description: "placeholder"
+        }
+    ],
+    Shipping: {
+        FirstName: "John",
+        LastName: "Doe",
+        Address: {
+            AddressLine1: "test addr1",
+            AddressLine2: undefined,
+            City: "Paris",
+            Country: "FR",
+            Region: "Europe",
+            PostalCode: "68400"
+        }
+    },
+    ReturnURL: "http://test.com",
+    Tag: "test tag",
+    StatementDescriptor: "test",
+    Culture: "FR"
+}).then(data => {
+    const d = data; // $ExpectType PayPalDirectPayInData
+});
+
+api.PayIns.create({
     PaymentType: "BANK_WIRE",
     ExecutionType: "DIRECT",
     AuthorId: "user-id",

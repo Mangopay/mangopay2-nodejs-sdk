@@ -16,6 +16,7 @@ export namespace payIn {
     import MoneyData = money.MoneyData;
     import SecurityInfoData = securityInfo.SecurityInfoData;
     import ShippingData = shipping.ShippingData;
+    import CreateShipping = shipping.CreateShipping;
 
     type _3DSVersion = "V1" | "V2_1";
 
@@ -309,6 +310,43 @@ export namespace payIn {
         Phone: string;
     }
 
+    interface PayPalDirectPayInData extends BasePayInData {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "PAYPAL";
+
+        /**
+         * The URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * The URL to which the user is redirected to complete the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+
+        /**
+         * Information about the shipping address
+         */
+        Shipping: ShippingData;
+
+        /**
+         * List of items and quantity bought by the buyer
+         */
+        LineItems: LineItemData[];
+
+        /**
+         * The language in which the PayPal payment page is to be displayed.
+         */
+        Culture: CountryISO;
+    }
+
     interface CreateCardDirectPayIn {
         ExecutionType: "DIRECT";
 
@@ -433,6 +471,121 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+    }
+
+    interface CreatePayPalDirectPayIn {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "PAYPAL";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the items bought by the customer
+         */
+        LineItems: CreateLineItem[];
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping?: CreateShipping;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+
+        /**
+         * The language in which the PayPal payment page is to be displayed.
+         */
+        Culture?: CountryISO;
+    }
+
+    interface LineItemData {
+        /**
+         * Item name
+         */
+        Name: string;
+
+        /**
+         * Quantity of item bought
+         */
+        Quantity: number;
+
+        /**
+         * The item cost
+         */
+        UnitAmount: number;
+
+        /**
+         * The item tax
+         */
+        TaxAmount: number;
+
+        /**
+         * A consistent and unique reference for the seller. It can be:
+         * - The user ID created on MANGOPAY for the seller
+         * - Or the firstname and lastname of the seller
+         */
+        Description: string;
+    }
+
+    interface CreateLineItem {
+        /**
+         * Item name
+         */
+        Name: string;
+
+        /**
+         * Quantity of item bought
+         */
+        Quantity: number;
+
+        /**
+         * The item cost
+         */
+        UnitAmount: number;
+
+        /**
+         * The item tax
+         */
+        TaxAmount?: number;
+
+        /**
+         * A consistent and unique reference for the seller. It can be:
+         * - The user ID created on MANGOPAY for the seller
+         * - Or the firstname and lastname of the seller
+         */
+        Description: string;
     }
 
     interface DirectDebitDirectPayInData extends BasePayInData {
