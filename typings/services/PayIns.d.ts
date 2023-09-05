@@ -77,6 +77,7 @@ export class PayIns {
 
     /**
      * Create new PayPal Web pay-in
+     * To be used instead of the 'create' method for PayPal PayIns
      * @param payIn
      * @param options
      */
