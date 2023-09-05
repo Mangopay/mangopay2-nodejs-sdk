@@ -27,7 +27,7 @@ export namespace payIn {
         | BankWireDirectPayInData
         | PayconiqWebPayInData
         | DirectDebitDirectPayInData
-        | MbwayDirectPayInData;
+        | MbwayWebPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -292,8 +292,8 @@ export namespace payIn {
         SecureModeRedirectURL: string;
     }
 
-    interface MbwayDirectPayInData extends BasePayInData {
-        ExecutionType: "DIRECT";
+    interface MbwayWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
 
         PaymentType: "MBWAY";
 
@@ -430,8 +430,8 @@ export namespace payIn {
         Tag?: string;
     }
 
-    interface CreateMbwayDirectPayIn {
-        ExecutionType: "DIRECT";
+    interface CreateMbwayWebPayIn {
+        ExecutionType: "WEB";
 
         PaymentType: "MBWAY";
 
