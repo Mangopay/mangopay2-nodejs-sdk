@@ -589,9 +589,9 @@ api.PayIns.create({
     const d = data; // $ExpectType CardWebPayInData
 });
 
-api.PayIns.create({
+api.PayIns.createPayPal({
     PaymentType: "PAYPAL",
-    ExecutionType: "DIRECT",
+    ExecutionType: "WEB",
     AuthorId: "user-id",
     CreditedWalletId: "wallet-id",
     Fees: {Amount: 100, Currency: "GBP"},
@@ -622,7 +622,7 @@ api.PayIns.create({
     StatementDescriptor: "test",
     Culture: "FR"
 }).then(data => {
-    const d = data; // $ExpectType PayPalDirectPayInData
+    const d = data; // $ExpectType PayPalWebPayInData
 });
 
 api.PayIns.create({

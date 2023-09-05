@@ -966,11 +966,11 @@ describe('PayIns', function () {
         });
     });
 
-    describe('PayPal Direct', function () {
+    describe('PayPal Web', function () {
         var payIn;
 
         before(function (done) {
-            helpers.getNewPayInPayPalDirect(api, john, function (data, response) {
+            helpers.getNewPayInPayPalWeb(api, john, function (data, response) {
                 payIn = data;
                 done();
             });
@@ -980,7 +980,7 @@ describe('PayIns', function () {
             it('should create the PayIn', function () {
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.PaymentType).to.equal('PAYPAL');
-                expect(payIn.ExecutionType).to.equal('DIRECT');
+                expect(payIn.ExecutionType).to.equal('WEB');
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('CREATED');
                 expect(payIn.Type).to.equal('PAYIN');
@@ -1000,7 +1000,7 @@ describe('PayIns', function () {
             it('should get the PayIn', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.PaymentType).to.equal('PAYPAL');
-                expect(getPayIn.ExecutionType).to.equal('DIRECT');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
             });
         });
     });

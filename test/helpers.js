@@ -338,7 +338,7 @@ module.exports = {
         });
     },
 
-    getNewPayInPayPalDirect: function(api, user, callback) {
+    getNewPayInPayPalWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
@@ -358,7 +358,7 @@ module.exports = {
                 },
                 CreditedWalletId: wallet.Id,
                 PaymentType: 'PAYPAL',
-                ExecutionType: 'DIRECT',
+                ExecutionType: 'WEB',
                 ReturnURL: 'http://example.com',
                 Shipping: {
                     FirstName: user.FirstName,
@@ -392,7 +392,7 @@ module.exports = {
                 StatementDescriptor: "test"
             };
 
-            api.PayIns.create(payIn, callback);
+            api.PayIns.createPayPal(payIn, callback);
         });
     },
 

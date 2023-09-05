@@ -310,8 +310,8 @@ export namespace payIn {
         Phone: string;
     }
 
-    interface PayPalDirectPayInData extends BasePayInData {
-        ExecutionType: "DIRECT";
+    interface PayPalWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
 
         PaymentType: "PAYPAL";
 
@@ -473,8 +473,8 @@ export namespace payIn {
         Tag?: string;
     }
 
-    interface CreatePayPalDirectPayIn {
-        ExecutionType: "DIRECT";
+    interface CreatePayPalWebPayIn {
+        ExecutionType: "WEB";
 
         PaymentType: "PAYPAL";
 

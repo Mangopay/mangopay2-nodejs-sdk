@@ -18,8 +18,7 @@ export class PayIns {
         MethodOverload<payIn.CreatePayconiqWebPayInData, payIn.PayconiqWebPayInData> &
         MethodOverload<payIn.CreateDirectDebitDirectPayIn, payIn.DirectDebitDirectPayInData> &
         MethodOverload<payIn.CreateDirectDebitWebPayIn, payIn.DirectDebitWebPayInData> &
-        MethodOverload<payIn.CreateMbwayWebPayIn, payIn.MbwayWebPayInData> &
-        MethodOverload<payIn.CreatePayPalDirectPayIn, payIn.PayPalDirectPayInData>;
+        MethodOverload<payIn.CreateMbwayWebPayIn, payIn.MbwayWebPayInData>;
 
     /**
      * Get pay-in
@@ -75,4 +74,12 @@ export class PayIns {
 
     createCardPreAuthorizedDepositPayIn:
         MethodOverload<payIn.CreateCardPreAuthorizedDepositPayIn, payIn.CardPreAuthorizedDepositPayInData>;
+
+    /**
+     * Create new PayPal Web pay-in
+     * @param payIn
+     * @param options
+     */
+    createPayPal:
+        MethodOverload<payIn.CreatePayPalWebPayIn, payIn.PayPalWebPayInData>;
 }
