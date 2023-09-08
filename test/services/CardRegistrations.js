@@ -120,19 +120,36 @@ describe('Card Registrations', function () {
             });
         });
 
-        // describe('Validate Card', function () {
-        //     before(function(done) {
-        //         api.Cards.validate(cardRegistration.CardId, function(data, response){
-        //             validatedCard = data;
-        //             done();
-        //         });
-        //     });
-        //
-        //     it('should be validate', function () {
-        //         expect(validatedCard).to.not.be.undefined;
-        //         expect(validatedCard.Id).to.not.be.undefined;
-        //     });
-        // });
+        describe('Validate Card', function () {
+            before(function(done) {
+                var cardValidation = {
+                    AuthorId: cardRegistration.UserId,
+                    SecureModeReturnURL: "http://example.com",
+                    IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+                    BrowserInfo: {
+                        AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                        ColorDepth: 4,
+                        JavaEnabled: true,
+                        JavascriptEnabled: true,
+                        Language: 'FR-FR',
+                        ScreenHeight: 1800,
+                        ScreenWidth: 400,
+                        TimeZoneOffset: "+60",
+                        UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                    }
+                };
+
+                api.Cards.validate(cardRegistration.CardId, cardValidation, function (data) {
+                    validatedCard = data;
+                    done();
+                });
+            });
+
+            it('should be validate', function () {
+                expect(validatedCard).to.not.be.undefined;
+                expect(validatedCard.Id).to.not.be.undefined;
+            });
+        });
 
         describe('Check Card Existing', function () {
             it('should be retrieved', function () {
