@@ -14,6 +14,7 @@ export namespace enums {
         Mbway: "MBWAY";
         Multibanco: "MULTIBANCO";
         Satispay: "SATISPAY";
+        Blik: "BLIK";
     }
 
     interface IMandateStatus {

@@ -603,6 +603,19 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "BLIK",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "http://test.com",
+    Tag: "test tag",
+    StatementDescriptor: "test"
+}).then(data => {
+    const d = data; // $ExpectType BlikWebPayInData
+});
+
+api.PayIns.create({
     PaymentType: "CARD",
     ExecutionType: "WEB",
     AuthorId: "user-id",

@@ -20,7 +20,8 @@ export class PayIns {
         MethodOverload<payIn.CreateDirectDebitWebPayIn, payIn.DirectDebitWebPayInData> &
         MethodOverload<payIn.CreateMbwayWebPayIn, payIn.MbwayWebPayInData> &
         MethodOverload<payIn.CreateMultibancoWebPayIn, payIn.MultibancoWebPayInData> &
-        MethodOverload<payIn.CreateSatispayWebPayIn, payIn.SatispayWebPayInData>;
+        MethodOverload<payIn.CreateSatispayWebPayIn, payIn.SatispayWebPayInData> &
+        MethodOverload<payIn.CreateBlikWebPayIn, payIn.BlikWebPayInData>;
 
     /**
      * Get pay-in
