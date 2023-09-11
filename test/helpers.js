@@ -729,14 +729,14 @@ module.exports = {
         });
     },
 
-    getNewPayInMultibancoWeb: function(api, user, callback) {
+    getNewPayInMultibancoWeb: function (api, user, callback) {
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
             Description: 'WALLET IN EUR'
         };
 
-        api.Wallets.create(wallet).then(function(){
+        api.Wallets.create(wallet).then(function () {
             var payIn = {
                 CreditedWalletId: wallet.Id,
                 AuthorId: user.Id,
@@ -757,4 +757,34 @@ module.exports = {
             api.PayIns.create(payIn, callback);
         });
     },
+
+    getNewPayInSatispayWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                CreditedWalletId: wallet.Id,
+                PaymentType: 'SATISPAY',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "test",
+                ReturnURL: "http://test.com",
+                Tag: "test tag",
+                Country: "IT"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    }
 };

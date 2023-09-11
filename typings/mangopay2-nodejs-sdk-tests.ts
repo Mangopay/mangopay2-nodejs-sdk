@@ -589,6 +589,20 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "SATISPAY",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "http://test.com",
+    Country: "IT",
+    Tag: "test tag",
+    StatementDescriptor: "test"
+}).then(data => {
+    const d = data; // $ExpectType SatispayWebPayInData
+});
+
+api.PayIns.create({
     PaymentType: "CARD",
     ExecutionType: "WEB",
     AuthorId: "user-id",
