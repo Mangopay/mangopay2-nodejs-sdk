@@ -8,6 +8,7 @@ import { base } from "../base";
 import { money } from "./money";
 import { securityInfo } from "./securityInfo";
 import { shipping } from "./shipping";
+import { address } from "./address";
 
 export namespace payIn {
     import BillingData = billing.BillingData;
@@ -776,7 +777,7 @@ export namespace payIn {
         /**
          * The address of the owner of the bank account
          */
-        OwnerAddress: string;
+        OwnerAddress: address.AddressType;
 
         /**
          * The type of bank account
