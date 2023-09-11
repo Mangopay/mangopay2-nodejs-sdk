@@ -27,7 +27,8 @@ export namespace payIn {
         | BankWireDirectPayInData
         | PayconiqWebPayInData
         | DirectDebitDirectPayInData
-        | MbwayWebPayInData;
+        | MbwayWebPayInData
+        | MultibancoWebPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -347,6 +348,18 @@ export namespace payIn {
         Culture: CountryISO;
     }
 
+    interface MultibancoWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "MULTIBANCO";
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
     interface CreateCardDirectPayIn {
         ExecutionType: "DIRECT";
 
@@ -528,6 +541,43 @@ export namespace payIn {
          * The language in which the PayPal payment page is to be displayed.
          */
         Culture?: CountryISO;
+    }
+
+    interface CreateMultibancoWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "MULTIBANCO";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The URL to redirect to after the payment, whether the transaction
+         */
+        ReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
     }
 
     interface LineItemData {

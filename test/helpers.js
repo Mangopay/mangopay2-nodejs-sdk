@@ -727,5 +727,34 @@ module.exports = {
                 });
             });
         });
-    }
+    },
+
+    getNewPayInMultibancoWeb: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = {
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                PaymentType: 'MULTIBANCO',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "test",
+                ReturnURL: "http://test.com",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
 };

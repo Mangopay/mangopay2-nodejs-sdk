@@ -12,6 +12,7 @@ export namespace enums {
         PayPal: "PAYPAL";
         Payconiq: "PAYCONIQ";
         Mbway: "MBWAY";
+        Multibanco: "MULTIBANCO";
     }
 
     interface IMandateStatus {
