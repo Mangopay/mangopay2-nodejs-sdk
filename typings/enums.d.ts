@@ -15,6 +15,7 @@ export namespace enums {
         Multibanco: "MULTIBANCO";
         Satispay: "SATISPAY";
         Blik: "BLIK";
+        GooglePay: "GOOGLE_PAY";
     }
 
     interface IMandateStatus {

@@ -665,6 +665,31 @@ api.PayIns.createPayPal({
     const d = data; // $ExpectType PayPalWebPayInData
 });
 
+api.PayIns.createGooglePay({
+    PaymentType: "GOOGLE_PAY",
+    ExecutionType: "DIRECT",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    SecureModeReturnURL: "http://test.com",
+    BrowserInfo: {
+        AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+        ColorDepth: 4,
+        JavaEnabled: true,
+        JavascriptEnabled: true,
+        Language: 'FR-FR',
+        ScreenHeight: 1800,
+        ScreenWidth: 400,
+        TimeZoneOffset: "+60",
+        UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+    },
+    IpAddress: "1234",
+    PaymentData: "placeholder"
+}).then(data => {
+    const d = data; // $ExpectType GooglePayDirectPayInData
+});
+
 api.PayIns.create({
     PaymentType: "BANK_WIRE",
     ExecutionType: "DIRECT",
