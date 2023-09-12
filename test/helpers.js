@@ -388,6 +388,7 @@ module.exports = {
                         Description: "seller2 ID"
                     }
                 ],
+                ShippingPreference: "NO_SHIPPING",
                 Tag: "tag",
                 StatementDescriptor: "test"
             };

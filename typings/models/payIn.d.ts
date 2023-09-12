@@ -46,6 +46,8 @@ export namespace payIn {
 
     type UpdateRecurringPaymentStatus = "ENDED";
 
+    type ShippingPreference = ValueOf<enums.IShippingPreference>;
+
     interface TemplateURLOptions {
         Payline: string;
 
@@ -348,6 +350,8 @@ export namespace payIn {
          * The language in which the PayPal payment page is to be displayed.
          */
         Culture: CountryISO;
+
+        ShippingPreference: ShippingPreference;
     }
 
     interface MultibancoWebPayInData extends BasePayInData {
@@ -572,6 +576,8 @@ export namespace payIn {
          * The language in which the PayPal payment page is to be displayed.
          */
         Culture?: CountryISO;
+
+        ShippingPreference?: ShippingPreference;
     }
 
     interface CreateMultibancoWebPayIn {

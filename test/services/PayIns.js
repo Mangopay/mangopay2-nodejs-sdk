@@ -966,7 +966,7 @@ describe('PayIns', function () {
         });
     });
 
-    describe('PayPal Web', function () {
+    describe('PayPal Web V2', function () {
         var payIn;
 
         before(function (done) {

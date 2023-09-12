@@ -172,4 +172,10 @@ export namespace enums {
         Waiting: "WAITING";
         Canceled: "CANCELED";
     }
+
+    interface IShippingPreference {
+        SetProvidedAddress: "SET_PROVIDED_ADDRESS";
+        GetFromFile: "GET_FROM_FILE";
+        NoShipping: "NO_SHIPPING";
+    }
 }
