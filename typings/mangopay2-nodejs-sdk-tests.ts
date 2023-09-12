@@ -581,6 +581,7 @@ api.PayIns.create({
     AuthorId: "user-id",
     Fees: {Amount: 100, Currency: "GBP"},
     DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    CreditedWalletId: "123",
     ReturnURL: "http://test.com",
     Tag: "test tag",
     StatementDescriptor: "test"
@@ -594,6 +595,7 @@ api.PayIns.create({
     AuthorId: "user-id",
     Fees: {Amount: 100, Currency: "GBP"},
     DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    CreditedWalletId: "123",
     ReturnURL: "http://test.com",
     Country: "IT",
     Tag: "test tag",
@@ -608,6 +610,7 @@ api.PayIns.create({
     AuthorId: "user-id",
     Fees: {Amount: 100, Currency: "GBP"},
     DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    CreditedWalletId: "123",
     ReturnURL: "http://test.com",
     Tag: "test tag",
     StatementDescriptor: "test"

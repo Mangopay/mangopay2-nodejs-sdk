@@ -608,6 +608,11 @@ export namespace payIn {
         ReturnURL: string;
 
         /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
          * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
          * See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
@@ -638,6 +643,11 @@ export namespace payIn {
          * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
          */
         Fees: MoneyData;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
 
         /**
          * The URL to redirect to after the payment, whether the transaction
@@ -680,6 +690,11 @@ export namespace payIn {
          * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
          */
         Fees: MoneyData;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
 
         /**
          * The URL to redirect to after the payment, whether the transaction
