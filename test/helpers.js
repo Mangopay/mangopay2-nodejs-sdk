@@ -309,7 +309,7 @@ module.exports = {
         });
     },
 
-    getNewPayInMbwayDirect: function(api, user, callback) {
+    getNewPayInMbwayWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
@@ -329,7 +329,7 @@ module.exports = {
                     Currency: 'EUR'
                 },
                 PaymentType: 'MBWAY',
-                ExecutionType: 'DIRECT',
+                ExecutionType: 'WEB',
                 StatementDescriptor: "test",
                 Phone: "351#269458236",
                 Tag: "test tag"
@@ -338,7 +338,7 @@ module.exports = {
         });
     },
 
-    getNewPayInPayPalDirect: function(api, user, callback) {
+    getNewPayInPayPalWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
@@ -358,7 +358,7 @@ module.exports = {
                 },
                 CreditedWalletId: wallet.Id,
                 PaymentType: 'PAYPAL',
-                ExecutionType: 'DIRECT',
+                ExecutionType: 'WEB',
                 ReturnURL: 'http://example.com',
                 Shipping: {
                     FirstName: user.FirstName,
@@ -392,7 +392,7 @@ module.exports = {
                 StatementDescriptor: "test"
             };
 
-            api.PayIns.create(payIn, callback);
+            api.PayIns.createPayPal(payIn, callback);
         });
     },
 

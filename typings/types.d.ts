@@ -159,8 +159,8 @@ export type ApiMethod =
     | "transactions_get_for_card"
     | "transactions_get_for_bank_account"
     | "idempotency_response_get"
-    | "payins_mbway-direct_create"
-    | "payins_paypal-direct_create";
+    | "payins_mbway-web_create"
+    | "payins_paypal-web_create_v2";
 
 export type CountryISO =
     | "AD"
