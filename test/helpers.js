@@ -816,5 +816,67 @@ module.exports = {
             };
             api.PayIns.create(payIn, callback);
         });
+    },
+
+    getNewPayInKlarnaWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'KLARNA',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 1000,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                ReturnURL: 'http://test.com',
+                LineItems: [
+                    {
+                        Name: "running shoes",
+                        Quantity: 1,
+                        UnitAmount: 500,
+                        TaxAmount: 0,
+                        Description: "seller1 ID"
+                    },
+                    {
+                        Name: "running shoes",
+                        Quantity: 1,
+                        UnitAmount: 500,
+                        TaxAmount: 0,
+                        Description: "seller2 ID"
+                    }
+                ],
+                Country: "FR",
+                Phone: "351#269458236",
+                Email: "mangopay@gmail.com",
+                AdditionalData: "{}",
+                Billing: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Address: {
+                        "AddressLine1": "4101 Reservoir Rd NW",
+                        "AddressLine2": "",
+                        "City": "Washington",
+                        "Region": "District of Columbia",
+                        "PostalCode": "80400",
+                        "Country": "US"
+                    }
+                },
+                MerchantOrderId: "1234",
+                StatementDescriptor: "test",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
     }
 };
