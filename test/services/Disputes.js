@@ -425,7 +425,7 @@ describe('Disputes', function() {
                     console.warn('Cannot test getting repudiation because dispute has no transaction.');
                     self.skip();
                 }
-                api.Disputes.getRepudiation(transactions[0].Id, function(data, response){
+                api.Disputes.getRepudiation(dispute.RepudiationId, function(data, response){
                     repudiation = data;
                     done();
                 });
@@ -434,7 +434,7 @@ describe('Disputes', function() {
 
         it('should be retrieved', function(){
             expect(repudiation).not.to.be.undefined;
-            expect(repudiation.Id).to.equal(transactions[0].Id);
+            expect(repudiation.Id).to.equal(dispute.RepudiationId);
         });
     });
     describe('Create Settlement Transfer', function() {
@@ -454,7 +454,7 @@ describe('Disputes', function() {
 
             api.Disputes.getTransactions(dispute.Id, function(data, response){
                 transactions = data;
-                api.Disputes.getRepudiation(transactions[0].Id, function(data, response){
+                api.Disputes.getRepudiation(dispute.RepudiationId, function(data, response){
                     repudiation = data;
                     api.Disputes.createSettlementTransfer({
                         AuthorId: repudiation.AuthorId,

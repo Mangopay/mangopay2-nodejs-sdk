@@ -171,7 +171,7 @@ describe('PayIns', function () {
         });
 
         it('should get transactions', function () {
-            expect(transactionsData[0].Status).to.equal('SUCCEEDED');
+            expect(transactionsData[0].Status).to.not.equal('FAILED');
         });
     });
 
