@@ -64,6 +64,7 @@ import { shipping } from "./models/shipping";
 import { countryAuthorization } from "./models/countryAuthorization";
 import { Regulatory } from "./services/Regulatory";
 import { Deposits } from "./services/Deposits";
+import { cardValidation } from "./models/cardValidation";
 
 export = MangoPay;
 
@@ -391,6 +392,16 @@ declare namespace MangoPay {
         }
 
         interface CardRegistration extends cardRegistration.CardRegistrationData {
+        }
+
+        class CardValidation extends EntityBase<cardValidation.CardValidationData> {
+            constructor(
+                data:
+                    | cardValidation.CreateCardValidation
+            );
+        }
+
+        interface CardValidation extends cardValidation.CardValidationData {
         }
 
         class Card extends EntityBase<card.CardData> {

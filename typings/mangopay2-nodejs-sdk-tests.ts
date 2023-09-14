@@ -484,8 +484,26 @@ api.Cards.getTransactions("card-id").then(data => {
     const d = data; // $ExpectType TransactionData[]
 });
 
-api.Cards.validate("id").then(data => {
-    const d = data; // $ExpectType CardData
+api.Cards.validate(
+    "id",
+    {
+        AuthorId: "placeholder",
+        IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+        BrowserInfo: {
+            AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+            ColorDepth: 4,
+            JavaEnabled: true,
+            JavascriptEnabled: true,
+            Language: 'FR-FR',
+            ScreenHeight: 1800,
+            ScreenWidth: 400,
+            TimeZoneOffset: "+60",
+            UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+        },
+        SecureModeReturnURL: "http://example.com"
+    }
+).then(data => {
+    const d = data; // $ExpectType CardValidationData
 });
 
 /* CardRegistrations */

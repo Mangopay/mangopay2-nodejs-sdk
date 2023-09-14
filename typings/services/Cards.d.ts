@@ -2,7 +2,9 @@ import { card } from "../models/card";
 import { transaction } from "../models/transaction";
 import { cardPreAuthorization } from "../models/cardPreauthorization";
 import { base } from "../base";
+import { cardValidation } from "../models/cardValidation";
 import MethodOverload = base.MethodOverload;
+import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
 
 export class Cards {
     /**
@@ -45,10 +47,14 @@ export class Cards {
     /**
      * Validate a card
      * @param cardId
+     * @param cardValidation
      * @param callback
      * @param options
      * @returns {*|Promise}
      */
-    validate: MethodOverload<string,
-        card.CardData>;
+    validate: TwoArgsMethodOverload<
+        string,
+        cardValidation.CreateCardValidation,
+        cardValidation.CardValidationData
+    >;
 }
