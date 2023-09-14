@@ -17,6 +17,7 @@ export namespace payIn {
     import SecurityInfoData = securityInfo.SecurityInfoData;
     import ShippingData = shipping.ShippingData;
     import CreateShipping = shipping.CreateShipping;
+    import CreateBilling = billing.CreateBilling;
 
     type _3DSVersion = "V1" | "V2_1";
 
@@ -27,7 +28,11 @@ export namespace payIn {
         | BankWireDirectPayInData
         | PayconiqWebPayInData
         | DirectDebitDirectPayInData
-        | MbwayWebPayInData;
+        | MbwayWebPayInData
+        | MultibancoWebPayInData
+        | SatispayWebPayInData
+        | BlikWebPayInData
+        | GooglePayDirectPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -42,6 +47,8 @@ export namespace payIn {
     type RecurringPaymentStatus = "CREATED" | "AUTHENTICATION_NEEDED" | "IN_PROGRESS" | "ENDED";
 
     type UpdateRecurringPaymentStatus = "ENDED";
+
+    type ShippingPreference = ValueOf<enums.IShippingPreference>;
 
     interface TemplateURLOptions {
         Payline: string;
@@ -345,6 +352,49 @@ export namespace payIn {
          * The language in which the PayPal payment page is to be displayed.
          */
         Culture: CountryISO;
+
+        ShippingPreference: ShippingPreference;
+    }
+
+    interface MultibancoWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "MULTIBANCO";
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
+    interface SatispayWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "SATISPAY";
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+
+        /**
+         * The end-user country of residence
+         */
+        Country: CountryISO;
+    }
+
+    interface BlikWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "BLIK";
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
     }
 
     interface CreateCardDirectPayIn {
@@ -528,6 +578,139 @@ export namespace payIn {
          * The language in which the PayPal payment page is to be displayed.
          */
         Culture?: CountryISO;
+
+        ShippingPreference?: ShippingPreference;
+    }
+
+    interface CreateMultibancoWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "MULTIBANCO";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The URL to redirect to after the payment, whether the transaction
+         */
+        ReturnURL: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+    }
+
+    interface CreateSatispayWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "SATISPAY";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * The URL to redirect to after the payment, whether the transaction
+         */
+        ReturnURL: string;
+
+        /**
+         * The end-user country of residence
+         */
+        Country: CountryISO;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+    }
+
+    interface CreateBlikWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "BLIK";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * The URL to redirect to after the payment, whether the transaction
+         */
+        ReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
     }
 
     interface LineItemData {
@@ -1254,5 +1437,154 @@ export namespace payIn {
         CreditedFunds: MoneyData;
 
         Fees: MoneyData;
+    }
+
+    interface CreateGooglePayDirectPayIn {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "GOOGLE_PAY";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * The URL to which the user is redirected to complete the payment.
+         */
+        SecureModeReturnURL: string;
+
+        /**
+         * The mode applied for the 3DS2 protocol for CB, Visa, and Mastercard. The options are:
+         * DEFAULT – Requests an exemption to strong customer authentication (SCA), and thus a frictionless payment
+         * experience, if allowed by your Mangopay contract and accepted by the issuer.
+         * FORCE – Requests SCA.
+         * NO_CHOICE – Leaves the choice to the issuer whether to allow for a frictionless payment experience
+         * or to enforce SCA.
+         */
+        SecureMode?: SecureMode;
+
+        /**
+         * IP Address of the end user (format IPV4 or IPV6)
+         */
+        IpAddress: string;
+
+        /**
+         * This object describes the Browser being user by an end user
+         */
+        BrowserInfo: BrowserInfoData;
+
+        /**
+         * Data received from the Google Pay API
+         */
+        PaymentData: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL?: string;
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping?: CreateShipping;
+
+        /**
+         * Information about the end user billing address.
+         */
+        Billing?: CreateBilling;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+    }
+
+    interface GooglePayDirectPayInData extends BasePayInData {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "GOOGLE_PAY";
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+
+        /**
+         * The value is 'true' if the SecureMode was used
+         */
+        SecureModeNeeded: boolean;
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping: CreateShipping;
+
+        /**
+         * Information about the end user billing address.
+         */
+        Billing: CreateBilling;
+
+        /**
+         * This object describes the Browser being user by an end user
+         */
+        BrowserInfo: BrowserInfoData;
+
+        /**
+         * IP Address of the end user (format IPV4 or IPV6)
+         */
+        IpAddress: string;
+
+        /**
+         * The ID of the card
+         */
+        CardId: string;
+
+        /**
+         * The URL to which the user is redirected to complete the payment.
+         */
+        SecureModeReturnURL: string;
+
+        /**
+         * This is the URL where to redirect users to proceed to 3D secure validation
+         */
+        SecureModeRedirectURL: string;
+
+        /**
+         * The mode applied for the 3DS2 protocol for CB, Visa, and Mastercard. The options are:
+         * DEFAULT – Requests an exemption to strong customer authentication (SCA), and thus a frictionless payment
+         * experience, if allowed by your Mangopay contract and accepted by the issuer.
+         * FORCE – Requests SCA.
+         * NO_CHOICE – Leaves the choice to the issuer whether to allow for a frictionless payment experience
+         * or to enforce SCA.
+         */
+        SecureMode: SecureMode;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
     }
 }

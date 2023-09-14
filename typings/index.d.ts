@@ -145,6 +145,7 @@ declare namespace MangoPay {
         const UserNaturalCapacity: enums.IUserNaturalCapacity;
         const DepositStatus: enums.IDepositStatus;
         const PaymentStatus: enums.IPaymentStatus;
+        const ShippingPreference: enums.IShippingPreference;
 
         interface ModelMethods<T extends {}> {
             initialize(): void;

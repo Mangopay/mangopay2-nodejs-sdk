@@ -22,4 +22,21 @@ export namespace billing {
 
         Address: address.AddressData;
     }
+
+    interface CreateBilling {
+        /**
+         * The name of the user
+         */
+        FirstName: string;
+
+        /**
+         * The last name of the user
+         */
+        LastName: string;
+
+        /**
+         * The address
+         */
+        Address: address.CreateAddress;
+    }
 }
