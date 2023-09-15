@@ -18,8 +18,11 @@ export class PayIns {
         MethodOverload<payIn.CreatePayconiqWebPayInData, payIn.PayconiqWebPayInData> &
         MethodOverload<payIn.CreateDirectDebitDirectPayIn, payIn.DirectDebitDirectPayInData> &
         MethodOverload<payIn.CreateDirectDebitWebPayIn, payIn.DirectDebitWebPayInData> &
-        MethodOverload<payIn.CreateMbwayDirectPayIn, payIn.MbwayDirectPayInData> &
-        MethodOverload<payIn.CreatePayPalDirectPayIn, payIn.PayPalDirectPayInData>;
+        MethodOverload<payIn.CreateMbwayWebPayIn, payIn.MbwayWebPayInData> &
+        MethodOverload<payIn.CreateMultibancoWebPayIn, payIn.MultibancoWebPayInData> &
+        MethodOverload<payIn.CreateSatispayWebPayIn, payIn.SatispayWebPayInData> &
+        MethodOverload<payIn.CreateBlikWebPayIn, payIn.BlikWebPayInData> &
+        MethodOverload<payIn.CreateGooglePayDirectPayIn, payIn.GooglePayDirectPayInData>;
 
     /**
      * Get pay-in
@@ -75,4 +78,22 @@ export class PayIns {
 
     createCardPreAuthorizedDepositPayIn:
         MethodOverload<payIn.CreateCardPreAuthorizedDepositPayIn, payIn.CardPreAuthorizedDepositPayInData>;
+
+    /**
+     * Create new PayPal Web pay-in
+     * To be used instead of the 'create' method for PayPal PayIns
+     * @param payIn
+     * @param options
+     */
+    createPayPal:
+        MethodOverload<payIn.CreatePayPalWebPayIn, payIn.PayPalWebPayInData>;
+
+    /**
+     * Create new GooglePay Direct pay-in
+     * To be used instead of the 'create' method for GooglePay PayIns
+     * @param payIn
+     * @param options
+     */
+    createGooglePay:
+        MethodOverload<payIn.CreateGooglePayDirectPayIn, payIn.GooglePayDirectPayInData>;
 }

@@ -12,6 +12,10 @@ export namespace enums {
         PayPal: "PAYPAL";
         Payconiq: "PAYCONIQ";
         Mbway: "MBWAY";
+        Multibanco: "MULTIBANCO";
+        Satispay: "SATISPAY";
+        Blik: "BLIK";
+        GooglePay: "GOOGLE_PAY";
     }
 
     interface IMandateStatus {
@@ -168,5 +172,11 @@ export namespace enums {
     interface IPaymentStatus {
         Waiting: "WAITING";
         Canceled: "CANCELED";
+    }
+
+    interface IShippingPreference {
+        SetProvidedAddress: "SET_PROVIDED_ADDRESS";
+        GetFromFile: "GET_FROM_FILE";
+        NoShipping: "NO_SHIPPING";
     }
 }

@@ -309,7 +309,7 @@ module.exports = {
         });
     },
 
-    getNewPayInMbwayDirect: function(api, user, callback) {
+    getNewPayInMbwayWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
@@ -329,7 +329,7 @@ module.exports = {
                     Currency: 'EUR'
                 },
                 PaymentType: 'MBWAY',
-                ExecutionType: 'DIRECT',
+                ExecutionType: 'WEB',
                 StatementDescriptor: "test",
                 Phone: "351#269458236",
                 Tag: "test tag"
@@ -338,7 +338,7 @@ module.exports = {
         });
     },
 
-    getNewPayInPayPalDirect: function(api, user, callback) {
+    getNewPayInPayPalWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',
@@ -358,7 +358,7 @@ module.exports = {
                 },
                 CreditedWalletId: wallet.Id,
                 PaymentType: 'PAYPAL',
-                ExecutionType: 'DIRECT',
+                ExecutionType: 'WEB',
                 ReturnURL: 'http://example.com',
                 Shipping: {
                     FirstName: user.FirstName,
@@ -388,11 +388,12 @@ module.exports = {
                         Description: "seller2 ID"
                     }
                 ],
+                ShippingPreference: "NO_SHIPPING",
                 Tag: "tag",
                 StatementDescriptor: "test"
             };
 
-            api.PayIns.create(payIn, callback);
+            api.PayIns.createPayPal(payIn, callback);
         });
     },
 
@@ -726,6 +727,94 @@ module.exports = {
                     });
                 });
             });
+        });
+    },
+
+    getNewPayInMultibancoWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                PaymentType: 'MULTIBANCO',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "test",
+                ReturnURL: "http://test.com",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
+    getNewPayInSatispayWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                CreditedWalletId: wallet.Id,
+                PaymentType: 'SATISPAY',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "test",
+                ReturnURL: "http://test.com",
+                Tag: "test tag",
+                Country: "IT"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
+    getNewPayInBlikWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'PLN',
+            Description: 'WALLET IN PLN'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'PLN'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'PLN'
+                },
+                CreditedWalletId: wallet.Id,
+                PaymentType: 'BLIK',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "test",
+                ReturnURL: "http://test.com",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
         });
     }
 };

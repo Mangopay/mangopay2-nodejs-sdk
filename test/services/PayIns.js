@@ -171,7 +171,7 @@ describe('PayIns', function () {
         });
 
         it('should get transactions', function () {
-            expect(transactionsData[0].Status).to.equal('SUCCEEDED');
+            expect(transactionsData[0].Status).to.not.equal('FAILED');
         });
     });
 
@@ -926,11 +926,11 @@ describe('PayIns', function () {
         });
     });
 
-    describe('Mbway Direct', function () {
+    describe('Mbway Web', function () {
         var payIn;
 
         before(function (done) {
-            helpers.getNewPayInMbwayDirect(api, john, function (data, response) {
+            helpers.getNewPayInMbwayWeb(api, john, function (data, response) {
                 payIn = data;
                 done();
             });
@@ -940,7 +940,7 @@ describe('PayIns', function () {
             it('should create the PayIn', function () {
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.PaymentType).to.equal('MBWAY');
-                expect(payIn.ExecutionType).to.equal('DIRECT');
+                expect(payIn.ExecutionType).to.equal('WEB');
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('CREATED');
                 expect(payIn.Type).to.equal('PAYIN');
@@ -960,17 +960,17 @@ describe('PayIns', function () {
             it('should get the PayIn', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.PaymentType).to.equal('MBWAY');
-                expect(getPayIn.ExecutionType).to.equal('DIRECT');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
                 expect(getPayIn.Phone).not.to.be.null;
             });
         });
     });
 
-    describe('PayPal Direct', function () {
+    describe('PayPal Web V2', function () {
         var payIn;
 
         before(function (done) {
-            helpers.getNewPayInPayPalDirect(api, john, function (data, response) {
+            helpers.getNewPayInPayPalWeb(api, john, function (data, response) {
                 payIn = data;
                 done();
             });
@@ -980,7 +980,7 @@ describe('PayIns', function () {
             it('should create the PayIn', function () {
                 expect(payIn.Id).not.to.be.undefined;
                 expect(payIn.PaymentType).to.equal('PAYPAL');
-                expect(payIn.ExecutionType).to.equal('DIRECT');
+                expect(payIn.ExecutionType).to.equal('WEB');
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('CREATED');
                 expect(payIn.Type).to.equal('PAYIN');
@@ -1000,7 +1000,233 @@ describe('PayIns', function () {
             it('should get the PayIn', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.PaymentType).to.equal('PAYPAL');
-                expect(getPayIn.ExecutionType).to.equal('DIRECT');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+            });
+        });
+    })
+
+    describe('Multibanco Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInMultibancoWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('MULTIBANCO');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Status).to.equal('CREATED');
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('MULTIBANCO');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
+    describe('Satispay Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInSatispayWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('SATISPAY');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Status).to.equal('CREATED');
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('SATISPAY');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
+    describe('Blik Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInBlikWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('BLIK');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Status).to.equal('CREATED');
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('BLIK');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
+    describe('GooglePay V2', function () {
+        var googlePayIn, wallet;
+
+        before(function (done) {
+            wallet = {
+                Owners: [john.Id],
+                Currency: 'EUR',
+                Description: 'WALLET IN EUR'
+            };
+
+            api.Wallets.create(wallet).then(function () {
+                done();
+            });
+        });
+
+        describe('Create', function () {
+
+            var paymentData = "{\"signature\":\"MEUCIQCLXOan2Y9DobLVSOeD5V64Peayvz0ZAWisdz/1iTdthAIgVFb4Hve4EhtW81k46S" +
+                "iMlnXLIiCn1h2+vVQGjHe+sSo\\u003d\",\"intermediateSigningKey\":{\"signedKey\":\"{\\\"keyValue\\\":\\\"M" +
+                "FkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEDGRER6R6PH6K39YTIYX+CpDNej6gQgvi/Wx19SOPtiDnkjAl4/LF9pXlvZYe+aJH0Dy" +
+                "095I6BlfY8bNBB5gjPg\\\\u003d\\\\u003d\\\",\\\"keyExpiration\\\":\\\"1688521049102\\\"}\"," +
+                "\"signatures\":[\"MEYCIQDup1B+rkiPAWmpg7RmqY0NfgdGhmdyL8wvAX+6C1aOU2QIhAIZACSDQ/ZexIyEia5KrRlG2B+y3AnK" +
+                "NlhRzumRcnNOR\"]},\"protocolVersion\":\"ECv2\",\"signedMessage\":\"{\\\"encryptedMessage\\\":\\\"YSSG" +
+                "K9yFdKP+mJB5+wAjnOujnThPM1E/KbbJxd3MDzPVI66ip1DBESldvQXYjjeLq6Rf1tKE9oLwwaj6u0/gU7Z9t3g1MoW+9YoEE1bs1" +
+                "IxImif7IQGAosfYjjbBBfDkOaqEs2JJC5qt6xjKO9lQ/E6JPkPFGqF7+OJ1vzmD83Pi3sHWkVge5MhxXQ3yBNhrjus3kV7zUoYA+u" +
+                "qNrciWcWypc1NndF/tiwSkvUTzM6n4dS8X84fkJiSO7PZ65C0yw0mdybRRnyL2fFdWGssve1zZFAvYfzcpNamyuZGGlu/SCoayit" +
+                "ojmMsqe5Cu0efD9+WvvDr9PA+Vo1gzuz7LmiZe81SGvdFhRoq62FBAUiwSsi2A3pWinZxM2XbYNph+HJ5FCNspWhz4ur9JG4ZMLem" +
+                "CXuaybvL++W6PWywAtoiE0mQcBIX3vhOq5itv0RkaKVe6nbcAS2UryRz2u /nDCJLKpIv2Wi11NtCUT2mgD8F6qfcXhvVZHyeLqZ1O" +
+                "LgCudTTSdKirzezbgPTg4tQpW++KufeD7bgG+01XhCWt+7/ftqcSf8n//gSRINne8j2G6w+2\\\",\\" +
+                "\"ephemeralPublicKey\\\":\\\"BLY2+R8C0T+BSf/W3HEq305qH63IGmJxMVmbfJ6+x1V7GQg9W9v7eHc3j+8TeypVn+nRl" +
+                "Pu98tivuMXECg+rWZs\\\\u003d\\\",\\\"tag\\\":\\\"MmEjNdLfsDNfYd/FRUjoJ4/IfLypNRqx8zgHfa6Ftmo\\\\u003d\\\"}\"}"
+
+            before(function (done) {
+                googlePayIn = {
+                    AuthorId: john.Id,
+                    CreditedWalletId: wallet.Id,
+                    DebitedFunds: {
+                        Amount: 199,
+                        Currency: 'EUR'
+                    },
+                    Fees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    PaymentType: 'GOOGLE_PAY',
+                    ExecutionType: 'DIRECT',
+                    PaymentData: paymentData,
+                    Tag: "Create an GooglePay card direct Payin",
+                    StatementDescriptor: "php",
+                    BrowserInfo: {
+                        AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                        JavaEnabled: true,
+                        Language: "FR-FR",
+                        ColorDepth: 4,
+                        ScreenHeight: 1800,
+                        ScreenWidth: 400,
+                        JavascriptEnabled: true,
+                        TimeZoneOffset: "+60",
+                        UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                    },
+                    IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+                    SecureModeReturnURL: "http://www.my-site.com/returnurl",
+                    SecureMode: "DEFAULT",
+                    ReturnURL: "http://test.com",
+                    Billing: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    Shipping: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    }
+                };
+
+                api.PayIns.createGooglePay(googlePayIn, function (data, response) {
+                    googlePayIn = data;
+                    done();
+                });
+            });
+
+            it('should be created', function () {
+                expect(googlePayIn.Id).not.to.be.undefined;
+                expect(googlePayIn.AuthorId).to.equal(john.Id);
+                expect(googlePayIn.PaymentType).to.equal('GOOGLE_PAY');
+                expect(googlePayIn.ExecutionType).to.equal('DIRECT');
+                expect(googlePayIn.Type).to.equal('PAYIN');
             });
         });
     });

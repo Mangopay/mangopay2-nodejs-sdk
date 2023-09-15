@@ -484,8 +484,26 @@ api.Cards.getTransactions("card-id").then(data => {
     const d = data; // $ExpectType TransactionData[]
 });
 
-api.Cards.validate("id").then(data => {
-    const d = data; // $ExpectType CardData
+api.Cards.validate(
+    "id",
+    {
+        AuthorId: "placeholder",
+        IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+        BrowserInfo: {
+            AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+            ColorDepth: 4,
+            JavaEnabled: true,
+            JavascriptEnabled: true,
+            Language: 'FR-FR',
+            ScreenHeight: 1800,
+            ScreenWidth: 400,
+            TimeZoneOffset: "+60",
+            UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+        },
+        SecureModeReturnURL: "http://example.com"
+    }
+).then(data => {
+    const d = data; // $ExpectType CardValidationData
 });
 
 /* CardRegistrations */
@@ -563,7 +581,7 @@ api.PayIns.create({
 
 api.PayIns.create({
     PaymentType: "MBWAY",
-    ExecutionType: "DIRECT",
+    ExecutionType: "WEB",
     AuthorId: "user-id",
     CreditedWalletId: "wallet-id",
     Fees: {Amount: 100, Currency: "GBP"},
@@ -572,7 +590,50 @@ api.PayIns.create({
     Tag: "test tag",
     StatementDescriptor: "test"
 }).then(data => {
-    const d = data; // $ExpectType MbwayDirectPayInData
+    const d = data; // $ExpectType MbwayWebPayInData
+});
+
+api.PayIns.create({
+    PaymentType: "MULTIBANCO",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    CreditedWalletId: "123",
+    ReturnURL: "http://test.com",
+    Tag: "test tag",
+    StatementDescriptor: "test"
+}).then(data => {
+    const d = data; // $ExpectType MultibancoWebPayInData
+});
+
+api.PayIns.create({
+    PaymentType: "SATISPAY",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    CreditedWalletId: "123",
+    ReturnURL: "http://test.com",
+    Country: "IT",
+    Tag: "test tag",
+    StatementDescriptor: "test"
+}).then(data => {
+    const d = data; // $ExpectType SatispayWebPayInData
+});
+
+api.PayIns.create({
+    PaymentType: "BLIK",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    CreditedWalletId: "123",
+    ReturnURL: "http://test.com",
+    Tag: "test tag",
+    StatementDescriptor: "test"
+}).then(data => {
+    const d = data; // $ExpectType BlikWebPayInData
 });
 
 api.PayIns.create({
@@ -589,9 +650,9 @@ api.PayIns.create({
     const d = data; // $ExpectType CardWebPayInData
 });
 
-api.PayIns.create({
+api.PayIns.createPayPal({
     PaymentType: "PAYPAL",
-    ExecutionType: "DIRECT",
+    ExecutionType: "WEB",
     AuthorId: "user-id",
     CreditedWalletId: "wallet-id",
     Fees: {Amount: 100, Currency: "GBP"},
@@ -622,7 +683,32 @@ api.PayIns.create({
     StatementDescriptor: "test",
     Culture: "FR"
 }).then(data => {
-    const d = data; // $ExpectType PayPalDirectPayInData
+    const d = data; // $ExpectType PayPalWebPayInData
+});
+
+api.PayIns.createGooglePay({
+    PaymentType: "GOOGLE_PAY",
+    ExecutionType: "DIRECT",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    SecureModeReturnURL: "http://test.com",
+    BrowserInfo: {
+        AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+        ColorDepth: 4,
+        JavaEnabled: true,
+        JavascriptEnabled: true,
+        Language: 'FR-FR',
+        ScreenHeight: 1800,
+        ScreenWidth: 400,
+        TimeZoneOffset: "+60",
+        UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+    },
+    IpAddress: "1234",
+    PaymentData: "placeholder"
+}).then(data => {
+    const d = data; // $ExpectType GooglePayDirectPayInData
 });
 
 api.PayIns.create({
