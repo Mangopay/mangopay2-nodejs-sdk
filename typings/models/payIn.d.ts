@@ -32,7 +32,8 @@ export namespace payIn {
         | MultibancoWebPayInData
         | SatispayWebPayInData
         | BlikWebPayInData
-        | GooglePayDirectPayInData;
+        | GooglePayDirectPayInData
+        | KlarnaWebPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -1586,5 +1587,166 @@ export namespace payIn {
          * This is the URL where users are automatically redirected after the payment is validated
          */
         ReturnURL: string;
+    }
+
+    interface KlarnaWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "KLARNA";
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * List of items and quantity bought by the buyer
+         */
+        LineItems: LineItemData[];
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping: ShippingData;
+
+        /**
+         * Contains every useful information's related to the user billing
+         */
+        Billing: BillingData;
+
+        /**
+         * The Klarna option that the end-user has chosen at checkout
+         */
+        PaymentMethod: string;
+
+        /**
+         * The end-user residency country
+         */
+        Country: CountryISO;
+
+        /**
+         * The language in which the Klarna payment page is to be displayed - Alpha-2  format (default US)
+         */
+        Culture: CountryISO;
+
+        /**
+         * Klarna custom data that you can add to this item
+         */
+        AdditionalData: string;
+
+        /**
+         * The mobile phone number of the user initiating the pay-in
+         * Country code followed by hash symbol (#) followed by the rest of the number. Only digits and hash allowed
+         */
+        Phone: string;
+
+        /**
+         * The end-user email address
+         */
+        Email: string;
+
+        /**
+         * The merchant order reference
+         */
+        MerchantOrderId: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
+    interface CreateKlarnaWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "KLARNA";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the debited funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * List of items and quantity bought by the buyer
+         */
+        LineItems: CreateLineItem[];
+
+        /**
+         * The end-user residency country
+         */
+        Country: CountryISO;
+
+        /**
+         * The mobile phone number of the user initiating the pay-in
+         * Country code followed by hash symbol (#) followed by the rest of the number. Only digits and hash allowed
+         */
+        Phone: string;
+
+        /**
+         * The end-user email address
+         */
+        Email: string;
+
+        /**
+         * Klarna custom data that you can add to this item
+         */
+        AdditionalData: string;
+
+        /**
+         * Contains every useful information's related to the user billing
+         */
+        Billing: CreateBilling;
+
+        /**
+         * The merchant order reference
+         */
+        MerchantOrderId: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+
+        /**
+         * The language in which the Klarna payment page is to be displayed - Alpha-2  format (default US)
+         */
+        Culture?: CountryISO;
+
+        /**
+         * Contains every useful information's related to the user shipping
+         */
+        Shipping?: CreateShipping;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
     }
 }
