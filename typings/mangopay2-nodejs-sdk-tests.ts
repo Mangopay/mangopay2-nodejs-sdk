@@ -594,6 +594,44 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "KLARNA",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "http://test.com",
+    LineItems: [
+        {
+            Name: "test",
+            Quantity: 100,
+            TaxAmount: undefined,
+            UnitAmount: 10,
+            Description: "placeholder"
+        }
+    ],
+    Country: "FR",
+    Phone: "351#269458236",
+    Email: "test@test.com",
+    AdditionalData: "{}",
+    Billing: {
+        FirstName: "John",
+        LastName: "Doe",
+        Address: {
+            AddressLine1: "test addr1",
+            AddressLine2: undefined,
+            City: "Paris",
+            Country: "FR",
+            Region: "Europe",
+            PostalCode: "68400"
+        }
+    },
+    MerchantOrderId: "1234"
+}).then(data => {
+    const d = data; // $ExpectType KlarnaWebPayInData
+});
+
+api.PayIns.create({
     PaymentType: "MULTIBANCO",
     ExecutionType: "WEB",
     AuthorId: "user-id",

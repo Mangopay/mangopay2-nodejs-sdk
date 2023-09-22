@@ -1125,6 +1125,45 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Klarna Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInKlarnaWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('KLARNA');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('KLARNA');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
     describe('GooglePay V2', function () {
         var googlePayIn, wallet;
 
