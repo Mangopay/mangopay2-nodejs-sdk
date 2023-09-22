@@ -476,6 +476,14 @@ api.Cards.getByFingerprint("fingerprinthash").then(data => {
     const d = data; // $ExpectType CardData[]
 });
 
+api.Cards.listCardFingerprintTransactions("fingerprinthash").then(data => {
+    const d = data; // $ExpectType TransactionData[]
+});
+
+api.Cards.listCardFingerprintUsers("fingerprinthash").then(data => {
+    const d = data; // $ExpectType UserData[]
+});
+
 api.Cards.update({Active: false, Id: "card-id"}).then(data => {
     const d = data; // $ExpectType CardData
 });
@@ -805,6 +813,10 @@ api.PayIns.create({
 
 api.PayIns.get("payin-id").then(data => {
     const d = data; // $ExpectType PayInData
+});
+
+api.PayIns.getCardDetailsForWebPayIn("payin-id").then(data => {
+    const d = data; // $ExpectType CardData
 });
 
 api.PayIns.createRefund("payin-id", {AuthorId: "user-id"}).then(data => {

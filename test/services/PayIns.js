@@ -1270,6 +1270,28 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Get Web Card PayIn Details', function () {
+        var payIn;
+        var cardDetails;
+
+        before(function (done) {
+            helpers.getNewPayInPayPalWeb(api, john, function (data) {
+                payIn = data;
+
+                api.PayIns.getCardDetailsForWebPayIn(payIn.Id, function (data) {
+                    cardDetails = data;
+                    done();
+                });
+            });
+        });
+
+        it('should be retrieved', function () {
+            expect(cardDetails.PaymentType).to.equal('CARD');
+            expect(cardDetails.ExecutionType).to.equal('WEB');
+            expect(cardDetails.Fingerprint).not.to.be.null;
+        });
+    });
+
     // describe('Card PreAuthorized Deposit', function () {
     //     var payIn;
     //

@@ -1,8 +1,9 @@
-import { card } from "../models/card";
-import { transaction } from "../models/transaction";
-import { cardPreAuthorization } from "../models/cardPreauthorization";
-import { base } from "../base";
-import { cardValidation } from "../models/cardValidation";
+import {card} from "../models/card";
+import {transaction} from "../models/transaction";
+import {cardPreAuthorization} from "../models/cardPreauthorization";
+import {base} from "../base";
+import {cardValidation} from "../models/cardValidation";
+import {user} from "mangopay2-nodejs-sdk";
 import MethodOverload = base.MethodOverload;
 import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
 
@@ -57,4 +58,20 @@ export class Cards {
         cardValidation.CreateCardValidation,
         cardValidation.CardValidationData
     >;
+
+    /**
+     * This call returns all the transactions made with cards with the same Fingerprint value.
+     *
+     * @param fingerprint The fingerprint hash
+     */
+    listCardFingerprintTransactions: MethodOverload<string, transaction.TransactionData[]>;
+
+    /**
+     * This call returns all the users who have
+     * registered the same card (based on the card’s Fingerprint).
+     * This can be useful to detect abnormal or fraudulent behavior.
+     *
+     * @param fingerprint The fingerprint hash
+     */
+    listCardFingerprintUsers: MethodOverload<string, user.UserData[]>;
 }

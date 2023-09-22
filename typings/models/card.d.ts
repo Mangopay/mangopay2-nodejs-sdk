@@ -1,5 +1,5 @@
-import { CurrencyISO } from "../types";
-import { entityBase } from "./entityBase";
+import {CurrencyISO} from "../types";
+import {entityBase} from "./entityBase";
 
 export namespace card {
     type CardType = "CB_VISA_MASTERCARD" | "DINERS" | "MASTERPASS" | "MAESTRO" | "P24" | "IDEAL" | "BCMC" | "PAYLIB";
@@ -64,6 +64,20 @@ export namespace card {
          * A unique representation of a 16-digits card number
          */
         Fingerprint: string;
+
+        /**
+         * The type of the payIn. Returned values:
+         *
+         * CARD, DIRECT_DEBIT, PREAUTHORIZED, BANK_WIRE
+         */
+        PaymentType: string;
+
+        /**
+         * The type of execution for the pay-in.Returned values:
+         *
+         * WEB, DIRECT, EXTERNAL_INSTRUCTION
+         */
+        ExecutionType: string;
     }
 
     interface UpdateCard {
