@@ -1222,7 +1222,7 @@ api.Hooks.getAll().then(data => {
 
 /* Reports */
 
-api.Reports.create({Columns: ["Alias", "AuthorId"], ReportType: "WALLET"}).then(data => {
+api.Reports.create({Columns: ["Alias", "AuthorId"], ReportType: "WALLETS"}).then(data => {
     const d = data; // $ExpectType ReportData
 });
 

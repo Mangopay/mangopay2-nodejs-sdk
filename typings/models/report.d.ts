@@ -1,6 +1,6 @@
-import { CurrencyISO, PickPartial, Timestamp } from "../types";
-import { transaction } from "./transaction";
-import { entityBase } from "./entityBase";
+import {CurrencyISO, PickPartial, Timestamp} from "../types";
+import {transaction} from "./transaction";
+import {entityBase} from "./entityBase";
 
 export namespace report {
     type Column =
@@ -141,7 +141,7 @@ export namespace report {
         /**
          * The type of report
          */
-        ReportType: "TRANSACTION" | "WALLET";
+        ReportType: "TRANSACTIONS" | "WALLETS";
 
         /**
          * The column to sort against and direction separated by a `:`
