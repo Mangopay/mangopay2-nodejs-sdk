@@ -1255,6 +1255,34 @@ api.PayIns.createCardPreAuthorizedDepositPayIn({
     const d = data; // $ExpectType CardPreAuthorizedDepositPayInData
 });
 
+api.InstantConversions.getConversionRate("EUR", "GBP")
+    .then(data => {
+        const d = data; // $ExpectType ConversionRateData
+    });
+
+api.InstantConversions.createInstantConversion(
+    {
+        AuthorId: "author-id",
+        CreditedWalletId: "credited-wallet-id",
+        DebitedWalletId: "debited-wallet-id",
+        CreditedFunds: {
+            Amount: 0,
+            Currency: "GBP"
+        },
+        DebitedFunds: {
+            Amount: 79,
+            Currency: "EUR"
+        }
+    }
+).then(data => {
+    const d = data; // $ExpectType InstantConversionData
+});
+
+api.InstantConversions.getInstantConversion("conversion-id")
+    .then(data => {
+        const d = data; // $ExpectType InstantConversionData
+    });
+
 /* Namespace Access */
 
 const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
