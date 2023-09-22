@@ -1,3 +1,8 @@
+## [1.38.0] - 2023-09-22
+### Added
+
+Klarna is now available as a payment method with Mangopay. This payment method is in private beta. Please contact support if you have any questions.
+
 ## [1.37.0] - 2023-09-15
 ### Added
 
