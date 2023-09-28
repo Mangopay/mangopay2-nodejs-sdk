@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var helpers = require('../helpers');
+var api = require('../main');
 
 describe('Reports - Transaction', function() {
     var report;

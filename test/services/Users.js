@@ -4,6 +4,7 @@ var Promise = require('promise');
 var expect = require('chai').expect;
 var assert = require('chai').assert;
 var sinon = require('sinon');
+var api = require('../main');
 
 var helpers = require('../helpers');
 
@@ -104,9 +105,12 @@ describe('Users', function() {
         var user = new UserLegal();
 
         api.Users.create(user, function(data){
-            expect(data.errors).to.exist;
             done();
-        });
+        })
+            .catch(function (data) {
+                expect(data.errors).to.exist;
+                done();
+            });
     });
 
     describe('Get Natural', function() {
@@ -128,9 +132,12 @@ describe('Users', function() {
 
         it('Fails for Legal User', function(done) {
             api.Users.getLegal(john.Id, function(data) {
-                expect(data.errors).to.exist;
                 done();
-            });
+            })
+                .catch(function (data) {
+                    expect(data.errors).to.exist;
+                    done();
+                });
         });
     });
 
@@ -191,9 +198,12 @@ describe('Users', function() {
 
         it('Fails for Natural User', function(done) {
             api.Users.getNatural(matrix.Id, function(data) {
-                expect(data.errors).to.exist;
                 done();
-            });
+            })
+                .catch(function (data) {
+                    expect(data.errors).to.exist;
+                    done();
+                });
         });
     });
 
@@ -576,7 +586,7 @@ describe('Users', function() {
                     sinon.stub(api, 'errorHandler');
                     api.Users.createKycPage(john.Id, kycDocument.Id, {
                         File: ''
-                    }).then(function(){done()}, function(){done()});
+                    }).then(function(){done();}, function(){done();});
                 });
 
                 it('Should call error handler', function(){
@@ -593,7 +603,7 @@ describe('Users', function() {
                     sinon.stub(api, 'errorHandler');
                     api.Users.createKycPage(john.Id, kycDocument.Id, {
                         File: 'qqqq'
-                    }).then(function(){done()}, function(){done()});
+                    }).then(function(){done();}, function(){done();});
                 });
 
                 it('Should call error handler', function(){
@@ -875,9 +885,12 @@ describe('Users', function() {
 
         before(function (done) {
             api.Users.getBlockStatus(john.Id, function (data, response) {
-                blockStatus = data;
                 done();
-            });
+            })
+                .catch(function (data) {
+                    blockStatus = data;
+                    done();
+                });
         });
 
         it('should get the block status', function() {

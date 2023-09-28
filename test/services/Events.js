@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var expect = require('chai').expect;
+var api = require('../main');
 
 var helpers = require('../helpers');
 

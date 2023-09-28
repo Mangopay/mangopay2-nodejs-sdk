@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var mangopay = require('../../index');
+var api = require('../main');
 
 describe('Tokens', function() {
     var authentication1, authentication2;

@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var helpers = require('../helpers');
+var api = require('../main');
 
 describe('Wallets', function() {
     var john = helpers.data.getUserNatural();
