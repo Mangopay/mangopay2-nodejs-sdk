@@ -1,13 +1,13 @@
-import { Timestamp } from "../types";
-import { entityBase } from "./entityBase";
-import { money } from "./money";
+import {Timestamp} from "../types";
+import {entityBase} from "./entityBase";
+import {money} from "./money";
 
 export namespace transaction {
     import MoneyData = money.MoneyData;
 
     type TransactionNature = "REGULAR" | "REPUDIATION" | "REFUND" | "SETTLEMENT";
 
-    type TransactionType = "PAYIN" | "TRANSFER" | "PAYOUT" | "CARD_VALIDATION";
+    type TransactionType = "PAYIN" | "TRANSFER" | "PAYOUT" | "CARD_VALIDATION" | "CONVERSION";
 
     type TransactionStatus = "CREATED" | "SUCCEEDED" | "FAILED";
 
