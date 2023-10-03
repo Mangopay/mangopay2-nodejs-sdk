@@ -1,4 +1,4 @@
-import {entityBase, models, money, transaction} from "mangopay2-nodejs-sdk";
+import { entityBase, models, money, transaction } from "mangopay2-nodejs-sdk";
 
 export namespace instantConversion {
     import ConversionRate = models.ConversionRate;

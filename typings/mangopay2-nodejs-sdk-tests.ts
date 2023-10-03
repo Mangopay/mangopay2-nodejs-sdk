@@ -675,6 +675,35 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "IDEAL",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "http://test.com",
+    StatementDescriptor: "Ideal",
+    Bic: "RBRBNL21",
+    Tag: "test"
+}).then(data => {
+    const d = data; // $ExpectType IdealWebPayInData
+});
+
+api.PayIns.create({
+    PaymentType: "GIROPAY",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "http://test.com",
+    StatementDescriptor: "Giropay",
+    Tag: "test"
+}).then(data => {
+    const d = data; // $ExpectType GiropayWebPayInData
+});
+
+api.PayIns.create({
     PaymentType: "CARD",
     ExecutionType: "WEB",
     AuthorId: "user-id",

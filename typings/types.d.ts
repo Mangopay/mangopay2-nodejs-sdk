@@ -165,7 +165,9 @@ export type ApiMethod =
     | "payins_satispay-web_create"
     | "payins_blik-web_create"
     | "payins_googlepay-direct_create_v2"
-    | "payins_klarna-web_create";
+    | "payins_klarna-web_create"
+    | "payins_ideal-web_create"
+    | "payins_giropay-web_create";
 
 export type CountryISO =
     | "AD"

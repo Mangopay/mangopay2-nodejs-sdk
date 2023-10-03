@@ -1,6 +1,6 @@
-import {Timestamp} from "../types";
-import {entityBase} from "./entityBase";
-import {money} from "./money";
+import { Timestamp } from "../types";
+import { entityBase } from "./entityBase";
+import { money } from "./money";
 
 export namespace transaction {
     import MoneyData = money.MoneyData;
