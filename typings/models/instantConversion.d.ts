@@ -1,11 +1,14 @@
-import { entityBase, models, money, transaction } from "mangopay2-nodejs-sdk";
+import { entityBase } from "./entityBase";
+import { money } from "./money";
+import { transaction } from "./transaction";
+import { conversionRate } from "./conversionRate";
 
 export namespace instantConversion {
-    import ConversionRate = models.ConversionRate;
     import TransactionStatus = transaction.TransactionStatus;
     import TransactionType = transaction.TransactionType;
     import TransactionNature = transaction.TransactionNature;
     import MoneyData = money.MoneyData;
+    import ConversionRateData = conversionRate.ConversionRateData;
 
     interface InstantConversionData extends entityBase.EntityBaseData {
         /**
@@ -36,7 +39,7 @@ export namespace instantConversion {
         /**
          * Real time indicative market rate of a specific currency pair
          */
-        ConversionRate: ConversionRate;
+        ConversionRate: ConversionRateData;
 
         /**
          * The status of the transaction.

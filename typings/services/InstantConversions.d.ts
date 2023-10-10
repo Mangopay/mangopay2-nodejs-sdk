@@ -1,4 +1,4 @@
-import { base } from "mangopay2-nodejs-sdk";
+import { base } from "../base";
 import { conversionRate } from "../models/conversionRate";
 import { instantConversion } from "../models/instantConversion";
 import MethodOverload = base.MethodOverload;
