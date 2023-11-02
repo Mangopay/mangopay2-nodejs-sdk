@@ -626,7 +626,7 @@ api.PayIns.create({
             PostalCode: "68400"
         }
     },
-    MerchantOrderId: "1234"
+    Reference: "1234"
 }).then(data => {
     const d = data; // $ExpectType KlarnaWebPayInData
 });
@@ -675,6 +675,35 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "IDEAL",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "http://test.com",
+    StatementDescriptor: "Ideal",
+    Bic: "RBRBNL21",
+    Tag: "test"
+}).then(data => {
+    const d = data; // $ExpectType IdealWebPayInData
+});
+
+api.PayIns.create({
+    PaymentType: "GIROPAY",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "http://test.com",
+    StatementDescriptor: "Giropay",
+    Tag: "test"
+}).then(data => {
+    const d = data; // $ExpectType GiropayWebPayInData
+});
+
+api.PayIns.create({
     PaymentType: "CARD",
     ExecutionType: "WEB",
     AuthorId: "user-id",
@@ -719,6 +748,7 @@ api.PayIns.createPayPal({
     ReturnURL: "http://test.com",
     Tag: "test tag",
     StatementDescriptor: "test",
+    Reference: "Reference",
     Culture: "FR"
 }).then(data => {
     const d = data; // $ExpectType PayPalWebPayInData
@@ -1222,7 +1252,7 @@ api.Hooks.getAll().then(data => {
 
 /* Reports */
 
-api.Reports.create({Columns: ["Alias", "AuthorId"], ReportType: "WALLET"}).then(data => {
+api.Reports.create({Columns: ["Alias", "AuthorId"], ReportType: "WALLETS"}).then(data => {
     const d = data; // $ExpectType ReportData
 });
 

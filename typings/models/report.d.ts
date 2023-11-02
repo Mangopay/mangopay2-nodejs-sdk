@@ -141,7 +141,7 @@ export namespace report {
         /**
          * The type of report
          */
-        ReportType: "TRANSACTION" | "WALLET";
+        ReportType: "TRANSACTIONS" | "WALLETS";
 
         /**
          * The column to sort against and direction separated by a `:`
