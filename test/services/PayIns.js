@@ -1242,7 +1242,8 @@ describe('PayIns', function () {
         });
     });
 
-    describe('GooglePay V2', function () {
+    // skip because we cannot generate new paymentData in the tests
+    describe.skip('GooglePay V2', function () {
         var googlePayIn, wallet;
 
         before(function (done) {

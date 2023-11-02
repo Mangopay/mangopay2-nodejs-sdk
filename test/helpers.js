@@ -873,7 +873,7 @@ module.exports = {
                         "Country": "US"
                     }
                 },
-                MerchantOrderId: "1234",
+                Reference: "1234",
                 StatementDescriptor: "test",
                 Tag: "test tag"
             };

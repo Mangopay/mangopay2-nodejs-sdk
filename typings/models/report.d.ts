@@ -1,6 +1,6 @@
-import {CurrencyISO, PickPartial, Timestamp} from "../types";
-import {transaction} from "./transaction";
-import {entityBase} from "./entityBase";
+import { CurrencyISO, PickPartial, Timestamp } from "../types";
+import { transaction } from "./transaction";
+import { entityBase } from "./entityBase";
 
 export namespace report {
     type Column =

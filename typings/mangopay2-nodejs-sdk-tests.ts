@@ -626,7 +626,7 @@ api.PayIns.create({
             PostalCode: "68400"
         }
     },
-    MerchantOrderId: "1234"
+    Reference: "1234"
 }).then(data => {
     const d = data; // $ExpectType KlarnaWebPayInData
 });

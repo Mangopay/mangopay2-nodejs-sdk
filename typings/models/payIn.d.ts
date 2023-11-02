@@ -1659,7 +1659,7 @@ export namespace payIn {
         /**
          * The merchant order reference
          */
-        MerchantOrderId: string;
+        Reference: string;
 
         /**
          * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
@@ -1732,7 +1732,7 @@ export namespace payIn {
         /**
          * The merchant order reference
          */
-        MerchantOrderId: string;
+        Reference: string;
 
         /**
          * Custom data that you can add to this item
