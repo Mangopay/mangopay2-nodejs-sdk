@@ -17,6 +17,8 @@ export namespace enums {
         Blik: "BLIK";
         GooglePay: "GOOGLE_PAY";
         Klarna: "KLARNA";
+        Ideal: "IDEAL";
+        Giropay: "GIROPAY";
     }
 
     interface IMandateStatus {

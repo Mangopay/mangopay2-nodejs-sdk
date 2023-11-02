@@ -33,7 +33,9 @@ export namespace payIn {
         | SatispayWebPayInData
         | BlikWebPayInData
         | GooglePayDirectPayInData
-        | KlarnaWebPayInData;
+        | KlarnaWebPayInData
+        | IdealWebPayInData
+        | GiropayWebPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -1752,5 +1754,148 @@ export namespace payIn {
          * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
         StatementDescriptor?: string;
+    }
+
+    interface IdealWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "IDEAL";
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * Name of the end-user’s bank
+         */
+        BankName: string;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        Bic: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
+    interface CreateIdealWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "IDEAL";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the debited funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        Bic: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this object
+         */
+        Tag?: string;
+    }
+
+    interface GiropayWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "GIROPAY";
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
+    interface CreateGiropayWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "GIROPAY";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the debited funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this object
+         */
+        Tag?: string;
     }
 }
