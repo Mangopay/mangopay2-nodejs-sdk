@@ -355,6 +355,8 @@ export namespace payIn {
         Culture: CountryISO;
 
         ShippingPreference: ShippingPreference;
+
+        Reference: string;
     }
 
     interface MultibancoWebPayInData extends BasePayInData {
@@ -581,6 +583,8 @@ export namespace payIn {
         Culture?: CountryISO;
 
         ShippingPreference?: ShippingPreference;
+
+        Reference?: string;
     }
 
     interface CreateMultibancoWebPayIn {

@@ -719,6 +719,7 @@ api.PayIns.createPayPal({
     ReturnURL: "http://test.com",
     Tag: "test tag",
     StatementDescriptor: "test",
+    Reference: "Reference",
     Culture: "FR"
 }).then(data => {
     const d = data; // $ExpectType PayPalWebPayInData

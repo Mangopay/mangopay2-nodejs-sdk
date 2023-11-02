@@ -389,6 +389,7 @@ module.exports = {
                     }
                 ],
                 ShippingPreference: "NO_SHIPPING",
+                Reference: "Reference",
                 Tag: "tag",
                 StatementDescriptor: "test"
             };
