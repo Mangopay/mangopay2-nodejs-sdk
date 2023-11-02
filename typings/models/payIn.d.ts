@@ -356,7 +356,7 @@ export namespace payIn {
 
         ShippingPreference: ShippingPreference;
 
-        Reference?: string;
+        Reference: string;
     }
 
     interface MultibancoWebPayInData extends BasePayInData {
