@@ -111,6 +111,23 @@ describe('PayIns', function () {
                 expect(refund.Nature).to.equal('REFUND');
             });
         });
+
+        describe('Create Partial Refund', function () {
+            var refund;
+
+            before(function (done) {
+                helpers.getPartialRefundForPayIn(api, john, payIn, function (data, response) {
+                    refund = data;
+                    done();
+                });
+            });
+
+            it('should succeed', function () {
+                expect(refund.Id).to.not.be.null;
+                expect(refund.Type).to.equal('PAYOUT');
+                expect(refund.Nature).to.equal('REFUND');
+            });
+        });
     });
 
     describe('PreAuthorizedDirect', function () {

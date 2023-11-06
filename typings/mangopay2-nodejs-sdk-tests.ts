@@ -841,6 +841,14 @@ api.PayIns.createRefund("payin-id", {AuthorId: "user-id"}).then(data => {
     const d = data; // $ExpectType RefundData
 });
 
+api.PayIns.createRefund("payin-id", {
+    AuthorId: "user-id",
+    DebitedFunds: {Amount: 100, Currency: "EUR"},
+    Fees: {Amount: 15, Currency: "EUR"}
+}).then(data => {
+    const d = data; // $ExpectType RefundData
+});
+
 api.PayIns.getRefunds("payin-id").then(data => {
     const d = data; // $ExpectType RefundData[]
 });
@@ -1029,6 +1037,12 @@ api.Transfers.create({
 api.Transfers.get("transfer-id").then(data => {
     const d = data; // $ExpectType TransferData
 });
+
+api.Transfers.createRefund("transfer-id", {AuthorId: "user-id"}).then(
+    data => {
+        const d = data; // $ExpectType RefundData
+    }
+);
 
 api.Transfers.createRefund("transfer-id", {AuthorId: "user-id"}).then(
     data => {

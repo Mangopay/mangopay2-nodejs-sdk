@@ -486,6 +486,22 @@ module.exports = {
         api.PayIns.createRefund(payIn.Id, refund, callback);
     },
 
+    getPartialRefundForPayIn: function(api, user, payIn, callback) {
+        var refund = {
+            AuthorId: user.Id,
+            DebitedFunds: new api.models.Money({
+                Amount: 100,
+                Currency: payIn.DebitedFunds.Currency
+            }),
+            Fees: new api.models.Money({
+                Amount: 10,
+                Currency: payIn.Fees.Currency
+            }),
+        };
+
+        api.PayIns.createRefund(payIn.Id, refund, callback);
+    },
+
     getPaylineCorrectRegistartionData: function(cardRegistration, callback) {
         /*
          ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
