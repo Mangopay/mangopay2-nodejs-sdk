@@ -1044,12 +1044,6 @@ api.Transfers.createRefund("transfer-id", {AuthorId: "user-id"}).then(
     }
 );
 
-api.Transfers.createRefund("transfer-id", {AuthorId: "user-id"}).then(
-    data => {
-        const d = data; // $ExpectType RefundData
-    }
-);
-
 api.Transfers.getRefunds("transfer-id").then(data => {
     const d = data; // $ExpectType RefundData[]
 });
