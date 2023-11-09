@@ -24,7 +24,9 @@ export class PayIns {
         MethodOverload<payIn.CreateSatispayWebPayIn, payIn.SatispayWebPayInData> &
         MethodOverload<payIn.CreateBlikWebPayIn, payIn.BlikWebPayInData> &
         MethodOverload<payIn.CreateGooglePayDirectPayIn, payIn.GooglePayDirectPayInData> &
-        MethodOverload<payIn.CreateKlarnaWebPayIn, payIn.KlarnaWebPayInData>;
+        MethodOverload<payIn.CreateKlarnaWebPayIn, payIn.KlarnaWebPayInData> &
+        MethodOverload<payIn.CreateIdealWebPayIn, payIn.IdealWebPayInData> &
+        MethodOverload<payIn.CreateGiropayWebPayIn, payIn.GiropayWebPayInData>;
 
     /**
      * Get pay-in

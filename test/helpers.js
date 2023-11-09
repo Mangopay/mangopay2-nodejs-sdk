@@ -389,6 +389,7 @@ module.exports = {
                     }
                 ],
                 ShippingPreference: "NO_SHIPPING",
+                Reference: "Reference",
                 Tag: "tag",
                 StatementDescriptor: "test"
             };
@@ -872,8 +873,67 @@ module.exports = {
                         "Country": "US"
                     }
                 },
-                MerchantOrderId: "1234",
+                Reference: "1234",
                 StatementDescriptor: "test",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
+    getNewPayInIdealWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'IDEAL',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 1000,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                ReturnURL: 'http://test.com',
+                Bic: 'SNSBNL2A',
+                StatementDescriptor: "ideal",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
+    getNewPayInGiropayWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'GIROPAY',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 1000,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                ReturnURL: 'http://test.com',
+                StatementDescriptor: "giropay",
                 Tag: "test tag"
             };
             api.PayIns.create(payIn, callback);

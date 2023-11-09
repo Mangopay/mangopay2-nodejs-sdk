@@ -7,7 +7,7 @@ export namespace transaction {
 
     type TransactionNature = "REGULAR" | "REPUDIATION" | "REFUND" | "SETTLEMENT";
 
-    type TransactionType = "PAYIN" | "TRANSFER" | "PAYOUT" | "CARD_VALIDATION";
+    type TransactionType = "PAYIN" | "TRANSFER" | "PAYOUT" | "CARD_VALIDATION" | "CONVERSION";
 
     type TransactionStatus = "CREATED" | "SUCCEEDED" | "FAILED";
 

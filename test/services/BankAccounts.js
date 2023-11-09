@@ -3,6 +3,7 @@ var helpers = require('../helpers');
 var UserNatural = require('../../lib/models/UserNatural');
 var BankAccount = require('../../lib/models/BankAccount');
 var BankAccountDetailsIBAN = require('../../lib/models/BankAccountDetailsIBAN');
+var api = require('../main');
 
 describe('Bank Accounts', function () {
     var john = new UserNatural(helpers.data.getUserNatural());

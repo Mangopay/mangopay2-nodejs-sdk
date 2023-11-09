@@ -2,7 +2,7 @@
 
 /// <reference types="node" />
 
-import { ApiMethod, MakeKeysRequired, Timestamp, SecureMode, CountryISO, CurrencyISO } from "./types";
+import { ApiMethod, CountryISO, CurrencyISO, MakeKeysRequired, SecureMode, Timestamp } from "./types";
 import { base } from "./base";
 import { Users } from "./services/Users";
 import { BankAccounts } from "./services/BankAccounts";
@@ -37,6 +37,8 @@ import { disputeDocument } from "./models/disputeDocument";
 import { uboDeclaration } from "./models/uboDeclaration";
 import { kycDocument } from "./models/kycDocument";
 import { money } from "./models/money";
+import { conversionRate } from "./models/conversionRate";
+import { instantConversion } from "./models/instantConversion";
 import { cardRegistration } from "./models/cardRegistration";
 import { card } from "./models/card";
 import { cardPreAuthorization } from "./models/cardPreauthorization";
@@ -65,6 +67,7 @@ import { countryAuthorization } from "./models/countryAuthorization";
 import { Regulatory } from "./services/Regulatory";
 import { Deposits } from "./services/Deposits";
 import { cardValidation } from "./models/cardValidation";
+import { InstantConversions } from "./services/InstantConversions";
 
 export = MangoPay;
 
@@ -98,6 +101,7 @@ declare class MangoPay {
     Idempotency: Idempotency;
     Regulatory: Regulatory;
     Deposits: Deposits;
+    InstantConversions: InstantConversions;
 
     models: typeof MangoPay.models;
 
@@ -126,6 +130,8 @@ declare namespace MangoPay {
     namespace models {
         import DependsObject = base.DependsObject;
         import MoneyData = money.MoneyData;
+        import ConversionRateData = conversionRate.ConversionRateData;
+
         import BillingData = billing.BillingData;
         const PayInExecutionType: enums.IPayInExecutionType;
         const PayInPaymentType: enums.IPayInPaymentType;
@@ -229,6 +235,10 @@ declare namespace MangoPay {
             Id: string;
             Date: number;
             errors: [string, string];
+        }
+
+        class ConversionRate extends EntityBase<ConversionRateData> {
+            constructor(data: ConversionRateData);
         }
 
         class Money extends EntityBase<MoneyData> {
@@ -802,6 +812,8 @@ declare namespace MangoPay {
         CountryISO,
         CurrencyISO,
         countryAuthorization,
-        deposit
+        deposit,
+        conversionRate,
+        instantConversion
     };
 }

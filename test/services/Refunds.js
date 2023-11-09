@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var helpers = require('../helpers');
+var api = require('../main');
 
 describe('Refunds', function() {
     var john = helpers.data.getUserNatural();
@@ -75,12 +76,15 @@ describe('Refunds', function() {
                                             CreditedWalletId: secondWallet.Id
                                         }, function(data, response){
                                             transfer = data;
-                                            done();
+                                            api.Wallets.get(wallet.Id).then(function (data) {
+                                                wallet = data;
+                                                done();
+                                            });
                                         });
                                     });
                                 });
                             });
-                        })
+                        });
                     });
                 });
             });
