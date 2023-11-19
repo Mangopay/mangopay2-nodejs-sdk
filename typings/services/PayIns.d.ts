@@ -1,6 +1,7 @@
-import { payIn } from "../models/payIn";
-import { refund } from "../models/refund";
-import { base } from "../base";
+import {payIn} from "../models/payIn";
+import {refund} from "../models/refund";
+import {base} from "../base";
+import {card} from "mangopay2-nodejs-sdk";
 import MethodOverload = base.MethodOverload;
 import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
 
@@ -99,4 +100,6 @@ export class PayIns {
      */
     createGooglePay:
         MethodOverload<payIn.CreateGooglePayDirectPayIn, payIn.GooglePayDirectPayInData>;
+
+    getCardDetailsForWebPayIn: MethodOverload<string, card.CardData>;
 }

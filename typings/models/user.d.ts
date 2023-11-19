@@ -1,6 +1,6 @@
-import { CountryISO, MakeKeysRequired, PickPartial, Timestamp } from "../types";
-import { address } from "./address";
-import { entityBase } from "./entityBase";
+import {CountryISO, MakeKeysRequired, PickPartial, Timestamp} from "../types";
+import {address} from "./address";
+import {entityBase} from "./entityBase";
 
 export namespace user {
     /**
@@ -116,6 +116,13 @@ export namespace user {
          * OWNER - Users who use MANGOPAY to receive funds. Please note that a user needs to be KYC validated to perform payouts
          */
         UserCategory?: UserCategory;
+
+        /**
+         * The date when the user has accepted the MANGOPAY Terms and Conditions.
+         */
+        TermsAndConditionsAcceptedDate: Timestamp;
+
+        UserStatus: string;
     }
 
     interface UserLegalData extends UserData {
