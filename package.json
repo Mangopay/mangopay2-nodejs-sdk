@@ -18,7 +18,7 @@
   "main": "./index.js",
   "dependencies": {
     "@types/node": "14.14.x",
-    "axios": "^1.5.1",
+    "axios": "1.6.2",
     "promise": "8.1.x",
     "underscore": "1.12.x"
   },
