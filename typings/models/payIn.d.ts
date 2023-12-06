@@ -177,6 +177,11 @@ export namespace payIn {
          * The URL to redirect to user to for them to proceed with the payment
          */
         RedirectURL: string;
+
+        /**
+         * Name of the end-user’s bank
+         */
+        BankName: string;
     }
 
     interface CreateCardWebPayIn {
@@ -252,6 +257,11 @@ export namespace payIn {
          * Contains every useful information's related to the user shipping
          */
         Shipping?: ShippingData;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        Bic?: string;
     }
 
     interface CardDirectPayInData extends BasePayInData {

@@ -711,6 +711,21 @@ api.PayIns.create({
     Fees: {Amount: 100, Currency: "GBP"},
     DebitedFunds: {Amount: 2000, Currency: "GBP"},
     ReturnURL: "https://secure-return.co",
+    Culture: "FR",
+    Bic: "RBRBNL21",
+    CardType: "IDEAL"
+}).then(data => {
+    const d = data; // $ExpectType CardWebPayInData
+});
+
+api.PayIns.create({
+    PaymentType: "CARD",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 100, Currency: "GBP"},
+    DebitedFunds: {Amount: 2000, Currency: "GBP"},
+    ReturnURL: "https://secure-return.co",
     Culture: "AD",
     CardType: "MAESTRO"
 }).then(data => {

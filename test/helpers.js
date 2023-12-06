@@ -954,5 +954,41 @@ module.exports = {
             };
             api.PayIns.create(payIn, callback);
         });
-    }
+    },
+
+    getLegacyPayInIdealCardWeb: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = new api.models.PayIn({
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: new api.models.Money({
+                    Amount: 1000,
+                    Currency: 'EUR'
+                }),
+                Fees: new api.models.Money({
+                    Amount: 0,
+                    Currency: 'EUR'
+                }),
+                PaymentType: 'CARD',
+                PaymentDetails: new api.models.PayInPaymentDetailsCard({
+                    CardType: 'IDEAL',
+                    Bic: 'REVOLT21'
+                }),
+                ExecutionType: 'WEB',
+                ExecutionDetails: new api.models.PayInPaymentDetailsCard({
+                    ReturnURL: 'https://test.com',
+                    TemplateURL: 'https://TemplateURL.com',
+                    SecureMode:  'DEFAULT',
+                    Culture: 'fr'
+                })
+            });
+            api.PayIns.create(payIn, callback);
+        });
+    },
 };
