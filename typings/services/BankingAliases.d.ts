@@ -31,7 +31,7 @@ export class BankingAliases {
      * @param bankingAliasId
      * @param options
      */
-    update: MethodOverload<Partial<Omit<bankingAlias.CreateIBANBankingAlias, "CreditedUserId">>,
+    update: MethodOverload<bankingAlias.UpdateIBANBankingAlias,
         bankingAlias.IBANBankingAliasData>;
 
     /**

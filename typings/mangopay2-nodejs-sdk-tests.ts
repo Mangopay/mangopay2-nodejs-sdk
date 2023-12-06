@@ -1067,7 +1067,9 @@ api.Transfers.getRefunds("transfer-id").then(data => {
 
 api.BankingAliases.create({
     Country: "GB",
-    OwnerName: "owner-id"
+    OwnerName: "owner-id",
+    Type: 'IBAN',
+    WalletId: '1234'
 }).then(data => {
     const d = data; // $ExpectType IBANBankingAliasData
 });
@@ -1077,7 +1079,10 @@ api.BankingAliases.get("alias-id").then(data => {
 api.BankingAliases.getAll().then(data => {
     const d = data; // $ExpectType IBANBankingAliasData[]
 });
-api.BankingAliases.update({OwnerName: "some-name"}).then(data => {
+api.BankingAliases.update({
+    Id: '1234',
+    Active: false
+}).then(data => {
     const d = data; // $ExpectType IBANBankingAliasData
 });
 api.BankingAliases.deactivate("alias-id").then(data => {
