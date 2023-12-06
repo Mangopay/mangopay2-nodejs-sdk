@@ -1259,6 +1259,30 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Ideal Legacy Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getLegacyPayInIdealCardWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the legacy PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.BankName).not.to.be.null;
+                expect(payIn.CardType).to.equal('IDEAL');
+                expect(payIn.PaymentType).to.equal('CARD');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
     // skip because we cannot generate new paymentData in the tests
     describe.skip('GooglePay V2', function () {
         var googlePayIn, wallet;
