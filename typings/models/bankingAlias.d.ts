@@ -53,7 +53,43 @@ export namespace bankingAlias {
         BIC: string;
     }
 
-    interface CreateIBANBankingAlias extends PickPartialRequired<IBANBankingAliasData,
-        "Tag" | "CreditedUserId", "OwnerName" | "Country"> {
+    interface CreateIBANBankingAlias {
+        /**
+         * The type of banking alias (note that only IBAN is available at present)
+         */
+        Type: "IBAN";
+
+        /**
+         * The ID of a wallet
+         */
+        WalletId: string;
+
+        /**
+         * The owner of the wallet/banking alias
+         */
+        OwnerName: string;
+
+        /**
+         * The Country of the Address
+         */
+        Country: CountryISO;
+
+        /**
+         * Custom data that you can add to this object
+         */
+        Tag?: string;
+    }
+
+    interface UpdateIBANBankingAlias {
+        /**
+         * The ID of the BankingAlias
+         */
+        Id: string;
+
+        /**
+         * Whether the banking alias is active or not
+         * Caution: Setting this value to false is irreversible
+         */
+        Active?: boolean;
     }
 }
