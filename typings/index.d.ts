@@ -250,7 +250,7 @@ declare namespace MangoPay {
         }
 
         class Address extends EntityBase<address.AddressData> {
-            constructor(data: Partial<address.AddressData>);
+            constructor(data: Partial<address.AddressData> | address.CreateAddress);
         }
 
         interface Address extends address.AddressData {

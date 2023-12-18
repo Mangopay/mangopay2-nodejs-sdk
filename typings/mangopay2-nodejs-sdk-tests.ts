@@ -41,14 +41,6 @@ const legalUser = new api.models.UserLegal({
         PostalCode: "20007",
         Country: "US"
     }),
-    LegalRepresentativeAddress: new api.models.Address({
-        AddressLine1: "4101 Reservoir Rd NW",
-        AddressLine2: "",
-        City: "Washington",
-        Region: "District of Columbia",
-        PostalCode: "20007",
-        Country: "US"
-    }),
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: "FR",
     LegalRepresentativeCountryOfResidence: "FR",
@@ -179,15 +171,7 @@ const userLegalPayer = new api.models.UserLegalPayer({
     LegalPersonType: "BUSINESS",
     LegalRepresentativeFirstName: "Mango",
     LegalRepresentativeLastName: "Pay",
-    LegalRepresentativeEmail: "mango@mangopay.com",
-    LegalRepresentativeAddress: new api.models.Address({
-        AddressLine1: "4101 Reservoir Rd NW",
-        AddressLine2: "",
-        City: "Washington",
-        Region: "District of Columbia",
-        PostalCode: "20007",
-        Country: "US"
-    })
+    LegalRepresentativeEmail: "mango@mangopay.com"
 });
 
 api.Users.create(userLegalPayer,
@@ -205,14 +189,6 @@ const userLegalOwner = new api.models.UserLegalOwner({
     LegalRepresentativeFirstName: "Mango",
     LegalRepresentativeLastName: "Pay",
     HeadquartersAddress: new api.models.Address({
-        AddressLine1: "4101 Reservoir Rd NW",
-        AddressLine2: "",
-        City: "Washington",
-        Region: "District of Columbia",
-        PostalCode: "20007",
-        Country: "US"
-    }),
-    LegalRepresentativeAddress: new api.models.Address({
         AddressLine1: "4101 Reservoir Rd NW",
         AddressLine2: "",
         City: "Washington",
