@@ -40,7 +40,6 @@ export namespace user {
         | "LegalRepresentativeNationality"
         | "LegalRepresentativeFirstName"
         | "LegalRepresentativeLastName"
-        | "LegalRepresentativeAddress"
         | "Email";
 
     type RequiredUserNaturalData =
@@ -68,7 +67,6 @@ export namespace user {
     type RequiredUserLegalPayerData =
         | "LegalPersonType"
         | "Name"
-        | "LegalRepresentativeAddress"
         | "LegalRepresentativeFirstName"
         | "LegalRepresentativeLastName"
         | "Email";
@@ -77,7 +75,6 @@ export namespace user {
         | "HeadquartersAddress"
         | "LegalPersonType"
         | "Name"
-        | "LegalRepresentativeAddress"
         | "LegalRepresentativeBirthday"
         | "LegalRepresentativeCountryOfResidence"
         | "LegalRepresentativeNationality"

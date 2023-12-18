@@ -2,7 +2,7 @@ import { CountryISO } from "../types";
 import { Models } from "../models";
 
 export namespace address {
-    type AddressType = string | AddressData | Models.Address;
+    type AddressType = string | AddressData | Models.Address | CreateAddress;
 
     interface AddressData {
         /**
@@ -55,7 +55,7 @@ export namespace address {
         /**
          * The region of the address - this is optional except if the Country is US, CA or MX
          */
-        Region: string;
+        Region?: string;
 
         /**
          * The postal code of the address - can be alphanumeric, dashes or spaces
