@@ -728,6 +728,95 @@ describe('PayIns', function () {
             })
         })
 
+        describe('Create a Recurring Payment Check Card Data', function() {
+            var recurring;
+            before(function(done){
+                recurringPayin = {
+                    AuthorId: john.Id,
+                    CardId: cardId,
+                    CreditedUserId: john.Id,
+                    CreditedWalletId: walletId,
+                    FirstTransactionDebitedFunds: {
+                        Amount: 10,
+                        Currency: 'EUR'
+                    },
+                    FirstTransactionFees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    Billing: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    Shipping: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    FreeCycles: 0
+                };
+
+                api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
+                    recurring = data;
+                }).then(function(){
+                    cit = {
+                        RecurringPayinRegistrationId: recurring.Id,
+                        BrowserInfo: {
+                            AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                            JavaEnabled: true,
+                            Language: "FR-FR",
+                            ColorDepth: 4,
+                            ScreenHeight: 1800,
+                            ScreenWidth: 400,
+                            JavascriptEnabled: true,
+                            TimeZoneOffset: "+60",
+                            UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                        },
+                        IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+                        SecureModeReturnURL: "http://www.my-site.com/returnurl",
+                        StatementDescriptor: "lorem",
+                        Tag: "custom meta",
+                        DebitedFunds: {
+                            Amount: 10,
+                            Currency: 'EUR'
+                        },
+                        Fees: {
+                            Amount: 1,
+                            Currency: 'EUR'
+                        },
+                    };
+
+                    api.PayIns.createRecurringPayInRegistrationCIT(cit, function(data, response){
+                        createCit = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should be created', function() {
+                expect(createCit.CardInfo).to.not.be.null;
+                expect(createCit.CardInfo.Type).to.not.be.null;
+                expect(createCit.CardInfo.Brand).to.not.be.null;
+                expect(createCit.CardInfo.IssuingBank).to.not.be.null;
+                expect(createCit.CardInfo.BIN).to.not.be.null;
+            });
+        });
+
         describe('Get Recurring Payment', function () {
             var recurring;
             before(function(done){

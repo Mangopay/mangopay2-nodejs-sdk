@@ -1,5 +1,5 @@
-import { CurrencyISO } from "../types";
-import { entityBase } from "./entityBase";
+import {CountryISO, CurrencyISO} from "../types";
+import {entityBase} from "./entityBase";
 
 export namespace card {
     type CardType = "CB_VISA_MASTERCARD" | "DINERS" | "MASTERPASS" | "MAESTRO" | "P24" | "IDEAL" | "BCMC" | "PAYLIB";
@@ -7,6 +7,8 @@ export namespace card {
     type CardStatus = "CREATED" | "VALIDATED" | "ERROR";
 
     type CardValidity = "UNKNOWN" | "VALID" | "INVALID";
+
+    type CardInfoType = "DEBIT" | "CREDIT" | "CHARGE CARD";
 
     interface CardData extends entityBase.EntityBaseData {
         /**
@@ -69,5 +71,14 @@ export namespace card {
     interface UpdateCard {
         Id: string;
         Active?: false;
+    }
+
+    interface CardInfoData {
+        BIN: string;
+        IssuingBank: string;
+        IssuerCountryCode: CountryISO;
+        Type: CardInfoType;
+        Brand: string;
+        SubType: string;
     }
 }

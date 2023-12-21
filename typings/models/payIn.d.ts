@@ -18,6 +18,7 @@ export namespace payIn {
     import ShippingData = shipping.ShippingData;
     import CreateShipping = shipping.CreateShipping;
     import CreateBilling = billing.CreateBilling;
+    import CardInfoData = card.CardInfoData;
 
     type _3DSVersion = "V1" | "V2_1";
 
@@ -134,6 +135,11 @@ export namespace payIn {
          * The type of execution for the payin
          */
         ExecutionType: PayInExecutionType;
+
+        /**
+         * Information about the card
+         */
+        CardInfo: CardInfoData;
     }
 
     interface CardWebPayInData extends BasePayInData {
