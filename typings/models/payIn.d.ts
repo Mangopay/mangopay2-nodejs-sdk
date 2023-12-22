@@ -18,6 +18,7 @@ export namespace payIn {
     import ShippingData = shipping.ShippingData;
     import CreateShipping = shipping.CreateShipping;
     import CreateBilling = billing.CreateBilling;
+    import CardInfoData = card.CardInfoData;
 
     type _3DSVersion = "V1" | "V2_1";
 
@@ -310,6 +311,11 @@ export namespace payIn {
          * This is the URL where to redirect users to proceed to 3D secure validation
          */
         SecureModeRedirectURL: string;
+
+        /**
+         * Information about the card
+         */
+        CardInfo: CardInfoData;
     }
 
     interface MbwayWebPayInData extends BasePayInData {
@@ -1269,6 +1275,11 @@ export namespace payIn {
         Applied3DSVersion: _3DSVersion;
 
         RecurringPayinRegistrationId: string;
+
+        /**
+         * Information about the card
+         */
+        CardInfo: CardInfoData;
     }
 
     interface CreateRecurringPayInCIT {

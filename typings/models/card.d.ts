@@ -1,4 +1,4 @@
-import { CurrencyISO } from "../types";
+import { CountryISO, CurrencyISO } from "../types";
 import { entityBase } from "./entityBase";
 
 export namespace card {
@@ -7,6 +7,8 @@ export namespace card {
     type CardStatus = "CREATED" | "VALIDATED" | "ERROR";
 
     type CardValidity = "UNKNOWN" | "VALID" | "INVALID";
+
+    type CardInfoType = "DEBIT" | "CREDIT" | "CHARGE CARD";
 
     interface CardData extends entityBase.EntityBaseData {
         /**
@@ -69,5 +71,37 @@ export namespace card {
     interface UpdateCard {
         Id: string;
         Active?: false;
+    }
+
+    interface CardInfoData {
+        /**
+         * The 6-digit bank identification number (BIN) of the card issuer.
+         */
+        BIN: string;
+
+        /**
+         * The name of the card issuer.
+         */
+        IssuingBank: string;
+
+        /**
+         * The country where the card was issued.
+         */
+        IssuerCountryCode: CountryISO;
+
+        /**
+         * The type of card product: DEBIT, CREDIT, CHARGE CARD.
+         */
+        Type: CardInfoType;
+
+        /**
+         * The card brand. Examples include: AMERICAN EXPRESS, DISCOVER, JCB, MASTERCARD, VISA, etc.
+         */
+        Brand: string;
+
+        /**
+         * The subtype of the card product. Examples include: CLASSIC, GOLD, PLATINUM, PREPAID, etc.
+         */
+        SubType: string;
     }
 }

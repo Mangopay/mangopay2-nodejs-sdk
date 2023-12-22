@@ -6,6 +6,7 @@ import { payIn } from "./payIn";
 import { base } from "../base";
 import { billing } from "./billing";
 import { shipping } from "./shipping";
+import { card } from "./card";
 
 export namespace deposit {
     import MoneyData = money.MoneyData;
@@ -15,6 +16,7 @@ export namespace deposit {
     import ShippingData = shipping.ShippingData;
     import CompleteBillingData = billing.CompleteBillingData;
     import _3DSVersion = payIn._3DSVersion;
+    import CardInfoData = card.CardInfoData;
 
     type DepositStatus = ValueOf<enums.IDepositStatus>;
 
@@ -64,6 +66,8 @@ export namespace deposit {
         Requested3DSVersion: _3DSVersion;
 
         Applied3DSVersion: _3DSVersion;
+
+        CardInfo: CardInfoData;
     }
 
     interface CreateDeposit {

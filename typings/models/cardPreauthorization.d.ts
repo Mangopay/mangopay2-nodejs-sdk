@@ -5,6 +5,7 @@ import { base } from "../base";
 import { money } from "./money";
 import { securityInfo } from "./securityInfo";
 import { shipping } from "./shipping";
+import { card } from "./card";
 
 export namespace cardPreAuthorization {
     import BillingData = billing.BillingData;
@@ -12,6 +13,7 @@ export namespace cardPreAuthorization {
     import MoneyData = money.MoneyData;
     import SecurityInfoData = securityInfo.SecurityInfoData;
     import ShippingData = shipping.ShippingData;
+    import CardInfoData = card.CardInfoData;
 
     type PreAuthorizationExecutionType = "DIRECT";
 
@@ -140,5 +142,7 @@ export namespace cardPreAuthorization {
          * Contains every useful information's related to the user shipping
          */
         Shipping: ShippingData;
+
+        CardInfo: CardInfoData;
     }
 }
