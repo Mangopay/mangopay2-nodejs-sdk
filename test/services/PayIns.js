@@ -74,7 +74,8 @@ describe('PayIns', function () {
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('SUCCEEDED');
                 expect(payIn.Type).to.equal('PAYIN');
-                expect(payIn.SecurityInfo.AVSResult).to.equal('NO_CHECK')
+                expect(payIn.SecurityInfo.AVSResult).to.equal('NO_CHECK');
+                expect(payIn.CardInfo).not.to.be.undefined;
             });
         });
 
@@ -728,7 +729,7 @@ describe('PayIns', function () {
             })
         })
 
-        describe('Create a Recurring Payment Check Card Data', function() {
+        describe('Create a Recurring Payment Check Card Info', function() {
             var recurring;
             before(function(done){
                 recurringPayin = {

@@ -6,7 +6,7 @@ import { payIn } from "./payIn";
 import { base } from "../base";
 import { billing } from "./billing";
 import { shipping } from "./shipping";
-import { card } from "mangopay2-nodejs-sdk";
+import { card } from "./card";
 
 export namespace deposit {
     import MoneyData = money.MoneyData;

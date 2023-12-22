@@ -5,7 +5,7 @@ import { base } from "../base";
 import { money } from "./money";
 import { securityInfo } from "./securityInfo";
 import { shipping } from "./shipping";
-import { card } from "mangopay2-nodejs-sdk";
+import { card } from "./card";
 
 export namespace cardPreAuthorization {
     import BillingData = billing.BillingData;

@@ -135,11 +135,6 @@ export namespace payIn {
          * The type of execution for the payin
          */
         ExecutionType: PayInExecutionType;
-
-        /**
-         * Information about the card
-         */
-        CardInfo: CardInfoData;
     }
 
     interface CardWebPayInData extends BasePayInData {
@@ -306,6 +301,11 @@ export namespace payIn {
          * This is the URL where to redirect users to proceed to 3D secure validation
          */
         SecureModeRedirectURL: string;
+
+        /**
+         * Information about the card
+         */
+        CardInfo: CardInfoData;
     }
 
     interface MbwayWebPayInData extends BasePayInData {
@@ -1265,6 +1265,11 @@ export namespace payIn {
         Applied3DSVersion: _3DSVersion;
 
         RecurringPayinRegistrationId: string;
+
+        /**
+         * Information about the card
+         */
+        CardInfo: CardInfoData;
     }
 
     interface CreateRecurringPayInCIT {
