@@ -89,42 +89,22 @@ describe('InstantConversions', function () {
                                     IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C"
                                 }, function (data, response) {
                                     api.Wallets.create(creditedWallet).then(function () {
-                                        api.Transfers.create({
+                                        instantConversion = {
                                             AuthorId: john.Id,
-                                            Tag: 'DefaultTag',
-                                            CreditedUserId: john.Id,
-                                            DebitedFunds: {
-                                                Currency: 'GBP',
-                                                Amount: 1
-                                            },
-                                            Fees: {
-                                                Currency: 'GBP',
-                                                Amount: 0
-                                            },
+                                            CreditedWalletId: creditedWallet.Id,
                                             DebitedWalletId: debitedWallet.Id,
-                                            CreditedWalletId: creditedWallet.Id
-                                        }, function (data, response) {
-                                            api.Wallets.get(debitedWallet.Id).then(function (data) {
-                                                debitedWallet = data;
-
-                                                instantConversion = {
-                                                    AuthorId: john.Id,
-                                                    CreditedWalletId: creditedWallet.Id,
-                                                    DebitedWalletId: debitedWallet.Id,
-                                                    CreditedFunds: {
-                                                        Currency: 'GBP'
-                                                    },
-                                                    DebitedFunds: {
-                                                        Currency: 'EUR',
-                                                        Amount: 79
-                                                    },
-                                                    Tag: 'Instant conversion test'
-                                                };
-                                                api.InstantConversions.createInstantConversion(instantConversion, function (data, response) {
-                                                    instantConversion = data;
-                                                    done();
-                                                });
-                                            });
+                                            CreditedFunds: {
+                                                Currency: 'GBP'
+                                            },
+                                            DebitedFunds: {
+                                                Currency: 'EUR',
+                                                Amount: 79
+                                            },
+                                            Tag: 'Instant conversion test'
+                                        };
+                                        api.InstantConversions.createInstantConversion(instantConversion, function (data, response) {
+                                            instantConversion = data;
+                                            done();
                                         });
                                     });
                                 });
@@ -203,44 +183,24 @@ describe('InstantConversions', function () {
                                     IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C"
                                 }, function (data, response) {
                                     api.Wallets.create(creditedWallet).then(function () {
-                                        api.Transfers.create({
+                                        instantConversion = {
                                             AuthorId: john.Id,
-                                            Tag: 'DefaultTag',
-                                            CreditedUserId: john.Id,
-                                            DebitedFunds: {
-                                                Currency: 'GBP',
-                                                Amount: 1
-                                            },
-                                            Fees: {
-                                                Currency: 'GBP',
-                                                Amount: 0
-                                            },
+                                            CreditedWalletId: creditedWallet.Id,
                                             DebitedWalletId: debitedWallet.Id,
-                                            CreditedWalletId: creditedWallet.Id
-                                        }, function (data, response) {
-                                            api.Wallets.get(debitedWallet.Id).then(function (data) {
-                                                debitedWallet = data;
-
-                                                instantConversion = {
-                                                    AuthorId: john.Id,
-                                                    CreditedWalletId: creditedWallet.Id,
-                                                    DebitedWalletId: debitedWallet.Id,
-                                                    CreditedFunds: {
-                                                        Currency: 'GBP'
-                                                    },
-                                                    DebitedFunds: {
-                                                        Currency: 'EUR',
-                                                        Amount: 79
-                                                    },
-                                                    Tag: 'Instant conversion test'
-                                                };
-                                                api.InstantConversions.createInstantConversion(instantConversion, function (data, response) {
-                                                    instantConversion = data;
-                                                    api.InstantConversions.getInstantConversion(instantConversion.Id, function (data, response) {
-                                                        returnedInstantConversion = data;
-                                                        done();
-                                                    });
-                                                });
+                                            CreditedFunds: {
+                                                Currency: 'GBP'
+                                            },
+                                            DebitedFunds: {
+                                                Currency: 'EUR',
+                                                Amount: 79
+                                            },
+                                            Tag: 'Instant conversion test'
+                                        };
+                                        api.InstantConversions.createInstantConversion(instantConversion, function (data, response) {
+                                            instantConversion = data;
+                                            api.InstantConversions.getInstantConversion(instantConversion.Id, function (data, response) {
+                                                returnedInstantConversion = data;
+                                                done();
                                             });
                                         });
                                     });

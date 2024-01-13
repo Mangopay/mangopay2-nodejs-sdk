@@ -98,13 +98,10 @@ describe('Mandates', function() {
     describe('Cancel a mandate before being approved it - CREATED status', function() {
         var cancelResponse;
         before(function(done){
-            api.Mandates.cancel(mandate.Id, function(){
-                done('Cancel a mandate with the status "CREATED didn`t fail');
-            })
-                .catch(function(data){
-                    cancelResponse = data;
-                    done();
-                });
+            api.Mandates.cancel(mandate.Id, function(data){
+                cancelResponse = data;
+                done();
+            });
         });
 
         it('shouldn\'t be able to cancel a mandate with the status "CREATED"', function(){

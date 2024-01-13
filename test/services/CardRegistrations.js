@@ -208,14 +208,10 @@ describe('Card Registrations', function () {
         var failedResponse;
 
         before(function(done) {
-          api.CardRegistrations.create(newInvalidCardRegistration)
-            .then(function(){
-              done('Creating invalid card registration did not failed the promise');
-            })
-            .catch(function(data, response){
+          api.CardRegistrations.create(newInvalidCardRegistration, function (data) {
               failedResponse = data;
               done();
-            });
+          });
         });
 
         it('should fail', function () {

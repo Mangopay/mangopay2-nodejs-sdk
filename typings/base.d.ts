@@ -43,7 +43,7 @@ export namespace base {
 
         /**
          * Set the response timeout limit(in milliseconds)
-         * @default 80000
+         * @default 30000
          */
         responseTimeout?: number;
 
@@ -61,14 +61,6 @@ export namespace base {
     }
 
     interface RequestOptions {
-        requestConfig: {
-            timeout: number;
-        };
-
-        responseConfig: {
-            timeout: number;
-        };
-
         /**
          * Path options are replacing the ${placeholders} from apiMethods
          */
