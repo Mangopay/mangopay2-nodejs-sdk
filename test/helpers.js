@@ -389,6 +389,7 @@ module.exports = {
                     }
                 ],
                 ShippingPreference: "NO_SHIPPING",
+                Reference: "Reference",
                 Tag: "tag",
                 StatementDescriptor: "test"
             };
@@ -480,6 +481,22 @@ module.exports = {
             AuthorId: user.Id,
             DebitedFunds: payIn.DebitedFunds,
             Fees: payIn.Fees
+        };
+
+        api.PayIns.createRefund(payIn.Id, refund, callback);
+    },
+
+    getPartialRefundForPayIn: function(api, user, payIn, callback) {
+        var refund = {
+            AuthorId: user.Id,
+            DebitedFunds: new api.models.Money({
+                Amount: 100,
+                Currency: payIn.DebitedFunds.Currency
+            }),
+            Fees: new api.models.Money({
+                Amount: 10,
+                Currency: payIn.Fees.Currency
+            }),
         };
 
         api.PayIns.createRefund(payIn.Id, refund, callback);
@@ -872,11 +889,106 @@ module.exports = {
                         "Country": "US"
                     }
                 },
-                MerchantOrderId: "1234",
+                Reference: "1234",
                 StatementDescriptor: "test",
                 Tag: "test tag"
             };
             api.PayIns.create(payIn, callback);
         });
-    }
+    },
+
+    getNewPayInIdealWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'IDEAL',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 1000,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                ReturnURL: 'http://test.com',
+                Bic: 'SNSBNL2A',
+                StatementDescriptor: "ideal",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
+    getNewPayInGiropayWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'GIROPAY',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 1000,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                ReturnURL: 'http://test.com',
+                StatementDescriptor: "giropay",
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
+    getLegacyPayInIdealCardWeb: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = new api.models.PayIn({
+                CreditedWalletId: wallet.Id,
+                AuthorId: user.Id,
+                DebitedFunds: new api.models.Money({
+                    Amount: 1000,
+                    Currency: 'EUR'
+                }),
+                Fees: new api.models.Money({
+                    Amount: 0,
+                    Currency: 'EUR'
+                }),
+                PaymentType: 'CARD',
+                PaymentDetails: new api.models.PayInPaymentDetailsCard({
+                    CardType: 'IDEAL',
+                    Bic: 'REVOLT21'
+                }),
+                ExecutionType: 'WEB',
+                ExecutionDetails: new api.models.PayInPaymentDetailsCard({
+                    ReturnURL: 'https://test.com',
+                    TemplateURL: 'https://TemplateURL.com',
+                    SecureMode:  'DEFAULT',
+                    Culture: 'fr'
+                })
+            });
+            api.PayIns.create(payIn, callback);
+        });
+    },
 };

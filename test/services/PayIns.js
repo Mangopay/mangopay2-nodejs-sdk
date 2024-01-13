@@ -74,7 +74,8 @@ describe('PayIns', function () {
                 expect(payIn.AuthorId).to.equal(john.Id);
                 expect(payIn.Status).to.equal('SUCCEEDED');
                 expect(payIn.Type).to.equal('PAYIN');
-                expect(payIn.SecurityInfo.AVSResult).to.equal('NO_CHECK')
+                expect(payIn.SecurityInfo.AVSResult).to.equal('NO_CHECK');
+                expect(payIn.CardInfo).not.to.be.undefined;
             });
         });
 
@@ -107,6 +108,23 @@ describe('PayIns', function () {
 
             it('should succeed', function () {
                 expect(refund.DebitedFunds).to.eql(payIn.DebitedFunds);
+                expect(refund.Type).to.equal('PAYOUT');
+                expect(refund.Nature).to.equal('REFUND');
+            });
+        });
+
+        describe('Create Partial Refund', function () {
+            var refund;
+
+            before(function (done) {
+                helpers.getPartialRefundForPayIn(api, john, payIn, function (data, response) {
+                    refund = data;
+                    done();
+                });
+            });
+
+            it('should succeed', function () {
+                expect(refund.Id).to.not.be.null;
                 expect(refund.Type).to.equal('PAYOUT');
                 expect(refund.Nature).to.equal('REFUND');
             });
@@ -723,6 +741,95 @@ describe('PayIns', function () {
             })
         })
 
+        describe('Create a Recurring Payment Check Card Info', function() {
+            var recurring;
+            before(function(done){
+                recurringPayin = {
+                    AuthorId: john.Id,
+                    CardId: cardId,
+                    CreditedUserId: john.Id,
+                    CreditedWalletId: walletId,
+                    FirstTransactionDebitedFunds: {
+                        Amount: 10,
+                        Currency: 'EUR'
+                    },
+                    FirstTransactionFees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    Billing: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    Shipping: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    FreeCycles: 0
+                };
+
+                api.PayIns.createRecurringPayment(recurringPayin, function(data, response){
+                    recurring = data;
+                }).then(function(){
+                    cit = {
+                        RecurringPayinRegistrationId: recurring.Id,
+                        BrowserInfo: {
+                            AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                            JavaEnabled: true,
+                            Language: "FR-FR",
+                            ColorDepth: 4,
+                            ScreenHeight: 1800,
+                            ScreenWidth: 400,
+                            JavascriptEnabled: true,
+                            TimeZoneOffset: "+60",
+                            UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                        },
+                        IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+                        SecureModeReturnURL: "http://www.my-site.com/returnurl",
+                        StatementDescriptor: "lorem",
+                        Tag: "custom meta",
+                        DebitedFunds: {
+                            Amount: 10,
+                            Currency: 'EUR'
+                        },
+                        Fees: {
+                            Amount: 1,
+                            Currency: 'EUR'
+                        },
+                    };
+
+                    api.PayIns.createRecurringPayInRegistrationCIT(cit, function(data, response){
+                        createCit = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should be created', function() {
+                expect(createCit.CardInfo).to.not.be.null;
+                expect(createCit.CardInfo.Type).to.not.be.null;
+                expect(createCit.CardInfo.Brand).to.not.be.null;
+                expect(createCit.CardInfo.IssuingBank).to.not.be.null;
+                expect(createCit.CardInfo.BIN).to.not.be.null;
+            });
+        });
+
         describe('Get Recurring Payment', function () {
             var recurring;
             before(function(done){
@@ -1176,7 +1283,110 @@ describe('PayIns', function () {
         });
     });
 
-    describe('GooglePay V2', function () {
+    describe('Ideal Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInIdealWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('IDEAL');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('IDEAL');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
+    describe('Giropay Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInGiropayWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('GIROPAY');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('GIROPAY');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
+    describe('Ideal Legacy Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getLegacyPayInIdealCardWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the legacy PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.BankName).not.to.be.null;
+                expect(payIn.CardType).to.equal('IDEAL');
+                expect(payIn.PaymentType).to.equal('CARD');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
+    // skip because we cannot generate new paymentData in the tests
+    describe.skip('GooglePay V2', function () {
         var googlePayIn, wallet;
 
         before(function (done) {

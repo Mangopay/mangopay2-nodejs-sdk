@@ -18,6 +18,7 @@ export namespace payIn {
     import ShippingData = shipping.ShippingData;
     import CreateShipping = shipping.CreateShipping;
     import CreateBilling = billing.CreateBilling;
+    import CardInfoData = card.CardInfoData;
 
     type _3DSVersion = "V1" | "V2_1";
 
@@ -33,7 +34,9 @@ export namespace payIn {
         | SatispayWebPayInData
         | BlikWebPayInData
         | GooglePayDirectPayInData
-        | KlarnaWebPayInData;
+        | KlarnaWebPayInData
+        | IdealWebPayInData
+        | GiropayWebPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -175,6 +178,11 @@ export namespace payIn {
          * The URL to redirect to user to for them to proceed with the payment
          */
         RedirectURL: string;
+
+        /**
+         * Name of the end-user’s bank
+         */
+        BankName: string;
     }
 
     interface CreateCardWebPayIn {
@@ -250,6 +258,11 @@ export namespace payIn {
          * Contains every useful information's related to the user shipping
          */
         Shipping?: ShippingData;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        Bic?: string;
     }
 
     interface CardDirectPayInData extends BasePayInData {
@@ -298,6 +311,11 @@ export namespace payIn {
          * This is the URL where to redirect users to proceed to 3D secure validation
          */
         SecureModeRedirectURL: string;
+
+        /**
+         * Information about the card
+         */
+        CardInfo: CardInfoData;
     }
 
     interface MbwayWebPayInData extends BasePayInData {
@@ -355,6 +373,8 @@ export namespace payIn {
         Culture: CountryISO;
 
         ShippingPreference: ShippingPreference;
+
+        Reference: string;
     }
 
     interface MultibancoWebPayInData extends BasePayInData {
@@ -581,6 +601,8 @@ export namespace payIn {
         Culture?: CountryISO;
 
         ShippingPreference?: ShippingPreference;
+
+        Reference?: string;
     }
 
     interface CreateMultibancoWebPayIn {
@@ -1253,6 +1275,11 @@ export namespace payIn {
         Applied3DSVersion: _3DSVersion;
 
         RecurringPayinRegistrationId: string;
+
+        /**
+         * Information about the card
+         */
+        CardInfo: CardInfoData;
     }
 
     interface CreateRecurringPayInCIT {
@@ -1653,7 +1680,7 @@ export namespace payIn {
         /**
          * The merchant order reference
          */
-        MerchantOrderId: string;
+        Reference: string;
 
         /**
          * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
@@ -1726,7 +1753,7 @@ export namespace payIn {
         /**
          * The merchant order reference
          */
-        MerchantOrderId: string;
+        Reference: string;
 
         /**
          * Custom data that you can add to this item
@@ -1748,5 +1775,148 @@ export namespace payIn {
          * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
         StatementDescriptor?: string;
+    }
+
+    interface IdealWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "IDEAL";
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * Name of the end-user’s bank
+         */
+        BankName: string;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        Bic: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
+    interface CreateIdealWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "IDEAL";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the debited funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        Bic: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this object
+         */
+        Tag?: string;
+    }
+
+    interface GiropayWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "GIROPAY";
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
+    interface CreateGiropayWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "GIROPAY";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the debited funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this object
+         */
+        Tag?: string;
     }
 }

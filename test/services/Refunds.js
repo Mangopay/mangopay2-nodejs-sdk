@@ -76,12 +76,15 @@ describe('Refunds', function() {
                                             CreditedWalletId: secondWallet.Id
                                         }, function(data, response){
                                             transfer = data;
-                                            done();
+                                            api.Wallets.get(wallet.Id).then(function (data) {
+                                                wallet = data;
+                                                done();
+                                            });
                                         });
                                     });
                                 });
                             });
-                        })
+                        });
                     });
                 });
             });

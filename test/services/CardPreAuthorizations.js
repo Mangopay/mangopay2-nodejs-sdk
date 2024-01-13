@@ -27,6 +27,7 @@ describe('Card PreAuthorizations', function() {
             expect(preAuthorization.ExecutionType).to.equal('DIRECT');
             expect(preAuthorization.PayInId).to.be.null;
             expect(preAuthorization.RemainingFunds).to.exist;
+            expect(preAuthorization.CardInfo).to.not.be.null;
         });
     });
 

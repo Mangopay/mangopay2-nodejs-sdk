@@ -1,3 +1,45 @@
+## [1.42.0] - 2023-12-22
+### Added
+
+New `CardInfo` parameter returned on card transactions. More information [here](https://mangopay.com/docs/release-notes/chilka).
+
+## [1.41.1] - 2023-12-18
+### Fixed
+
+- Typing for User
+- Comments #336
+
+## [1.41.0] - 2023-12-06
+### Added
+
+The IDEAL legacy implementation has been enhanced. You can now pass the `Bic`, and if provided, the API response will include the `BankName` parameter. More information [here](https://mangopay.com/docs/endpoints/web-card-payins#create-web-card-payin).
+
+### Fixed
+BankingAlias typings have been fixed to match the API behavior
+
+## [1.40.1] - 2023-11-09
+### Added
+
+It's now possible to specify an amount for DebitedFunds and Fees when you create a refund with `PayIns.createRefund()`
+
+## [1.40.0] - 2023-11-02
+### Updated
+
+- Giropay and Ideal integrations with Mangopay have been improved. Some methods have been deprecated
+- Klarna param "MerchantOrderId" has been renamed to "Reference"
+
+### Fixed
+
+- An error occurred while creating a transaction report. It has been fixed.
+
+### Added
+
+- New Reference parameter for the new Paypal implementation.
+
+## [1.39.0] - 2023-09-29
+### Added
+- Instantly convert funds between 2 wallets of different currencies owned by the same user with the new SPOT FX endpoints
+
 ## [1.38.0] - 2023-09-22
 ### Added
 

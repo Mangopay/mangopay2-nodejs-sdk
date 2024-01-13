@@ -127,8 +127,8 @@ export type ApiMethod =
     | "disputes_repudiation_create_settlement"
     | "disputes_repudiation_get_settlement"
     | "disputes_pending_settlement"
-    | "reports_transaction_create"
-    | "reports_wallet_create"
+    | "reports_transactions_create"
+    | "reports_wallets_create"
     | "reports_get"
     | "reports_all"
     | "mandates_directdebit-web_create"
@@ -165,7 +165,9 @@ export type ApiMethod =
     | "payins_satispay-web_create"
     | "payins_blik-web_create"
     | "payins_googlepay-direct_create_v2"
-    | "payins_klarna-web_create";
+    | "payins_klarna-web_create"
+    | "payins_ideal-web_create"
+    | "payins_giropay-web_create";
 
 export type CountryISO =
     | "AD"

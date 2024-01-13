@@ -18,6 +18,14 @@ describe('Deposits', function () {
         it('should be created', function () {
             expect(deposit).not.to.be.undefined;
         });
+
+        it('check card info', function () {
+            expect(deposit.CardInfo).not.to.be.undefined;
+            expect(deposit.CardInfo.Type).not.to.be.undefined;
+            expect(deposit.CardInfo.Brand).not.to.be.undefined;
+            expect(deposit.CardInfo.IssuerCountryCode).not.to.be.undefined;
+            expect(deposit.CardInfo.BIN).not.to.be.undefined;
+        });
     });
 
     describe('Get', function () {
