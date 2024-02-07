@@ -62,7 +62,11 @@ describe('Wallets', function() {
         var transactions;
 
         before(function(done){
-            helpers.getNewPayInCardWeb(api, john, function(data){
+            helpers.getNewPayInCardWeb(api, john, async function(data){
+                // wait 2 seconds for the transactions to be created by the API
+                const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+                await delay(2000);
+
                 api.Wallets.getTransactions(data.CreditedWalletId, function(data, response){
                     transactions = data;
                     done();

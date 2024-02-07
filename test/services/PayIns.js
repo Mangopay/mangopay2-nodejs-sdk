@@ -164,7 +164,10 @@ describe('PayIns', function () {
                         PreauthorizationId: preAuthorization.Id
                     };
 
-                    api.PayIns.create(payIn, function (data, response) {
+                    api.PayIns.create(payIn, async function (data, response) {
+                        // wait 2 seconds for the transactions to be created by the API
+                        const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+                        await delay(2000);
                         done();
                     });
                 });
