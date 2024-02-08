@@ -1,3 +1,8 @@
+## [1.42.1] - 2024-02-08
+### Fixed
+
+We have upgraded our SDK to use Axios for API communication with Mangopay. This change ensures faster, more reliable, and secure interactions, aligning with our commitment to provide an efficient and robust user experience.
+
 ## [1.42.0] - 2023-12-22
 ### Added
 
