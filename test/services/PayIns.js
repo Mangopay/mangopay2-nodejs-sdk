@@ -164,7 +164,10 @@ describe('PayIns', function () {
                         PreauthorizationId: preAuthorization.Id
                     };
 
-                    api.PayIns.create(payIn, function (data, response) {
+                    api.PayIns.create(payIn, async function (data, response) {
+                        // wait 2 seconds for the transactions to be created by the API
+                        const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+                        await delay(2000);
                         done();
                     });
                 });
@@ -614,32 +617,44 @@ describe('PayIns', function () {
                             updatedCardRegistration = data;
                             cardId = updatedCardRegistration.CardId;
                             walletId = wallet.Id;
+                            api.Cards.get(cardRegistration.CardId, function(data, response) {
+                                card = data;
+                                api.PayIns.create({
+                                    CreditedWalletId: wallet.Id,
+                                    AuthorId: john.Id,
+                                    DebitedFunds: {
+                                        Amount: 100,
+                                        Currency: 'EUR'
+                                    },
+                                    Fees: {
+                                        Amount: 0,
+                                        Currency: 'EUR'
+                                    },
+                                    CardId: card.Id,
+                                    SecureMode: 'DEFAULT',
+                                    SecureModeReturnURL: 'https://test.com',
+                                    PaymentType: 'CARD',
+                                    ExecutionType: 'DIRECT',
+                                    BrowserInfo: {
+                                        AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                                        JavaEnabled: true,
+                                        Language: "FR-FR",
+                                        ColorDepth: 4,
+                                        ScreenHeight: 1800,
+                                        ScreenWidth: 400,
+                                        JavascriptEnabled: true,
+                                        TimeZoneOffset: "+60",
+                                        UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                                    },
+                                    IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C"
+                                }, function(data, response) {
+                                    done();
+                                });
+                            });
                         });
-                        api.Cards.get(cardRegistration.CardId, function(data, response) {
-                            card = data;
-                            api.PayIns.create({
-                                CreditedWalletId: wallet.Id,
-                                AuthorId: john.Id,
-                                DebitedFunds: {
-                                    Amount: 10000,
-                                    Currency: 'EUR'
-                                },
-                                Fees: {
-                                    Amount: 0,
-                                    Currency: 'EUR'
-                                },
-                                CardId: card.Id,
-                                SecureMode: 'DEFAULT',
-                                SecureModeReturnURL: 'https://test.com',
-                                PaymentType: 'CARD',
-                                ExecutionType: 'DIRECT'
-                            }, function(data, response) {
-                                done();
-                            })
-                        })
-                    })
-                })
-            })
+                    });
+                });
+            });
         });
 
         describe('Create a Recurring Payment', function() {

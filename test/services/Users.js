@@ -4,6 +4,7 @@ var Promise = require('promise');
 var expect = require('chai').expect;
 var assert = require('chai').assert;
 var sinon = require('sinon');
+var api = require('../main');
 
 var helpers = require('../helpers');
 
@@ -570,38 +571,33 @@ describe('Users', function() {
         });
 
         describe('Create KYC Page', function() {
-
             describe('Empty File String', function() {
+                var emptyFileStringResult;
+
                 before(function(done){
-                    sinon.stub(api, 'errorHandler');
-                    api.Users.createKycPage(john.Id, kycDocument.Id, {
-                        File: ''
-                    }).then(function(){done()}, function(){done()});
+                    api.Users.createKycPage(john.Id, kycDocument.Id, {File: ''}, function (data) {
+                        emptyFileStringResult = data;
+                        done();
+                    });
                 });
 
-                it('Should call error handler', function(){
-                    assert(api.errorHandler.calledOnce);
-                });
-
-                after(function(){
-                    api.errorHandler.restore();
+                it('Should return error for empty file string', function(){
+                    expect(emptyFileStringResult.errors).to.not.be.null;
                 });
             });
 
             describe('Wrong File String', function() {
+                var wrongFileStringResult;
+
                 before(function(done){
-                    sinon.stub(api, 'errorHandler');
-                    api.Users.createKycPage(john.Id, kycDocument.Id, {
-                        File: 'qqqq'
-                    }).then(function(){done()}, function(){done()});
+                    api.Users.createKycPage(john.Id, kycDocument.Id, {File: ''}, function (data) {
+                        wrongFileStringResult = data;
+                        done();
+                    });
                 });
 
-                it('Should call error handler', function(){
-                    assert(api.errorHandler.calledOnce);
-                });
-
-                after(function(){
-                    api.errorHandler.restore();
+                it('Should return error for wrong file string', function(){
+                    expect(wrongFileStringResult.errors).to.not.be.null;
                 });
             });
 

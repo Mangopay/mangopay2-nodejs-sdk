@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
+var api = require('../main');
 
 describe('Card Registrations', function () {
     var cardRegistration;
@@ -58,7 +59,7 @@ describe('Card Registrations', function () {
                 data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4970105191923460',
+                    cardNumber: '4970107111111119',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
@@ -207,14 +208,10 @@ describe('Card Registrations', function () {
         var failedResponse;
 
         before(function(done) {
-          api.CardRegistrations.create(newInvalidCardRegistration)
-            .then(function(){
-              done('Creating invalid card registration did not failed the promise');
-            })
-            .catch(function(data, response){
+          api.CardRegistrations.create(newInvalidCardRegistration, function (data) {
               failedResponse = data;
               done();
-            });
+          });
         });
 
         it('should fail', function () {

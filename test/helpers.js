@@ -197,7 +197,7 @@ module.exports = {
                 data: {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
-                    cardNumber: '4970105191923460',
+                    cardNumber: '4970107111111119',
                     cardExpirationDate: '1224',
                     cardCvx: '123'
                 },
@@ -510,50 +510,7 @@ module.exports = {
             data: {
                 data: cardRegistration.PreregistrationData,
                 accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4970105191923460',
-                cardExpirationDate: '1224',
-                cardCvx: '123'
-            },
-            url: cardRegistration.CardRegistrationURL,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        };
-
-        return api.method('post', function (data, response) {
-            callback(Buffer.from(data).toString(), response);
-        }, options);
-    },
-
-    getPaylineCorrectRegistartionDataForDeposit: function(cardRegistration, callback) {
-        /*
-         ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
-         */
-        var options = {
-            data: {
-                data: cardRegistration.PreregistrationData,
-                accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4970105181818183',
-                cardExpirationDate: '1224',
-                cardCvx: '123'
-            },
-            url: cardRegistration.CardRegistrationURL,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        };
-
-        return api.method('post', function (data, response) {
-            callback(Buffer.from(data).toString(), response);
-        }, options);
-    },
-
-    getPaylineCorrectRegistartionData3DSecure: function(cardRegistration, callback) {
-        var options = {
-            data: {
-                data: cardRegistration.PreregistrationData,
-                accessKeyRef: cardRegistration.AccessKey,
-                cardNumber: '4970105191923460',
+                cardNumber: '4970107111111119',
                 cardExpirationDate: '1224',
                 cardCvx: '123'
             },
@@ -678,7 +635,7 @@ module.exports = {
             };
 
             api.CardRegistrations.create(cardRegistration, function () {
-                self.getPaylineCorrectRegistartionDataForDeposit(cardRegistration, function (data, response) {
+                self.getPaylineCorrectRegistartionData(cardRegistration, function (data, response) {
                     cardRegistration.RegistrationData = data;
 
                     api.CardRegistrations.update(cardRegistration).then(function (data) {
@@ -706,7 +663,7 @@ module.exports = {
             };
 
             api.CardRegistrations.create(cardRegistration, function () {
-                self.getPaylineCorrectRegistartionDataForDeposit(cardRegistration, function (data, response) {
+                self.getPaylineCorrectRegistartionData(cardRegistration, function (data, response) {
                     cardRegistration.RegistrationData = data;
 
                     api.CardRegistrations.update(cardRegistration).then(function (data) {

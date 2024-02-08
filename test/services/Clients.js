@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var path = require('path');
 var expect = require('chai').expect;
+var api = require('../main');
 
 var ClientWallet = require('../../lib/models/ClientWallet');
 var BankAccount = require('../../lib/models/BankAccount');
@@ -65,7 +66,7 @@ describe("Clients", function () {
         });
 
         it('should be uploaded', function () {
-            expect(requestResponse.statusCode).to.equal(204);
+            expect(requestResponse.status).to.equal(204);
         });
 
     });

@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
+var api = require('../main');
 
 describe('KycDocuments', function() {
     var john = helpers.data.getUserNatural();

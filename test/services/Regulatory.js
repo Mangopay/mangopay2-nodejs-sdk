@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+var api = require('../main');
 
 describe('Regulatory', function() {
 

@@ -2,6 +2,7 @@ var _ = require('underscore');
 var expect = require('chai').expect;
 var helpers = require('../helpers');
 var UserNatural = require('../../lib/models/UserNatural');
+var api = require('../main');
 
 describe('Cards', function () {
     var john = new UserNatural(helpers.data.getUserNatural());

@@ -4,6 +4,7 @@ var Promise = require('promise');
 var expect = require('chai').expect;
 var assert = require('chai').assert;
 var os = require('os');
+var api = require('../main');
 
 var helpers = require('../helpers');
 
