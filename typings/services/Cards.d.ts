@@ -57,4 +57,18 @@ export class Cards {
         cardValidation.CreateCardValidation,
         cardValidation.CardValidationData
     >;
+
+    /**
+     * Validate a card
+     * @param cardId
+     * @param cardValidationId
+     * @param callback
+     * @param options
+     * @returns {*|Promise}
+     */
+    getCardValidation: TwoArgsMethodOverload<
+        string,
+        string,
+        cardValidation.CardValidationData
+    >;
 }

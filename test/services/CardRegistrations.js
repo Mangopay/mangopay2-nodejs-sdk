@@ -114,6 +114,7 @@ describe('Card Registrations', function () {
     describe('Cards', function () {
         var card;
         var validatedCard;
+        var fetchedCardValidation;
         before(function(done) {
             api.Cards.get(cardRegistration.CardId, function(data, response){
                 card = data;
@@ -146,9 +147,26 @@ describe('Card Registrations', function () {
                 });
             });
 
-            it('should be validate', function () {
+            it('should be validated', function () {
                 expect(validatedCard).to.not.be.undefined;
                 expect(validatedCard.Id).to.not.be.undefined;
+                expect(validatedCard.Type).to.equal("CARD_VALIDATION");
+            });
+        });
+
+        describe('Get Card Validation', function () {
+            before(function(done) {
+                api.Cards.getCardValidation(cardRegistration.CardId, validatedCard.Id, function(data) {
+                    fetchedCardValidation = data;
+                    done();
+                });
+            });
+
+            it('should fetch card validation', function () {
+                expect(fetchedCardValidation).to.not.be.undefined;
+                expect(fetchedCardValidation.Id).to.not.be.undefined;
+                expect(fetchedCardValidation.Id).to.equal(validatedCard.Id);
+                expect(fetchedCardValidation.Type).to.equal("CARD_VALIDATION");
             });
         });
 

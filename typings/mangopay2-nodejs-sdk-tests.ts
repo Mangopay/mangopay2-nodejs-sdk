@@ -482,6 +482,13 @@ api.Cards.validate(
     const d = data; // $ExpectType CardValidationData
 });
 
+api.Cards.getCardValidation(
+    "cardId",
+    "cardValidationId"
+).then(data => {
+    const d = data; // $ExpectType CardValidationData
+});
+
 /* CardRegistrations */
 
 api.CardRegistrations.create({
