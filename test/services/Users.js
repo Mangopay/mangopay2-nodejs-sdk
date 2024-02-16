@@ -67,14 +67,14 @@ describe('Users', function() {
         expect(john.Id).not.to.be.undefined;
         expect(john.PersonType).to.equal(PersonType.Natural);
         expect(john.TermsAndConditionsAccepted).to.be.false;
-        expect(john.UserCategory).to.equal('UNKNOWN');
+        expect(john.UserCategory).to.equal('OWNER');
     });
 
     it('Create Legal', function() {
         expect(matrix.Id).not.to.be.undefined;
         expect(matrix.PersonType).to.equal(PersonType.Legal);
         expect(matrix.TermsAndConditionsAccepted).to.be.false;
-        expect(matrix.UserCategory).to.equal('UNKNOWN');
+        expect(matrix.UserCategory).to.equal('OWNER');
     });
 
     it('Create Natural Payer', function(){
