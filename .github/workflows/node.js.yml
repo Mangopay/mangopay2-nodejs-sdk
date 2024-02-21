@@ -8,10 +8,6 @@ on:
     branches:
       # push on master branch
       - master
-      # push on a feature branch
-      - feature/*
-      # push on a bugfix branch
-      - bugfix/*
   pull_request:
     branches: [ master ]
 
