@@ -1919,4 +1919,71 @@ export namespace payIn {
          */
         Tag?: string;
     }
+
+    interface BinData {
+        /**
+         * The subtype of the card product. Examples include: CLASSIC, GOLD, PLATINUM, PREPAID, etc.
+         */
+        Subtype: string;
+        /**
+         * The card brand. Examples include: AMERICAN EXPRESS, DISCOVER, JCB, MASTERCARD, VISA, etc.
+         */
+        Brand: string;
+    }
+
+    interface PaymentMethodMetadata {
+        /**
+         * The type of metadata. Allowed values: BIN, GOOGLE_PAY
+         */
+        Type: string;
+        /**
+         * The bank identification number (BIN). (Format: 6 or 8 digits)
+         */
+        Bin: string;
+        /**
+         * The tokenized payment data provided by the third-party payment method.
+         */
+        Token: string;
+        /**
+         * In the case of Google Pay, the format of the Token.
+         * PAN_ONLY – The card is registered in the Google account and requires 3DS authentication.
+         * CRYPTOGRAM_3DS – The card is enrolled in the customer’s Google Wallet and authentication is handled by the Android device.
+         */
+        TokenFormat: string;
+        /**
+         * The type of the card. Allowed / Returned / Default values: CREDIT, DEBIT, CHARGE CARD
+         */
+        CardType: string;
+        /**
+         * The country where the card was issued. Format: ISO-3166 alpha-2 two-letter country code
+         */
+        IssuerCountryCode: string;
+        /**
+         * The name of the card issuer.
+         */
+        IssuingBank: string;
+        /**
+         * Whether the card is held in a personal or commercial capacity.
+         */
+        CommercialIndicator: string;
+        /**
+         * Additional data about the card based on the BIN. In the case of co-branded card products, two objects are returned.
+         */
+        BinData: BinData[];
+    }
+
+    interface PaymentMethodMetadataRequest {
+        /**
+         * The type of metadata. Allowed values: BIN, GOOGLE_PAY
+         */
+        Type: string;
+        /**
+         * The bank identification number (BIN). (Format: 6 or 8 digits)
+         */
+        Bin?: string;
+        /**
+         * The tokenized payment data provided by the third-party payment method.
+         */
+        Token?: string;
+    }
 }

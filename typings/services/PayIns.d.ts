@@ -99,4 +99,10 @@ export class PayIns {
      */
     createGooglePay:
         MethodOverload<payIn.CreateGooglePayDirectPayIn, payIn.GooglePayDirectPayInData>;
+
+    /**
+     * Get Payment Method Metadata
+     * The body should contain the 'Type' and: 'Bin' (if the type is BIN) or 'Token' (if the type is GOOGLE_PAY)
+     */
+    getPaymentMethodMetadata: MethodOverload<payIn.PaymentMethodMetadataRequest, payIn.PaymentMethodMetadata>;
 }
