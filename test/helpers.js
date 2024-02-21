@@ -843,7 +843,7 @@ module.exports = {
                         "City": "Washington",
                         "Region": "District of Columbia",
                         "PostalCode": "80400",
-                        "Country": "US"
+                        "Country": "FR"
                     }
                 },
                 Reference: "1234",
