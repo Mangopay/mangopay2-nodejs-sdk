@@ -1,3 +1,10 @@
+## [1.43.0] - 2024-02-21
+### Added
+
+- New endpoint to look up metadata from BIN or Google Pay token. More information [here](https://mangopay.com/docs/release-notes/kisale)
+- [Get a card validation endpoint](https://mangopay.com/docs/endpoints/card-validations#view-card-validation)
+- Event types for Card Validation : "CARD_VALIDATION_CREATED", "CARD_VALIDATION_SUCCEEDED" and "CARD_VALIDATION_FAILED"
+
 ## [1.42.1] - 2024-02-08
 ### Fixed
 
