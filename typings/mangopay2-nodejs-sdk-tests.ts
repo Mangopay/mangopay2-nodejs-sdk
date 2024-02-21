@@ -946,6 +946,13 @@ api.PayIns.createRecurringPayInRegistrationMIT({
     const d = data; // $ExpectType RecurringPayInData
 });
 
+api.PayIns.getPaymentMethodMetadata({
+    Type: "BIN",
+    Bin: "1234"
+}).then(data => {
+    const d = data; // $ExpectType PaymentMethodMetadata
+});
+
 /* Clients */
 api.Clients.get().then(data => {
     const d = data; // $ExpectType ClientData
