@@ -1495,6 +1495,34 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Payment Method Metadata', function () {
+        var metadata;
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInCardDirect(api, john, function (createdPayIn) {
+                payIn = createdPayIn
+                var metadataPost = {
+                    Type: "BIN",
+                    Bin: payIn.CardInfo.BIN
+                }
+
+                api.PayIns.getPaymentMethodMetadata(metadataPost, function (data) {
+                    metadata = data;
+                    done();
+                });
+            });
+        });
+
+        describe('Fetch Metadata', function () {
+            it('should fetch the payment method metadata', function () {
+                expect(metadata.Type).to.equal('BIN')
+                expect(metadata.Bin).to.equal(payIn.CardInfo.BIN);
+            });
+        });
+
+    });
+
     // describe('Card PreAuthorized Deposit', function () {
     //     var payIn;
     //
