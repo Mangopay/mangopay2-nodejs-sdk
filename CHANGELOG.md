@@ -1,3 +1,8 @@
+## [1.43.1] - 2024-02-29
+### Fixed
+
+- Fix for #393 and #395 : Reject promise on API error and fix `status` type.
+
 ## [1.43.0] - 2024-02-21
 ### Added
 
