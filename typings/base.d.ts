@@ -159,7 +159,9 @@ export namespace base {
     }
 
     interface WithResponse<T> {
-        statusCode: number;
+        status: number;
+
+        statusText: string;
 
         body: T;
 
