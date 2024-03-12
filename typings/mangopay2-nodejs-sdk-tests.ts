@@ -1341,12 +1341,12 @@ api.PayIns.createCardPreAuthorizedDepositPayIn({
     const d = data; // $ExpectType CardPreAuthorizedDepositPayInData
 });
 
-api.InstantConversions.getConversionRate("EUR", "GBP")
+api.Conversions.getConversionRate("EUR", "GBP")
     .then(data => {
         const d = data; // $ExpectType ConversionRateData
     });
 
-api.InstantConversions.createInstantConversion(
+api.Conversions.createInstantConversion(
     {
         AuthorId: "author-id",
         CreditedWalletId: "credited-wallet-id",
@@ -1361,12 +1361,23 @@ api.InstantConversions.createInstantConversion(
         }
     }
 ).then(data => {
-    const d = data; // $ExpectType InstantConversionData
+    const d = data; // $ExpectType ConversionData
 });
 
-api.InstantConversions.getInstantConversion("conversion-id")
+api.Conversions.createQuotedConversion(
+    {
+        QuoteId: "quote-id",
+        AuthorId: "author-id",
+        CreditedWalletId: "credited-wallet-id",
+        DebitedWalletId: "debited-wallet-id"
+    }
+).then(data => {
+    const d = data; // $ExpectType ConversionData
+});
+
+api.Conversions.getConversion("conversion-id")
     .then(data => {
-        const d = data; // $ExpectType InstantConversionData
+        const d = data; // $ExpectType ConversionData
     });
 
 /* Namespace Access */

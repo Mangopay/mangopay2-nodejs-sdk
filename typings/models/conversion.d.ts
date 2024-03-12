@@ -3,14 +3,19 @@ import { money } from "./money";
 import { transaction } from "./transaction";
 import { conversionRate } from "./conversionRate";
 
-export namespace instantConversion {
+export namespace conversion {
     import TransactionStatus = transaction.TransactionStatus;
     import TransactionType = transaction.TransactionType;
     import TransactionNature = transaction.TransactionNature;
     import MoneyData = money.MoneyData;
     import ConversionRateData = conversionRate.ConversionRateData;
 
-    interface InstantConversionData extends entityBase.EntityBaseData {
+    interface ConversionData extends entityBase.EntityBaseData {
+        /**
+         * The unique identifier of the active quote which guaranteed the rate for the conversion.
+         */
+        QuoteId: string;
+
         /**
          * The unique identifier of the user at the source of the transaction
          */
@@ -36,12 +41,16 @@ export namespace instantConversion {
          */
         CreditedFunds: MoneyData;
 
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet).
+         * Note: The fees currency must match the debited funds currency.
+         */
         Fees: MoneyData;
 
         /**
          * Real time indicative market rate of a specific currency pair
          */
-        ConversionRate: ConversionRateData;
+        ConversionRateResponse: ConversionRateData;
 
         /**
          * The status of the transaction.
@@ -109,6 +118,33 @@ export namespace instantConversion {
          * Note: The fees currency must match the debited funds currency.
          */
         Fees?: MoneyData;
+
+        /**
+         * Custom data that you can add to this object.
+         */
+        Tag?: string;
+    }
+
+    interface CreateQuotedConversion {
+        /**
+         * The unique identifier of the active quote which guaranteed the rate for the conversion.
+         */
+        QuoteId: string;
+
+        /**
+         * The unique identifier of the user at the source of the transaction.
+         */
+        AuthorId: string;
+
+        /**
+         * The unique identifier of the debited wallet.
+         */
+        DebitedWalletId: string;
+
+        /**
+         * The unique identifier of the credited wallet
+         */
+        CreditedWalletId: string;
 
         /**
          * Custom data that you can add to this object.
