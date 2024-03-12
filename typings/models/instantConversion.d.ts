@@ -36,6 +36,8 @@ export namespace instantConversion {
          */
         CreditedFunds: MoneyData;
 
+        Fees: MoneyData;
+
         /**
          * Real time indicative market rate of a specific currency pair
          */
@@ -101,5 +103,16 @@ export namespace instantConversion {
          * The buy funds
          */
         CreditedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet).
+         * Note: The fees currency must match the debited funds currency.
+         */
+        Fees?: MoneyData;
+
+        /**
+         * Custom data that you can add to this object.
+         */
+        Tag?: string;
     }
 }
