@@ -12,4 +12,8 @@ export class Conversions {
     createQuotedConversion: MethodOverload<conversion.CreateQuotedConversion, conversion.ConversionData>;
 
     getConversion: MethodOverload<string, conversion.ConversionData>;
+
+    createQuote: MethodOverload<conversion.CreateQuote, conversion.QuoteData>;
+
+    getQuote: MethodOverload<string, conversion.QuoteData>;
 }

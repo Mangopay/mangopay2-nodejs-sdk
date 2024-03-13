@@ -10,6 +10,8 @@ export namespace conversion {
     import MoneyData = money.MoneyData;
     import ConversionRateData = conversionRate.ConversionRateData;
 
+    type QuoteStatus = "ACTIVE" | "EXPIRED";
+
     interface ConversionData extends entityBase.EntityBaseData {
         /**
          * The unique identifier of the active quote which guaranteed the rate for the conversion.
@@ -149,6 +151,21 @@ export namespace conversion {
         /**
          * Custom data that you can add to this object.
          */
+        Tag?: string;
+    }
+
+    interface QuoteData extends entityBase.EntityBaseData {
+        ExpirationDate: number;
+        Status: QuoteStatus;
+        DebitedFunds: MoneyData;
+        CreditedFunds: MoneyData;
+        ConversionRateResponse: ConversionRateData;
+    }
+
+    interface CreateQuote {
+        DebitedFunds: MoneyData;
+        CreditedFunds: MoneyData;
+        Duration: number;
         Tag?: string;
     }
 }

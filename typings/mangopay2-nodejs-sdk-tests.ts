@@ -1380,6 +1380,27 @@ api.Conversions.getConversion("conversion-id")
         const d = data; // $ExpectType ConversionData
     });
 
+api.Conversions.createQuote(
+    {
+        CreditedFunds: {
+            Amount: 0,
+            Currency: "GBP"
+        },
+        DebitedFunds: {
+            Amount: 79,
+            Currency: "EUR"
+        },
+        Duration: 60
+    }
+).then(data => {
+    const d = data; // $ExpectType QuoteData
+});
+
+api.Conversions.getQuote("quote-id")
+    .then(data => {
+        const d = data; // $ExpectType QuoteData
+    });
+
 /* Namespace Access */
 
 const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
