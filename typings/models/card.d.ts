@@ -62,6 +62,12 @@ export namespace card {
          */
         Validity: CardValidity;
 
+
+        /**
+         * The unique identifier of the user the card belongs to.
+         */
+        UserId: string;
+
         /**
          * A unique representation of a 16-digits card number
          */
