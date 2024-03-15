@@ -54,6 +54,12 @@ export namespace base {
         apiVersion?: string;
 
         /**
+         * Set to true for uk traffic
+         * @default 'false'
+         */
+        ukHeaderFlag?: boolean
+
+        /**
          * Set a custom error handler
          * @default `console.error`
          */
