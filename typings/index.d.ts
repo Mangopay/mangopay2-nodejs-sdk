@@ -38,7 +38,7 @@ import { uboDeclaration } from "./models/uboDeclaration";
 import { kycDocument } from "./models/kycDocument";
 import { money } from "./models/money";
 import { conversionRate } from "./models/conversionRate";
-import { instantConversion } from "./models/instantConversion";
+import { conversion } from "./models/conversion";
 import { cardRegistration } from "./models/cardRegistration";
 import { card } from "./models/card";
 import { cardPreAuthorization } from "./models/cardPreauthorization";
@@ -67,7 +67,7 @@ import { countryAuthorization } from "./models/countryAuthorization";
 import { Regulatory } from "./services/Regulatory";
 import { Deposits } from "./services/Deposits";
 import { cardValidation } from "./models/cardValidation";
-import { InstantConversions } from "./services/InstantConversions";
+import { Conversions } from "./services/Conversions";
 
 export = MangoPay;
 
@@ -101,7 +101,7 @@ declare class MangoPay {
     Idempotency: Idempotency;
     Regulatory: Regulatory;
     Deposits: Deposits;
-    InstantConversions: InstantConversions;
+    Conversions: Conversions;
 
     models: typeof MangoPay.models;
 
@@ -814,6 +814,6 @@ declare namespace MangoPay {
         countryAuthorization,
         deposit,
         conversionRate,
-        instantConversion
+        conversion
     };
 }

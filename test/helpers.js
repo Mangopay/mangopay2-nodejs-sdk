@@ -948,4 +948,18 @@ module.exports = {
             api.PayIns.create(payIn, callback);
         });
     },
+
+    getNewQuote: function (api, callback) {
+        var quoteBody = {
+            DebitedFunds: {
+                Amount: 100,
+                Currency: 'EUR'
+            },
+            CreditedFunds: {
+                Currency: 'GBP'
+            },
+            Duration: 60
+        };
+        api.Conversions.createQuote(quoteBody, callback);
+    },
 };

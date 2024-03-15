@@ -167,7 +167,13 @@ export type ApiMethod =
     | "payins_googlepay-direct_create_v2"
     | "payins_klarna-web_create"
     | "payins_ideal-web_create"
-    | "payins_giropay-web_create";
+    | "payins_giropay-web_create"
+    | "get_conversion_rate"
+    | "create_instant_conversion"
+    | "create_quoted_conversion"
+    | "get_conversion"
+    | "create_quote"
+    | "get_quote"
 
 export type CountryISO =
     | "AD"
