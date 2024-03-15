@@ -1,3 +1,15 @@
+## [1.44.0] - 2024-03-15
+### Fixed
+
+- Conversions endpoint spelling
+- #350 thanks @hostyn
+
+### Added
+
+- The optional Fees parameter is now available on instant conversions, allowing platforms to charge users for FX services. More information [here](https://mangopay.com/docs/release-notes/millefeuille).
+- Platforms can now use a quote to secure the rate for a conversion between two currencies for a set amount of time. More information [here](https://mangopay.com/docs/release-notes/millefeuille).
+- Introduced the `ukHeaderFlag` boolean configuration key. Platforms partnered with Mangopay's UK entity should set this key to true for proper configuration.
+
 ## [1.43.1] - 2024-02-29
 ### Fixed
 
