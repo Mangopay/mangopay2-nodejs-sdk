@@ -375,6 +375,20 @@ export namespace payIn {
         ShippingPreference: ShippingPreference;
 
         Reference: string;
+
+        PaypalPayerID: string;
+
+        BuyerCountry: string;
+
+        BuyerFirstname: string;
+
+        BuyerLastname: string;
+
+        BuyerPhone: string;
+
+        PaypalOrderID: string;
+
+        CancelURL: string;
     }
 
     interface MultibancoWebPayInData extends BasePayInData {
@@ -603,6 +617,8 @@ export namespace payIn {
         ShippingPreference?: ShippingPreference;
 
         Reference?: string;
+
+        CancelURL?: string;
     }
 
     interface CreateMultibancoWebPayIn {
@@ -763,6 +779,8 @@ export namespace payIn {
          * - Or the firstname and lastname of the seller
          */
         Description: string;
+
+        Category: string;
     }
 
     interface CreateLineItem {
@@ -792,6 +810,8 @@ export namespace payIn {
          * - Or the firstname and lastname of the seller
          */
         Description: string;
+
+        Category?: string;
     }
 
     interface DirectDebitDirectPayInData extends BasePayInData {
