@@ -174,6 +174,7 @@ export type ApiMethod =
     | "get_conversion"
     | "create_quote"
     | "get_quote"
+    | "add_tracking_info"
 
 export type CountryISO =
     | "AD"

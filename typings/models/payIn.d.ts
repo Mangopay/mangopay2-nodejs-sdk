@@ -375,6 +375,53 @@ export namespace payIn {
         ShippingPreference: ShippingPreference;
 
         Reference: string;
+
+        PaypalPayerID: string;
+
+        BuyerCountry: string;
+
+        BuyerFirstname: string;
+
+        BuyerLastname: string;
+
+        BuyerPhone: string;
+
+        PaypalOrderID: string;
+
+        CancelURL: string;
+
+        /**
+         * The email address registered on the PayPal account used to make the payment.
+         */
+        PaypalBuyerAccountEmail: string;
+
+        /**
+         * Shipping information of the LineItems added to the pay-in object.
+         */
+        Trackings: PayPalWebTrackingData;
+    }
+
+    interface PayPalWebTrackingData {
+        /**
+         * The shipment’s tracking number provided by the carrier.
+         */
+        TrackingNumber: string;
+
+        /**
+         * The carrier for the shipment. Use the country-specific version of the carrier if it exists,
+         * otherwise use its global version.
+         *
+         * Returned values: One of the carriers supported by PayPal.
+         */
+        Carrier: string;
+
+        /**
+         * If true, sends an email notification to the PaypalBuyerAccountEmail containing the TrackingNumber and Carrier,
+         * which allows the end user to track their shipment with the carrier.
+         *
+         * Default value: false
+         */
+        NotifyBuyer: boolean;
     }
 
     interface MultibancoWebPayInData extends BasePayInData {
@@ -603,6 +650,8 @@ export namespace payIn {
         ShippingPreference?: ShippingPreference;
 
         Reference?: string;
+
+        CancelURL?: string;
     }
 
     interface CreateMultibancoWebPayIn {
@@ -763,6 +812,8 @@ export namespace payIn {
          * - Or the firstname and lastname of the seller
          */
         Description: string;
+
+        Category: string;
     }
 
     interface CreateLineItem {
@@ -792,6 +843,8 @@ export namespace payIn {
          * - Or the firstname and lastname of the seller
          */
         Description: string;
+
+        Category?: string;
     }
 
     interface DirectDebitDirectPayInData extends BasePayInData {
