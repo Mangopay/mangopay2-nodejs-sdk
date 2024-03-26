@@ -105,4 +105,23 @@ export class PayIns {
      * The body should contain the 'Type' and: 'Bin' (if the type is BIN) or 'Token' (if the type is GOOGLE_PAY)
      */
     getPaymentMethodMetadata: MethodOverload<payIn.PaymentMethodMetadataRequest, payIn.PaymentMethodMetadata>;
+
+    /**
+     * Add tracking information to a PayPal PayIn (add the tracking number and carrier for LineItems shipments.)
+     *
+     * Caution – Tracking information cannot be edited
+     *
+     * You can’t modify the TrackingNumber, Carrier, or NotifyBuyer once added.
+     *
+     * You can only send a unique tracking number once.
+     *
+     * @param {string} payInId The ID of the PayIn
+     * @param {Object}  trackingInformation    trackingInformation object
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {Object}         Request promise
+     */
+    addTrackingInformation: TwoArgsMethodOverload<string,
+        payIn.PayPalWebTrackingData,
+        payIn.PayPalWebPayInData>;
 }
