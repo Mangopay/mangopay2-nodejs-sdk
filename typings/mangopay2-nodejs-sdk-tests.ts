@@ -1,4 +1,5 @@
 import Mangopay = require("mangopay2-nodejs-sdk");
+import {PayPalWebPayInData} from "./models/payIn";
 
 // $ExpectError
 const invalidConfig: Mangopay.base.Config = {};
@@ -749,6 +750,16 @@ api.PayIns.createPayPal({
     Reference: "Reference",
     Culture: "FR"
 }).then(data => {
+    const d = data; // $ExpectType PayPalWebPayInData
+});
+
+api.PayIns.addTrackingInformation(
+    "payInId",
+    {
+        TrackingNumber: "123456789",
+        Carrier: "DHL",
+        NotifyBuyer: true
+    }).then(data => {
     const d = data; // $ExpectType PayPalWebPayInData
 });
 
