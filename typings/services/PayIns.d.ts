@@ -121,7 +121,7 @@ export class PayIns {
      * @param {Object} options    Request options
      * @return {Object}         Request promise
      */
-    addTrackingInformation: TwoArgsMethodOverload<string,
+    addPayPalTrackingInformation: TwoArgsMethodOverload<string,
         payIn.PayPalWebTrackingData,
         payIn.PayPalWebPayInData>;
 }

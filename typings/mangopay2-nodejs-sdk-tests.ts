@@ -753,7 +753,7 @@ api.PayIns.createPayPal({
     const d = data; // $ExpectType PayPalWebPayInData
 });
 
-api.PayIns.addTrackingInformation(
+api.PayIns.addPayPalTrackingInformation(
     "payInId",
     {
         TrackingNumber: "123456789",
