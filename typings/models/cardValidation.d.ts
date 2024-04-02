@@ -3,6 +3,7 @@ import { entityBase } from "./entityBase";
 import { transaction } from "./transaction";
 import { base } from "../base";
 import { payIn } from "./payIn";
+import { SecureMode } from "../types";
 
 export namespace cardValidation {
     interface CardValidationData extends entityBase.EntityBaseData {
@@ -30,6 +31,11 @@ export namespace cardValidation {
          * Whether or not the SecureMode was used.
          */
         SecureModeNeeded: boolean;
+
+        /**
+         * The mode applied for the 3DS2 protocol for CB, Visa, and Mastercard
+         */
+        SecureMode: SecureMode;
 
         /**
          * The IP address of the end user initiating the transaction, in IPV4 or IPV6 format.
@@ -77,6 +83,11 @@ export namespace cardValidation {
          * The URL to which users are automatically returned after 3DS2 if it is triggered (i.e., if the SecureModeNeeded parameter is set to true).
          */
         SecureModeReturnURL: string;
+
+        /**
+         * The mode applied for the 3DS2 protocol for CB, Visa, and Mastercard
+         */
+        SecureMode?: SecureMode;
 
         /**
          * The IP address of the end user initiating the transaction, in IPV4 or IPV6 format.
