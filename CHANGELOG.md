@@ -1,3 +1,8 @@
+## [1.45.2] - 2024-04-16
+### Fixed
+
+- #400 & #401 Improve timeout error management
+
 ## [1.45.1] - 2024-04-02
 ### Added
 - New parameter `SecureMode` for [Create card validation](https://mangopay.com/docs/endpoints/card-validations#create-card-validation)
