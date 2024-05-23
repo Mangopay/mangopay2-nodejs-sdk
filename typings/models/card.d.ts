@@ -76,7 +76,7 @@ export namespace card {
         /**
          * The cardholder’s name shown on the payment card
          */
-        CardHolderName: string
+        CardHolderName: string;
     }
 
     interface UpdateCard {
