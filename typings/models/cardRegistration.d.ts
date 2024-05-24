@@ -3,8 +3,22 @@ import { card } from "./card";
 import { entityBase } from "./entityBase";
 
 export namespace cardRegistration {
-    type UpdateCardRegistration = PickPartialRequired<CardRegistrationData,
-        "Tag" | "RegistrationData", "Id">;
+    type UpdateCardRegistration = {
+        /**
+         * The unique identifier of the Card Registration object.
+         */
+        Id: string;
+
+        /**
+         * The string returned by the tokenization server after the Tokenize the card call is made.
+         */
+        RegistrationData: string;
+
+        /**
+         * The cardholder’s name shown on the payment card
+         */
+        CardHolderName?: string;
+    }
 
     interface CardRegistrationData extends entityBase.EntityBaseData {
         /**

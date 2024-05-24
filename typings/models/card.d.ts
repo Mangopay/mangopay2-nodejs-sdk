@@ -72,6 +72,11 @@ export namespace card {
          * A unique representation of a 16-digits card number
          */
         Fingerprint: string;
+
+        /**
+         * The cardholder’s name shown on the payment card
+         */
+        CardHolderName: string;
     }
 
     interface UpdateCard {
