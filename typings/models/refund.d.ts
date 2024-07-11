@@ -46,6 +46,8 @@ export namespace refund {
         DebitedFunds?: MoneyData;
 
         Fees?: MoneyData;
+        
+        StatementDescriptor?: string;
     }
 
     interface CreateTransferRefund {
