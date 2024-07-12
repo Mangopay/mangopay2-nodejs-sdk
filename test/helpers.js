@@ -338,6 +338,37 @@ module.exports = {
         });
     },
 
+    getNewPayInBancontactWeb: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payIn = {
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                ReturnURL: "http://mangopay.com",
+                PaymentType: 'BCMC',
+                ExecutionType: 'WEB',
+                Culture: 'FR',
+                StatementDescriptor: "test",
+                Recurring: true,
+                Tag: "test tag"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
     getNewPayInPayPalWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],

@@ -30,6 +30,7 @@ export namespace payIn {
         | PayconiqWebPayInData
         | DirectDebitDirectPayInData
         | MbwayWebPayInData
+        | BancontactWebPayInData
         | MultibancoWebPayInData
         | SatispayWebPayInData
         | BlikWebPayInData
@@ -345,6 +346,43 @@ export namespace payIn {
         Phone: string;
     }
 
+    interface BancontactWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "BCMC";
+
+        /**
+         * The URL to which the user is redirected to complete the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * The URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * The URL where you should redirect your client in a mobile app experience
+         */
+        DeepLinkURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+
+        /**
+         * The language to use for the payment page - needs to be the ISO code of the language
+         */
+        Culture: CountryISO;
+
+        /**
+         * Whether the Bancontact pay-ins are being made to be re-used in a recurring payment flow
+         */
+        Recurring: boolean;
+    }
+
     interface PayPalWebPayInData extends BasePayInData {
         ExecutionType: "WEB";
 
@@ -596,6 +634,58 @@ export namespace payIn {
          * The ID of the wallet where money will be credited
          */
         CreditedWalletId: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+    }
+
+    interface CreateBancontactWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "BCMC";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * The language to use for the payment page - needs to be the ISO code of the language
+         */
+        Culture?: CountryISO;
+
+        /**
+         * Whether the Bancontact pay-ins are being made to be re-used in a recurring payment flow
+         */
+        Recurring?: boolean;
 
         /**
          * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
