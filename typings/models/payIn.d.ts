@@ -316,6 +316,15 @@ export namespace payIn {
          * Information about the card
          */
         CardInfo: CardInfoData;
+
+        /**
+         * The channel through which the user provided their card details, used to indicate mail-order and telephone-order (MOTO) payments:
+         *
+         * ECommerce – Payment received online.
+         *
+         * TelephoneOrder – Payment received via mail order or telephone order (MOTO).
+         */
+        PaymentCategory: string;
     }
 
     interface MbwayWebPayInData extends BasePayInData {
@@ -546,6 +555,15 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The channel through which the user provided their card details, used to indicate mail-order and telephone-order (MOTO) payments:
+         *
+         * ECommerce – Payment received online.
+         *
+         * TelephoneOrder – Payment received via mail order or telephone order (MOTO).
+         */
+        PaymentCategory?: string;
     }
 
     interface CreateMbwayWebPayIn {

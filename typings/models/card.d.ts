@@ -82,6 +82,7 @@ export namespace card {
     interface UpdateCard {
         Id: string;
         Active?: false;
+        CardHolderName?: string;
     }
 
     interface CardInfoData {

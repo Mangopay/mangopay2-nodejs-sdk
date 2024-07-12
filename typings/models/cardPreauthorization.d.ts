@@ -22,7 +22,7 @@ export namespace cardPreAuthorization {
     type PreAuthorizationStatus = "CREATED" | "SUCCEEDED" | "FAILED";
 
     type CreateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
-        "Tag" | "Billing" | "SecureMode" | "Culture" | "StatementDescriptor" | "Shipping", "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo">;
+        "Tag" | "Billing" | "SecureMode" | "Culture" | "StatementDescriptor" | "Shipping" | "PaymentCategory", "AuthorId" | "DebitedFunds" | "CardId" | "SecureModeReturnURL" | "IpAddress" | "BrowserInfo">;
 
     type UpdateCardPreAuthorization = PickPartialRequired<CardPreAuthorizationData,
         "Tag",
@@ -144,5 +144,14 @@ export namespace cardPreAuthorization {
         Shipping: ShippingData;
 
         CardInfo: CardInfoData;
+
+        /**
+         * The channel through which the user provided their card details, used to indicate mail-order and telephone-order (MOTO) payments:
+         *
+         * ECommerce – Payment received online.
+         *
+         * TelephoneOrder – Payment received via mail order or telephone order (MOTO).
+         */
+        PaymentCategory: string;
     }
 }

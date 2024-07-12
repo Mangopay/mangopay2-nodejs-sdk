@@ -71,6 +71,15 @@ export namespace cardValidation {
          * The explanation of the result code.
          */
         ResultMessage: string;
+
+        /**
+         * The channel through which the user provided their card details, used to indicate mail-order and telephone-order (MOTO) payments:
+         *
+         * ECommerce – Payment received online.
+         *
+         * TelephoneOrder – Payment received via mail order or telephone order (MOTO).
+         */
+        PaymentCategory: string;
     }
 
     interface CreateCardValidation {
@@ -103,5 +112,14 @@ export namespace cardValidation {
          * Custom data that you can add to this object.
          */
         Tag?: string;
+
+        /**
+         * The channel through which the user provided their card details, used to indicate mail-order and telephone-order (MOTO) payments:
+         *
+         * ECommerce – Payment received online.
+         *
+         * TelephoneOrder – Payment received via mail order or telephone order (MOTO).
+         */
+        PaymentCategory?: string;
     }
 }
