@@ -36,6 +36,11 @@ export namespace refund {
          * Contains info about the reason for refund
          */
         RefundReason: RefundReason;
+
+        /**
+         * Custom description to appear on the user’s bank statement along with the platform name
+         */
+        StatementDescriptor: string;
     }
 
     interface CreatePayInRefund {
@@ -46,6 +51,11 @@ export namespace refund {
         DebitedFunds?: MoneyData;
 
         Fees?: MoneyData;
+
+        /**
+         * Custom description to appear on the user’s bank statement along with the platform name
+         */
+        StatementDescriptor?: string;
     }
 
     interface CreateTransferRefund {
