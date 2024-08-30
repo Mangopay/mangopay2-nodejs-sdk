@@ -1,3 +1,7 @@
+## [1.46.1] - 2024-08-30
+### Fixed
+- Updated Axios to the latest version.
+
 ## [1.46.0] - 2024-07-15
 ### Added
 
