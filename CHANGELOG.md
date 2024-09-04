@@ -1,3 +1,8 @@
+## [1.46.2] - 2024-09-04
+### Fixed
+
+- Add additional refund reason types.
+
 ## [1.46.1] - 2024-08-30
 ### Fixed
 - Updated Axios to the latest version.
