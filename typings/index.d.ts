@@ -68,6 +68,7 @@ import { Regulatory } from "./services/Regulatory";
 import { Deposits } from "./services/Deposits";
 import { cardValidation } from "./models/cardValidation";
 import { Conversions } from "./services/Conversions";
+import { VirtualAccounts } from "./services/VirtualAccounts";
 
 export = MangoPay;
 
@@ -102,6 +103,7 @@ declare class MangoPay {
     Regulatory: Regulatory;
     Deposits: Deposits;
     Conversions: Conversions;
+    VirtualAccounts: VirtualAccounts;
 
     models: typeof MangoPay.models;
 
