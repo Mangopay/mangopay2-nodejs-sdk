@@ -51,7 +51,7 @@ export namespace virtualAccount {
          * The `InternationalAccountDetails` are not returned if the country doesn’t use IBAN (e.g. AU -
          * Australia)
          */
-        InternationalAccountDetails: InternationalAccountDetails[];
+        InternationalAccountDetails: InternationalAccountDetails;
 
         /**
          * Information about the account’s payment capabilities
@@ -97,7 +97,7 @@ export namespace virtualAccount {
         /**
          * The IBAN and BIC of the account.
          */
-        Account: Account;
+        Account: InternationalAccount;
     }
 
     interface LocalAccountsDetails {
@@ -106,6 +106,18 @@ export namespace virtualAccount {
          */
         Address: VirtualAccountAddress;
 
+        Account: LocalAccount;
+    }
+
+    interface VirtualAccountAddress {
+        StreetName: string;
+        PostCode: string;
+        TownName: string;
+        CountrySubDivision: string;
+        Country: CountryISO;
+    }
+
+    interface LocalAccount {
         /**
          * The account number of the account
          */
@@ -117,16 +129,15 @@ export namespace virtualAccount {
         SortCode: string;
     }
 
-    interface VirtualAccountAddress {
-        StreetName: string;
-        PostalCode: string;
-        TownName: string;
-        CountrySubDivision: string;
-        Country: CountryISO;
-    }
-
-    interface Account {
+    interface InternationalAccount {
+        /**
+         * IBAN
+         */
         Iban: string;
+
+        /**
+         * BIC
+         */
         Bic: string;
     }
 
