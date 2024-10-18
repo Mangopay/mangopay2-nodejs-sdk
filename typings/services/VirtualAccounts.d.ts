@@ -15,9 +15,10 @@ export class VirtualAccounts {
 
     /**
      * Get a specific virtual account
+     * @param walletId
      * @param virtualAccountId
      */
-    get: MethodOverload<string, virtualAccount.VirtualAccountData>;
+    get: TwoArgsMethodOverload<string, string, virtualAccount.VirtualAccountData>;
 
     /**
      * Get all virtual accounts

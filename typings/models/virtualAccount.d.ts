@@ -12,7 +12,7 @@ export namespace virtualAccount {
         Active: boolean;
         AccountOwner: VirtualAccountOwner;
         LocalAccountsDetails: LocalAccountsDetails;
-        InternationalAccountDetails: InternationalAccountDetails;
+        InternationalAccountDetails: InternationalAccountDetails[];
         Capabilities: VirtualAccountCapabilities;
     }
 
@@ -53,8 +53,8 @@ export namespace virtualAccount {
     }
 
     interface Account {
-        IBAN: string;
-        BIC: string;
+        Iban: string;
+        Bic: string;
     }
 
     interface VirtualAccountCapabilities {
