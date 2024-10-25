@@ -1,3 +1,13 @@
+## [1.47.0] - 2024-10-25
+### Added
+
+New endpoints for The Virtual Account object:
+- [Create a Virtual Account]()
+- [Deactivate a Virtual Account]()
+- [View a Virtual Account]()
+- [List Virtual Accounts for a Wallet]()
+- [View Client Availabilities]()
+
 ## [1.46.2] - 2024-09-04
 ### Fixed
 
