@@ -600,3 +600,7 @@ export type CurrencyISO =
 export type Timestamp = number;
 
 export type SecureMode = "DEFAULT" | "FORCE" | "NO_CHOICE";
+
+export type VirtualAccountPurpose = "COLLECTION" | "USER_OWNED";
+export type VirtualAccountStatus = "PENDING" | "FAILED" | "ACTIVE" | "BLOCKED" | "CLOSED"
+export type VirtualAccountOwner = "COLLECTION" | "USER_OWNED";
