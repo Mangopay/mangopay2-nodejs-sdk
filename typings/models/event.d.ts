@@ -75,7 +75,11 @@ export namespace event {
         | "DEPOSIT_PREAUTHORIZATION_PAYMENT_VALIDATED"
         | "CARD_VALIDATION_CREATED"
         | "CARD_VALIDATION_SUCCEEDED"
-        | "CARD_VALIDATION_FAILED";
+        | "CARD_VALIDATION_FAILED"
+        | "VIRTUAL_ACCOUNT_ACTIVE"
+        | "VIRTUAL_ACCOUNT_BLOCKED"
+        | "VIRTUAL_ACCOUNT_CLOSED"
+        | "VIRTUAL_ACCOUNT_FAILED";
 
     interface EventData {
         /**
