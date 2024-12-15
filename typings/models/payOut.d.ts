@@ -32,7 +32,7 @@ export namespace payOut {
         /**
          * Payment reference provided for the payout.
          */
-        PayoutPaymentRef: PayoutPaymentRefData
+        PaymentRef: PayoutPaymentRefData
     }
 
     interface CreatePayOut {
