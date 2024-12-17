@@ -1,3 +1,9 @@
+## [1.48.1] - 2024-12-17
+### Fixed
+
+- #426 Fixed typo mistake reports_wallets_create instead of reports_wallet_create. Thanks for your contribution [@jilink](https://github.com/jilink)
+- #428 Fixed tests and added missing `BankWireExternalInstructionPayInData` type.
+
 ## [1.48.0] - 2024-12-17
 ### Added
 
