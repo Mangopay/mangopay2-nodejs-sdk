@@ -27,6 +27,7 @@ export namespace payIn {
         | CardPreAuthorizedPayInData
         | CardWebPayInData
         | BankWireDirectPayInData
+        | BankWireExternalInstructionPayInData
         | PayconiqWebPayInData
         | DirectDebitDirectPayInData
         | MbwayWebPayInData
@@ -1175,6 +1176,27 @@ export namespace payIn {
          * Bank account details
          */
         BankAccount: BankAccountData;
+    }
+
+    interface BankWireExternalInstructionPayInData extends BasePayInData {
+        ExecutionType: "EXTERNAL_INSTRUCTION";
+
+        PaymentType: "BANK_WIRE";
+
+        /**
+         * The reference of the wire made to a banking alias
+         */
+        WireReference: string;
+
+        /**
+         * The unique identifier of the banking alias
+         */
+        BankingAliasId: string;
+
+        /**
+         * Debited bank account details
+         */
+        DebitedBankAccount: BankAccountData;
     }
 
     interface CreateBankWireDirectPayIn extends PickPartialRequired<BankWireDirectPayInData,

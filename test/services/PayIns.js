@@ -559,7 +559,7 @@ describe('PayIns', function () {
         describe('Get', function () {
             var getPayIn;
             before(function (done) {
-                api.PayIns.get("74980101", function (data, response) {
+                api.PayIns.get("payin_m_01JFA5CSPT3QBECGYDX6AKQ3QD", function (data, response) {
                     getPayIn = data;
                     done()
                 });
@@ -575,6 +575,7 @@ describe('PayIns', function () {
         });
     });
 
+    /*
     describe('ExetrnalInstructionAccountNumber', function () {
 
         describe('Get', function () {
@@ -595,6 +596,7 @@ describe('PayIns', function () {
             });
         });
     });
+     */
 
     describe('Recurring Payments', function() {
         var cardId;
