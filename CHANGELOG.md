@@ -1,4 +1,4 @@
-## [1.48.0] - 2024-10-25
+## [1.48.0] - 2024-12-17
 ### Added
 
 - New PaymentRef parameter for [Payouts](https://docs.mangopay.com/api-reference/payouts/payout-object#the-payout-object)
