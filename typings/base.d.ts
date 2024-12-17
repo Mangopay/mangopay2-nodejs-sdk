@@ -164,6 +164,12 @@ export namespace base {
         Message: string;
     }
 
+    interface PayoutPaymentRefData {
+        ReasonType: string;
+
+        ReferenceId: string;
+    }
+
     interface WithResponse<T> {
         status: number;
 

@@ -7,6 +7,7 @@ import { base } from "../base";
 export namespace payOut {
     import MoneyData = money.MoneyData;
     import FallbackReasonData = base.FallbackReasonData;
+    import PayoutPaymentRefData = base.PayoutPaymentRefData;
 
     type PayoutModeRequestedType = "STANDARD" | "INSTANT_PAYMENT" | "INSTANT_PAYMENT_ONLY";
 
@@ -27,6 +28,11 @@ export namespace payOut {
          * A custom reference you wish to appear on the user’s bank statement (your Client Name is already shown). This reference can contain max 12 characters
          */
         BankWireRef: string;
+
+        /**
+         * Payment reference provided for the payout.
+         */
+        PaymentRef: PayoutPaymentRefData
     }
 
     interface CreatePayOut {
