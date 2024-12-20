@@ -176,6 +176,13 @@ export namespace enums {
     interface IPaymentStatus {
         Waiting: "WAITING";
         Canceled: "CANCELED";
+        CancelRequested: "CANCEL_REQUESTED";
+        Expired: "EXPIRED";
+        ToBeCompleted: "TO_BE_COMPLETED";
+        NoShowRequested: "NO_SHOW_REQUESTED";
+        NoShow: "NO_SHOW";
+        Validated: "VALIDATED";
+        Failed: "FAILED";
     }
 
     interface IShippingPreference {
