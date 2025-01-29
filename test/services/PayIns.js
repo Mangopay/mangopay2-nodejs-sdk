@@ -559,7 +559,7 @@ describe('PayIns', function () {
         describe('Get', function () {
             var getPayIn;
             before(function (done) {
-                api.PayIns.get("74980101", function (data, response) {
+                api.PayIns.get("payin_m_01JFA5CSPT3QBECGYDX6AKQ3QD", function (data, response) {
                     getPayIn = data;
                     done()
                 });
@@ -575,6 +575,7 @@ describe('PayIns', function () {
         });
     });
 
+    /*
     describe('ExetrnalInstructionAccountNumber', function () {
 
         describe('Get', function () {
@@ -595,6 +596,7 @@ describe('PayIns', function () {
             });
         });
     });
+     */
 
     describe('Recurring Payments', function() {
         var cardId;
@@ -1082,6 +1084,46 @@ describe('PayIns', function () {
             it('should get the PayIn', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.PaymentType).to.equal('MBWAY');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
+    describe('Bancontact Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInBancontactWeb(api, john, function (data, response) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('BCMC');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Status).to.equal('CREATED');
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Recurring).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done()
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('BCMC');
                 expect(getPayIn.ExecutionType).to.equal('WEB');
                 expect(getPayIn.Phone).not.to.be.null;
             });

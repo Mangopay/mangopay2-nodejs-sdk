@@ -19,6 +19,7 @@ export namespace enums {
         Klarna: "KLARNA";
         Ideal: "IDEAL";
         Giropay: "GIROPAY";
+        Bancontact: "BCMC";
     }
 
     interface IMandateStatus {

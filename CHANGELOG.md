@@ -1,3 +1,51 @@
+## [1.48.1] - 2024-12-17
+### Fixed
+
+- #426 Fixed typo mistake reports_wallets_create instead of reports_wallet_create. Thanks for your contribution [@jilink](https://github.com/jilink)
+- #428 Fixed tests and added missing `BankWireExternalInstructionPayInData` type.
+
+## [1.48.0] - 2024-12-17
+### Added
+
+- New PaymentRef parameter for [Payouts](https://docs.mangopay.com/api-reference/payouts/payout-object#the-payout-object)
+
+## [1.47.1] - 2024-11-28
+### Updated
+
+Added all relevant `EVENT_TYPE_CHOICES` for virtual accounts:
+
+- `VIRTUAL_ACCOUNT_ACTIVE`
+- `VIRTUAL_ACCOUNT_BLOCKED`
+- `VIRTUAL_ACCOUNT_CLOSED`
+- `VIRTUAL_ACCOUNT_FAILED`
+
+## [1.47.0] - 2024-10-25
+### Added
+
+New endpoints for The Virtual Account object:
+- [Create a Virtual Account]()
+- [Deactivate a Virtual Account]()
+- [View a Virtual Account]()
+- [List Virtual Accounts for a Wallet]()
+- [View Client Availabilities]()
+
+## [1.46.2] - 2024-09-04
+### Fixed
+
+- Add additional refund reason types.
+
+## [1.46.1] - 2024-08-30
+### Fixed
+- Updated Axios to the latest version.
+
+## [1.46.0] - 2024-07-15
+### Added
+
+- New endpoint [Create a bancontact payin](https://mangopay.com/docs/endpoints/bancontact#create-bancontact-payin)
+- Parameter `StatementDescriptor` for the endpoint [Create refund payin](https://mangopay.com/docs/endpoints/refunds#create-refund-payin)
+- Parameter `CardHolderName` for the endpoint [Deactivate or edit a Card](https://mangopay.com/docs/endpoints/direct-card-payins#deactivate-edit-card)
+- Parameter PaymentCategory for the endpoints : [Create a card validation](https://mangopay.com/docs/endpoints/card-validations#create-card-validation), [Create a direct card payin](https://mangopay.com/docs/endpoints/direct-card-payins#create-direct-card-payin), [Create a preauthorization](https://mangopay.com/docs/endpoints/preauthorizations#create-preauthorization)
+
 ## [1.45.4] - 2024-05-24
 ### Added
 

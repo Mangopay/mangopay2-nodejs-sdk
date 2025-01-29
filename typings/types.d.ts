@@ -128,7 +128,7 @@ export type ApiMethod =
     | "disputes_repudiation_get_settlement"
     | "disputes_pending_settlement"
     | "reports_transactions_create"
-    | "reports_wallets_create"
+    | "reports_wallet_create"
     | "reports_get"
     | "reports_all"
     | "mandates_directdebit-web_create"
@@ -160,6 +160,7 @@ export type ApiMethod =
     | "transactions_get_for_bank_account"
     | "idempotency_response_get"
     | "payins_mbway-web_create"
+    | "payins_bcmc-web_create"
     | "payins_paypal-web_create_v2"
     | "payins_multibanco-web_create"
     | "payins_satispay-web_create"
@@ -599,3 +600,7 @@ export type CurrencyISO =
 export type Timestamp = number;
 
 export type SecureMode = "DEFAULT" | "FORCE" | "NO_CHOICE";
+
+export type VirtualAccountPurpose = "COLLECTION" | "USER_OWNED";
+export type VirtualAccountStatus = "PENDING" | "FAILED" | "ACTIVE" | "BLOCKED" | "CLOSED"
+export type VirtualAccountOwner = "COLLECTION" | "USER_OWNED";
