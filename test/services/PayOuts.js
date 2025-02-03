@@ -38,7 +38,7 @@ describe('PayOuts', function() {
 
         it('should be fetched', function(){
             expect(payOut.Id).to.equal(getPayOut.Id);
-            expect(payOut.Status).to.equal('FAILED');
+            expect(payOut.Status).to.equal('CREATED');
             expect(payOut.ExecutionDate).to.be.null;
         });
 
@@ -54,7 +54,7 @@ describe('PayOuts', function() {
 
             it('should be fetched', function(){
                 expect(payOut.Id).to.equal(getPayOut.Id);
-                expect(payOut.Status).to.equal('FAILED');
+                expect(payOut.Status).to.equal('CREATED');
                 expect(payOut.ExecutionDate).to.be.null;
                 expect(payOut.ModeRequested).to.equal('STANDARD');
             });

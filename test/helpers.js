@@ -198,7 +198,7 @@ module.exports = {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
                     cardNumber: '4970107111111119',
-                    cardExpirationDate: '1224',
+                    cardExpirationDate: '1229',
                     cardCvx: '123'
                 },
                 url: cardRegistration.CardRegistrationURL,
@@ -542,7 +542,7 @@ module.exports = {
                 data: cardRegistration.PreregistrationData,
                 accessKeyRef: cardRegistration.AccessKey,
                 cardNumber: '4970107111111119',
-                cardExpirationDate: '1224',
+                cardExpirationDate: '1229',
                 cardCvx: '123'
             },
             url: cardRegistration.CardRegistrationURL,
@@ -989,7 +989,7 @@ module.exports = {
             CreditedFunds: {
                 Currency: 'GBP'
             },
-            Duration: 60
+            Duration: 300
         };
         api.Conversions.createQuote(quoteBody, callback);
     },

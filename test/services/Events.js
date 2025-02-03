@@ -68,15 +68,19 @@ describe('Events', function() {
             var payOut, events;
 
             before(function(done) {
-                helpers.getNewPayoutBankWire(api, john, function(data, response){
+                helpers.getNewPayoutBankWire(api, john, async function (data, response) {
                     payOut = data;
-                    api.Events.getAll(function(data, response){
+                    // wait 2 seconds for the transactions to be created by the API
+                    const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+                    await delay(2000);
+
+                    api.Events.getAll(function (data, response) {
                         events = data;
                         done();
                     }, {
                         parameters: {
-                            BeforeDate: payOut.CreationDate+10,
-                            AfterDate: payOut.CreationDate-10,
+                            BeforeDate: payOut.CreationDate + 10,
+                            AfterDate: payOut.CreationDate - 10,
                             EventType: 'PAYOUT_NORMAL_CREATED'
                         }
                     })
