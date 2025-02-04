@@ -1,3 +1,8 @@
+## [1.48.3] - 2025-02-04
+### Updated
+
+Revised tests to improve reliability and address any outdated tests.
+
 ## [1.48.2] - 2025-01-30
 ### Updated
 
