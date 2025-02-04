@@ -10,5 +10,7 @@
   "bitwise": true,
   "esversion": 6,
   "browser": true,
-  "predef": ["require", "module"]
+  "predef": ["require", "module"],
+  "mocha": true,
+  "expr": true
 }
