@@ -54,6 +54,26 @@ describe('PayIns', function () {
                 expect(getPayIn.ReturnURL).not.to.be.undefined;
             });
         });
+
+        describe('Get extended details', function () {
+            var extendedDetails;
+            before(function (done) {
+                api.PayIns.getCardWebPayInExtendedDetails(payIn.Id, function (data, response) {
+                    extendedDetails = data;
+                    done();
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(extendedDetails.Id).not.to.be.undefined;
+                expect(extendedDetails.PaymentType).to.equal('CARD');
+                expect(extendedDetails.ExecutionType).to.equal('WEB');
+                // expect(getPayIn.Status).to.equal('CREATED');
+                // expect(getPayIn.ExecutionDate).to.be.null;
+                // expect(getPayIn.RedirectURL).not.to.be.undefined;
+                // expect(getPayIn.ReturnURL).not.to.be.undefined;
+            });
+        });
     });
 
     describe('Card Direct', function () {

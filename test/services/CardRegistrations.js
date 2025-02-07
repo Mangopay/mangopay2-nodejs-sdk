@@ -195,6 +195,21 @@ describe('Card Registrations', function () {
             });
         });
 
+        describe('Get Users by Fingerprint', function() {
+            var users;
+
+            before(function (done) {
+                api.Users.getByFingerprint(card.Fingerprint, function(data, response) {
+                    users = data;
+                    done();
+                });
+            });
+
+            it('should retrieve the users', function () {
+                expect(users).to.be.an('array');
+            });
+        });
+
         // test card deactivated
         //describe('Update', function () {
         //    var updatedCard;
