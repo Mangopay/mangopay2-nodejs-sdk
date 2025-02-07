@@ -85,7 +85,9 @@ describe('VirtualAccounts', function() {
         });
     });
 
-    describe('Get Availabilities', function () {
+    describe.skip('Get Availabilities', function () {
+        // TODO
+        console.warn("Skipped because of API issues. To be enabled after API is fixed.");
         var availabilities;
 
         before(function(done){

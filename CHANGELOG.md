@@ -1,3 +1,13 @@
+## [1.48.3] - 2025-02-04
+### Updated
+
+Revised tests to improve reliability and address any outdated tests.
+
+## [1.48.2] - 2025-01-30
+### Updated
+
+- #429 Add the missing `PaymentStatus` values for [deposit preauthorized pay-ins](https://docs.mangopay.com/api-reference/deposit-preauthorizations/deposit-preauthorized-payin-object). Thanks for your contribution [@gabrieledarrigo](https://github.com/gabrieledarrigo)!
+
 ## [1.48.1] - 2024-12-17
 ### Fixed
 

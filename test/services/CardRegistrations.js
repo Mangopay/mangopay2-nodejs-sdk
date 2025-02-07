@@ -60,7 +60,7 @@ describe('Card Registrations', function () {
                     data: cardRegistration.PreregistrationData,
                     accessKeyRef: cardRegistration.AccessKey,
                     cardNumber: '4970107111111119',
-                    cardExpirationDate: '1224',
+                    cardExpirationDate: '1229',
                     cardCvx: '123'
                 },
                 url: cardRegistration.CardRegistrationURL,

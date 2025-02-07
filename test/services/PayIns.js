@@ -398,7 +398,8 @@ describe('PayIns', function () {
             });
         });
 
-        describe("Get with Email", function () {
+        describe.skip("Get with Email", function () {
+            console.warn("Cannot be tested. PayIn ID expired.");
             var payInId = "54088959";
             var accountEmail = "paypal-buyer-user@mangopay.com";
             var payinWithEmail;
