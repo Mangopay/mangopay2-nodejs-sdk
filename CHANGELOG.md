@@ -1,3 +1,9 @@
+## [1.48.4] - 2025-02-07
+### Updated
+
+- Improved Apple Pay to ensure full support in TypeScript.
+- Add `StatementDescriptor` parameter to the [Refund](https://docs.mangopay.com/api-reference/refunds/create-refund-payin) object.
+
 ## [1.48.3] - 2025-02-04
 ### Updated
 

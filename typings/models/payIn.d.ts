@@ -1691,7 +1691,7 @@ export namespace payIn {
     interface ApplePayPayInData extends BasePayInData {
         ExecutionType: "DIRECT";
 
-        PaymentType: "APPLE";
+        PaymentType: "APPLEPAY";
         /**
          * A user's ID
          */
@@ -1718,12 +1718,12 @@ export namespace payIn {
          * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
          * See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
-        StatementDescriptor?: string;
+        StatementDescriptor: string;
 
         /**
          * Custom data that you can add to this item
          */
-        Tag?: string;
+        Tag: string;
     }
 
     interface ApplePayPaymentData {
