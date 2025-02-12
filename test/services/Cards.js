@@ -34,12 +34,12 @@ describe('Cards', function () {
         });
     });
 
-    describe('Get Transactions for Card', function(){
+    describe('Get Transactions for Card fingerprint', function(){
         var getTransactions;
 
         before(function(done){
             api.Cards.get(cardId, function(data, response){
-                api.Cards.getTransactions(data.Fingerprint, function(data, response){
+                api.Cards.getTransactionsForFingerprint(data.Fingerprint, function(data, response){
                     getTransactions = data;
                     done();
                 });
