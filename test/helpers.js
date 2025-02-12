@@ -944,6 +944,35 @@ module.exports = {
         });
     },
 
+    getNewPayInSwishWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'SEK',
+            Description: 'WALLET IN SEK'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'SWISH',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 100,
+                    Currency: 'SEK'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'SEK'
+                },
+                ReturnURL: 'http://test.com',
+                StatementDescriptor: "swish",
+                Tag: "created from nodejs"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
     getLegacyPayInIdealCardWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],

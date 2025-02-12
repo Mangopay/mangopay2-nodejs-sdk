@@ -18,6 +18,8 @@ import ThreeArgsMethodOverload = base.ThreeArgsMethodOverload;
  */
 export class UboDeclarations {
     /**
+     * @deprecated Use the 'getById' method, which doesn't require passing the userId.
+     *
      * Retrieves a UBO declaration object from the API.
      * @param {String} userId User Unique identifier
      * @param {String} id Unique identifier
