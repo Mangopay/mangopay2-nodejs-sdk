@@ -15,6 +15,7 @@ export namespace enums {
         Multibanco: "MULTIBANCO";
         Satispay: "SATISPAY";
         Blik: "BLIK";
+        ApplePay: "APPLEPAY";
         GooglePay: "GOOGLE_PAY";
         Klarna: "KLARNA";
         Ideal: "IDEAL";

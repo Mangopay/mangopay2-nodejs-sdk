@@ -35,6 +35,7 @@ export namespace payIn {
         | MultibancoWebPayInData
         | SatispayWebPayInData
         | BlikWebPayInData
+        | ApplePayPayInData
         | GooglePayDirectPayInData
         | KlarnaWebPayInData
         | IdealWebPayInData
@@ -1691,6 +1692,90 @@ export namespace payIn {
 
         Fees: MoneyData;
     }
+
+    interface CreateApplePayPayIn {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "APPLE";
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        PaymentData: ApplePayPaymentData;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+    }
+    interface ApplePayPayInData extends BasePayInData {
+        ExecutionType: "DIRECT";
+
+        PaymentType: "APPLEPAY";
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        PaymentData: ApplePayPaymentData;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces.
+         * See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag: string;
+    }
+
+    interface ApplePayPaymentData {
+        TransactionId: string, 
+
+        Network: string,
+
+        TokenData: string
+    }
+
 
     interface CreateGooglePayDirectPayIn {
         ExecutionType: "DIRECT";

@@ -77,7 +77,7 @@ export namespace refund {
         /**
          * Custom description to appear on the user’s bank statement along with the platform name
          */
-        StatementDescriptor?: string;
+        StatementDescriptor?: string; 
     }
 
     interface CreateTransferRefund {
