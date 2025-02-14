@@ -71,4 +71,10 @@ export class Cards {
         string,
         cardValidation.CardValidationData
     >;
+
+    /**
+     * Get a list of Transactions for a fingerprint
+     * @param fingerprint
+     */
+    getTransactionsForFingerprint: MethodOverload<string, transaction.TransactionData[]>;
 }
