@@ -688,6 +688,21 @@ api.PayIns.create({
 });
 
 api.PayIns.create({
+    PaymentType: "SWISH",
+    ExecutionType: "WEB",
+    AuthorId: "user-id",
+    CreditedWalletId: "wallet-id",
+    Fees: {Amount: 0, Currency: "SEK"},
+    DebitedFunds: {Amount: 100, Currency: "SEK"},
+    ReturnURL: "http://test.com",
+    StatementDescriptor: "Swish",
+    Tag: "test",
+    PaymentFlow: "WEB"
+}).then(data => {
+    const d = data; // $ExpectType SwishWebPayInData
+});
+
+api.PayIns.create({
     PaymentType: "CARD",
     ExecutionType: "WEB",
     AuthorId: "user-id",
