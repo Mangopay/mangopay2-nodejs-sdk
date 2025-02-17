@@ -55,7 +55,8 @@ describe('PayIns', function () {
             });
         });
 
-        describe('Get extended details', function () {
+        describe.skip('Get extended details', function () {
+            console.warn('Cannot be tested because a Succeeded Card Web PayIn cannot be generated from the tests');
             var extendedDetails;
             before(function (done) {
                 api.PayIns.getCardWebPayInExtendedDetails(payIn.Id, function (data, response) {
