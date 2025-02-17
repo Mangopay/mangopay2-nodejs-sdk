@@ -178,6 +178,7 @@ export type ApiMethod =
     | "get_quote"
     | "add_tracking_info"
     | "identity_verification_create"
+    | "identity_verification_get"
 
 export type CountryISO =
     | "AD"
