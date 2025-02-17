@@ -20,4 +20,10 @@ export class IdentityVerifications {
      * @param {string} id The unique identifier of the identity verification session.
      */
     get: MethodOverload<string, identityVerification.IdentityVerificationData>;
+
+    /**
+     * Obtain verified user data and results of each check performed
+     * @param {string} id The unique identifier of the identity verification session.
+     */
+    getChecks: MethodOverload<string, identityVerification.IdentityVerificationCheckData>;
 }

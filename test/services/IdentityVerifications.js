@@ -49,4 +49,24 @@ describe('IdentityVerifications', function () {
             expect(fetched.Status).to.equal(identityVerification.Status);
         });
     });
+
+    describe('Get checks', function () {
+        var checks;
+
+        before(function (done) {
+            api.IdentityVerifications.getChecks(identityVerification.Id).then(function (data, response) {
+                checks = data;
+                done();
+            });
+        });
+
+        it('should be fetched', function () {
+            expect(checks).not.to.be.undefined;
+            expect(identityVerification.Id).to.equal(checks.SessionId);
+            expect("PENDING").to.equal(checks.Status);
+            expect(checks.CreationDate).to.be.gt(0);
+            expect(checks.LastUpdate).to.be.gt(0);
+            expect(checks.Checks).not.to.be.undefined;
+        });
+    });
 });
