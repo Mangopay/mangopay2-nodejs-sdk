@@ -28,7 +28,9 @@ export class PayIns {
         MethodOverload<payIn.CreateIdealWebPayIn, payIn.IdealWebPayInData> &
         MethodOverload<payIn.CreateGiropayWebPayIn, payIn.GiropayWebPayInData> &
         MethodOverload<payIn.CreateSwishWebPayIn, payIn.SwishWebPayInData> &
-        MethodOverload<payIn.CreateBancontactWebPayIn, payIn.BancontactWebPayInData>;
+        MethodOverload<payIn.CreateBancontactWebPayIn, payIn.BancontactWebPayInData> &
+        MethodOverload<payIn.CreateOpenBankingWebPayIn, payIn.OpenBankingWebPayInData>;
+
 
 
     /**

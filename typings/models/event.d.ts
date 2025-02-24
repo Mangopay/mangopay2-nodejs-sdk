@@ -79,7 +79,8 @@ export namespace event {
         | "VIRTUAL_ACCOUNT_ACTIVE"
         | "VIRTUAL_ACCOUNT_BLOCKED"
         | "VIRTUAL_ACCOUNT_CLOSED"
-        | "VIRTUAL_ACCOUNT_FAILED";
+        | "VIRTUAL_ACCOUNT_FAILED"
+        | "PAYIN_NORMAL_PROCESSING_STATUS_PENDING_SUCCEEDED";
 
     interface EventData {
         /**

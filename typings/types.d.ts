@@ -170,6 +170,7 @@ export type ApiMethod =
     | "payins_ideal-web_create"
     | "payins_giropay-web_create"
     | "payins_swish-web_create"
+    | "payins_paybybank-web_create"
     | "get_conversion_rate"
     | "create_instant_conversion"
     | "create_quoted_conversion"
