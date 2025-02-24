@@ -108,7 +108,7 @@ export namespace user {
         TermsAndConditionsAccepted?: boolean;
 
         /**
-         * Whether or not the user has accepted the MANGOPAY Terms and Conditions.
+         * The date when the user has accepted the MANGOPAY Terms and Conditions.
          */
         TermsAndConditionsAcceptedDate?: number;
 
