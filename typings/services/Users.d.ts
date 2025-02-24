@@ -205,12 +205,4 @@ export class Users {
         string,
         cardPreAuthorization.CardPreAuthorizationData[]
         >;
-
-    /**
-     * Returns all the users who have registered the same card (based on the card’s Fingerprint).
-     * The fingerprint is a hash uniquely generated per 16-digit card number.
-     *
-     * @param fingerprint The fingerprint hash
-     */
-    getByFingerprint: MethodOverload<string, user.UserData[]>;
 }
