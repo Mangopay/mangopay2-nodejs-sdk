@@ -1,3 +1,11 @@
+## [1.49.1] - 2025-02-24
+### Added
+
+New endpoint for the [Pay by Bank PayIn](https://docs.mangopay.com/api-reference/pay-by-bank/view-payin-pay-by-bank#200) object:
+
+-  [Create a Pay by Bank PayIn](https://docs.mangopay.com/api-reference/pay-by-bank/create-pay-by-bank-payin)
+-  [View a PayIn (Pay by Bank)](https://docs.mangopay.com/api-reference/pay-by-bank/view-payin-pay-by-bank)
+
 ## [1.49.0] - 2025-02-14
 ### Added
 
