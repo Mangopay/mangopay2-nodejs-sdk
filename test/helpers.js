@@ -944,6 +944,71 @@ module.exports = {
         });
     },
 
+    getNewPayInSwishWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'SEK',
+            Description: 'WALLET IN SEK'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'SWISH',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 100,
+                    Currency: 'SEK'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'SEK'
+                },
+                ReturnURL: 'http://test.com',
+                StatementDescriptor: "swish",
+                Tag: "created from nodejs"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
+    getNewPayInPayByBankWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'PAY_BY_BANK',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 10,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                Country: "DE",
+                ReturnURL: 'https://test.com',
+                IBAN: "DE03500105177564668331",
+                BIC: "AACSDE33",
+                Scheme: "SEPA_INSTANT_CREDIT_TRANSFER",
+                BankName: "de-demobank-open-banking-embedded-templates",
+                Culture: "EN",
+                PaymentFlow: "WEB",
+                StatementDescriptor: "test",
+                Tag: "created from nodejs"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
     getLegacyPayInIdealCardWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],

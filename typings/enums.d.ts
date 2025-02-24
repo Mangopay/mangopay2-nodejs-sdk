@@ -21,6 +21,8 @@ export namespace enums {
         Ideal: "IDEAL";
         Giropay: "GIROPAY";
         Bancontact: "BCMC";
+        Swish: "SWISH";
+        PayByBank: "PAY_BY_BANK"
     }
 
     interface IMandateStatus {

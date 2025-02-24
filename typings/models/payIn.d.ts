@@ -39,7 +39,9 @@ export namespace payIn {
         | GooglePayDirectPayInData
         | KlarnaWebPayInData
         | IdealWebPayInData
-        | GiropayWebPayInData;
+        | GiropayWebPayInData
+        | SwishWebPayInData
+        | PayByBankWebPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -2188,6 +2190,48 @@ export namespace payIn {
         StatementDescriptor: string;
     }
 
+    interface SwishWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "SWISH";
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * The mobile URL to which to redirect the user to complete the payment in an app-to-app flow.
+         */
+        DeepLinkURL: string;
+
+        /**
+         * The PNG file of the Swish QR code as a Base64-encoded string.
+         */
+        QRCodeURL: string;
+
+        /**
+         *  <p>Allowed values: WEB, APP</p>
+         *  <p>Default value: WEB</p>
+         *  <p>The platform environment of the post-payment flow. The PaymentFlow value combines with the ReturnURL to manage the redirection behavior after payment:</p>
+         *  <p>Set the value to APP to send the user to your platform’s mobile app</p>
+         *  <p>Set the value to WEB to send the user to a web browser</p>
+         *  <p>In both cases you need to provide the relevant ReturnURL, whether to your app or website.</p>
+         */
+        PaymentFlow: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor: string;
+    }
+
     interface CreateGiropayWebPayIn {
         ExecutionType: "WEB";
 
@@ -2228,6 +2272,58 @@ export namespace payIn {
          * Custom data that you can add to this object
          */
         Tag?: string;
+    }
+
+    interface CreateSwishWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "SWISH";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the debited funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this object
+         */
+        Tag?: string;
+
+        /**
+         *  <p>Allowed values: WEB, APP</p>
+         *  <p>Default value: WEB</p>
+         *  <p>The platform environment of the post-payment flow. The PaymentFlow value combines with the ReturnURL to manage the redirection behavior after payment:</p>
+         *  <p>Set the value to APP to send the user to your platform’s mobile app</p>
+         *  <p>Set the value to WEB to send the user to a web browser</p>
+         *  <p>In both cases you need to provide the relevant ReturnURL, whether to your app or website.</p>
+         */
+        PaymentFlow?: string;
     }
 
     interface BinData {
@@ -2305,5 +2401,181 @@ export namespace payIn {
          * The tokenized payment data provided by the third-party payment method.
          */
         Token?: string;
+    }
+
+    interface PayByBankWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "PAY_BY_BANK";
+
+        /**
+         * The URL to redirect to user to for them to proceed with the payment
+         */
+        RedirectURL: string;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * Custom description to appear on the user’s bank statement along with the platform name
+         */
+        StatementDescriptor: string;
+
+        /**
+         * The end-user residency country
+         */
+        Country: CountryISO;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        BIC: string;
+
+        /**
+         * The IBAN identifier of the end-user’s bank
+         */
+        IBAN: string;
+
+        /**
+         * This is the platform environment in which the application is running.Accepted values are:
+         *
+         * - WEB: For web browser usage(default setting)
+         *
+         * - APP: For mobile application usage
+         *
+         * If PaymentFlow is set to APP,the user is redirected to the platform's app after payment
+         */
+        PaymentFlow: string;
+
+        /**
+         * Name of the end-user’s bank
+         */
+        BankName: string;
+
+        /**
+         * The language in which the Pay by Bank payment page isto be displayed - Alpha-2 format (default US)
+         */
+        Culture: string;
+
+        /**
+         * This is the payment scheme the end user selects for processing the transaction,which varies by market
+         * (see details below). Default values are always instant schemes.
+         *
+         * Please note that some banks may charge additional fees for instant payment schemes
+         *
+         * Please note that the scheme is mandatory for the Danish market (”Country” : “DK”)
+         */
+        Scheme: string;
+
+        /**
+         * This is a temporary status indicating that the payment initiation was successful,
+         * but the funds have not yet been received in Mangopay's bank account
+         *
+         * This parameter is only relevant once the transaction has been processed by the end user.
+         * It is not returned when the payment is initiated or successfully completed
+         *
+         * Possible value: PENDING_SUCCEEDED
+         */
+        ProcessingStatus: string;
+    }
+
+    interface CreatePayByBankWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "PAY_BY_BANK";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the debited funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees taken by the platform for this transaction (and hence transferred to the Fees Wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * The end-user residency country
+         */
+        Country: CountryISO;
+
+        /**
+         * This is the URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL: string;
+
+        /**
+         * The BIC identifier of the end-user’s bank
+         */
+        BIC?: string;
+
+        /**
+         * The IBAN identifier of the end-user’s bank
+         */
+        IBAN?: string;
+
+        /**
+         * This is the platform environment in which the application is running.Accepted values are:
+         *
+         * - WEB: For web browser usage(default setting)
+         *
+         * - APP: For mobile application usage
+         *
+         * If PaymentFlow is set to APP,the user is redirected to the platform's app after payment
+         */
+        PaymentFlow?: string;
+
+        /**
+         * Name of the end-user’s bank
+         */
+        BankName?: string;
+
+        /**
+         * The language in which the Pay by Bank payment page isto be displayed - Alpha-2 format (default US)
+         */
+        Culture?: string;
+
+        /**
+         * This is the payment scheme the end user selects for processing the transaction,which varies by market
+         * (see details below). Default values are always instant schemes.
+         *
+         * Please note that some banks may charge additional fees for instant payment schemes
+         *
+         * Please note that the scheme is mandatory for the Danish market (”Country” : “DK”)
+         */
+        Scheme?: string;
+
+        /**
+         * This is a temporary status indicating that the payment initiation was successful,
+         * but the funds have not yet been received in Mangopay's bank account
+         *
+         * This parameter is only relevant once the transaction has been processed by the end user.
+         * It is not returned when the payment is initiated or successfully completed
+         *
+         * Possible value: PENDING_SUCCEEDED
+         */
+        ProcessingStatus?: string;
+
+        /**
+         * Custom description to appear on the user’s bank statement along with the platform name
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
     }
 }
