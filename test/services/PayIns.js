@@ -69,10 +69,6 @@ describe('PayIns', function () {
                 expect(extendedDetails.Id).not.to.be.undefined;
                 expect(extendedDetails.PaymentType).to.equal('CARD');
                 expect(extendedDetails.ExecutionType).to.equal('WEB');
-                // expect(getPayIn.Status).to.equal('CREATED');
-                // expect(getPayIn.ExecutionDate).to.be.null;
-                // expect(getPayIn.RedirectURL).not.to.be.undefined;
-                // expect(getPayIn.ReturnURL).not.to.be.undefined;
             });
         });
     });
