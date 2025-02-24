@@ -190,6 +190,48 @@ export namespace payIn {
         BankName: string;
     }
 
+    interface CardWebExtendedPayInData {
+        /**
+         * The unique identifier of the object.
+         */
+        Id: string;
+
+        /**
+         * The type of payin
+         */
+        PaymentType: PayInPaymentType;
+
+        /**
+         * The type of execution for the payin
+         */
+        ExecutionType: PayInExecutionType;
+
+        /**
+         * Time in millis when the page consult will expire.
+         */
+        ExpirationDate: Timestamp;
+
+        /**
+         * A partially obfuscated version of the credit card number
+         */
+        Alias: string;
+
+        /**
+         * The type of card
+         */
+        CardType: card.CardType;
+
+        /**
+         * The Country of the Card
+         */
+        Country: CountryISO;
+
+        /**
+         * A unique representation of a 16-digits card number
+         */
+        Fingerprint: string;
+    }
+
     interface CreateCardWebPayIn {
         ExecutionType: "WEB";
 
