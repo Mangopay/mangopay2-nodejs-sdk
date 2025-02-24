@@ -973,7 +973,7 @@ module.exports = {
         });
     },
 
-    getNewPayInOpenBankingWeb: function (api, user, callback) {
+    getNewPayInPayByBankWeb: function (api, user, callback) {
         var wallet = {
             Owners: [user.Id],
             Currency: 'EUR',

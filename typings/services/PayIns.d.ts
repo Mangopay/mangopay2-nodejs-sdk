@@ -29,7 +29,7 @@ export class PayIns {
         MethodOverload<payIn.CreateGiropayWebPayIn, payIn.GiropayWebPayInData> &
         MethodOverload<payIn.CreateSwishWebPayIn, payIn.SwishWebPayInData> &
         MethodOverload<payIn.CreateBancontactWebPayIn, payIn.BancontactWebPayInData> &
-        MethodOverload<payIn.CreateOpenBankingWebPayIn, payIn.OpenBankingWebPayInData>;
+        MethodOverload<payIn.CreatePayByBankWebPayIn, payIn.PayByBankWebPayInData>;
 
 
 

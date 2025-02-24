@@ -22,7 +22,7 @@ export namespace enums {
         Giropay: "GIROPAY";
         Bancontact: "BCMC";
         Swish: "SWISH";
-        OpenBanking: "PAY_BY_BANK"
+        PayByBank: "PAY_BY_BANK"
     }
 
     interface IMandateStatus {

@@ -41,7 +41,7 @@ export namespace payIn {
         | IdealWebPayInData
         | GiropayWebPayInData
         | SwishWebPayInData
-        | OpenBankingWebPayInData;
+        | PayByBankWebPayInData;
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
@@ -2361,7 +2361,7 @@ export namespace payIn {
         Token?: string;
     }
 
-    interface OpenBankingWebPayInData extends BasePayInData {
+    interface PayByBankWebPayInData extends BasePayInData {
         ExecutionType: "WEB";
 
         PaymentType: "PAY_BY_BANK";
@@ -2413,7 +2413,7 @@ export namespace payIn {
         BankName: string;
 
         /**
-         * The language in which theOpen Banking payment page isto be displayed - Alpha-2 format (default US)
+         * The language in which the Pay by Bank payment page isto be displayed - Alpha-2 format (default US)
          */
         Culture: string;
 
@@ -2439,7 +2439,7 @@ export namespace payIn {
         ProcessingStatus: string;
     }
 
-    interface CreateOpenBankingWebPayIn {
+    interface CreatePayByBankWebPayIn {
         ExecutionType: "WEB";
 
         PaymentType: "PAY_BY_BANK";
@@ -2501,7 +2501,7 @@ export namespace payIn {
         BankName?: string;
 
         /**
-         * The language in which theOpen Banking payment page isto be displayed - Alpha-2 format (default US)
+         * The language in which the Pay by Bank payment page isto be displayed - Alpha-2 format (default US)
          */
         Culture?: string;
 

@@ -1621,11 +1621,11 @@ describe('PayIns', function () {
     //     });
     // });
 
-    describe('Open banking Web', function () {
+    describe('Pay by Bank Web', function () {
         var payIn;
 
         before(function (done) {
-            helpers.getNewPayInOpenBankingWeb(api, john, function (data) {
+            helpers.getNewPayInPayByBankWeb(api, john, function (data) {
                 payIn = data;
                 done();
             });
