@@ -69,6 +69,9 @@ import { Deposits } from "./services/Deposits";
 import { cardValidation } from "./models/cardValidation";
 import { Conversions } from "./services/Conversions";
 import { VirtualAccounts } from "./services/VirtualAccounts";
+import { virtualAccount } from "./models/virtualAccount";
+import { IdentityVerifications } from "./services/IdentityVerifications";
+import { identityVerification } from "./models/identityVerification";
 
 export = MangoPay;
 
@@ -104,6 +107,7 @@ declare class MangoPay {
     Deposits: Deposits;
     Conversions: Conversions;
     VirtualAccounts: VirtualAccounts;
+    IdentityVerifications: IdentityVerifications;
 
     models: typeof MangoPay.models;
 
@@ -816,6 +820,8 @@ declare namespace MangoPay {
         countryAuthorization,
         deposit,
         conversionRate,
-        conversion
+        conversion,
+        virtualAccount,
+        identityVerification
     };
 }
