@@ -1,3 +1,19 @@
+## [1.50.0] - 2025-02-26
+### Added
+
+Endpoints and webhooks for [hosted KYC/B solution](https://docs.mangopay.com/guides/users/verification/hosted) (in beta)
+
+- Endpoints
+  - [Create an IDV Session](https://docs.mangopay.com/api-reference/idv-sessions/create-idv-session)
+  - [View an IDV Session](https://docs.mangopay.com/api-reference/idv-sessions/view-idv-session)
+  - [View Checks for an IDV Session](https://mangopay-idv.mintlify.app/api-reference/idv-sessions/view-idv-session-checks)
+
+- Event types
+  - `IDENTITY_VERIFICATION_VALIDATED`
+  - `IDENTITY_VERIFICATION_FAILED`
+  - `IDENTITY_VERIFICATION_INCONCLUSIVE`
+  - `IDENTITY_VERIFICATION_OUTDATED`
+
 ## [1.49.1] - 2025-02-24
 ### Added
 
