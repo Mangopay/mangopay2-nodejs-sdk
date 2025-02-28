@@ -1,3 +1,12 @@
+## [1.50.1] - 2025-02-28
+### Added
+
+Missing endpoint [GET View card details for a Web Card PayIn](https://docs.mangopay.com/api-reference/web-card-payins/view-card-details-web-card-payin)
+
+### Fixed
+
+Rate limiting headers interpreted dynamically based on `X-RateLimit-Reset` time and for a variable number of bucket values.
+
 ## [1.50.0] - 2025-02-26
 ### Added
 
