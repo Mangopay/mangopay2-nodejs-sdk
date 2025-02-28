@@ -130,4 +130,11 @@ export class PayIns {
     addPayPalTrackingInformation: TwoArgsMethodOverload<string,
         payIn.PayPalWebTrackingData,
         payIn.PayPalWebPayInData>;
+
+    /**
+     * Create new pay-in Payconiq Web, using the latest API url (/payment-methods/payconiq)
+     * @param payIn
+     * @param options
+     */
+    createPayconiq: MethodOverload<payIn.CreatePayconiqWebPayInData, payIn.PayconiqWebPayInData>
 }
