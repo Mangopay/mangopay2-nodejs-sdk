@@ -108,11 +108,18 @@ export namespace user {
         TermsAndConditionsAccepted?: boolean;
 
         /**
+         * The date when the user has accepted the MANGOPAY Terms and Conditions.
+         */
+        TermsAndConditionsAcceptedDate?: number;
+
+        /**
          * Category of the user. May take one of the following values:
          * PAYER - Users who only use MANGOPAY to give money to other users
          * OWNER - Users who use MANGOPAY to receive funds. Please note that a user needs to be KYC validated to perform payouts
          */
         UserCategory?: UserCategory;
+
+        UserStatus?: string;
     }
 
     interface UserLegalData extends UserData {

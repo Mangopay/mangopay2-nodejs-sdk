@@ -130,4 +130,11 @@ export class PayIns {
     addPayPalTrackingInformation: TwoArgsMethodOverload<string,
         payIn.PayPalWebTrackingData,
         payIn.PayPalWebPayInData>;
+
+    /**
+     * View card details for a Web Card PayIn
+     * @param payInId
+     * @param options
+     */
+    getCardWebPayInExtendedDetails: MethodOverload<string, payIn.CardWebExtendedPayInData>;
 }
