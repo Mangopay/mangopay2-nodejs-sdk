@@ -10,6 +10,7 @@ var helpers = require('../helpers');
 
 var UserLegal = require('../../lib/models/UserLegal');
 var UserNatural = require('../../lib/models/UserNatural');
+var UserNaturalSca = require('../../lib/models/UserNaturalSca');
 var Address = require('../../lib/models/Address');
 var PersonType = require('../../lib/models/PersonType');
 var BankAccount = require('../../lib/models/BankAccount');
@@ -25,6 +26,7 @@ const UserNaturalPut = require('../../lib/models/UserNaturalPut');
 
 describe('Users', function() {
     var john = new UserNatural(helpers.data.getUserNatural());
+    var johnScaOwner = new UserNaturalSca(helpers.data.getUserNaturalScaOwner());
     var matrix = new UserLegal(helpers.data.getUserLegal());
 
     var johnPayer = new UserNatural(helpers.data.getUserNaturalPayer());
@@ -63,11 +65,29 @@ describe('Users', function() {
         });
     });
 
+    before(function(done){
+        api.Users.create(johnScaOwner).then(function(data, err){
+            johnScaOwner = data;
+            done();
+        });
+    });
+
     it('Create Natural', function(){
         expect(john.Id).not.to.be.undefined;
         expect(john.PersonType).to.equal(PersonType.Natural);
         expect(john.TermsAndConditionsAccepted).to.be.false;
         expect(john.UserCategory).to.equal('OWNER');
+    });
+
+    it('Create Natural SCA', function(){
+        expect(johnScaOwner.Id).not.to.be.undefined;
+        expect(johnScaOwner.PersonType).to.equal(PersonType.Natural);
+        expect(johnScaOwner.TermsAndConditionsAccepted).to.be.true;
+        expect(johnScaOwner.UserCategory).to.equal('OWNER');
+        expect(johnScaOwner.PendingUserAction).not.to.be.undefined;
+        expect(johnScaOwner.PhoneNumber).not.to.be.undefined;
+        expect(johnScaOwner.PhoneNumberCountry).not.to.be.undefined;
+        expect(johnScaOwner.UserStatus).to.equal('PENDING_USER_ACTION');
     });
 
     it('Create Legal', function() {

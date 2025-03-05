@@ -77,6 +77,7 @@ export type ApiMethod =
     | "transfers_get"
     | "transfers_createrefunds"
     | "users_createnaturals"
+    | "users_createnaturals_sca"
     | "users_createlegals"
     | "users_createbankaccounts_iban"
     | "users_createbankaccounts_gb"

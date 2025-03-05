@@ -501,6 +501,27 @@ declare namespace MangoPay {
         interface UserNaturalPayer extends user.UserNaturalData {
         }
 
+        class UserNaturalScaPayer extends EntityBase<user.UserNaturalScaData> {
+            PersonType: "NATURAL";
+            UserCategory: "PAYER";
+
+            constructor(
+                data: MakeKeysRequired<Partial<user.UserNaturalScaData>,
+                    user.RequiredUserNaturalScaPayerData>
+            );
+
+            /**
+             * Sets the person type for the model
+             * @param personType
+             */
+            setPersonType(type: user.PersonType): void;
+
+            setUserCategory(category: user.UserCategory): void;
+        }
+
+        interface UserNaturalScaPayer extends user.UserNaturalScaData {
+        }
+
         class UserNaturalOwner extends EntityBase<user.UserNaturalData> {
             PersonType: "NATURAL";
             UserCategory: "OWNER";
@@ -520,6 +541,27 @@ declare namespace MangoPay {
         }
 
         interface UserNaturalOwner extends user.UserNaturalData {
+        }
+
+        class UserNaturalScaOwner extends EntityBase<user.UserNaturalScaData> {
+            PersonType: "NATURAL";
+            UserCategory: "OWNER";
+
+            constructor(
+                data: MakeKeysRequired<Partial<user.UserNaturalScaData>,
+                    user.RequiredUserNaturalScaOwnerData>
+            );
+
+            /**
+             * Sets the person type for the model
+             * @param personType
+             */
+            setPersonType(type: user.PersonType): void;
+
+            setUserCategory(category: user.UserCategory): void;
+        }
+
+        interface UserNaturalScaOwner extends user.UserNaturalScaData {
         }
 
         class UserLegalPayer extends EntityBase<user.UserLegalData> {

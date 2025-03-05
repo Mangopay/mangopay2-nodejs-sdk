@@ -28,6 +28,32 @@ module.exports = {
                 TermsAndConditionsAccepted: false
             };
         },
+        getUserNaturalScaOwner: function() {
+            return {
+                FirstName: 'John SCA',
+                LastName: 'Doe SCA Review',
+                Email: 'john.doe.sca@sample.org',
+                Address: new Address({
+                    "AddressLine1": "4101 Reservoir Rd NW",
+                    "AddressLine2": "Address line 2",
+                    "City": "Washington",
+                    "Region": "District of Columbia",
+                    "PostalCode": "20007",
+                    "Country": "US"
+                }),
+                Birthday: 188301600,
+                Birthplace: 'FR',
+                Nationality: 'FR',
+                CountryOfResidence: 'FR',
+                Occupation: 'programmer',
+                IncomeRange: 3,
+                PersonType: 'NATURAL',
+                TermsAndConditionsAccepted: true,
+                UserCategory: 'OWNER',
+                PhoneNumber: '+33611111111',
+                PhoneNumberCountry: 'FR'
+            };
+        },
         getUserNaturalPayer: function() {
             return {
                 PersonType: 'NATURAL',

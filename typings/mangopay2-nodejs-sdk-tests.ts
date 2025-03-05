@@ -144,6 +144,21 @@ api.Users.create(userNaturalPayer,
     }
 );
 
+// create User Natural SCA Payer with mandatory props
+const userNaturalScaPayer = new api.models.UserNaturalScaPayer({
+    UserCategory: "PAYER",
+    FirstName: "Sara",
+    LastName: "McNick",
+    Email: "info@mangopay.com",
+    TermsAndConditionsAccepted: true
+});
+
+api.Users.create(userNaturalScaPayer,
+    data => {
+        const d = data; // $ExpectType UserNaturalScaData
+    }
+);
+
 // create User Natural Owner with mandatory props
 const userNaturalOwner = new api.models.UserNaturalOwner({
     PersonType: "NATURAL",
@@ -160,6 +175,25 @@ const userNaturalOwner = new api.models.UserNaturalOwner({
 api.Users.create(userNaturalOwner,
     data => {
         const d = data; // $ExpectType UserNaturalData
+    }
+);
+
+// create User Natural SCA Owner with mandatory props
+const userNaturalScaOwner = new api.models.UserNaturalScaOwner({
+    PersonType: "NATURAL",
+    UserCategory: "OWNER",
+    FirstName: "Sara",
+    LastName: "McNick",
+    Email: "info@mangopay.com",
+    Birthday: 1300186358,
+    CountryOfResidence: "GB",
+    Nationality: "US",
+    TermsAndConditionsAccepted: true
+});
+
+api.Users.create(userNaturalScaOwner,
+    data => {
+        const d = data; // $ExpectType UserNaturalScaData
     }
 );
 
