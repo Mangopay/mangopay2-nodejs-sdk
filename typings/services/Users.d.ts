@@ -24,8 +24,8 @@ export class Users {
         MethodOverload<user.CreateUserNaturalOwnerData, user.UserNaturalData> &
         MethodOverload<user.CreateUserLegalPayerData, user.UserLegalData> &
         MethodOverload<user.CreateUserLegalOwnerData, user.UserLegalData> &
-        MethodOverload<user.CreateUserNaturalScaPayerData, user.UserNaturalScaData> &
-        MethodOverload<user.CreateUserNaturalScaOwnerData, user.UserNaturalScaData>;
+        MethodOverload<user.CreateUserNaturalScaData, user.UserNaturalScaData> &
+        MethodOverload<user.CreateUserLegalScaData, user.UserLegalScaData>;
 
     /**
      * Update a user

@@ -9,6 +9,7 @@ var api = require('../main');
 var helpers = require('../helpers');
 
 var UserLegal = require('../../lib/models/UserLegal');
+var UserLegalSca = require('../../lib/models/UserLegalSca');
 var UserNatural = require('../../lib/models/UserNatural');
 var UserNaturalSca = require('../../lib/models/UserNaturalSca');
 var Address = require('../../lib/models/Address');
@@ -28,6 +29,7 @@ describe('Users', function() {
     var john = new UserNatural(helpers.data.getUserNatural());
     var johnScaOwner = new UserNaturalSca(helpers.data.getUserNaturalScaOwner());
     var matrix = new UserLegal(helpers.data.getUserLegal());
+    var matrixScaOwner = new UserLegalSca(helpers.data.getUserLegalScaOwner());
 
     var johnPayer = new UserNatural(helpers.data.getUserNaturalPayer());
     var johnOwner = new UserNatural(helpers.data.getUserNaturalOwner());
@@ -72,6 +74,13 @@ describe('Users', function() {
         });
     });
 
+    before(function(done){
+        api.Users.create(matrixScaOwner).then(function(data, err){
+            matrixScaOwner = data;
+            done();
+        });
+    });
+
     it('Create Natural', function(){
         expect(john.Id).not.to.be.undefined;
         expect(john.PersonType).to.equal(PersonType.Natural);
@@ -95,6 +104,15 @@ describe('Users', function() {
         expect(matrix.PersonType).to.equal(PersonType.Legal);
         expect(matrix.TermsAndConditionsAccepted).to.be.false;
         expect(matrix.UserCategory).to.equal('OWNER');
+    });
+
+    it('Create Legal SCA', function() {
+        expect(matrixScaOwner.Id).not.to.be.undefined;
+        expect(matrixScaOwner.PersonType).to.equal(PersonType.Legal);
+        expect(matrixScaOwner.TermsAndConditionsAccepted).to.be.true;
+        expect(matrixScaOwner.UserCategory).to.equal('OWNER');
+        expect(matrixScaOwner.PendingUserAction).not.to.be.undefined;
+        expect(matrixScaOwner.LegalRepresentative).not.to.be.undefined;
     });
 
     it('Create Natural Payer', function(){

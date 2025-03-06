@@ -55,20 +55,20 @@ export namespace user {
         | "LastName"
         | "Email";
 
-    type RequiredUserNaturalScaPayerData =
+    type RequiredUserNaturalScaData =
         | "FirstName"
         | "LastName"
         | "Email"
-        | "TermsAndConditionsAccepted";
+        | "TermsAndConditionsAccepted"
+        | "UserCategory"
 
-    type RequiredUserNaturalScaOwnerData =
-        | "FirstName"
-        | "LastName"
+    type RequiredUserLegalScaData =
+        | "Name"
+        | "LegalPersonType"
+        | "LegalRepresentative"
         | "Email"
-        | "Birthday"
-        | "Nationality"
-        | "CountryOfResidence"
-        | "TermsAndConditionsAccepted";
+        | "TermsAndConditionsAccepted"
+        | "UserCategory"
 
     type RequiredUserNaturalOwnerData =
         | "FirstName"
@@ -288,7 +288,8 @@ export namespace user {
         Address: string | address.AddressData;
 
         /**
-         * The date of birth of the user - be careful to set the right timezone (should be UTC) to avoid 00h becoming 23h (and hence interpreted as the day before)
+         * The date of birth of the user - be careful to set the right timezone (should be UTC)
+         * to avoid 00h becoming 23h (and hence interpreted as the day before)
          */
         Birthday: Timestamp;
 
@@ -331,9 +332,11 @@ export namespace user {
          *
          * If the international format is sent, the PhoneNumberCountry value is not taken into account.
          *
-         * We recommend that you use the PhoneNumberCountry parameter to ensure the correct rendering in line with the E.164 standard.
+         * We recommend that you use the PhoneNumberCountry parameter to ensure the correct rendering
+         * in line with the E.164 standard.
          *
-         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll the new value in SCA via the PendingUserAction.RedirectUrl.
+         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll
+         * the new value in SCA via the PendingUserAction.RedirectUrl.
          * For more details see the <a href="https://docs.mangopay.com/guides/users/sca/enrollment">SCA</a> guides.
          */
         PhoneNumber: string;
@@ -345,7 +348,8 @@ export namespace user {
          *
          * The country code of the PhoneNumber, used to render the value in the E.164 standard.
          *
-         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll the new value in SCA via the PendingUserAction.RedirectUrl.
+         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll
+         * the new value in SCA via the PendingUserAction.RedirectUrl.
          * For more details see the <a href="https://docs.mangopay.com/guides/users/sca/enrollment">SCA</a> guides.
          */
         PhoneNumberCountry: CountryISO;
@@ -358,13 +362,129 @@ export namespace user {
 
     interface PendingUserActionData {
         /**
-         * The URL to which to redirect the user to perform strong customer authentication (SCA) via a Mangopay-hosted webpage. This value is a variable and should not be hardcoded.
-         * <p>
-         * Caution: Before redirecting the user on this URL, you must add the query parameter ReturnUrl with the percent-encoded URL to which you want the SCA session to return the user after authentication (whether successful or not).
-         * <p>
+         * The URL to which to redirect the user to perform strong customer authentication (SCA)
+         * via a Mangopay-hosted webpage. This value is a variable and should not be hardcoded.
+         *
+         * Caution: Before redirecting the user on this URL, you must add the query parameter ReturnUrl with
+         * the percent-encoded URL to which you want the SCA session to return the user
+         * after authentication (whether successful or not).
+         *
          * For more details, see <a href="https://docs.mangopay.com/guides/users/sca#how-to-redirect-a-user-for-an-sca-session">How to redirect a user for an SCA session</a>
          */
         RedirectUrl: string;
+    }
+
+    interface UserLegalScaData extends UserData {
+        PersonType: "LEGAL";
+
+        /**
+         * The registered legal name of the entity.
+         * The Name value should be the one registered with the relevant national authority.
+         */
+        Name: string;
+
+        /**
+         * The type of legal user
+         */
+        LegalPersonType: LegalPersonType;
+
+        /**
+         * Information about the legal representative declared for the user.
+         */
+        LegalRepresentative: LegalRepresentativeData;
+
+        /**
+         * The Id of the KYC Document whose Type is REGISTRATION_PROOF if validated for the user.
+         * If no registration proof is validated, then this value is null.
+         */
+        ProofOfRegistration: string;
+
+        /**
+         * The Id of the KYC Document whose Type is SHAREHOLDERS_DECLARATION if validated for the user.
+         * If no Shareholder Declaration is validated, then this value is null.
+         */
+        ShareholderDeclaration: string;
+
+        /**
+         * The Id of the KYC Document whose Type is ARTICLES_OF_ASSOCIATION if validated for the user.
+         * If no articles of association document is validated, then this value is null.
+         */
+        Statute: string;
+
+        /**
+         * The registration number of the entity, assigned by the relevant national authority
+         */
+        CompanyNumber: string;
+
+        /**
+         * Object containing the link needed for SCA redirection if triggered by the API call (otherwise returned null).
+         */
+        PendingUserAction: PendingUserActionData;
+
+        /**
+         * The legally registered address of the entity’s administrative center.
+         * This object’s sub-parameters are null if the UserCategory is PAYER.
+         */
+        HeadquartersAddress: address.AddressData;
+
+        /**
+         * The address of the entity’s legal representative.
+         */
+        LegalRepresentativeAddress: address.AddressData;
+    }
+
+    interface LegalRepresentativeData {
+        /**
+         * The first name of the individual.
+         */
+        FirstName: string;
+
+        /**
+         * The last name of the individual.
+         */
+        LastName: string;
+
+        /**
+         * The date of birth of the individual.
+         */
+        Birthday: Timestamp;
+
+        /**
+         * The nationality of the individual.
+         */
+        Nationality: CountryISO;
+
+        /**
+         * The country of residence of the individual.
+         */
+        CountryOfResidence: CountryISO;
+
+        /**
+         * The individual’s email address.
+         */
+        Email: string;
+
+        /**
+         * Format: International E.164 standard (prefixed by plus sign and country code) or local format
+         *
+         * The individual’s phone number. The local format (recommended) requires
+         * PhoneNumberCountry to ensure correct formatting.
+         *
+         * If present, the phone number forms part of card transaction data that is
+         * passed to issuers to improve authentication rates.
+         *
+         * For users with UserCategory OWNER , the phone number is used to pre-populate the SCA
+         * session for them to confirm and receive an SMS OTP. If the individual modifies the phone number
+         * during the session, this data is not updated in the API.
+         */
+        PhoneNumber: string;
+
+        /**
+         * Format: Two-letter country code (ISO 3166-1 alpha-2 format)
+         *
+         * Required if the PhoneNumber is provided in local format (recommended), to render the value in the E.164 standard.
+         */
+        PhoneNumberCountry: CountryISO;
     }
 
     interface BaseUserLegalData extends PickPartial<UserLegalData,
@@ -422,15 +542,15 @@ export namespace user {
         PickPartial<UserLegalData, "Tag" | "LegalRepresentativeEmail" | "UserCategory"> {
     }
 
-    interface CreateUserNaturalScaPayerData {
+    interface CreateUserNaturalScaData {
         /**
          * Needed for calling the correct API url (it will not be sent to the API)
          */
-        Sca: true;
+        NaturalSca: true;
 
         PersonType: "NATURAL";
 
-        UserCategory: "PAYER";
+        UserCategory: "PAYER" | "OWNER";
 
         /**
          * The name of the user
@@ -443,27 +563,21 @@ export namespace user {
         LastName: string;
 
         /**
-         * The person's email address (not more than 12 consecutive numbers) - must be a valid email
-         */
-        Email: string;
-
-        /**
-         * The user address
-         */
-        Address?: address.CreateAddress;
-
-        /**
-         * The date of birth of the user - be careful to set the right timezone (should be UTC) to avoid 00h becoming 23h (and hence interpreted as the day before)
+         * The date of birth of the user - be careful to set the right timezone (should be UTC)
+         * to avoid 00h becoming 23h (and hence interpreted as the day before)
+         * Required if UserCategory is OWNER
          */
         Birthday?: Timestamp;
 
         /**
          * The user’s nationality. ISO 3166-1 alpha-2 format is expected
+         * Required if UserCategory is OWNER
          */
         Nationality?: CountryISO;
 
         /**
          * The user’s country of residence. ISO 3166-1 alpha-2 format is expected
+         * Required if UserCategory is OWNER
          */
         CountryOfResidence?: CountryISO;
 
@@ -478,6 +592,11 @@ export namespace user {
         IncomeRange?: IncomeRange;
 
         /**
+         * The person's email address (not more than 12 consecutive numbers) - must be a valid email
+         */
+        Email: string;
+
+        /**
          * Format: International telephone numbering plan E.164 (+ then country code then the number) or local format
          *
          * Required if UserCategory is OWNER.
@@ -486,9 +605,11 @@ export namespace user {
          *
          * If the international format is sent, the PhoneNumberCountry value is not taken into account.
          *
-         * We recommend that you use the PhoneNumberCountry parameter to ensure the correct rendering in line with the E.164 standard.
+         * We recommend that you use the PhoneNumberCountry parameter to ensure the correct rendering
+         * in line with the E.164 standard.
          *
-         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll the new value in SCA via the PendingUserAction.RedirectUrl.
+         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll
+         * the new value in SCA via the PendingUserAction.RedirectUrl.
          * For more details see the <a href="https://docs.mangopay.com/guides/users/sca/enrollment">SCA</a> guides.
          */
         PhoneNumber?: string;
@@ -500,10 +621,16 @@ export namespace user {
          *
          * The country code of the PhoneNumber, used to render the value in the E.164 standard.
          *
-         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll the new value in SCA via the PendingUserAction.RedirectUrl.
+         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll
+         * the new value in SCA via the PendingUserAction.RedirectUrl.
          * For more details see the <a href="https://docs.mangopay.com/guides/users/sca/enrollment">SCA</a> guides.
          */
         PhoneNumberCountry?: CountryISO;
+
+        /**
+         * The user address
+         */
+        Address?: address.CreateAddress;
 
         /**
          * Whether the user has accepted Mangopay’s terms and conditions. Must be true if UserCategory is OWNER
@@ -516,87 +643,122 @@ export namespace user {
         Tag?: string;
     }
 
-    interface CreateUserNaturalScaOwnerData {
+    interface CreateUserLegalScaData {
         /**
          * Needed for calling the correct API url (it will not be sent to the API)
          */
-        Sca: true;
+        LegalSca: true;
 
-        PersonType: "NATURAL";
+        PersonType: "LEGAL";
 
-        UserCategory: "OWNER";
-
-        /**
-         * The name of the user
-         */
-        FirstName: string;
+        UserCategory: "PAYER" | "OWNER";
 
         /**
-         * The last name of the user
+         * The registered legal name of the entity.
+         * The Name value should be the one registered with the relevant national authority.
          */
-        LastName: string;
+        Name: string;
 
         /**
-         * The person's email address (not more than 12 consecutive numbers) - must be a valid email
+         * The type of legal user
          */
-        Email: string;
+        LegalPersonType: LegalPersonType;
 
         /**
-         * The user address
+         * Information about the legal representative declared for the user.
          */
-        Address?: address.CreateAddress;
+        LegalRepresentative: CreateLegalRepresentativeData;
 
         /**
-         * The date of birth of the user - be careful to set the right timezone (should be UTC) to avoid 00h becoming 23h (and hence interpreted as the day before)
-         */
-        Birthday: Timestamp;
+        * The registration number of the entity, assigned by the relevant national authority
+        * Required if UserCategory is OWNER and LegalPersonType is BUSINESS. Returned null if UserCategory is PAYER.
+        */
+        CompanyNumber?: string;
 
         /**
-         * The user’s nationality. ISO 3166-1 alpha-2 format is expected
+         * The legally registered address of the entity’s administrative center.
+         * This object’s sub-parameters are null if the UserCategory is PAYER.
+         * Required if UserCategory is OWNER. Child parameters returned null if UserCategory is PAYER.
          */
-        Nationality: CountryISO;
+        HeadquartersAddress?: address.CreateAddress;
 
         /**
-         * The user’s country of residence. ISO 3166-1 alpha-2 format is expected
+         * The address of the entity’s legal representative.
          */
-        CountryOfResidence: CountryISO;
-
-        /**
-         * Format: International telephone numbering plan E.164 (+ then country code then the number) or local format
-         *
-         * Required if UserCategory is OWNER.
-         *
-         * The individual’s phone number.
-         *
-         * If the international format is sent, the PhoneNumberCountry value is not taken into account.
-         *
-         * We recommend that you use the PhoneNumberCountry parameter to ensure the correct rendering in line with the E.164 standard.
-         *
-         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll the new value in SCA via the PendingUserAction.RedirectUrl.
-         * For more details see the <a href="https://docs.mangopay.com/guides/users/sca/enrollment">SCA</a> guides.
-         */
-        PhoneNumber?: string;
-
-        /**
-         * Allowed values: Two-letter country code (ISO 3166-1 alpha-2 format).
-         *
-         * Required if the PhoneNumber is provided in local format.
-         *
-         * The country code of the PhoneNumber, used to render the value in the E.164 standard.
-         *
-         * Caution: If UserCategory is OWNER, modifying this value means the user will be required to re-enroll the new value in SCA via the PendingUserAction.RedirectUrl.
-         * For more details see the <a href="https://docs.mangopay.com/guides/users/sca/enrollment">SCA</a> guides.
-         */
-        PhoneNumberCountry?: CountryISO;
-
-        /**
-         * Whether the user has accepted Mangopay’s terms and conditions. Must be true if UserCategory is OWNER
-         */
-        TermsAndConditionsAccepted: boolean;
+        LegalRepresentativeAddress?: address.CreateAddress;
 
         /**
          * Custom data that you can add to this object.
          */
         Tag?: string;
+
+        /**
+         * The email address for the entity.
+         */
+        Email: string;
+
+        /**
+         * Whether the user has accepted Mangopay’s terms and conditions (as defined by your contract, see the T&Cs guide for details).
+         *
+         * Must be true if UserCategory is OWNER.
+         */
+        TermsAndConditionsAccepted: boolean;
+    }
+
+    interface CreateLegalRepresentativeData {
+        /**
+         * The first name of the individual.
+         */
+        FirstName: string;
+
+        /**
+         * The last name of the individual.
+         */
+        LastName: string;
+
+        /**
+         * The date of birth of the individual.
+         * Required if UserCategory is OWNER. Returned null if UserCategory is PAYER.
+         */
+        Birthday?: Timestamp;
+
+        /**
+         * The nationality of the individual.
+         * Required if UserCategory is OWNER. Returned null if UserCategory is PAYER.
+         */
+        Nationality?: CountryISO;
+
+        /**
+         * The country of residence of the individual.
+         * Required if UserCategory is OWNER. Returned null if UserCategory is PAYER.
+         */
+        CountryOfResidence?: CountryISO;
+
+        /**
+         * The individual’s email address.
+         */
+        Email: string;
+
+        /**
+         * Format: International E.164 standard (prefixed by plus sign and country code) or local format
+         *
+         * The individual’s phone number. The local format (recommended) requires
+         * PhoneNumberCountry to ensure correct formatting.
+         *
+         * If present, the phone number forms part of card transaction data that is
+         * passed to issuers to improve authentication rates.
+         *
+         * For users with UserCategory OWNER , the phone number is used to pre-populate the SCA
+         * session for them to confirm and receive an SMS OTP. If the individual modifies the phone number
+         * during the session, this data is not updated in the API.
+         */
+        PhoneNumber?: string;
+
+        /**
+         * Format: Two-letter country code (ISO 3166-1 alpha-2 format)
+         *
+         * Required if the PhoneNumber is provided in local format (recommended), to render the value in the E.164 standard.
+         */
+        PhoneNumberCountry?: CountryISO;
     }
 }

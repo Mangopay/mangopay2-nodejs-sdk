@@ -1,5 +1,4 @@
 import Mangopay = require("mangopay2-nodejs-sdk");
-import {PayPalWebPayInData} from "./models/payIn";
 
 // $ExpectError
 const invalidConfig: Mangopay.base.Config = {};
@@ -145,7 +144,7 @@ api.Users.create(userNaturalPayer,
 );
 
 // create User Natural SCA Payer with mandatory props
-const userNaturalScaPayer = new api.models.UserNaturalScaPayer({
+const userNaturalScaPayer = new api.models.UserNaturalSca({
     UserCategory: "PAYER",
     FirstName: "Sara",
     LastName: "McNick",
@@ -175,25 +174,6 @@ const userNaturalOwner = new api.models.UserNaturalOwner({
 api.Users.create(userNaturalOwner,
     data => {
         const d = data; // $ExpectType UserNaturalData
-    }
-);
-
-// create User Natural SCA Owner with mandatory props
-const userNaturalScaOwner = new api.models.UserNaturalScaOwner({
-    PersonType: "NATURAL",
-    UserCategory: "OWNER",
-    FirstName: "Sara",
-    LastName: "McNick",
-    Email: "info@mangopay.com",
-    Birthday: 1300186358,
-    CountryOfResidence: "GB",
-    Nationality: "US",
-    TermsAndConditionsAccepted: true
-});
-
-api.Users.create(userNaturalScaOwner,
-    data => {
-        const d = data; // $ExpectType UserNaturalScaData
     }
 );
 

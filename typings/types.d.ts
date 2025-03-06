@@ -79,6 +79,7 @@ export type ApiMethod =
     | "users_createnaturals"
     | "users_createnaturals_sca"
     | "users_createlegals"
+    | "users_createlegals_sca"
     | "users_createbankaccounts_iban"
     | "users_createbankaccounts_gb"
     | "users_createbankaccounts_us"

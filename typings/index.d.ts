@@ -501,13 +501,12 @@ declare namespace MangoPay {
         interface UserNaturalPayer extends user.UserNaturalData {
         }
 
-        class UserNaturalScaPayer extends EntityBase<user.UserNaturalScaData> {
+        class UserNaturalSca extends EntityBase<user.UserNaturalScaData> {
             PersonType: "NATURAL";
-            UserCategory: "PAYER";
 
             constructor(
                 data: MakeKeysRequired<Partial<user.UserNaturalScaData>,
-                    user.RequiredUserNaturalScaPayerData>
+                    user.RequiredUserNaturalScaData>
             );
 
             /**
@@ -519,7 +518,7 @@ declare namespace MangoPay {
             setUserCategory(category: user.UserCategory): void;
         }
 
-        interface UserNaturalScaPayer extends user.UserNaturalScaData {
+        interface UserNaturalSca extends user.UserNaturalScaData {
         }
 
         class UserNaturalOwner extends EntityBase<user.UserNaturalData> {
@@ -543,13 +542,12 @@ declare namespace MangoPay {
         interface UserNaturalOwner extends user.UserNaturalData {
         }
 
-        class UserNaturalScaOwner extends EntityBase<user.UserNaturalScaData> {
-            PersonType: "NATURAL";
-            UserCategory: "OWNER";
+        class UserLegalSca extends EntityBase<user.UserLegalScaData> {
+            PersonType: "LEGAL";
 
             constructor(
-                data: MakeKeysRequired<Partial<user.UserNaturalScaData>,
-                    user.RequiredUserNaturalScaOwnerData>
+                data: MakeKeysRequired<Partial<user.UserLegalScaData>,
+                    user.RequiredUserLegalScaData>
             );
 
             /**
@@ -561,7 +559,7 @@ declare namespace MangoPay {
             setUserCategory(category: user.UserCategory): void;
         }
 
-        interface UserNaturalScaOwner extends user.UserNaturalScaData {
+        interface UserLegalSca extends user.UserLegalScaData {
         }
 
         class UserLegalPayer extends EntityBase<user.UserLegalData> {
