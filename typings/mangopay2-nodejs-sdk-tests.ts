@@ -143,21 +143,6 @@ api.Users.create(userNaturalPayer,
     }
 );
 
-// create User Natural SCA Payer with mandatory props
-const userNaturalScaPayer = new api.models.UserNaturalSca({
-    UserCategory: "PAYER",
-    FirstName: "Sara",
-    LastName: "McNick",
-    Email: "info@mangopay.com",
-    TermsAndConditionsAccepted: true
-});
-
-api.Users.create(userNaturalScaPayer,
-    data => {
-        const d = data; // $ExpectType UserNaturalScaData
-    }
-);
-
 // create User Natural Owner with mandatory props
 const userNaturalOwner = new api.models.UserNaturalOwner({
     PersonType: "NATURAL",

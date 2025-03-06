@@ -173,6 +173,48 @@ describe('Users', function() {
         });
     });
 
+    describe('Get Natural SCA', function() {
+        var john1, john2;
+        before(function (done) {
+            Promise.all(
+                [api.Users.getSca(johnScaOwner.Id),
+                    api.Users.getNaturalSca(johnScaOwner.Id)
+                ]).then(function (res) {
+                john1 = res[0];
+                john2 = res[1];
+                done();
+            });
+        });
+
+        it('John SCA should be the same', function(){
+            expect(_.isMatch(john1, _.omit(john.data, 'Address'))).to.be.true;
+            expect(_.isMatch(john2, _.omit(john.data, 'Address'))).to.be.true;
+            expect(john1.TermsAndConditionsAccepted).to.eq(john2.TermsAndConditionsAccepted);
+            expect(john1.Id).to.eq(john2.Id);
+            expect(john1.UserStatus).to.eq(john2.UserStatus);
+        });
+    });
+
+    describe('Get Legal SCA', function() {
+        var matrix1, matrix2;
+        before(function (done) {
+            Promise.all(
+                [api.Users.getSca(matrixScaOwner.Id),
+                    api.Users.getLegalSca(matrixScaOwner.Id)
+                ]).then(function (res) {
+                matrix1 = res[0];
+                matrix2 = res[1];
+                done();
+            });
+        });
+
+        it('Matrix SCA should be the same', function(){
+            expect(matrix1.TermsAndConditionsAccepted).to.eq(matrix2.TermsAndConditionsAccepted);
+            expect(matrix1.Id).to.eq(matrix2.Id);
+            expect(matrix1.CompanyNumber).to.eq(matrix2.CompanyNumber);
+        });
+    });
+
     describe('Get Natural Payer', function() {
         var johnPayer1, johnPayer2;
         before(function(done){

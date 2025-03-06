@@ -43,6 +43,13 @@ export class Users {
     get: MethodOverload<string, user.UserLegalData | user.UserNaturalData>;
 
     /**
+     * Get natural or legal SCA user by ID
+     * @param userId
+     * @param options
+     */
+    getSca: MethodOverload<string, user.UserLegalScaData | user.UserNaturalScaData>;
+
+    /**
      * Get natural user by ID
      * @param userId
      * @param options
@@ -50,11 +57,25 @@ export class Users {
     getNatural: MethodOverload<string, user.UserNaturalData>;
 
     /**
+     * Get natural SCA user by ID
+     * @param userId
+     * @param options
+     */
+    getNaturalSca: MethodOverload<string, user.UserNaturalScaData>;
+
+    /**
      * Get legal user by ID
      * @param userId
      * @param options
      */
     getLegal: MethodOverload<string, user.UserLegalData>;
+
+    /**
+     * Get legal SCA user by ID
+     * @param userId
+     * @param options
+     */
+    getLegalSca: MethodOverload<string, user.UserLegalScaData>;
 
     /**
      * Get all users
