@@ -1068,6 +1068,55 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Payconiq Web V2', function () {
+        var payIn, wallet;
+
+        before(function (done) {
+            wallet = {
+                Owners: [john.Id],
+                Currency: 'EUR',
+                Description: 'WALLET IN EUR'
+            };
+
+            api.Wallets.create(wallet).then(function () {
+                payIn = {
+                    Tag: 'custom meta',
+                    CreditedWalletId: wallet.Id,
+                    AuthorId: john.Id,
+                    DebitedFunds: {
+                        Amount: 100,
+                        Currency: 'EUR'
+                    },
+                    Fees: {
+                        Amount: 0,
+                        Currency: 'EUR'
+                    },
+                    PaymentType: 'PAYCONIQ',
+                    ExecutionType: 'WEB',
+                    ReturnURL: 'http://www.my-site.com/returnURL',
+                    Country: 'BE'
+                };
+
+                api.PayIns.createPayconiq(payIn, function (data, response) {
+                    payIn = data;
+                    done();
+                });
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('PAYCONIQ');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.Status).to.equal('CREATED');
+                expect(payIn.RedirectURL).not.to.be.undefined;
+                expect(payIn.DeepLinkURL).not.to.be.undefined;
+                expect(payIn.QRCodeURL).not.to.be.undefined;
+            });
+        });
+    });
+
     describe('Mbway Web', function () {
         var payIn;
 

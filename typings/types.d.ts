@@ -65,6 +65,7 @@ export type ApiMethod =
     | "payins_recurring_registration_put"
     | "payins_create_recurring_card_direct"
     | "payins_payconiq-web_create"
+    | "payins_payconiqv2-web_create"
     | "payouts_bankwire_create"
     | "payouts_bankwire_get"
     | "payouts_get"

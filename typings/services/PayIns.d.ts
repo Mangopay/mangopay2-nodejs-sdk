@@ -137,4 +137,11 @@ export class PayIns {
      * @param options
      */
     getCardWebPayInExtendedDetails: MethodOverload<string, payIn.CardWebExtendedPayInData>;
+
+    /**
+     * Create new pay-in Payconiq Web, using the latest API url (/payment-methods/payconiq)
+     * @param payIn
+     * @param options
+     */
+    createPayconiq: MethodOverload<payIn.CreatePayconiqWebPayInData, payIn.PayconiqWebPayInData>
 }

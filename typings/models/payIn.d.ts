@@ -1609,6 +1609,12 @@ export namespace payIn {
          * The URL to be used in App2App workflow
          */
         DeepLinkURL: string;
+
+        Country: CountryISO;
+
+        QRCodeURL: string;
+
+        StatementDescriptor: string;
     }
 
     interface CreatePayconiqWebPayInData {
@@ -1649,6 +1655,8 @@ export namespace payIn {
          * The Country of the Address
          */
         Country: CountryISO;
+
+        StatementDescriptor?: string;
     }
 
     interface CreateCardPreAuthorizedDepositPayIn {
