@@ -39,7 +39,7 @@ var myUser = new api.models.UserLegal({
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: 'FR',
     LegalRepresentativeCountryOfResidence: 'FR',
-    CompanyNumber: 123456789,
+    CompanyNumber: "123456789",
     Tag: 'custom tag'
 });
 
@@ -74,7 +74,7 @@ api.Users.create({
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: 'FR',
     LegalRepresentativeCountryOfResidence: 'FR',
-    CompanyNumber: 123456789,
+    CompanyNumber: "123456789",
     Tag: 'custom tag'
 }, function (myOtherUser) {
     // Output the created user data to console

@@ -809,4 +809,105 @@ export namespace user {
         PhoneNumberCountry?: CountryISO;
         Address?: address.CreateAddress;
     }
+
+    interface CategorizeUserNatural {
+        /**
+         * Needed for calling the correct API url (it will not be sent to the API)
+         */
+        NaturalSca: true;
+
+        /**
+         * The id of the user
+         */
+        Id: string;
+
+        /**
+         * The new category of the user, which must be OWNER.
+         */
+        UserCategory: 'OWNER';
+
+        /**
+         * Whether the user has accepted Mangopay’s terms and conditions (as defined by your contract, see the T&Cs guide for details).
+         */
+        TermsAndConditionsAccepted: boolean;
+
+        /**
+         * The individual’s email address.
+         */
+        Email?: string;
+
+        /**
+         * The date of birth of the individual.
+         */
+        Birthday: Timestamp;
+
+        /**
+         * The nationality of the individual.
+         */
+        Nationality: CountryISO;
+
+        /**
+         * The country of residence of the individual.
+         */
+        CountryOfResidence: CountryISO;
+
+        /**
+         * Format: International E.164 standard (prefixed by plus sign and country code) or local format
+         *
+         * The individual’s phone number. The local format (recommended) requires
+         * PhoneNumberCountry to ensure correct formatting.
+         *
+         * If present, the phone number forms part of card transaction data that is
+         * passed to issuers to improve authentication rates.
+         *
+         * For users with UserCategory OWNER , the phone number is used to pre-populate the SCA
+         * session for them to confirm and receive an SMS OTP. If the individual modifies the phone number
+         * during the session, this data is not updated in the API.
+         */
+        PhoneNumber?: string;
+
+        /**
+         * Format: Two-letter country code (ISO 3166-1 alpha-2 format)
+         *
+         * Required if the PhoneNumber is provided in local format (recommended), to render the value in the E.164 standard.
+         */
+        PhoneNumberCountry?: string;
+    }
+
+    interface CategorizeUserLegal {
+        /**
+         * Needed for calling the correct API url (it will not be sent to the API)
+         */
+        LegalSca: true;
+
+        /**
+         * The id of the user
+         */
+        Id: string;
+
+        /**
+         * The new category of the user, which must be OWNER.
+         */
+        UserCategory: 'OWNER';
+
+        /**
+         * Whether the user has accepted Mangopay’s terms and conditions (as defined by your contract, see the T&Cs guide for details).
+         */
+        TermsAndConditionsAccepted: boolean;
+
+        /**
+         * Information about the legal representative declared for the user.
+         */
+        LegalRepresentative: CreateLegalRepresentativeData;
+
+        /**
+         * The legally registered address of the entity’s administrative center.
+         */
+        HeadquartersAddress: address.CreateAddress;
+
+        /**
+         * Required if LegalPersonType is BUSINESS.
+         */
+        CompanyNumber?: string;
+    }
 }

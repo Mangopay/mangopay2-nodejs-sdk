@@ -236,4 +236,21 @@ export class Users {
         string,
         cardPreAuthorization.CardPreAuthorizationData[]
         >;
+
+    /**
+     * This endpoint allows you to transition a user whose UserCategory is PAYER into an OWNER
+     * by providing the required information and redirecting them on the PendingUserAction.RedirectUrl
+     * response value to complete SCA enrollment.
+     *
+     * For Natural Users, optionally, you can update the Email and provide or update the PhoneNumber
+     * and PhoneNumberCountry before SCA redirection.
+     *
+     * For Legal Users, optionally, you can update the LegalRepresentative.Email and provide or update
+     * the LegalRepresentative.PhoneNumber and LegalRepresentative.PhoneNumberCountry before SCA redirection.
+     *
+     * @param user
+     * @param options
+     */
+    categorize: MethodOverload<user.CategorizeUserNatural, user.UserNaturalScaData> &
+        MethodOverload<user.CategorizeUserLegal, user.UserLegalScaData>;
 }

@@ -23,13 +23,17 @@ var KycDocumentType = require('../../lib/models/KycDocumentType');
 var UboDeclaration = require('../../lib/models/UboDeclaration');
 var Ubo = require('../../lib/models/Ubo');
 var UboDeclarationStatus = require('../../lib/models/UboDeclarationStatus');
-const UserNaturalPut = require('../../lib/models/UserNaturalPut');
+var UserNaturalPut = require('../../lib/models/UserNaturalPut');
+var CategorizeUserNatural = require('../../lib/models/CategorizeUserNatural');
+var CategorizeUserLegal = require('../../lib/models/CategorizeUserLegal');
 
 describe('Users', function() {
     var john = new UserNatural(helpers.data.getUserNatural());
     var johnScaOwner = new UserNaturalSca(helpers.data.getUserNaturalScaOwner());
+    var johnScaPayer = new UserNaturalSca(helpers.data.getUserNaturalScaPayer());
     var matrix = new UserLegal(helpers.data.getUserLegal());
     var matrixScaOwner = new UserLegalSca(helpers.data.getUserLegalScaOwner());
+    var matrixScaPayer = new UserLegalSca(helpers.data.getUserLegalScaPayer());
 
     var johnPayer = new UserNatural(helpers.data.getUserNaturalPayer());
     var johnOwner = new UserNatural(helpers.data.getUserNaturalOwner());
@@ -77,6 +81,20 @@ describe('Users', function() {
     before(function(done){
         api.Users.create(matrixScaOwner).then(function(data, err){
             matrixScaOwner = data;
+            done();
+        });
+    });
+
+    before(function(done){
+        api.Users.create(johnScaPayer).then(function(data, err){
+            johnScaPayer = data;
+            done();
+        });
+    });
+
+    before(function(done){
+        api.Users.create(matrixScaPayer).then(function(data, err){
+            matrixScaPayer = data;
             done();
         });
     });
@@ -375,6 +393,83 @@ describe('Users', function() {
         it('Models should be the same', function() {
             expect(_.isMatch(matrixScaOwner.Name, updatedMatrix.Name)).to.be.true;
             expect(updatedMatrix.Name).to.be.eq(changedName);
+        });
+    });
+
+    describe.skip('Categorize Natural SCA', function(){
+        console.warn('Cannot be tested at the moment');
+
+        var updatedUser;
+
+        before(function (done) {
+            var categorizeNatural = new CategorizeUserNatural(
+                {
+                    Id: johnScaPayer.Id,
+                    UserCategory: 'OWNER',
+                    TermsAndConditionsAccepted: true,
+                    Birthday: 188301600,
+                    Nationality: 'FR',
+                    CountryOfResidence: 'FR'
+                }
+            );
+
+            api.Users.categorize(categorizeNatural).then(function(data){
+                updatedUser = data;
+                done();
+            });
+        });
+
+        it('Category should be OWNER', function() {
+            expect(updatedUser.UserCategory).to.be.eq('OWNER');
+            expect(updatedUser.Birthday).to.not.be.undefined;
+            expect(updatedUser.Nationality).to.not.be.undefined;
+            expect(updatedUser.CountryOfResidence).to.not.be.undefined;
+        });
+    });
+
+    describe.skip('Categorize Legal SCA', function(){
+        console.warn('Cannot be tested at the moment');
+
+        var updatedUser;
+
+        before(function (done) {
+            var categorizeLegal = new CategorizeUserLegal(
+                {
+                    Id: matrixScaPayer.Id,
+                    UserCategory: 'OWNER',
+                    TermsAndConditionsAccepted: true,
+                    LegalRepresentative: {
+                        FirstName: 'John NodejsSDK',
+                        LastName: 'Doe NodejsSDK',
+                        Email: 'john.doe@sample.org',
+                        Birthday: 188301600,
+                        Nationality: 'FR',
+                        CountryOfResidence: 'FR',
+                        PhoneNumber: '+33611111111',
+                        PhoneNumberCountry: 'FR'
+                    },
+                    HeadquartersAddress: {
+                        "AddressLine1": "4101 Reservoir Rd NW",
+                        "AddressLine2": "address line 2",
+                        "City": "Washington",
+                        "Region": "District of Columbia",
+                        "PostalCode": "20007",
+                        "Country": "US"
+                    },
+                    CompanyNumber: "123456789"
+                }
+            );
+
+            api.Users.categorize(categorizeLegal).then(function(data){
+                updatedUser = data;
+                done();
+            });
+        });
+
+        it('Category should be OWNER', function() {
+            expect(updatedUser.UserCategory).to.be.eq('OWNER');
+            expect(updatedUser.HeadquartersAddress).to.not.be.undefined;
+            expect(updatedUser.LegalRepresentative).to.not.be.undefined;
         });
     });
 
