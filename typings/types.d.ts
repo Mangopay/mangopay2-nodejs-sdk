@@ -188,6 +188,9 @@ export type ApiMethod =
     | "identity_verification_create"
     | "identity_verification_get"
     | "identity_verification_checks_get"
+    | "users_categorizelegals_sca"
+    | "users_categorizenaturals_sca"
+    | "users_enroll_sca"
 
 export type CountryISO =
     | "AD"
