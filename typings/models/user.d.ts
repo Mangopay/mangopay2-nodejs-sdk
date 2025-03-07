@@ -910,4 +910,11 @@ export namespace user {
          */
         CompanyNumber?: string;
     }
+
+    interface UserEnrollmentResult {
+        /**
+         * Information about the action required from the user if UserStatus is PENDING_USER_ACTION (otherwise returned null).
+         */
+        PendingUserAction: PendingUserActionData;
+    }
 }

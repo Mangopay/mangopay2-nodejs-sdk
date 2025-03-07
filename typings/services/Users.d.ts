@@ -253,4 +253,15 @@ export class Users {
      */
     categorize: MethodOverload<user.CategorizeUserNatural, user.UserNaturalScaData> &
         MethodOverload<user.CategorizeUserLegal, user.UserLegalScaData>;
+
+    /**
+     * If UserCategory is OWNER, this endpoint allows you to enroll a user in SCA.
+     * Your platform needs to retrieve the returned PendingUserAction.RedirectUrl,
+     * add an encoded returnUrl query parameter for them to be returned to after the SCA session,
+     * and redirect the userGet natural or legal user by ID
+     *
+     * @param userId
+     * @param options
+     */
+    enroll: MethodOverload<string, user.UserEnrollmentResult>;
 }

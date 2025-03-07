@@ -473,6 +473,21 @@ describe('Users', function() {
         });
     });
 
+    describe('Enroll to SCA', function(){
+        var enrollmentResult;
+
+        before(function (done) {
+            api.Users.enroll(johnOwner.Id).then(function(data){
+                enrollmentResult = data;
+                done();
+            });
+        });
+
+        it('Category should be OWNER', function() {
+            expect(enrollmentResult.PendingUserAction.RedirectUrl).to.not.be.undefined;
+        });
+    });
+
     describe('Save Natural Payer to Owner', function(){
         var updatedJohn;
         before(function(done){
