@@ -101,6 +101,8 @@ export type ApiMethod =
     | "users_deactivate_bankaccount"
     | "users_savenaturals"
     | "users_savelegals"
+    | "users_savenaturals_sca"
+    | "users_savelegals_sca"
     | "users_getemoney"
     | "wallets_create"
     | "wallets_alltransactions"

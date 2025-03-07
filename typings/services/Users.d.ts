@@ -36,6 +36,14 @@ export class Users {
         MethodOverload<Models.UserNatural | user.UpdateUserNaturalData, user.UserNaturalData>;
 
     /**
+     * Modify details for a Natural/Legal Payer or Owner without changing category
+     * @param user
+     * @param options
+     */
+    updateSca: MethodOverload<user.UpdateUserLegalScaData, user.UserLegalScaData> &
+        MethodOverload<user.UpdateUserNaturalScaData, user.UserNaturalScaData>;
+
+    /**
      * Get natural or legal user by ID
      * @param userId
      * @param options

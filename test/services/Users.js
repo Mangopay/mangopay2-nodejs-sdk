@@ -336,6 +336,48 @@ describe('Users', function() {
         });
     });
 
+    describe('Save Natural SCA', function(){
+        var updatedJohn;
+        const changedLastName = johnScaOwner.LastName + " - CHANGED";
+
+        before(function(done){
+            johnScaOwner.LastName = changedLastName;
+
+            api.Users.updateSca(johnScaOwner).then(function(){
+                api.Users.getSca(johnScaOwner.Id).then(function(user){
+                    updatedJohn = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function() {
+            expect(_.isMatch(johnScaOwner.LastName, updatedJohn.LastName)).to.be.true;
+            expect(updatedJohn.LastName).to.be.eq(changedLastName);
+        });
+    });
+
+    describe('Save Legal SCA', function(){
+        var updatedMatrix;
+        const changedName = matrixScaOwner.Name + " - CHANGED";
+
+        before(function(done){
+            matrixScaOwner.Name = changedName;
+
+            api.Users.updateSca(matrixScaOwner).then(function(){
+                api.Users.getSca(matrixScaOwner.Id).then(function(user){
+                    updatedMatrix = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function() {
+            expect(_.isMatch(matrixScaOwner.Name, updatedMatrix.Name)).to.be.true;
+            expect(updatedMatrix.Name).to.be.eq(changedName);
+        });
+    });
+
     describe('Save Natural Payer to Owner', function(){
         var updatedJohn;
         before(function(done){

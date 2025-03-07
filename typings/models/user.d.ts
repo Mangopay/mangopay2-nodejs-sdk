@@ -1,4 +1,4 @@
-import { CountryISO, MakeKeysRequired, PickPartial, Timestamp } from "../types";
+import {CountryISO, MakeKeysRequired, PickPartial, Timestamp} from "../types";
 import { address } from "./address";
 import { entityBase } from "./entityBase";
 
@@ -760,5 +760,53 @@ export namespace user {
          * Required if the PhoneNumber is provided in local format (recommended), to render the value in the E.164 standard.
          */
         PhoneNumberCountry?: CountryISO;
+    }
+
+    interface UpdateLegalRepresentativeData {
+        FirstName?: string;
+        LastName?: string;
+        Birthday?: Timestamp;
+        Nationality?: CountryISO;
+        CountryOfResidence?: CountryISO;
+        Email?: string;
+        PhoneNumber?: string;
+        PhoneNumberCountry?: CountryISO;
+    }
+
+    interface UpdateUserLegalScaData {
+        /**
+         * Needed for calling the correct API url (it will not be sent to the API)
+         */
+        LegalSca: true;
+        Id: string;
+        Tag?: string;
+        TermsAndConditionsAccepted: boolean;
+        Name?: string;
+        LegalPersonType?: LegalPersonType;
+        LegalRepresentative?: UpdateLegalRepresentativeData
+        CompanyNumber?: string;
+        HeadquartersAddress?: address.CreateAddress;
+        LegalRepresentativeAddress?: address.CreateAddress;
+        Email?: string;
+    }
+
+    interface UpdateUserNaturalScaData {
+        /**
+         * Needed for calling the correct API url (it will not be sent to the API)
+         */
+        NaturalSca: true;
+        Id: string;
+        TermsAndConditionsAccepted: boolean;
+        FirstName?: string;
+        LastName?: string;
+        Birthday?: Timestamp;
+        Nationality?: CountryISO;
+        CountryOfResidence?: CountryISO;
+        Occupation?: string;
+        IncomeRange?: IncomeRange;
+        Tag?: string;
+        PhoneNumber?: string;
+        PhoneNumberCountry?: CountryISO;
+        Address?: address.CreateAddress;
     }
 }
