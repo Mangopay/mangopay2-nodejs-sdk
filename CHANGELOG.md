@@ -1,3 +1,20 @@
+## [1.51.0] - 2025-03-07
+### Added
+
+New endpoints for [strong customer authentication (SCA)](https://docs.mangopay.com/guides/users/sca) on Owner users:
+- [POST Create a Natural User (SCA)](https://docs.mangopay.com/api-reference/users/create-natural-user-sca)
+- [PUT Update a Natural User (SCA)](https://docs.mangopay.com/api-reference/users/update-natural-user-sca)
+- [POST Create a Legal User (SCA)](https://docs.mangopay.com/api-reference/users/create-legal-user-sca)
+- [PUT Update a Legal User (SCA)](https://docs.mangopay.com/api-reference/users/update-legal-user-sca)
+- [PUT Categorize a Natural User (SCA)](https://docs.mangopay.com/api-reference/users/categorize-natural-user)
+- [PUT Categorize a Legal User (SCA)](https://docs.mangopay.com/api-reference/users/categorize-legal-user)
+- [POST Enroll a User in SCA](https://docs.mangopay.com/api-reference/users/enroll-user)
+
+### Added
+
+New endpoint for Payconiq:
+- [POST Create a Payconiq PayIn](https://docs.mangopay.com/api-reference/payconiq/create-payconiq-payin)
+
 ## [1.50.1] - 2025-02-28
 ### Added
 
