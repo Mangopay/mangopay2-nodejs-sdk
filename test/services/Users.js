@@ -9,7 +9,9 @@ var api = require('../main');
 var helpers = require('../helpers');
 
 var UserLegal = require('../../lib/models/UserLegal');
+var UserLegalSca = require('../../lib/models/UserLegalSca');
 var UserNatural = require('../../lib/models/UserNatural');
+var UserNaturalSca = require('../../lib/models/UserNaturalSca');
 var Address = require('../../lib/models/Address');
 var PersonType = require('../../lib/models/PersonType');
 var BankAccount = require('../../lib/models/BankAccount');
@@ -21,11 +23,17 @@ var KycDocumentType = require('../../lib/models/KycDocumentType');
 var UboDeclaration = require('../../lib/models/UboDeclaration');
 var Ubo = require('../../lib/models/Ubo');
 var UboDeclarationStatus = require('../../lib/models/UboDeclarationStatus');
-const UserNaturalPut = require('../../lib/models/UserNaturalPut');
+var UserNaturalPut = require('../../lib/models/UserNaturalPut');
+var CategorizeUserNatural = require('../../lib/models/CategorizeUserNatural');
+var CategorizeUserLegal = require('../../lib/models/CategorizeUserLegal');
 
 describe('Users', function() {
     var john = new UserNatural(helpers.data.getUserNatural());
+    var johnScaOwner = new UserNaturalSca(helpers.data.getUserNaturalScaOwner());
+    var johnScaPayer = new UserNaturalSca(helpers.data.getUserNaturalScaPayer());
     var matrix = new UserLegal(helpers.data.getUserLegal());
+    var matrixScaOwner = new UserLegalSca(helpers.data.getUserLegalScaOwner());
+    var matrixScaPayer = new UserLegalSca(helpers.data.getUserLegalScaPayer());
 
     var johnPayer = new UserNatural(helpers.data.getUserNaturalPayer());
     var johnOwner = new UserNatural(helpers.data.getUserNaturalOwner());
@@ -63,6 +71,34 @@ describe('Users', function() {
         });
     });
 
+    before(function(done){
+        api.Users.create(johnScaOwner).then(function(data, err){
+            johnScaOwner = data;
+            done();
+        });
+    });
+
+    before(function(done){
+        api.Users.create(matrixScaOwner).then(function(data, err){
+            matrixScaOwner = data;
+            done();
+        });
+    });
+
+    before(function(done){
+        api.Users.create(johnScaPayer).then(function(data, err){
+            johnScaPayer = data;
+            done();
+        });
+    });
+
+    before(function(done){
+        api.Users.create(matrixScaPayer).then(function(data, err){
+            matrixScaPayer = data;
+            done();
+        });
+    });
+
     it('Create Natural', function(){
         expect(john.Id).not.to.be.undefined;
         expect(john.PersonType).to.equal(PersonType.Natural);
@@ -70,11 +106,31 @@ describe('Users', function() {
         expect(john.UserCategory).to.equal('OWNER');
     });
 
+    it('Create Natural SCA', function(){
+        expect(johnScaOwner.Id).not.to.be.undefined;
+        expect(johnScaOwner.PersonType).to.equal(PersonType.Natural);
+        expect(johnScaOwner.TermsAndConditionsAccepted).to.be.true;
+        expect(johnScaOwner.UserCategory).to.equal('OWNER');
+        expect(johnScaOwner.PendingUserAction).not.to.be.undefined;
+        expect(johnScaOwner.PhoneNumber).not.to.be.undefined;
+        expect(johnScaOwner.PhoneNumberCountry).not.to.be.undefined;
+        expect(johnScaOwner.UserStatus).to.equal('PENDING_USER_ACTION');
+    });
+
     it('Create Legal', function() {
         expect(matrix.Id).not.to.be.undefined;
         expect(matrix.PersonType).to.equal(PersonType.Legal);
         expect(matrix.TermsAndConditionsAccepted).to.be.false;
         expect(matrix.UserCategory).to.equal('OWNER');
+    });
+
+    it('Create Legal SCA', function() {
+        expect(matrixScaOwner.Id).not.to.be.undefined;
+        expect(matrixScaOwner.PersonType).to.equal(PersonType.Legal);
+        expect(matrixScaOwner.TermsAndConditionsAccepted).to.be.true;
+        expect(matrixScaOwner.UserCategory).to.equal('OWNER');
+        expect(matrixScaOwner.PendingUserAction).not.to.be.undefined;
+        expect(matrixScaOwner.LegalRepresentative).not.to.be.undefined;
     });
 
     it('Create Natural Payer', function(){
@@ -132,6 +188,48 @@ describe('Users', function() {
                 expect(data.errors).to.exist;
                 done();
             });
+        });
+    });
+
+    describe('Get Natural SCA', function() {
+        var john1, john2;
+        before(function (done) {
+            Promise.all(
+                [api.Users.getSca(johnScaOwner.Id),
+                    api.Users.getNaturalSca(johnScaOwner.Id)
+                ]).then(function (res) {
+                john1 = res[0];
+                john2 = res[1];
+                done();
+            });
+        });
+
+        it('John SCA should be the same', function(){
+            expect(_.isMatch(john1, _.omit(john.data, 'Address'))).to.be.true;
+            expect(_.isMatch(john2, _.omit(john.data, 'Address'))).to.be.true;
+            expect(john1.TermsAndConditionsAccepted).to.eq(john2.TermsAndConditionsAccepted);
+            expect(john1.Id).to.eq(john2.Id);
+            expect(john1.UserStatus).to.eq(john2.UserStatus);
+        });
+    });
+
+    describe('Get Legal SCA', function() {
+        var matrix1, matrix2;
+        before(function (done) {
+            Promise.all(
+                [api.Users.getSca(matrixScaOwner.Id),
+                    api.Users.getLegalSca(matrixScaOwner.Id)
+                ]).then(function (res) {
+                matrix1 = res[0];
+                matrix2 = res[1];
+                done();
+            });
+        });
+
+        it('Matrix SCA should be the same', function(){
+            expect(matrix1.TermsAndConditionsAccepted).to.eq(matrix2.TermsAndConditionsAccepted);
+            expect(matrix1.Id).to.eq(matrix2.Id);
+            expect(matrix1.CompanyNumber).to.eq(matrix2.CompanyNumber);
         });
     });
 
@@ -253,6 +351,140 @@ describe('Users', function() {
         it('Models should be the same', function() {
             expect(_.isMatch(john.LastName, updatedJohn.LastName)).to.be.true
             expect(updatedJohn.TermsAndConditionsAccepted).to.be.true;
+        });
+    });
+
+    describe('Save Natural SCA', function(){
+        var updatedJohn;
+        const changedLastName = johnScaOwner.LastName + " - CHANGED";
+
+        before(function(done){
+            johnScaOwner.LastName = changedLastName;
+
+            api.Users.updateSca(johnScaOwner).then(function(){
+                api.Users.getSca(johnScaOwner.Id).then(function(user){
+                    updatedJohn = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function() {
+            expect(_.isMatch(johnScaOwner.LastName, updatedJohn.LastName)).to.be.true;
+            expect(updatedJohn.LastName).to.be.eq(changedLastName);
+        });
+    });
+
+    describe('Save Legal SCA', function(){
+        var updatedMatrix;
+        const changedName = matrixScaOwner.Name + " - CHANGED";
+
+        before(function(done){
+            matrixScaOwner.Name = changedName;
+
+            api.Users.updateSca(matrixScaOwner).then(function(){
+                api.Users.getSca(matrixScaOwner.Id).then(function(user){
+                    updatedMatrix = user;
+                    done();
+                });
+            });
+        });
+
+        it('Models should be the same', function() {
+            expect(_.isMatch(matrixScaOwner.Name, updatedMatrix.Name)).to.be.true;
+            expect(updatedMatrix.Name).to.be.eq(changedName);
+        });
+    });
+
+    describe.skip('Categorize Natural SCA', function(){
+        console.warn('Cannot be tested at the moment');
+
+        var updatedUser;
+
+        before(function (done) {
+            var categorizeNatural = new CategorizeUserNatural(
+                {
+                    Id: johnScaPayer.Id,
+                    UserCategory: 'OWNER',
+                    TermsAndConditionsAccepted: true,
+                    Birthday: 188301600,
+                    Nationality: 'FR',
+                    CountryOfResidence: 'FR'
+                }
+            );
+
+            api.Users.categorize(categorizeNatural).then(function(data){
+                updatedUser = data;
+                done();
+            });
+        });
+
+        it('Category should be OWNER', function() {
+            expect(updatedUser.UserCategory).to.be.eq('OWNER');
+            expect(updatedUser.Birthday).to.not.be.undefined;
+            expect(updatedUser.Nationality).to.not.be.undefined;
+            expect(updatedUser.CountryOfResidence).to.not.be.undefined;
+        });
+    });
+
+    describe.skip('Categorize Legal SCA', function(){
+        console.warn('Cannot be tested at the moment');
+
+        var updatedUser;
+
+        before(function (done) {
+            var categorizeLegal = new CategorizeUserLegal(
+                {
+                    Id: matrixScaPayer.Id,
+                    UserCategory: 'OWNER',
+                    TermsAndConditionsAccepted: true,
+                    LegalRepresentative: {
+                        FirstName: 'John NodejsSDK',
+                        LastName: 'Doe NodejsSDK',
+                        Email: 'john.doe@sample.org',
+                        Birthday: 188301600,
+                        Nationality: 'FR',
+                        CountryOfResidence: 'FR',
+                        PhoneNumber: '+33611111111',
+                        PhoneNumberCountry: 'FR'
+                    },
+                    HeadquartersAddress: {
+                        "AddressLine1": "4101 Reservoir Rd NW",
+                        "AddressLine2": "address line 2",
+                        "City": "Washington",
+                        "Region": "District of Columbia",
+                        "PostalCode": "20007",
+                        "Country": "US"
+                    },
+                    CompanyNumber: "123456789"
+                }
+            );
+
+            api.Users.categorize(categorizeLegal).then(function(data){
+                updatedUser = data;
+                done();
+            });
+        });
+
+        it('Category should be OWNER', function() {
+            expect(updatedUser.UserCategory).to.be.eq('OWNER');
+            expect(updatedUser.HeadquartersAddress).to.not.be.undefined;
+            expect(updatedUser.LegalRepresentative).to.not.be.undefined;
+        });
+    });
+
+    describe('Enroll to SCA', function(){
+        var enrollmentResult;
+
+        before(function (done) {
+            api.Users.enroll(johnOwner.Id).then(function(data){
+                enrollmentResult = data;
+                done();
+            });
+        });
+
+        it('Category should be OWNER', function() {
+            expect(enrollmentResult.PendingUserAction.RedirectUrl).to.not.be.undefined;
         });
     });
 

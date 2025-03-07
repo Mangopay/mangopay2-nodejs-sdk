@@ -23,7 +23,9 @@ export class Users {
         MethodOverload<user.CreateUserNaturalPayerData, user.UserNaturalData> &
         MethodOverload<user.CreateUserNaturalOwnerData, user.UserNaturalData> &
         MethodOverload<user.CreateUserLegalPayerData, user.UserLegalData> &
-        MethodOverload<user.CreateUserLegalOwnerData, user.UserLegalData>;
+        MethodOverload<user.CreateUserLegalOwnerData, user.UserLegalData> &
+        MethodOverload<user.CreateUserNaturalScaData, user.UserNaturalScaData> &
+        MethodOverload<user.CreateUserLegalScaData, user.UserLegalScaData>;
 
     /**
      * Update a user
@@ -34,11 +36,26 @@ export class Users {
         MethodOverload<Models.UserNatural | user.UpdateUserNaturalData, user.UserNaturalData>;
 
     /**
+     * Modify details for a Natural/Legal Payer or Owner without changing category
+     * @param user
+     * @param options
+     */
+    updateSca: MethodOverload<user.UpdateUserLegalScaData, user.UserLegalScaData> &
+        MethodOverload<user.UpdateUserNaturalScaData, user.UserNaturalScaData>;
+
+    /**
      * Get natural or legal user by ID
      * @param userId
      * @param options
      */
     get: MethodOverload<string, user.UserLegalData | user.UserNaturalData>;
+
+    /**
+     * Get natural or legal SCA user by ID
+     * @param userId
+     * @param options
+     */
+    getSca: MethodOverload<string, user.UserLegalScaData | user.UserNaturalScaData>;
 
     /**
      * Get natural user by ID
@@ -48,11 +65,25 @@ export class Users {
     getNatural: MethodOverload<string, user.UserNaturalData>;
 
     /**
+     * Get natural SCA user by ID
+     * @param userId
+     * @param options
+     */
+    getNaturalSca: MethodOverload<string, user.UserNaturalScaData>;
+
+    /**
      * Get legal user by ID
      * @param userId
      * @param options
      */
     getLegal: MethodOverload<string, user.UserLegalData>;
+
+    /**
+     * Get legal SCA user by ID
+     * @param userId
+     * @param options
+     */
+    getLegalSca: MethodOverload<string, user.UserLegalScaData>;
 
     /**
      * Get all users
@@ -205,4 +236,32 @@ export class Users {
         string,
         cardPreAuthorization.CardPreAuthorizationData[]
         >;
+
+    /**
+     * This endpoint allows you to transition a user whose UserCategory is PAYER into an OWNER
+     * by providing the required information and redirecting them on the PendingUserAction.RedirectUrl
+     * response value to complete SCA enrollment.
+     *
+     * For Natural Users, optionally, you can update the Email and provide or update the PhoneNumber
+     * and PhoneNumberCountry before SCA redirection.
+     *
+     * For Legal Users, optionally, you can update the LegalRepresentative.Email and provide or update
+     * the LegalRepresentative.PhoneNumber and LegalRepresentative.PhoneNumberCountry before SCA redirection.
+     *
+     * @param user
+     * @param options
+     */
+    categorize: MethodOverload<user.CategorizeUserNatural, user.UserNaturalScaData> &
+        MethodOverload<user.CategorizeUserLegal, user.UserLegalScaData>;
+
+    /**
+     * If UserCategory is OWNER, this endpoint allows you to enroll a user in SCA.
+     * Your platform needs to retrieve the returned PendingUserAction.RedirectUrl,
+     * add an encoded returnUrl query parameter for them to be returned to after the SCA session,
+     * and redirect the userGet natural or legal user by ID
+     *
+     * @param userId
+     * @param options
+     */
+    enroll: MethodOverload<string, user.UserEnrollmentResult>;
 }

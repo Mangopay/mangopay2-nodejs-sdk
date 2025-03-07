@@ -132,6 +132,13 @@ export class PayIns {
         payIn.PayPalWebPayInData>;
 
     /**
+     * View card details for a Web Card PayIn
+     * @param payInId
+     * @param options
+     */
+    getCardWebPayInExtendedDetails: MethodOverload<string, payIn.CardWebExtendedPayInData>;
+
+    /**
      * Create new pay-in Payconiq Web, using the latest API url (/payment-methods/payconiq)
      * @param payIn
      * @param options

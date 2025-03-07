@@ -1,5 +1,4 @@
 import Mangopay = require("mangopay2-nodejs-sdk");
-import {PayPalWebPayInData} from "./models/payIn";
 
 // $ExpectError
 const invalidConfig: Mangopay.base.Config = {};
