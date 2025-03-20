@@ -61,7 +61,15 @@ module.exports = {
                 Email: 'john.doe.sca@sample.org',
                 PersonType: 'NATURAL',
                 TermsAndConditionsAccepted: true,
-                UserCategory: 'PAYER'
+                UserCategory: 'PAYER',
+                Address: new Address({
+                    "AddressLine1": "4101 Reservoir Rd NW",
+                    "AddressLine2": "",
+                    "City": "Washington",
+                    "Region": "District of Columbia",
+                    "PostalCode": "20007",
+                    "Country": "US"
+                })
             };
         },
         getUserNaturalPayer: function() {
@@ -258,14 +266,22 @@ module.exports = {
                 Email: 'mail@test.com',
                 LegalPersonType: 'BUSINESS',
                 LegalRepresentative: {
-                    FirstName: 'John NodejsSDK',
-                    LastName: 'Doe NodejsSDK',
-                    Email: 'john.doe@sample.org',
+                    FirstName: 'John Sca',
+                    LastName: 'Doe SCA Review',
+                    Email: 'john.doe.sca@sample.org',
                     Birthday: 188301600,
                     Nationality: 'FR',
                     CountryOfResidence: 'FR',
                     PhoneNumber: '+33611111111',
                     PhoneNumberCountry: 'FR'
+                },
+                LegalRepresentativeAddress: {
+                    "AddressLine1": "4101 Reservoir Rd NW",
+                    "AddressLine2": "address line 2",
+                    "City": "Washington",
+                    "Region": "District of Columbia",
+                    "PostalCode": "20007",
+                    "Country": "US"
                 },
                 TermsAndConditionsAccepted: true,
                 UserCategory: 'PAYER'
