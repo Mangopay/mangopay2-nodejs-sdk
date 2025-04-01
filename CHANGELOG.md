@@ -1,4 +1,11 @@
+## [1.51.1] - 2025-04-01
+### Changed
+- User-Agent Header value standardized on format: User-Agent: Mangopay-SDK/`SDKVersion` (`Language`/`LanguageVersion`)
+
+### Fixed
+- Fixed tests for categorize SCA users endpoint
 ## [1.51.0] - 2025-03-07
+
 ### Added
 
 New endpoints for [strong customer authentication (SCA)](https://docs.mangopay.com/guides/users/sca) on Owner users:

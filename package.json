@@ -1,6 +1,6 @@
 {
   "name": "mangopay2-nodejs-sdk",
-  "version": "1.51.0",
+  "version": "1.51.1",
   "types": "./typings/index.d.ts",
   "description": "Mangopay Node.js SDK",
   "repository": "https://github.com/Mangopay/mangopay2-nodejs-sdk.git",
