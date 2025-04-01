@@ -396,9 +396,7 @@ describe('Users', function() {
         });
     });
 
-    describe.skip('Categorize Natural SCA', function(){
-        console.warn('Cannot be tested at the moment');
-
+    describe('Categorize Natural SCA', function(){
         var updatedUser;
 
         before(function (done) {
@@ -427,9 +425,7 @@ describe('Users', function() {
         });
     });
 
-    describe.skip('Categorize Legal SCA', function(){
-        console.warn('Cannot be tested at the moment');
-
+    describe('Categorize Legal SCA', function(){
         var updatedUser;
 
         before(function (done) {
@@ -439,9 +435,9 @@ describe('Users', function() {
                     UserCategory: 'OWNER',
                     TermsAndConditionsAccepted: true,
                     LegalRepresentative: {
-                        FirstName: 'John NodejsSDK',
-                        LastName: 'Doe NodejsSDK',
-                        Email: 'john.doe@sample.org',
+                        FirstName: 'John SCA',
+                        LastName: 'Doe SCA Review',
+                        Email: 'john.doe.sca@sample.org',
                         Birthday: 188301600,
                         Nationality: 'FR',
                         CountryOfResidence: 'FR',
