@@ -96,6 +96,8 @@ describe('Recipients', function() {
             expect(schema.Currency).to.not.be.null;
             expect(schema.RecipientType).to.not.be.null;
             expect(schema.PayoutMethodType).to.not.be.null;
+            expect(schema.RecipientScope).to.not.be.null;
+            expect(schema.Tag).to.not.be.null;
             expect(schema.LocalBankTransfer).to.not.be.null;
             expect(schema.IndividualRecipient).to.not.be.null;
             expect(schema.InternationalBankTransfer).to.be.undefined;
@@ -119,6 +121,8 @@ describe('Recipients', function() {
             expect(schema.Currency).to.not.be.null;
             expect(schema.RecipientType).to.not.be.null;
             expect(schema.PayoutMethodType).to.not.be.null;
+            expect(schema.RecipientScope).to.not.be.null;
+            expect(schema.Tag).to.not.be.null;
             expect(schema.InternationalBankTransfer).to.not.be.null;
             expect(schema.BusinessRecipient).to.not.be.null;
             expect(schema.LocalBankTransfer).to.be.undefined;

@@ -122,11 +122,13 @@ export namespace recipient {
         Address: address.CreateAddress;
     }
 
-    interface RecipientSchemaData extends entityBase.EntityBaseData {
+    interface RecipientSchemaData {
         DisplayName: RecipientPropertySchema;
         Currency: RecipientPropertySchema;
         RecipientType: RecipientPropertySchema;
         PayoutMethodType: RecipientPropertySchema;
+        RecipientScope: RecipientPropertySchema;
+        Tag: RecipientPropertySchema;
         LocalBankTransfer: Record<string, Record<string, RecipientPropertySchema>>;
         InternationalBankTransfer: Record<string, RecipientPropertySchema>;
         IndividualRecipient: IndividualRecipientPropertySchema;
