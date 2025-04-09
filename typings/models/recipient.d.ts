@@ -141,6 +141,8 @@ export namespace recipient {
         MinLength: number;
         Pattern: string;
         AllowedValues: string[];
+        Label: string;
+        EndUserDisplay: string;
     }
 
     interface RecipientAddressPropertySchema {
