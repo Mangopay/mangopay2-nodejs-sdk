@@ -91,11 +91,11 @@ describe('Transfers', function () {
                             transferWithPendingUserAction = data;
                             transferPost.DebitedFunds = {
                                 Currency: 'EUR',
-                                Amount: 2000
+                                Amount: 20
                             };
                             api.Transfers.create(transferPost).then(function (data) {
                                 transferWithoutPendingUserAction = data;
-                                transferPost.ScaContext = 'USER_NOT_PRESENT'
+                                transferPost.ScaContext = 'USER_NOT_PRESENT';
                                 api.Transfers.create(transferPost).then(function (data) {
                                     transferUserNotPresent = data;
                                     done();
