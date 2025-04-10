@@ -2,6 +2,7 @@ import { transaction } from "./transaction";
 import { Timestamp } from "../types";
 import { entityBase } from "./entityBase";
 import { money } from "./money";
+import { user } from "./user";
 
 export namespace transfer {
     import MoneyData = money.MoneyData;
@@ -71,6 +72,10 @@ export namespace transfer {
          * The type of the transaction
          */
         Type: "TRANSFER";
+
+        ScaContext: string;
+
+        PendingUserAction: user.PendingUserActionData;
     }
 
     interface CreateTransfer {
@@ -108,5 +113,7 @@ export namespace transfer {
          * The ID of the wallet where money will be credited
          */
         CreditedWalletId: string;
+
+        ScaContext?: string;
     }
 }
