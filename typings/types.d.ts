@@ -64,6 +64,7 @@ export type ApiMethod =
     | "payins_recurring_registration_get"
     | "payins_recurring_registration_put"
     | "payins_create_recurring_card_direct"
+    | "payins_create_recurring_paypal"
     | "payins_payconiq-web_create"
     | "payins_payconiqv2-web_create"
     | "payouts_bankwire_create"
@@ -192,6 +193,25 @@ export type ApiMethod =
     | "users_categorizelegals_sca"
     | "users_categorizenaturals_sca"
     | "users_enroll_sca"
+
+export type CultureISO =
+    | "DE"
+    | "EN"
+    | "DA"
+    | "ES"
+    | "ET"
+    | "FI"
+    | "FR"
+    | "EL"
+    | "HU"
+    | "IT"
+    | "NL"
+    | "NO"
+    | "PL"
+    | "PT"
+    | "SK"
+    | "SV"
+    | "CS"
 
 export type CountryISO =
     | "AD"
