@@ -33,9 +33,9 @@ export namespace payOut {
         /**
          * Payment reference provided for the payout.
          */
-        PaymentRef: PayoutPaymentRefData,
+        PaymentRef: PayoutPaymentRefData;
 
-        ModeRequested: PayoutModeRequestedType,
+        ModeRequested: PayoutModeRequestedType;
 
         ModeApplied: PayoutModeAppliedType;
     }
