@@ -567,6 +567,82 @@ describe('Users', function() {
         });
     });
 
+    describe('Close natural', function(){
+        var john = new UserNatural(helpers.data.getUserNatural());
+        var johnSca = new UserNaturalSca(helpers.data.getUserNaturalScaPayer());
+
+        var closedJohn, closedJohnSca;
+
+        before(function (done) {
+            // create new UserNatural
+            api.Users.create(john).then(function(data){
+                john = data;
+                // create new UserNaturalSca
+                api.Users.create(johnSca).then(function(data){
+                    johnSca = data;
+                    // close the UserNatural
+                    api.Users.close(john).then(function(){
+                        // close the UserNaturalSca
+                        api.Users.close(johnSca).then(function (){
+                            // fetch the closed UserNatural
+                            api.Users.get(john.Id).then(function(data){
+                                closedJohn = data;
+                                // fetch the closed UserNaturalSca
+                                api.Users.get(johnSca.Id).then(function(data){
+                                    closedJohnSca = data;
+                                    done();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+
+        it('Status should be CLOSED', function() {
+            expect(closedJohn.UserStatus).to.be.eq('CLOSED');
+            expect(closedJohnSca.UserStatus).to.be.eq('CLOSED');
+        });
+    });
+
+    describe('Close legal', function(){
+        var matrix = new UserLegal(helpers.data.getUserLegal());
+        var matrixSca = new UserLegalSca(helpers.data.getUserLegalScaPayer());
+
+        var closedMatrix, closedMatrixSca;
+
+        before(function (done) {
+            // create new UserLegal
+            api.Users.create(matrix).then(function(data){
+                matrix = data;
+                // create new UserLegalSca
+                api.Users.create(matrixSca).then(function(data){
+                    matrixSca = data;
+                    // close the UserLegal
+                    api.Users.close(matrix).then(function(){
+                        // close the UserLegalSca
+                        api.Users.close(matrixSca).then(function (){
+                            // fetch the closed UserLegal
+                            api.Users.get(matrix.Id).then(function(data){
+                                closedMatrix = data;
+                                // fetch the closed UserLegalSca
+                                api.Users.get(matrixSca.Id).then(function(data){
+                                    closedMatrixSca = data;
+                                    done();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+
+        it('Status should be CLOSED', function() {
+            expect(closedMatrix.UserStatus).to.be.eq('CLOSED');
+            expect(closedMatrixSca.UserStatus).to.be.eq('CLOSED');
+        });
+    });
+
     describe('Create Bank Account', function(){
         describe('IBAN', function() {
             var ibanAccount;
