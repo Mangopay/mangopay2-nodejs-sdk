@@ -1,3 +1,12 @@
+## [1.52.0] - 2025-04-16
+### Added
+- [POST Create a TWINT PayIn](https://docs.mangopay.com/api-reference/twint/create-twint-payin)
+- `RTGS_PAYMENT` for `PayoutModeRequested` on [POST Create a Payout](https://docs.mangopay.com/api-reference/payouts/create-payout)
+- PayPal recurring payments, thanks to the `PaymentType` value `PAYPAL` on [Recurring PayIn Registrations](https://docs.mangopay.com/api-reference/recurring-payin-registrations/create-recurring-payin-registration-paypal) and new endpoints ([POST Create a Recurring PayPal PayIn (CIT)](https://docs.mangopay.com/api-reference/paypal/create-recurring-paypal-payin-cit) and [POST Create a Recurring PayPal PayIn (MIT)](https://docs.mangopay.com/api-reference/paypal/create-recurring-paypal-payin-mit)
+
+#### Fixed
+- Removed chai requirement from Users service - thanks for the MR @thierrymarianne
+
 ## [1.51.1] - 2025-04-01
 ### Changed
 - User-Agent Header value standardized on format: User-Agent: Mangopay-SDK/`SDKVersion` (`Language`/`LanguageVersion`)
