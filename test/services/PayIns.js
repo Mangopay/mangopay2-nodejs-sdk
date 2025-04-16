@@ -1512,6 +1512,45 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Twint Web', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.getNewPayInTwintWeb(api, john, function (data) {
+                payIn = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the PayIn', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('TWINT');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.AuthorId).to.equal(john.Id);
+                expect(payIn.Type).to.equal('PAYIN');
+                expect(payIn.Phone).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayIn;
+            before(function (done) {
+                api.PayIns.get(payIn.Id, function (data, response) {
+                    getPayIn = data;
+                    done();
+                });
+            });
+
+            it('should get the PayIn', function () {
+                expect(getPayIn.Id).to.equal(payIn.Id);
+                expect(getPayIn.PaymentType).to.equal('TWINT');
+                expect(getPayIn.ExecutionType).to.equal('WEB');
+                expect(getPayIn.Phone).not.to.be.null;
+            });
+        });
+    });
+
     describe('Ideal Legacy Web', function () {
         var payIn;
 

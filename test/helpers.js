@@ -1082,6 +1082,35 @@ module.exports = {
         });
     },
 
+    getNewPayInTwintWeb: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'CHF',
+            Description: 'WALLET IN CHF'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                PaymentType: 'TWINT',
+                ExecutionType: 'WEB',
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 100,
+                    Currency: 'CHF'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'CHF'
+                },
+                ReturnURL: 'http://test.com',
+                StatementDescriptor: "twint",
+                Tag: "twint payin"
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
     getNewPayInPayByBankWeb: function (api, user, callback) {
         var wallet = {
             Owners: [user.Id],
