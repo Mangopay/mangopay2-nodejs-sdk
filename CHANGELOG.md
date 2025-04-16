@@ -1,3 +1,28 @@
+## [1.53.0] - 2025-04-16
+### Added
+
+#### Recipients
+- [GET View payout methods](/api-reference/recipients/view-payout-methods)
+- [GET View the schema for a Recipient](/api-reference/recipients/view-recipient-schema)
+- [POST Validate data for a Recipient](/api-reference/recipients/validate-recipient-data)
+- [POST Create a Recipient](/api-reference/recipients/create-recipient)
+- [GET View a Recipient](/api-reference/recipients/view-recipient)
+- [GET List Recipients for a user](/api-reference/recipients/list-recipients-user)
+- [PUT Deactivate a Recipient](/api-reference/recipients/deactivate-recipient)
+- Webhook event types:
+  - `RECIPIENT_ACTIVE`
+  - `RECIPIENT_CANCELED`
+  - `RECIPIENT_DEACTIVATED`
+
+#### SCA on Owner-initiated transfers
+- On [POST Create a Transfer](/api-reference/transfers/create-transfer)
+  - `ScaContext` body parameter
+  - `PendingUserAction` response field containing `RedirectUrl`
+
+#### Endpoints to close a user account
+- [DELETE Close a Natural User](/api-reference/users/close-natural-user)
+- [DELETE Close a Legal User](/api-reference/users/close-legal-user)
+
 ## [1.52.0] - 2025-04-16
 ### Added
 - [POST Create a TWINT PayIn](https://docs.mangopay.com/api-reference/twint/create-twint-payin)
