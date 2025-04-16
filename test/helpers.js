@@ -3,6 +3,7 @@ var Address = require('../lib/models/Address');
 var Birthplace = require('../lib/models/Birthplace');
 var UserNaturalCapacity = require('../lib/models/UserNaturalCapacity');
 var UserNatural = require('../lib/models/UserNatural');
+const api = require("./main");
 
 module.exports = {
     data: {
@@ -1195,5 +1196,74 @@ module.exports = {
             Duration: 300
         };
         api.Conversions.createQuote(quoteBody, callback);
+    },
+
+    getNewWalletWithMoney: function (api, userId, callback) {
+        var self = this;
+        var wallet = {
+            Owners: [userId],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function (createdWallet) {
+            var cardRegistration = {
+                UserId: userId,
+                Currency: 'EUR'
+            };
+
+            api.CardRegistrations.create(cardRegistration, function () {
+                self.getPaylineCorrectRegistartionData(cardRegistration, function (data, response) {
+                    cardRegistration.RegistrationData = data;
+                    api.CardRegistrations.update(cardRegistration).then(function (data) {
+                        cardRegistration = data;
+                        var payIn = {
+                            CreditedWalletId: wallet.Id,
+                            AuthorId: userId,
+                            DebitedFunds: {
+                                Amount: 10000,
+                                Currency: 'EUR'
+                            },
+                            Fees: {
+                                Amount: 0,
+                                Currency: 'EUR'
+                            },
+                            CardId: cardRegistration.CardId,
+                            SecureModeReturnURL: 'http://test.com',
+                            PaymentType: 'CARD',
+                            ExecutionType: 'DIRECT',
+                            Billing: {
+                                FirstName: "John",
+                                LastName: "Doe",
+                                Address: {
+                                    "AddressLine1": "4101 Reservoir Rd NW",
+                                    "AddressLine2": "",
+                                    "City": "Washington",
+                                    "Region": "District of Columbia",
+                                    "PostalCode": "68400",
+                                    "Country": "US"
+                                }
+                            },
+                            BrowserInfo: {
+                                AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                                JavaEnabled: true,
+                                Language: "FR-FR",
+                                ColorDepth: 4,
+                                ScreenHeight: 1800,
+                                ScreenWidth: 400,
+                                JavascriptEnabled: true,
+                                TimeZoneOffset: "+60",
+                                UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                            },
+                            IpAddress: "2001:0620:0000:0000:0211:24FF:FE80:C12C",
+                        };
+
+                        api.PayIns.create(payIn).then(function () {
+                            api.Wallets.get(createdWallet.Id, callback);
+                        });
+                    });
+                });
+            });
+        });
     },
 };
