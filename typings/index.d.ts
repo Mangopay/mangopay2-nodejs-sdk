@@ -72,6 +72,8 @@ import { VirtualAccounts } from "./services/VirtualAccounts";
 import { virtualAccount } from "./models/virtualAccount";
 import { IdentityVerifications } from "./services/IdentityVerifications";
 import { identityVerification } from "./models/identityVerification";
+import { recipient } from "./models/recipient";
+import { Recipients } from "./services/Recipients";
 
 export = MangoPay;
 
@@ -108,6 +110,7 @@ declare class MangoPay {
     Conversions: Conversions;
     VirtualAccounts: VirtualAccounts;
     IdentityVerifications: IdentityVerifications;
+    Recipients: Recipients;
 
     models: typeof MangoPay.models;
 
@@ -863,6 +866,7 @@ declare namespace MangoPay {
         conversionRate,
         conversion,
         virtualAccount,
-        identityVerification
+        identityVerification,
+        recipient
     };
 }

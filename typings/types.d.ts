@@ -194,6 +194,13 @@ export type ApiMethod =
     | "users_categorizelegals_sca"
     | "users_categorizenaturals_sca"
     | "users_enroll_sca"
+    | "recipients_create"
+    | "recipients_get"
+    | "recipients_get_all"
+    | "recipients_get_schema"
+    | "recipients_get_payout_methods"
+    | "recipients_validate"
+    | "recipients_deactivate"
 
 export type CultureISO =
     | "DE"
