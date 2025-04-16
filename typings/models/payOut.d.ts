@@ -9,7 +9,8 @@ export namespace payOut {
     import FallbackReasonData = base.FallbackReasonData;
     import PayoutPaymentRefData = base.PayoutPaymentRefData;
 
-    type PayoutModeRequestedType = "STANDARD" | "INSTANT_PAYMENT" | "INSTANT_PAYMENT_ONLY";
+    type PayoutModeRequestedType = "STANDARD" | "INSTANT_PAYMENT" | "INSTANT_PAYMENT_ONLY" | "RTGS_PAYMENT";
+    type PayoutModeAppliedType = "STANDARD" | "INSTANT_PAYMENT" | "RTGS_PAYMENT" | "PENDING_RESPONSE";
 
     interface PayOutData extends Omit<transfer.TransferData, "Type"> {
         /**
@@ -33,6 +34,10 @@ export namespace payOut {
          * Payment reference provided for the payout.
          */
         PaymentRef: PayoutPaymentRefData;
+
+        ModeRequested: PayoutModeRequestedType;
+
+        ModeApplied: PayoutModeAppliedType;
     }
 
     interface CreatePayOut {
