@@ -89,6 +89,12 @@ export class PayIns {
     createCardPreAuthorizedDepositPayIn:
         MethodOverload<payIn.CreateCardPreAuthorizedDepositPayIn, payIn.CardPreAuthorizedDepositPayInData>;
 
+    createRecurringPayPalPayInCIT: MethodOverload<payIn.CreateRecurringPayPalPayInCIT,
+        payIn.RecurringPayInData>;
+
+    createRecurringPayPalPayInMIT: MethodOverload<payIn.CreateRecurringPayPalPayInMIT,
+        payIn.RecurringPayInData>;
+
     /**
      * Create new PayPal Web pay-in
      * To be used instead of the 'create' method for PayPal PayIns

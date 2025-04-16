@@ -619,6 +619,7 @@ describe('PayIns', function () {
     describe('Recurring Payments', function() {
         var cardId;
         var walletId;
+        var createdPayPalCit;
         before('Create a wallet with money and a card', function(done){
             wallet = {
                 Owners: [john.Id],
@@ -763,6 +764,84 @@ describe('PayIns', function () {
                 expect(createCit).to.not.be.null;
             })
         })
+
+        describe('Create a PayPal Recurring Payment CIT', function() {
+            var recurring;
+            before(function(done){
+                var recurringPayinRegistration = {
+                    AuthorId: john.Id,
+                    CreditedWalletId: walletId,
+                    FirstTransactionDebitedFunds: {
+                        Amount: 1000,
+                        Currency: 'EUR'
+                    },
+                    FirstTransactionFees: {
+                        Amount: 1,
+                        Currency: 'EUR'
+                    },
+                    Billing: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    Shipping: {
+                        FirstName: 'Joe',
+                        LastName: 'Blogs',
+                        Address: {
+                            AddressLine1: '1 MangoPay Street',
+                            AddressLine2: 'The Loop',
+                            City: 'Paris',
+                            Region: 'Ile de France',
+                            PostalCode: '75001',
+                            Country: 'FR'
+                        }
+                    },
+                    PaymentType: 'PAYPAL'
+                };
+
+                api.PayIns.createRecurringPayment(recurringPayinRegistration, function(data, response){
+                    recurringPayinRegistration = data;
+                }).then(function(){
+                    var cit = {
+                        RecurringPayinRegistrationId: recurringPayinRegistration.Id,
+                        StatementDescriptor: "lorem",
+                        Tag: "custom meta",
+                        LineItems: [
+                            {
+                                Name: "running shoes",
+                                Quantity: 1,
+                                UnitAmount: 1000,
+                                TaxAmount: 0,
+                                Description: "seller1 ID"
+                            }
+                        ],
+                        ReturnURL: 'http://example.com',
+                        CancelURL: 'http://example.net',
+                        ShippingPreference: 'SET_PROVIDED_ADDRESS',
+                        Reference: 'abcd-efgh-ijkl'
+                    };
+
+                    api.PayIns.createRecurringPayPalPayInCIT(cit, function(data){
+                        createdPayPalCit = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should be created', function() {
+                expect(createdPayPalCit).to.not.be.null;
+                expect(createdPayPalCit.Status).to.eq('CREATED');
+                expect(createdPayPalCit.PaymentType).to.eq('PAYPAL');
+                expect(createdPayPalCit.ExecutionType).to.eq('WEB');
+            });
+        });
 
         describe('Create a Recurring Payment Check Card Info', function() {
             var recurring;

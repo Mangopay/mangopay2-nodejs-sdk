@@ -1,4 +1,4 @@
-import { CountryISO, PickPartialRequired, SecureMode, Timestamp, ValueOf } from "../types";
+import {CountryISO, CultureISO, PickPartialRequired, SecureMode, Timestamp, ValueOf} from "../types";
 import { enums } from "../enums";
 import { transaction } from "./transaction";
 import { card } from "./card";
@@ -1353,6 +1353,8 @@ export namespace payIn {
          * Indicates whether the object is being used to attempt registration of an existing recurring payment
          */
         Migration: boolean;
+
+        PaymentType: PayInPaymentType;
     }
 
     interface CreatePayInRecurringRegistration {
@@ -1434,6 +1436,8 @@ export namespace payIn {
         NextTransactionFees?: MoneyData;
 
         FreeCycles?: number;
+
+        PaymentType?: PayInPaymentType
     }
 
     interface UpdatePayInRecurringRegistration {
@@ -1556,6 +1560,67 @@ export namespace payIn {
         Fees?: MoneyData;
     }
 
+    interface CreateRecurringPayPalPayInCIT {
+        /**
+         * The unique identifier of the recurring pay-in registration.
+         */
+        RecurringPayinRegistrationId: string;
+
+        /**
+         * The URL to which the user is returned after the payment, whether the transaction is successful or not.
+         */
+        ReturnURL: string;
+
+        /**
+         * The URL to which the user is returned after canceling the payment.
+         * If not provided, the Cancel button returns the user to the RedirectURL.
+         */
+        CancelURL?: string;
+
+        /**
+         * Custom description to appear on the user’s bank statement along with the platform name
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+
+        /**
+         * Information about the end user’s shipping address, managed by ShippingPreference.
+         * Required if ShippingPreference is SET_PROVIDED_ADDRESS and the shipping information is not present in the
+         * recurring registration object.
+         */
+        Shipping?: CreateShipping;
+
+        /**
+         * Information about the items purchased in the transaction
+         */
+        LineItems: CreateLineItem[];
+
+        /**
+         * The language in which the PayPal payment page is to be displayed.
+         */
+        Culture?: CultureISO;
+
+        /**
+         * Information about the shipping address behavior on the PayPal payment page:
+         * <p>
+         * SET_PROVIDED_ADDRESS - The Shipping parameter becomes required and its values are displayed to the end user, who is not able to modify them.
+         * <p>
+         * GET_FROM_FILE – The Shipping parameter is ignored and the end user can choose from registered addresses.
+         * <p>
+         * NO_SHIPPING – No shipping address section is displayed.
+         */
+        ShippingPreference?: ShippingPreference;
+
+        /**
+         * The platform’s order reference for the transaction.
+         */
+        Reference?: string;
+    }
+
     interface CreateRecurringPayInMIT {
         /**
          * The recurring's ID
@@ -1584,6 +1649,83 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+    }
+
+    interface CreateRecurringPayPalPayInMIT {
+        /**
+         * The unique identifier of the recurring pay-in registration.
+         */
+        RecurringPayinRegistrationId: string;
+
+        /**
+         * The amount of the subsequent recurring pay-in. If this field is empty, the amount entered in
+         * the NextTransactionDebitedFunds of the Recurring PayIn Registration is taken into account.
+         * <p></p>
+         * Required if the registration’s NextTransactionDebitedFunds is empty.
+         */
+        DebitedFunds?: MoneyData;
+
+        /**
+         * The amount of the subsequent fees. If this field is empty, the amount entered in
+         * the NextTransactionFees of the Recurring PayIn Registration is taken into account.
+         * <p></p>
+         * Required if the registration’s NextTransactionFees is empty.
+         */
+        Fees?: MoneyData;
+
+        /**
+         * The URL to which the user is returned after the payment, whether the transaction is successful or not.
+         */
+        ReturnURL: string;
+
+        /**
+         * The URL to which the user is returned after canceling the payment.
+         * If not provided, the Cancel button returns the user to the RedirectURL.
+         */
+        CancelURL?: string;
+
+        /**
+         * Custom description to appear on the user’s bank statement along with the platform name
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+
+        /**
+         * Information about the end user’s shipping address, managed by ShippingPreference.
+         * Required if ShippingPreference is SET_PROVIDED_ADDRESS and the shipping information is not present in the
+         * recurring registration object.
+         */
+        Shipping?: CreateShipping;
+
+        /**
+         * Information about the items purchased in the transaction
+         */
+        LineItems: CreateLineItem[];
+
+        /**
+         * The language in which the PayPal payment page is to be displayed.
+         */
+        Culture?: CultureISO;
+
+        /**
+         * Information about the shipping address behavior on the PayPal payment page:
+         * <p>
+         * SET_PROVIDED_ADDRESS - The Shipping parameter becomes required and its values are displayed to the end user, who is not able to modify them.
+         * <p>
+         * GET_FROM_FILE – The Shipping parameter is ignored and the end user can choose from registered addresses.
+         * <p>
+         * NO_SHIPPING – No shipping address section is displayed.
+         */
+        ShippingPreference?: ShippingPreference;
+
+        /**
+         * The platform’s order reference for the transaction.
+         */
+        Reference?: string;
     }
 
     interface PayconiqWebPayInData extends BasePayInData {
