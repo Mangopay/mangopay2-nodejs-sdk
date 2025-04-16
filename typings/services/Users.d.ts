@@ -264,4 +264,12 @@ export class Users {
      * @param options
      */
     enroll: MethodOverload<string, user.UserEnrollmentResult>;
+
+    /**
+     * Close a user (change status to CLOSED). The resource remains available for historical purposes.
+     * @param user
+     * @param options
+     */
+    close: MethodOverload<user.UserNaturalData | user.UserNaturalScaData, void> &
+        MethodOverload<user.UserLegalData | user.UserLegalScaData, void>;
 }
