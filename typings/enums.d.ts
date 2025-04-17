@@ -26,6 +26,11 @@ export namespace enums {
         PayByBank: "PAY_BY_BANK"
     }
 
+    interface IRecurringPayInRegistrationPaymentType {
+        CardDirect: "CARD_DIRECT";
+        PayPal: "PAYPAL"
+    }
+
     interface IMandateStatus {
         Created: "CREATED";
         Submitted: "SUBMITTED";

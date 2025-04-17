@@ -45,6 +45,8 @@ export namespace payIn {
 
     type PayInPaymentType = ValueOf<enums.IPayInPaymentType>;
 
+    type RecurringPayInRegistrationPaymentType = ValueOf<enums.IRecurringPayInRegistrationPaymentType>;
+
     type PayInExecutionType = ValueOf<enums.IPayInExecutionType> | "EXTERNAL_INSTRUCTION";
 
     type RecurringType = "CLASSIC_SUBSCRIPTION" | "FRACTIONED_PAYMENT" | "CUSTOM";
@@ -1354,7 +1356,7 @@ export namespace payIn {
          */
         Migration: boolean;
 
-        PaymentType: PayInPaymentType;
+        PaymentType: RecurringPayInRegistrationPaymentType;
     }
 
     interface CreatePayInRecurringRegistration {
@@ -1437,7 +1439,7 @@ export namespace payIn {
 
         FreeCycles?: number;
 
-        PaymentType?: PayInPaymentType
+        PaymentType?: RecurringPayInRegistrationPaymentType
     }
 
     interface UpdatePayInRecurringRegistration {
