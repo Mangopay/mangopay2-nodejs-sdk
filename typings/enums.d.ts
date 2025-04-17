@@ -26,6 +26,28 @@ export namespace enums {
         PayByBank: "PAY_BY_BANK"
     }
 
+    interface IRecurringPayInRegistrationPaymentType {
+        BankWire: "BANK_WIRE";
+        Card: "CARD";
+        DirectDebit: "DIRECT_DEBIT";
+        Preauthorized: "PREAUTHORIZED";
+        PayPal: "PAYPAL";
+        Payconiq: "PAYCONIQ";
+        Mbway: "MBWAY";
+        Multibanco: "MULTIBANCO";
+        Satispay: "SATISPAY";
+        Blik: "BLIK";
+        ApplePay: "APPLEPAY";
+        GooglePay: "GOOGLE_PAY";
+        Klarna: "KLARNA";
+        Ideal: "IDEAL";
+        Giropay: "GIROPAY";
+        Bancontact: "BCMC";
+        Swish: "SWISH";
+        Twint: "TWINT";
+        PayByBank: "PAY_BY_BANK"
+    }
+
     interface IMandateStatus {
         Created: "CREATED";
         Submitted: "SUBMITTED";

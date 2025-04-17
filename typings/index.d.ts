@@ -144,6 +144,7 @@ declare namespace MangoPay {
         import BillingData = billing.BillingData;
         const PayInExecutionType: enums.IPayInExecutionType;
         const PayInPaymentType: enums.IPayInPaymentType;
+        const RecurringPayInRegistrationPaymentType: enums.IRecurringPayInRegistrationPaymentType;
         const MandateStatus: enums.IMandateStatus;
         const LegalPersonType: enums.ILegalPersonType;
         const PersonType: enums.IPersonType;
