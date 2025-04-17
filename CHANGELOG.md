@@ -1,3 +1,7 @@
+## [1.53.1] - 2025-04-17
+### Fixed
+- Fixed the PaymentType enum for recurring payin registrations
+
 ## [1.53.0] - 2025-04-16
 ### Added
 
