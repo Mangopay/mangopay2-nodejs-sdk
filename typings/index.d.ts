@@ -538,10 +538,31 @@ declare namespace MangoPay {
              * @param personType
              */
             setPersonType(type: user.PersonType): void;
+
             setUserCategory(category: user.UserCategory): void;
         }
 
         interface CategorizeUserNatural extends user.CategorizeUserNatural {
+        }
+
+      class CategorizeUserLegal extends EntityBase<user.CategorizeUserLegal> {
+            PersonType: "LEGAL";
+
+            constructor(
+                data: MakeKeysRequired<Partial<user.CategorizeUserLegal>,
+                    user.RequiredCategorizeUserLegal>
+            );
+            
+            /**
+             * Sets the person type for the model
+             * @param personType
+             */
+            setPersonType(type: user.PersonType): void;
+            
+            setUserCategory(category: user.UserCategory): void;
+      }
+      
+        interface CategorizeUserLegal extends user.CategorizeUserLegal {
         }
 
         class UserNaturalOwner extends EntityBase<user.UserNaturalData> {
