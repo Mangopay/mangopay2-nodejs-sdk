@@ -558,6 +558,24 @@ export namespace payIn {
          * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
         StatementDescriptor: string;
+
+        /**
+         * The 6-digit code from the user’s banking application.
+         * Required when creating a Blik PayIn with code.
+         */
+        Code: string;
+
+        /**
+         * The IP address of the end user initiating the transaction, in IPV4 or IPV6 format.
+         * Required when creating a Blik PayIn with code.
+         */
+        IpAddress: string;
+
+        /**
+         * Information about the browser used by the end user (author) to perform the payment.
+         * Required when creating a Blik PayIn with code.
+         */
+        BrowserInfo: BrowserInfoData;
     }
 
     interface CreateCardDirectPayIn {
@@ -939,6 +957,24 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The 6-digit code from the user’s banking application.
+         * Required when creating a Blik PayIn with code.
+         */
+        Code?: string;
+
+        /**
+         * The IP address of the end user initiating the transaction, in IPV4 or IPV6 format.
+         * Required when creating a Blik PayIn with code.
+         */
+        IpAddress?: string;
+
+        /**
+         * Information about the browser used by the end user (author) to perform the payment.
+         * Required when creating a Blik PayIn with code.
+         */
+        BrowserInfo?: BrowserInfoData;
     }
 
     interface LineItemData {

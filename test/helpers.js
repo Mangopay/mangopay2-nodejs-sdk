@@ -933,6 +933,48 @@ module.exports = {
         });
     },
 
+    getNewPayInBlikWebWithCode: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'PLN',
+            Description: 'WALLET IN PLN'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payIn = {
+                AuthorId: user.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'PLN'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'PLN'
+                },
+                CreditedWalletId: wallet.Id,
+                PaymentType: 'BLIK',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "test",
+                ReturnURL: "http://test.com",
+                Tag: "test tag",
+                Code: "777365",
+                IpAddress: "159.180.248.187",
+                BrowserInfo: {
+                    AcceptHeader: "text/html, application/xhtml+xml, application/xml;q=0.9, /;q=0.8",
+                    JavaEnabled: true,
+                    Language: "FR-FR",
+                    ColorDepth: 4,
+                    ScreenHeight: 1800,
+                    ScreenWidth: 400,
+                    JavascriptEnabled: true,
+                    TimeZoneOffset: "+60",
+                    UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+                }
+            };
+            api.PayIns.create(payIn, callback);
+        });
+    },
+
     getNewPayInKlarnaWeb: function (api, user, callback) {
         var wallet = {
             Owners: [user.Id],
