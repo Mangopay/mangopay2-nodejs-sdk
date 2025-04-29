@@ -1397,11 +1397,15 @@ describe('PayIns', function () {
 
     describe('Blik Web', function () {
         var payIn;
+        var payInWithCode;
 
         before(function (done) {
             helpers.getNewPayInBlikWeb(api, john, function (data) {
                 payIn = data;
-                done();
+                helpers.getNewPayInBlikWebWithCode(api, john, function (data) {
+                    payInWithCode = data;
+                    done();
+                });
             });
         });
 
@@ -1414,6 +1418,15 @@ describe('PayIns', function () {
                 expect(payIn.Status).to.equal('CREATED');
                 expect(payIn.Type).to.equal('PAYIN');
                 expect(payIn.Phone).not.to.be.null;
+            });
+
+            it('should create the PayIn with code', function () {
+                expect(payIn.Id).not.to.be.undefined;
+                expect(payIn.PaymentType).to.equal('BLIK');
+                expect(payIn.ExecutionType).to.equal('WEB');
+                expect(payIn.Code).not.to.be.undefined;
+                expect(payIn.IpAddress).not.to.be.undefined;
+                expect(payIn.BrowserInfo).not.to.be.undefined;
             });
         });
 

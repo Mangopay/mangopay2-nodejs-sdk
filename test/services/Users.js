@@ -1062,6 +1062,29 @@ describe('Users', function() {
             });
         });
 
+        describe('Get all transactions Sca', function(){
+            var responseError;
+
+            before(function(done){
+                api.Users.getTransactions(john.Id, function(data, response) {}, {
+                    parameters: {
+                        Type: 'PAYIN',
+                        AfterDate: payIn.CreationDate - 10,
+                        BeforeDate: payIn.CreationDate + 10,
+                        ScaContext: 'USER_PRESENT'
+                    },
+                    resolveWithFullResponse: true
+                }).catch(function (error) {
+                    responseError = error;
+                    done();
+                });
+            });
+
+            it('redirectUrl should be present on response headers', function () {
+                expect(responseError.headers['www-authenticate']).to.contain("PendingUserAction RedirectUrl");
+            });
+        });
+
         describe('Get all Cards', function(){
             var card, cards;
 
@@ -1126,6 +1149,29 @@ describe('Users', function() {
 
         it('wallet should contain the right data', function(){
             assert(_.contains(wallets[0].Owners, john.Id));
+        });
+    });
+
+    describe('Wallets Sca', function () {
+        var responseError;
+
+
+        before(function (done) {
+            api.Users.getWallets(john.Id, function (data, response) {
+                },
+                {
+                    parameters: {
+                        ScaContext: 'USER_PRESENT'
+                    },
+                    resolveWithFullResponse: true
+                }).catch(function (error) {
+                responseError = error;
+                done();
+            });
+        });
+
+        it('redirectUrl should be present on response headers', function () {
+            expect(responseError.headers['www-authenticate']).to.contain("PendingUserAction RedirectUrl");
         });
     });
 
