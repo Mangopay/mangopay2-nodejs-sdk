@@ -1,3 +1,21 @@
+## [1.54.0] - 2025-04-29
+### Added
+
+#### SCA on wallet access endpoints
+`ScaContext` query parameter added on wallet access endpoints for the [introduction of SCA](https://docs.mangopay.com/guides/sca/wallets):
+
+- [GET View a Wallet](https://docs.mangopay.com/api-reference/wallets/view-wallet)
+- [GET List Wallets for a User](https://docs.mangopay.com/api-reference/wallets/list-wallets-user)
+- [GET List Transactions for a User](https://docs.mangopay.com/api-reference/transactions/list-transactions-user)
+- [GET List Transactions for a Wallet](https://docs.mangopay.com/api-reference/transactions/list-transactions-wallet)
+
+If SCA is required, Mangopay responds with a 401 response code. The `PendingUserAction` `RedirectUrl` is in the dedicated `WWW-Authenticate` response header.
+
+See the tests for examples on handling this error.
+
+#### BLIK with code
+Support for [BLIK with code endpoint](https://docs.mangopay.com/api-reference/blik/create-blik-payin-with-code)
+
 ## [1.53.1] - 2025-04-17
 ### Fixed
 - Fixed the PaymentType enum for recurring payin registrations
