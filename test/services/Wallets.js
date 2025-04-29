@@ -42,6 +42,28 @@ describe('Wallets', function() {
         });
     });
 
+    describe('Get Sca', function () {
+        var responseError;
+
+        before(function (done) {
+            api.Wallets.get(wallet.Id, function (data) {},
+                {
+                    parameters: {
+                        ScaContext: 'USER_PRESENT'
+                    },
+                    resolveWithFullResponse: true
+                })
+                .catch(function (error) {
+                    responseError = error;
+                    done();
+                });
+        });
+
+        it('redirectUrl should be present on response headers', function () {
+            expect(responseError.headers['www-authenticate']).to.contain("PendingUserAction RedirectUrl");
+        });
+    });
+
     describe('Save', function () {
         var NEW_DESCRIPTION = 'New description to test';
 
@@ -84,6 +106,27 @@ describe('Wallets', function() {
         it('should be correctly updated', function () {
             expect(transactions.length).to.equal(1);
             expect(transactions[0].AuthorId).to.equal(john.Id);
+        });
+    });
+
+    describe('Transactions Sca', function () {
+        var responseError;
+
+        before(function(done){
+            api.Wallets.getTransactions(wallet.Id, function(data, response) {}, {
+                page: 1,
+                per_page: 50,
+                ScaContext: 'USER_PRESENT',
+                resolveWithFullResponse: true
+            })
+                .catch(function (error) {
+                    responseError = error;
+                    done();
+                });
+        });
+
+        it('redirectUrl should be present on response headers', function () {
+            expect(responseError.headers['www-authenticate']).to.contain("PendingUserAction RedirectUrl");
         });
     });
 });
