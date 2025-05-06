@@ -190,7 +190,7 @@ export type ApiMethod =
     | "add_tracking_info"
     | "identity_verification_create"
     | "identity_verification_get"
-    | "identity_verification_checks_get"
+    | "identity_verification_get_all"
     | "users_categorizelegals_sca"
     | "users_categorizenaturals_sca"
     | "users_enroll_sca"

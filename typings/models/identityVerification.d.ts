@@ -24,6 +24,15 @@ export namespace identityVerification {
          * The URL to which the user is returned after the hosted identity verification session, regardless of the outcome.
          */
         ReturnUrl: string;
+
+        LastUpdate: number;
+
+        UserId: string;
+
+        /**
+         * The details of the individual verification checks performed during the session.
+         */
+        Checks: Check[];
     }
 
     interface CreateIdentityVerification {
@@ -83,40 +92,8 @@ export namespace identityVerification {
         /**
          * The data points collected and verified during the check.
          */
-        Data: CheckData[]
-    }
+        Data: CheckData[];
 
-    interface IdentityVerificationCheckData {
-        /**
-         * Unique identifier for the entire verification session.
-         */
-        SessionId: string;
-
-        /**
-         * The status of the identity verification session:
-         * <p>PENDING – The session is available on the HostedUrl, to which the user must be redirected to complete it.</p>
-         * <p>VALIDATED – The session was successful.</p>
-         * <p>REFUSED – The session was refused.</p>
-         * <p>REVIEW – The session is under manual review by Mangopay.</p>
-         * <p>OUTDATED – The session is no longer valid (likely due to expired documents used during the session).</p>
-         * <p>TIMEOUT – The session timed out due to inactivity.</p>
-         * <p>ERROR – The session was not completed because an error occurred.</p>
-         */
-        Status: string;
-
-        /**
-         * The date and time at which the session was created.
-         */
-        CreationDate: number;
-
-        /**
-         * The date and time at which the session was last updated.
-         */
-        LastUpdate: number;
-
-        /**
-         * The details of the individual verification checks performed during the session.
-         */
-        Checks: Check[];
+        Reasons: CheckData[];
     }
 }
