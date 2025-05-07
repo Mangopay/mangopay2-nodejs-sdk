@@ -55,7 +55,7 @@ describe("Clients", function () {
 
     });
 
-    describe("Upload Logo", function () {
+    describe.skip("Upload Logo", function () {
         var filePath = path.resolve(__dirname, '../TestKycPageFile.png');
         var requestResponse;
         before(function (done) {

@@ -50,24 +50,19 @@ describe('IdentityVerifications', function () {
         });
     });
 
-    describe.skip('Get checks', function () {
-        console.warn("Endpoint is returning 404");
-        var checks;
+    describe('Get All', function () {
+        var fetched;
 
         before(function (done) {
-            api.IdentityVerifications.getChecks(identityVerification.Id).then(function (data, response) {
-                checks = data;
+            api.IdentityVerifications.getAll(john.Id).then(function (data, response) {
+                fetched = data;
                 done();
             });
         });
 
         it('should be fetched', function () {
-            expect(checks).not.to.be.undefined;
-            expect(identityVerification.Id).to.equal(checks.SessionId);
-            expect("PENDING").to.equal(checks.Status);
-            expect(checks.CreationDate).to.be.gt(0);
-            expect(checks.LastUpdate).to.be.gt(0);
-            expect(checks.Checks).not.to.be.undefined;
+            expect(fetched).not.to.be.undefined;
+            expect(fetched.length).to.be.above(0);
         });
     });
 });
