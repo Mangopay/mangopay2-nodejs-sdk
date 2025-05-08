@@ -4,17 +4,16 @@ var helpers = require('../helpers');
 var api = require('../main');
 
 describe('Deposits', function () {
+    var deposit;
+
+    before(function (done) {
+        helpers.createNewDeposit(function (data, response) {
+            deposit = data;
+            done();
+        });
+    });
 
     describe('Create', function () {
-        var deposit;
-
-        before(function (done) {
-            helpers.createNewDeposit(function (data, response) {
-               deposit = data;
-               done();
-            });
-        });
-
         it('should be created', function () {
             expect(deposit).not.to.be.undefined;
         });
@@ -29,23 +28,50 @@ describe('Deposits', function () {
     });
 
     describe('Get', function () {
-        var deposit;
         var fetchedDeposit;
 
         before(function (done) {
-            helpers.createNewDeposit(function (data, response) {
-                deposit = data;
-
-                api.Deposits.get(deposit.Id, function (data, response) {
-                   fetchedDeposit = data;
-                   done();
-                });
+            api.Deposits.get(deposit.Id, function (data, response) {
+                fetchedDeposit = data;
+                done();
             });
         });
 
         it('should be fetched', function () {
             expect(fetchedDeposit).not.to.be.undefined;
             expect(fetchedDeposit.Id).to.equal(deposit.Id);
+        });
+    });
+
+    describe('Get all for card', function () {
+        var result;
+
+        before(function (done) {
+            api.Deposits.getAllForCard(deposit.CardId, function (data, response) {
+                result = data;
+                done();
+            });
+        });
+
+        it('should be fetched', function () {
+            expect(result).to.be.an('array');
+            expect(result.length).to.be.above(0);
+        });
+    });
+
+    describe('Get all for user', function () {
+        var result;
+
+        before(function (done) {
+            api.Deposits.getAllForUser(deposit.AuthorId, function (data, response) {
+                result = data;
+                done();
+            });
+        });
+
+        it('should be fetched', function () {
+            expect(result).to.be.an('array');
+            expect(result.length).to.be.above(0);
         });
     });
 
