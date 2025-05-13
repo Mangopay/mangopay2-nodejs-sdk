@@ -1802,21 +1802,68 @@ describe('PayIns', function () {
 
     });
 
-    // describe('Card PreAuthorized Deposit', function () {
-    //     var payIn;
-    //
-    //     before(function (done) {
-    //         helpers.createNewCardPreAuthorizedDepositPayIn(function (data, response) {
-    //             payIn = data;
-    //             done();
-    //         });
-    //     });
-    //
-    //     it('should be fetched', function () {
-    //         expect(payIn).not.to.be.undefined;
-    //         expect(payIn.Status).to.equal('SUCCEEDED');
-    //     });
-    // });
+    describe('Card PreAuthorized Deposit', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.createNewCardPreAuthorizedDepositPayIn(function (data, response) {
+                payIn = data;
+                done();
+            });
+        });
+
+        it('should be created', function () {
+            expect(payIn).not.to.be.undefined;
+            expect(payIn.Status).to.equal('SUCCEEDED');
+            expect(payIn.PaymentType).to.equal('PREAUTHORIZED');
+            expect(payIn.ExecutionType).to.equal('DIRECT');
+            expect(payIn.DepositId).not.to.be.undefined;
+        });
+    });
+
+    describe('Card PreAuthorized Deposit prior to complement', function () {
+        var payIn;
+
+        before(function (done) {
+            helpers.createNewDeposit(function (data, response) {
+                var deposit = data;
+                var wallet = {
+                    Owners: [deposit.AuthorId],
+                    Currency: 'EUR',
+                    Description: 'WALLET IN EUR'
+                };
+
+                api.Wallets.create(wallet).then(function(data) {
+                    var payInDto = {
+                        AuthorId: deposit.AuthorId,
+                        CreditedWalletId: wallet.Id,
+                        DebitedFunds: {
+                            Currency: 'EUR',
+                            Amount: 1000
+                        },
+                        Fees: {
+                            Currency: 'EUR',
+                            Amount: 0
+                        },
+                        DepositId: deposit.Id
+                    };
+
+                    api.PayIns.createDepositPreauthorizedPayInPriorToComplement(payInDto).then(function(data) {
+                        payIn = data;
+                        done();
+                    });
+                });
+            });
+        });
+
+        it('should be created', function () {
+            expect(payIn).not.to.be.undefined;
+            expect(payIn.Status).to.equal('SUCCEEDED');
+            expect(payIn.PaymentType).to.equal('PREAUTHORIZED');
+            expect(payIn.ExecutionType).to.equal('DIRECT');
+            expect(payIn.DepositId).not.to.be.undefined;
+        });
+    });
 
     describe('Pay by Bank Web', function () {
         var payIn;
