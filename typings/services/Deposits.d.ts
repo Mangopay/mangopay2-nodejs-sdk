@@ -8,4 +8,8 @@ export class Deposits {
     get: MethodOverload<string, deposit.DepositData>;
 
     cancel: MethodOverload<string, deposit.DepositData>;
+
+    getAllForCard: MethodOverload<string, deposit.DepositData[]>;
+
+    getAllForUser: MethodOverload<string, deposit.DepositData[]>;
 }
