@@ -2,7 +2,7 @@ import { base } from "../base";
 import { recipient } from "../models/recipient";
 import MethodOverload = base.MethodOverload;
 import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
-import ThreeArgsMethodOverload = base.ThreeArgsMethodOverload;
+import FourArgsMethodOverload = base.FourArgsMethodOverload;
 
 export class Recipients {
     /**
@@ -29,8 +29,9 @@ export class Recipients {
      * @param payoutMethodType
      * @param recipientType
      * @param currency
+     * @param country
      */
-    getSchema: ThreeArgsMethodOverload<string, string, string, recipient.RecipientSchemaData>;
+    getSchema: FourArgsMethodOverload<string, string, string, string, recipient.RecipientSchemaData>;
 
     /**
      * Get a Payment Methods
