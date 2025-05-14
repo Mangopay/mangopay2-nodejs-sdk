@@ -258,6 +258,36 @@ export namespace base {
         ): void;
     }
 
+    interface FourArgsMethodOverload<T, U, V, Q, R> {
+        (data: T, extra: U, arg: V, lastArg: Q, options: MethodOptionWithResponse): Promise<WithResponse<R>>;
+
+        (
+            data: T,
+            extra: U,
+            arg: V,
+            lastArg: Q,
+            options?: MethodOptionWithoutResponse
+        ): Promise<R>;
+
+        (
+            data: T,
+            extra: U,
+            arg: V,
+            lastArg: Q,
+            callback: (data: WithResponse<R>) => void,
+            options?: MethodOptionWithResponse
+        ): void;
+
+        (
+            data: T,
+            extra: U,
+            arg: V,
+            lastArg: Q,
+            callback: (data: R) => void,
+            options?: MethodOptionWithoutResponse
+        ): void;
+    }
+
     // Determines the shape of the response
     interface resolveWithFullResponse {
         resolveWithFullResponse: true;
