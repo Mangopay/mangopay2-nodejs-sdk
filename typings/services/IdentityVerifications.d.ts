@@ -22,8 +22,8 @@ export class IdentityVerifications {
     get: MethodOverload<string, identityVerification.IdentityVerificationData>;
 
     /**
-     * Obtain verified user data and results of each check performed
-     * @param {string} id The unique identifier of the identity verification session.
+     * Get all IdentityVerifications for a user
+     * @param {string} userId The unique identifier of the user.
      */
-    getChecks: MethodOverload<string, identityVerification.IdentityVerificationCheckData>;
+    getAll: MethodOverload<string, identityVerification.IdentityVerificationData[]>;
 }
