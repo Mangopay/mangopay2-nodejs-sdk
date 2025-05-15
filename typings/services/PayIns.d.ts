@@ -98,6 +98,12 @@ export class PayIns {
     createDepositPreauthorizedPayInPriorToComplement:
         MethodOverload<payIn.CreateCardPreAuthorizedDepositPayIn, payIn.CardPreAuthorizedDepositPayInData>;
 
+    /**
+     * Create new Card PreAuthorized Deposit PayIn complement
+     */
+    createDepositPreauthorizedPayInComplement:
+        MethodOverload<payIn.CreateCardPreAuthorizedDepositPayIn, payIn.CardPreAuthorizedDepositPayInData>;
+
     createRecurringPayPalPayInCIT: MethodOverload<payIn.CreateRecurringPayPalPayInCIT,
         payIn.RecurringPayInData>;
 
