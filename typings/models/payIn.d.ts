@@ -1165,6 +1165,8 @@ export namespace payIn {
         ExecutionType: "DIRECT";
 
         PaymentType: "PREAUTHORIZED";
+
+        DepositId: string;
     }
 
     interface CreateCardPreAuthorizedPayIn {

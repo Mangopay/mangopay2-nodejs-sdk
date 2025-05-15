@@ -96,4 +96,9 @@ export namespace deposit {
         PayinCaptureId: string;
         PayinComplementId: string;
     }
+
+    interface UpdateDeposit {
+        Id: string;
+        PaymentStatus?: PaymentStatus;
+    }
 }

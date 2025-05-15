@@ -12,4 +12,6 @@ export class Deposits {
     getAllForCard: MethodOverload<string, deposit.DepositData[]>;
 
     getAllForUser: MethodOverload<string, deposit.DepositData[]>;
+
+    update: MethodOverload<deposit.UpdateDeposit, deposit.DepositData>;
 }
