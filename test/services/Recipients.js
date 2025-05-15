@@ -84,7 +84,7 @@ describe('Recipients', function() {
     describe('GET Schema LocalBankTransfer Individual', function () {
         var schema;
         before(function(done){
-            api.Recipients.getSchema("LocalBankTransfer", "Individual", "GBP").then(function(data){
+            api.Recipients.getSchema("LocalBankTransfer", "Individual", "GBP", "GB").then(function(data){
                 schema = data;
                 done();
             });
@@ -109,7 +109,7 @@ describe('Recipients', function() {
     describe('GET Schema InternationalBankTransfer Business', function () {
         var schema;
         before(function(done){
-            api.Recipients.getSchema("InternationalBankTransfer", "Business", "GBP").then(function(data){
+            api.Recipients.getSchema("InternationalBankTransfer", "Business", "GBP", "GB").then(function(data){
                 schema = data;
                 done();
             });

@@ -1,3 +1,31 @@
+## [1.55.1] - 2025-05-15
+#### Fixed
+
+- File naming issue on Recipients service (thanks for raising @JordhanMadec 🙏)
+
+## [1.55.0] - 2025-05-14
+### Added and refined
+
+#### Hosted KYC/KYB endpoints
+
+The following endpoints have been refined following the beta phase, and are now generally available:
+- [POST Create an IDV Session](https://docs.mangopay.com/api-reference/idv-sessions/create-idv-session) (no changes)
+- [GET View an IDV Session](https://docs.mangopay.com/api-reference/idv-sessions/view-idv-session) (includes `Checks` in response)
+- [GET List IDV Sessions for a User](https://docs.mangopay.com/api-reference/idv-sessions/list-idv-sessions-user) (new endpoint)
+
+The previously available endpoint GET View Checks for an IDV Session has been removed (as Checks were integrated into the GET by ID).
+
+See the [guide](https://docs.mangopay.com/guides/users/verification/hosted) for more details.
+
+#### Recipients
+
+The `Country` property has been added to [Recipients](https://docs.mangopay.com/guides/sca/recipients), as a required query parameter on [GET View the schema for a Recipient](https://docs.mangopay.com/api-reference/recipients/view-recipient-schema) and as a required body parameter on [POST Validate data for a Recipient](https://docs.mangopay.com/api-reference/recipients/validate-recipient-data) and [POST Create a Recipient](https://docs.mangopay.com/api-reference/recipients/create-recipient).
+
+### Added
+
+- [GET List Deposit Preauthorizations for a Card](https://docs.mangopay.com/api-reference/deposit-preauthorizations/list-deposit-preauthorizations-card)
+- [GET List Deposit Preauthorizations for a User](https://docs.mangopay.com/api-reference/deposit-preauthorizations/list-deposit-preauthorizations-user)
+
 ## [1.54.0] - 2025-04-29
 ### Added
 

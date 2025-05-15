@@ -1,4 +1,4 @@
-import { CurrencyISO } from "../types";
+import {CountryISO, CurrencyISO} from "../types";
 import { entityBase } from "./entityBase";
 import { address } from "./address";
 import { user } from "./user";
@@ -29,6 +29,11 @@ export namespace recipient {
          * 3-letter ISO 4217 destination currency code (e.g. EUR, USD, GBP, AUD, CAD,HKD, SGD, MXN).
          */
         Currency: CurrencyISO;
+
+        /**
+         * Country ISO
+         */
+        Country: CountryISO;
 
         /**
          * The scope of the recipient:
@@ -96,6 +101,11 @@ export namespace recipient {
         Currency: CurrencyISO;
 
         /**
+         * Country ISO
+         */
+        Country?: CountryISO;
+
+        /**
          * The scope of the recipient:
          *
          * <p>- PAYOUT – Usable for payouts and in pay-in use cases.
@@ -161,6 +171,7 @@ export namespace recipient {
     interface RecipientSchemaData {
         DisplayName: RecipientPropertySchema;
         Currency: RecipientPropertySchema;
+        Country: RecipientPropertySchema;
         RecipientType: RecipientPropertySchema;
         PayoutMethodType: RecipientPropertySchema;
         RecipientScope: RecipientPropertySchema;

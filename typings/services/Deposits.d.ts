@@ -9,5 +9,9 @@ export class Deposits {
 
     cancel: MethodOverload<string, deposit.DepositData>;
 
+    getAllForCard: MethodOverload<string, deposit.DepositData[]>;
+
+    getAllForUser: MethodOverload<string, deposit.DepositData[]>;
+
     update: MethodOverload<deposit.UpdateDeposit, deposit.DepositData>;
 }
