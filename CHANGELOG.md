@@ -1,3 +1,8 @@
+## [1.55.1] - 2025-05-15
+#### Fixed
+
+- File naming issue on Recipients service (thanks for raising @JordhanMadec 🙏)
+
 ## [1.55.0] - 2025-05-14
 ### Added and refined
 
