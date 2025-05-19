@@ -89,7 +89,9 @@ export namespace event {
         | "IDENTITY_VERIFICATION_PENDING"
         | "RECIPIENT_ACTIVE"
         | "RECIPIENT_CANCELED"
-        | "RECIPIENT_DEACTIVATED";
+        | "RECIPIENT_DEACTIVATED"
+        | "USER_ACCOUNT_VALIDATION_ASKED"
+        | "USER_ACCOUNT_ACTIVATED";
 
     interface EventData {
         /**
