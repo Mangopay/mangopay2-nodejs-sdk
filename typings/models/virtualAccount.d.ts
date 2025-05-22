@@ -57,6 +57,10 @@ export namespace virtualAccount {
          * Information about the account’s payment capabilities
          */
         Capabilities: VirtualAccountCapabilities;
+
+        ResultCode: string;
+
+        ResultMessage: string;
     }
 
     interface CreateVirtualAccount {
@@ -98,6 +102,8 @@ export namespace virtualAccount {
          * The IBAN and BIC of the account.
          */
         Account: InternationalAccount;
+
+        BankName: string;
     }
 
     interface LocalAccountsDetails {
@@ -107,6 +113,8 @@ export namespace virtualAccount {
         Address: VirtualAccountAddress;
 
         Account: LocalAccount;
+
+        BankName: string;
     }
 
     interface VirtualAccountAddress {
@@ -127,6 +135,20 @@ export namespace virtualAccount {
          * The sort code of the account.
          */
         SortCode: string;
+
+        Iban: string;
+
+        Bic: string;
+
+        AchNumber: string;
+
+        FedWireNumber: string;
+
+        AccountType: string;
+
+        BranchCode: string;
+
+        InstitutionNumber: string;
     }
 
     interface InternationalAccount {
