@@ -76,5 +76,10 @@ export namespace transaction {
          * The type of the transaction
          */
         Type: TransactionType;
+
+        /**
+         * The identifier of a deposit.
+         */
+        DepositId?: string;
     }
 }
