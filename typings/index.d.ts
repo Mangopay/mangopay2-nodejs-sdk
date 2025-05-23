@@ -819,14 +819,6 @@ declare namespace MangoPay {
 
         interface Deposit extends deposit.DepositData {
         }
-
-        class VirtualAccount extends EntityBase<virtualAccount.VirtualAccountData> {
-            constructor(data: Partial<virtualAccount.VirtualAccountData> | virtualAccount.CreateVirtualAccount)
-        }
-
-        interface VirtualAccount extends virtualAccount.VirtualAccountData {
-
-        }
     }
 
     export {
