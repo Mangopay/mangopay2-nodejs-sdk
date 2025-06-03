@@ -80,7 +80,7 @@ export namespace reportV2 {
         /**
          * The data columns to be included in the report.
          */
-        Columns: string[];
+        Columns: ReportColumn[];
     }
 
     interface CreateReportV2 {
@@ -124,5 +124,10 @@ export namespace reportV2 {
          * The data columns to be included in the report.
          */
         Columns?: string[];
+    }
+
+    interface ReportColumn {
+        Name: string;
+        IsDefault: boolean;
     }
 }
