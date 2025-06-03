@@ -272,4 +272,11 @@ export class Users {
      */
     close: MethodOverload<user.UserNaturalData | user.UserNaturalScaData, void> &
         MethodOverload<user.UserLegalData | user.UserLegalScaData, void>;
+
+    /**
+     * Validate the format of User data
+     * @param dataValidation
+     * @param options
+     */
+    validateDataFormat: MethodOverload<user.UserDataFormatValidation, user.UserDataFormatValidation>
 }
