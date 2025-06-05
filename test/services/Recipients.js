@@ -69,15 +69,42 @@ describe('Recipients', function() {
     describe('GET User Recipients', function () {
         var recipientsList;
         before(function(done){
-            api.Recipients.getUserRecipients(john.Id).then(function(data){
+            api.Recipients.getUserRecipients(john.Id, function(data){
                 recipientsList = data;
                 done();
-            });
+            },
+                {
+                    parameters: {
+                        RecipientScope: "PAYOUT"
+                    }
+                }
+            );
         });
 
         it('should be correctly fetched', function () {
             expect(recipientsList).to.not.be.null;
             expect(recipientsList.length).to.be.gt(0);
+        });
+    });
+
+    describe('GET User Recipients PAYIN', function () {
+        var recipientsList;
+        before(function(done){
+            api.Recipients.getUserRecipients(john.Id, function(data){
+                    recipientsList = data;
+                    done();
+                },
+                {
+                    parameters: {
+                        RecipientScope: "PAYIN"
+                    }
+                }
+            );
+        });
+
+        it('should be correctly fetched', function () {
+            expect(recipientsList).to.not.be.null;
+            expect(recipientsList.length).to.be.eq(0);
         });
     });
 
