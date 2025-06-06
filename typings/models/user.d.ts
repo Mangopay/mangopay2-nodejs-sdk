@@ -917,4 +917,35 @@ export namespace user {
          */
         PendingUserAction: PendingUserActionData;
     }
+
+    interface UserDataFormatValidation {
+        /**
+         * Information about the registration number of a legal entity
+         */
+        CompanyNumber?: CompanyNumberValidation;
+    }
+
+    interface CompanyNumberValidation {
+        /**
+         * The registration number of a legal entity, assigned by the relevant national authority.
+         */
+        CompanyNumber: string;
+
+        /**
+         * The country of the registration of the legal entity, against which the company number format is validated.
+         */
+        CountryCode: CountryISO;
+
+        /**
+         * Whether the format of the value is valid for the country.
+         */
+        IsValid?: boolean;
+
+        /**
+         * The list of regular expressions applicable to the country. Rules only exist for countries listed in the Company number article.
+         * <p></p>
+         * Note: Any non-alphanumeric characters, like dashes or spaces, are removed before applying the validation rules.
+         */
+        ValidationRules?: string[];
+    }
 }
