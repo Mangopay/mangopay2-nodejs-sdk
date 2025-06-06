@@ -1,3 +1,12 @@
+## [1.56.1] - 2025-06-06
+### Added
+- Support for `RecipientScope` query parameter on [GET List Recipients for a User](https://docs.mangopay.com/api-reference/recipients/list-recipients-user)
+- [POST Validate the format of User data](https://docs.mangopay.com/api-reference/user-data-format/validate-user-data-format)
+
+### Fixed
+- `Status` enum value on Identity Verification object changed from `OUTDATED` to `OUT_OF_DATE`
+
+## [1.56.0] - 2025-05-23
 ### Added
 Event types for [user account webhooks](https://docs.mangopay.com//webhooks/event-types#user-account), relevant to [SCA enrollment in user endpoints](https://docs.mangopay.com/guides/sca/users#user-status) and account closure:
 - `USER_ACCOUNT_VALIDATION_ASKED`
@@ -18,7 +27,6 @@ Support for [30-day deposit preauthorization](https://docs.mangopay.com/guides/p
 - `NO_SHOW_REQUESTED` on `updateDeposit` method for [PUT Cancel a Deposit Preauthorization or request a no-show](https://docs.mangopay.com/api-reference/deposit-preauthorizations/cancel-deposit-preauthorization-request-no-show)
 - [GET View a PayIn (Deposit Preauthorized Card](https://docs.mangopay.com/api-reference/deposit-preauthorizations/view-payin-deposit-preauthorized)
 - [GET List Transactions for a Deposit Preauthorization](https://docs.mangopay.com/api-reference/transactions/list-transactions-deposit-preauthorization)
-## [1.56.0] - 2025-05-23
 
 ## [1.55.1] - 2025-05-15
 #### Fixed
