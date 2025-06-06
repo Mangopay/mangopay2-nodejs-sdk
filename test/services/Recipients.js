@@ -10,13 +10,14 @@ describe('Recipients', function() {
         api.Users.create(john).then(function(data){
             john = data;
             const createRecipient = {
-                DisplayName: "Alex Smith GBP account",
+                DisplayName: "My GB account",
                 PayoutMethodType: "LocalBankTransfer",
                 RecipientType: "Individual",
                 Currency: "GBP",
+                Country: "GB",
                 IndividualRecipient: {
-                    FirstName: "Alex",
-                    LastName: "Smith",
+                    FirstName: "Payout",
+                    LastName: "Team",
                     Address: {
                         AddressLine1: "10 Kingsway",
                         City: "London",
@@ -26,8 +27,8 @@ describe('Recipients', function() {
                 },
                 LocalBankTransfer: {
                     GBP: {
-                        SortCode: "200000",
-                        AccountNumber: "55779911"
+                        SortCode: "010039",
+                        AccountNumber: "11696419"
                     }
                 }
             };
