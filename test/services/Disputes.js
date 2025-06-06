@@ -110,6 +110,33 @@ describe('Disputes', function() {
         });
     });
 
+    describe('Get Disputes for PayIn', function() {
+        var dispute, disputesForPayIn, payIn;
+
+        before(function(done){
+            dispute = _.find(disputes, function(disputeItem) {
+                return disputeItem.InitialTransactionId;
+            });
+
+            if (!dispute) {
+                console.warn('Cannot test getting disputes for wallet because there\'s no disputes with transaction ID in the disputes list.');
+                this.skip();
+            }
+
+            payIn = api.PayIns.get(dispute.InitialTransactionId, function(data, response){
+                api.Disputes.getDisputesForPayIn(data.Id, function(data, response){
+                    disputesForPayIn = data;
+                    done();
+                });
+            });
+
+        });
+
+        it('should be retrieved', function(){
+            expect(disputesForPayIn.length).to.be.above(0);
+        });
+    });
+
     describe('Create Dispute Document', function() {
         var dispute, document;
 

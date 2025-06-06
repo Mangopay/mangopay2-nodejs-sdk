@@ -78,6 +78,13 @@ export class Disputes {
     getDisputesForUser: MethodOverload<string, dispute.DisputeData[]>;
 
     /**
+     * Gets dispute's documents for pay in
+     * @param payInId
+     * @param options
+     */
+    getDisputesForPayIn: MethodOverload<string, dispute.DisputeData[]>;
+
+    /**
      * Gets repudiation
      * @param repudiationId
      * @param options
