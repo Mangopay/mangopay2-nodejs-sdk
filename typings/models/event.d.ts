@@ -99,6 +99,8 @@ export namespace event {
         | "QUOTED_CONVERSION_CREATED"
         | "QUOTED_CONVERSION_SUCCEEDED"
         | "QUOTED_CONVERSION_FAILED"
+        | "REPORT_GENERATED"
+        | "REPORT_FAILED"
 
     interface EventData {
         /**
