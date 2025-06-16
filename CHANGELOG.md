@@ -1,3 +1,47 @@
+## [1.57.0] - 2025-06-10
+### Added
+
+Endpoints for [new Reporting Service](https://docs.mangopay.com/release-notes/api/2025-06-05) feature:
+- [POST Create a Report](https://docs.mangopay.com/api-reference/reporting/create-report)
+- [GET View a Report](https://docs.mangopay.com/api-reference/reporting/view-report)
+- [GET List all Reports](https://docs.mangopay.com/api-reference/reporting/list-reports)
+
+Webhook [event types](url) for new Reporting Service:
+- `REPORT_GENERATED`
+- `REPORT_FAILED`
+
+Support for [GET List Disputes for a PayIn](https://docs.mangopay.com/api-reference/disputes/list-disputes-payin) endpoint.
+
+## [1.56.1] - 2025-06-06
+### Added
+- Support for `RecipientScope` query parameter on [GET List Recipients for a User](https://docs.mangopay.com/api-reference/recipients/list-recipients-user)
+- [POST Validate the format of User data](https://docs.mangopay.com/api-reference/user-data-format/validate-user-data-format)
+
+### Fixed
+- `Status` enum value on Identity Verification object changed from `OUTDATED` to `OUT_OF_DATE`
+
+## [1.56.0] - 2025-05-23
+### Added
+Event types for [user account webhooks](https://docs.mangopay.com//webhooks/event-types#user-account), relevant to [SCA enrollment in user endpoints](https://docs.mangopay.com/guides/sca/users#user-status) and account closure:
+- `USER_ACCOUNT_VALIDATION_ASKED`
+- `USER_ACCOUNT_ACTIVATED`
+- `USER_ACCOUNT_CLOSED`
+
+Event types for [instant and quoted FX conversions](https://docs.mangopay.com//webhooks/event-types#fx-conversions):
+- `INSTANT_CONVERSION_CREATED`
+- `INSTANT_CONVERSION_SUCCEEDED`
+- `INSTANT_CONVERSION_FAILED`
+- `QUOTED_CONVERSION_CREATED`
+- `QUOTED_CONVERSION_SUCCEEDED`
+- `QUOTED_CONVERSION_FAILED`
+
+Support for [30-day deposit preauthorization](https://docs.mangopay.com/guides/payment-methods/card/deposit-preauthorization) features:
+- [POST Create a Deposit Preauthorized PayIn prior to complement](https://docs.mangopay.com/api-reference/deposit-preauthorizations/create-deposit-preauthorized-payin-prior-to-complement)
+- [POST Create a Deposit Preauthorized PayIn complement](https://docs.mangopay.com/api-reference/deposit-preauthorizations/create-deposit-preauthorized-payin-complement)
+- `NO_SHOW_REQUESTED` on `updateDeposit` method for [PUT Cancel a Deposit Preauthorization or request a no-show](https://docs.mangopay.com/api-reference/deposit-preauthorizations/cancel-deposit-preauthorization-request-no-show)
+- [GET View a PayIn (Deposit Preauthorized Card](https://docs.mangopay.com/api-reference/deposit-preauthorizations/view-payin-deposit-preauthorized)
+- [GET List Transactions for a Deposit Preauthorization](https://docs.mangopay.com/api-reference/transactions/list-transactions-deposit-preauthorization)
+
 ## [1.55.1] - 2025-05-15
 #### Fixed
 

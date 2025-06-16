@@ -14,7 +14,7 @@ export namespace identityVerification {
          * <p>VALIDATED – The session was successful.</p>
          * <p>REFUSED – The session was refused.</p>
          * <p>REVIEW – The session is under manual review by Mangopay.</p>
-         * <p>OUTDATED – The session is no longer valid (likely due to expired documents used during the session).</p>
+         * <p>OUT_OF_DATE – The session is no longer valid (likely due to expired documents used during the session).</p>
          * <p>TIMEOUT – The session timed out due to inactivity.</p>
          * <p>ERROR – The session was not completed because an error occurred.</p>
          */

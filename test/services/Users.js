@@ -1245,4 +1245,40 @@ describe('Users', function() {
             expect(blockStatus).not.to.be.undefined;
         });
     });
+
+    describe('Validate data format', function () {
+        var successResult;
+        var errorResult;
+
+        before(function (done) {
+            var validation = {
+                CompanyNumber: {
+                    CompanyNumber: "AB123456",
+                    CountryCode: "IT"
+                }
+            };
+            api.Users.validateDataFormat(validation, function (data, response) {
+                successResult = data;
+                validation = {
+                    CompanyNumber: {
+                        CompanyNumber: "123"
+                    }
+                };
+                api.Users.validateDataFormat(validation, function (data, response) {
+                })
+                    .catch(function (data) {
+                        errorResult = data;
+                        done();
+                    });
+            });
+        });
+
+        it('should be valid', function () {
+            expect(successResult.CompanyNumber).not.to.be.undefined;
+        });
+
+        it('should fail', function () {
+            expect(successResult.CompanyNumber).not.to.be.undefined;
+        });
+    });
 });

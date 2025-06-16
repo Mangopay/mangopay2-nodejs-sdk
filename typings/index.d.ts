@@ -26,6 +26,7 @@ import { Responses } from "./services/Responses";
 import { Mandates } from "./services/Mandates";
 import { Hooks } from "./services/Hooks";
 import { Reports } from "./services/Reports";
+import { ReportsV2 } from "./services/ReportsV2";
 import { Idempotency } from "./services/Idempotency";
 import { address } from "./models/address";
 import { enums } from "./enums";
@@ -104,6 +105,7 @@ declare class MangoPay {
     Mandates: Mandates;
     Hooks: Hooks;
     Reports: Reports;
+    ReportsV2: ReportsV2;
     Idempotency: Idempotency;
     Regulatory: Regulatory;
     Deposits: Deposits;

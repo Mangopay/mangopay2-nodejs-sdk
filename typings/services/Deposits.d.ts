@@ -1,5 +1,6 @@
 import { base } from "../base";
 import { deposit } from "../models/deposit";
+import { transaction } from "../models/transaction";
 import MethodOverload = base.MethodOverload;
 
 export class Deposits {
@@ -12,4 +13,8 @@ export class Deposits {
     getAllForCard: MethodOverload<string, deposit.DepositData[]>;
 
     getAllForUser: MethodOverload<string, deposit.DepositData[]>;
+
+    update: MethodOverload<deposit.UpdateDeposit, deposit.DepositData>;
+
+    getTransactions: MethodOverload<string, transaction.TransactionData[]>;
 }
