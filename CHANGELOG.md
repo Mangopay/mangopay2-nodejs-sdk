@@ -1,3 +1,7 @@
+## [1.57.1] - 2025-06-17
+### Added
+- [US and CA virtual accounts](https://docs.mangopay.com/release-notes/api/2025-06-12) for local pay-in collection
+
 ## [1.57.0] - 2025-06-10
 ### Added
 
