@@ -1308,4 +1308,41 @@ module.exports = {
             });
         });
     },
+
+    getNewPayInIntentAuthorization: function (api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function () {
+            var payInIntent = {
+                "Amount" : 1000,
+                "Currency" : "EUR",
+                "ExternalData" : {
+                    "ExternalProcessingDate" : "01-10-2024",
+                    "ExternalProviderReference" : Math.random().toString(),
+                    "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                    "ExternalProviderName" : "Stripe",
+                    "ExternalProviderPaymentMethod" : "PAYPAL"
+                },
+                "Buyer" : {
+                    "Id" : user.Id
+                },
+                "LineItems" : [
+                    {
+                        "Seller" : {
+                            "WalletId" : wallet.Id,
+                            "TransferDate" : "13-11-2030"
+                        },
+                        "Sku" : "item-123456",
+                        "Quantity" : 1,
+                        "UnitAmount" : 1000,
+                    }
+                ]
+            };
+            api.PayIns.createPayInIntentAuthorization(payInIntent, callback);
+        });
+    },
 };
