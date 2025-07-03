@@ -56,6 +56,7 @@ export namespace enums {
     interface IUserCategory {
         Payer: "PAYER";
         Owner: "OWNER";
+        Platform: "PLATFORM";
     }
 
     interface IBankAccountType {
