@@ -170,6 +170,7 @@ export type ApiMethod =
     | "idempotency_response_get"
     | "payins_mbway-web_create"
     | "payins_bcmc-web_create"
+    | "payins_bizum-web_create"
     | "payins_paypal-web_create_v2"
     | "payins_multibanco-web_create"
     | "payins_satispay-web_create"

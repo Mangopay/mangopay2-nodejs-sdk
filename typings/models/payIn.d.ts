@@ -32,6 +32,7 @@ export namespace payIn {
         | DirectDebitDirectPayInData
         | MbwayWebPayInData
         | BancontactWebPayInData
+        | BizumWebPayInData
         | MultibancoWebPayInData
         | SatispayWebPayInData
         | BlikWebPayInData
@@ -431,6 +432,39 @@ export namespace payIn {
         Recurring: boolean;
     }
 
+    interface BizumWebPayInData extends BasePayInData {
+        ExecutionType: "WEB";
+
+        PaymentType: "BIZUM";
+
+        /**
+         * The URL to which the user is redirected to complete the payment
+         */
+        RedirectURL?: string;
+
+        /**
+         * The URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL?: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * Format: International E.164 standard (preceded by plus sign and country code, +34 in Spain); pattern: ^\+[1-9][\d]{4,14}$
+         * If the Phone parameter is sent, then RedirectURL is not returned and ReturnURL is ignored.
+         */
+        Phone?: string;
+
+        /**
+         * The unique reference generated for the profiling session, used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
+    }
+
     interface PayPalWebPayInData extends BasePayInData {
         ExecutionType: "WEB";
 
@@ -758,6 +792,59 @@ export namespace payIn {
          * See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
         StatementDescriptor?: string;
+
+        /**
+         * Custom data that you can add to this item
+         */
+        Tag?: string;
+    }
+
+    interface CreateBizumWebPayIn {
+        ExecutionType: "WEB";
+
+        PaymentType: "BIZUM";
+
+        /**
+         * A user's ID
+         */
+        AuthorId: string;
+
+        /**
+         * The ID of the wallet where money will be credited
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the funds that are being debited
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client's platform wallet)
+         */
+        Fees: MoneyData;
+
+        /**
+         * Format: International E.164 standard (preceded by plus sign and country code, +34 in Spain); pattern: ^\+[1-9][\d]{4,14}$
+         * If the Phone parameter is sent, then RedirectURL is not returned and ReturnURL is ignored.
+         */
+        Phone?: string;
+
+        /**
+         * The URL where users are automatically redirected after the payment is validated
+         */
+        ReturnURL?: string;
+
+        /**
+         * A custom description to appear on the user's bank statement. It can be up to 10 characters long, and can only include alphanumeric
+         * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
+         */
+        StatementDescriptor?: string;
+
+        /**
+         * The unique reference generated for the profiling session, used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
 
         /**
          * Custom data that you can add to this item
