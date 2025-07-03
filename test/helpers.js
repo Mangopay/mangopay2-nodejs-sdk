@@ -479,6 +479,64 @@ module.exports = {
         });
     },
 
+    getNewPayInBizumWebWithReturnUrl: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payInWithReturnUrl = {
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                ReturnURL: "http://mangopay.com",
+                PaymentType: 'BIZUM',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "Example123",
+                Tag: "test bizum tag"
+            };
+            api.PayIns.create(payInWithReturnUrl, callback);
+        });
+    },
+
+    getNewPayInBizumWebWithPhone: function(api, user, callback) {
+        var wallet = {
+            Owners: [user.Id],
+            Currency: 'EUR',
+            Description: 'WALLET IN EUR'
+        };
+
+        api.Wallets.create(wallet).then(function(){
+            var payInWithPhone = {
+                AuthorId: user.Id,
+                CreditedWalletId: wallet.Id,
+                DebitedFunds: {
+                    Amount: 500,
+                    Currency: 'EUR'
+                },
+                Fees: {
+                    Amount: 0,
+                    Currency: 'EUR'
+                },
+                Phone: "+34700000000",
+                PaymentType: 'BIZUM',
+                ExecutionType: 'WEB',
+                StatementDescriptor: "Example123",
+                Tag: "test bizum tag"
+            };
+            api.PayIns.create(payInWithPhone, callback);
+        });
+    },
+
     getNewPayInPayPalWeb: function(api, user, callback) {
         var wallet = {
             Owners: [user.Id],
