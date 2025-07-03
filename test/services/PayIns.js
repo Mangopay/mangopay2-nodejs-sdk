@@ -1276,6 +1276,78 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Bizum Web', function () {
+        var payInWithPhone;
+        var payInWithReturnUrl;
+
+        before(function (done) {
+            helpers.getNewPayInBizumWebWithPhone(api, john, function (data, response) {
+                payInWithPhone = data;
+                helpers.getNewPayInBizumWebWithReturnUrl(api, john, function (data) {
+                    payInWithReturnUrl = data;
+                    done();
+                });
+            });
+        });
+
+        describe('Create', function () {
+            it('should create Bizum PayIn with Phone', function () {
+                expect(payInWithPhone.Id).not.to.be.undefined;
+                expect(payInWithPhone.PaymentType).to.equal('BIZUM');
+                expect(payInWithPhone.ExecutionType).to.equal('WEB');
+                expect(payInWithPhone.AuthorId).to.equal(john.Id);
+                expect(payInWithPhone.Status).to.equal('CREATED');
+                expect(payInWithPhone.Type).to.equal('PAYIN');
+                expect(payInWithPhone.Phone).not.to.be.null;
+                expect(payInWithPhone.ReturnURL).to.be.undefined;
+            });
+            it('should create Bizum PayIn with ReturnUrl', function () {
+                expect(payInWithReturnUrl.Id).not.to.be.undefined;
+                expect(payInWithReturnUrl.PaymentType).to.equal('BIZUM');
+                expect(payInWithReturnUrl.ExecutionType).to.equal('WEB');
+                expect(payInWithReturnUrl.AuthorId).to.equal(john.Id);
+                expect(payInWithReturnUrl.Status).to.equal('CREATED');
+                expect(payInWithReturnUrl.Type).to.equal('PAYIN');
+                expect(payInWithReturnUrl.Phone).to.be.null;
+                expect(payInWithReturnUrl.ReturnURL).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayInWithPhone;
+            var getPayInWithReturnUrl;
+
+            before(function (done) {
+                api.PayIns.get(payInWithPhone.Id, function (data, response) {
+                    getPayInWithPhone = data;
+                    api.PayIns.get(payInWithReturnUrl.Id, function (data, response) {
+                        getPayInWithReturnUrl = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should get Bizum PayIn with Phone', function () {
+                expect(getPayInWithPhone.Id).to.equal(payInWithPhone.Id);
+                expect(getPayInWithPhone.PaymentType).to.equal('BIZUM');
+                expect(getPayInWithPhone.ExecutionType).to.equal('WEB');
+                expect(getPayInWithPhone.Phone).not.to.be.null;
+                expect(getPayInWithPhone.Phone).to.equal(payInWithPhone.Phone);
+                expect(getPayInWithPhone.ReturnURL).to.equal(payInWithPhone.ReturnURL);
+                expect(getPayInWithPhone.ReturnURL).to.be.undefined;
+            });
+
+            it('should get the Bizum with ReturnUrl', function () {
+                expect(getPayInWithReturnUrl.Id).to.equal(payInWithReturnUrl.Id);
+                expect(getPayInWithReturnUrl.PaymentType).to.equal('BIZUM');
+                expect(getPayInWithReturnUrl.ExecutionType).to.equal('WEB');
+                expect(getPayInWithReturnUrl.Phone).to.be.null;
+                expect(getPayInWithReturnUrl.ReturnURL).not.to.be.null;
+                expect(getPayInWithReturnUrl.ReturnURL).to.equal(payInWithReturnUrl.ReturnURL);
+            });
+        });
+    });
+
     describe('PayPal Web V2', function () {
         var payIn;
 

@@ -21,6 +21,7 @@ export namespace enums {
         Ideal: "IDEAL";
         Giropay: "GIROPAY";
         Bancontact: "BCMC";
+        Bizum: "BIZUM";
         Swish: "SWISH";
         Twint: "TWINT";
         PayByBank: "PAY_BY_BANK"
@@ -56,6 +57,7 @@ export namespace enums {
     interface IUserCategory {
         Payer: "PAYER";
         Owner: "OWNER";
+        Platform: "PLATFORM";
     }
 
     interface IBankAccountType {

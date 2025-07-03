@@ -99,7 +99,7 @@ export namespace user {
         | "CompanyNumber"
         | "TermsAndConditionsAccepted";
 
-    type UserCategory = "PAYER" | "OWNER";
+    type UserCategory = "PAYER" | "OWNER" | "PLATFORM";
 
     interface UserData extends entityBase.EntityBaseData {
         /**
