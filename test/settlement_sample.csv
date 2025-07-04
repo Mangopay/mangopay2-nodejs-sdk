@@ -1,0 +1,8 @@
+﻿IntentId,ExternalProviderReference,ExternalPaymentMethod,ExternalTransactionType,ExternalTransactionStatus,ExternalProcessingDate,Amount,Currency,ExternalInitialReference,ExternalProviderFees
+int_0197b19d-ee51-7b60-84cb-207491cf383a,6TU984332A894613W,PAYPAL,PAYMENT,SETTLED,19-06-2025,1000,EUR,,0
+,,,,,,,,,
+SettlementDate,19-06-2025,,,,,,,,
+ExternalProviderName,Paypal,,,,,,,,
+TotalSettlementFeesAmount,0,,,,,,,,
+TotalSettlementAmount,1000,,,,,,,,
+SettlementCurrency,EUR,,,,,,,,

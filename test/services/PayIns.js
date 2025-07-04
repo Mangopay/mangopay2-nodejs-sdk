@@ -2033,4 +2033,105 @@ describe('PayIns', function () {
             });
         });
     });
+
+    describe('PayIn Intent', function () {
+        describe('Create intent authorization', function () {
+            var payInIntent;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    payInIntent = data;
+                    done();
+                });
+            });
+
+            it('should create the PayInIntent Authorization', function () {
+                expect(payInIntent.Id).not.to.be.undefined;
+                expect(payInIntent.Status).to.equal('AUTHORIZED');
+            });
+        });
+
+        describe('Create full capture', function () {
+            var payInIntent;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    const toCreate = {
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : "01-10-2024",
+                            "ExternalProviderReference" : Math.random().toString(),
+                            "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                            "ExternalProviderName" : "Stripe",
+                            "ExternalProviderPaymentMethod" : "PAYPAL"
+                        }
+                    };
+                    api.PayIns.createPayInIntentFullCapture(data.Id, toCreate, function(data) {
+                        payInIntent = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should create the PayInIntent Full Capture', function () {
+                expect(payInIntent.Id).not.to.be.undefined;
+                expect(payInIntent.Status).to.equal('CAPTURED');
+            });
+        });
+
+        describe('Create partial capture', function () {
+            var payInIntent;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    const toCreate = {
+                        "Amount" : 1000,
+                        "Currency" : "EUR",
+                        "PlatformFeesAmount": 0,
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : "01-10-2024",
+                            "ExternalProviderReference" : Math.random().toString(),
+                            "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                            "ExternalProviderName" : "Stripe",
+                            "ExternalProviderPaymentMethod" : "PAYPAL"
+                        },
+                        "LineItems": [
+                            {
+                                "Amount": 1000,
+                                "Id": data.LineItems[0].Id
+                            }
+                        ]
+                    };
+                    api.PayIns.createPayInIntentPartialCapture(data.Id, toCreate, function(data) {
+                        payInIntent = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should create the PayInIntent Partial Capture', function () {
+                expect(payInIntent.Id).not.to.be.undefined;
+                expect(payInIntent.Status).to.equal('CAPTURED');
+            });
+        });
+
+        describe('Get intent', function () {
+            var fetched;
+            var created;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    created = data;
+                    api.PayIns.getPayInIntent(created.Id, function(data) {
+                        fetched = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should create the PayInIntent Partial Capture', function () {
+                expect(fetched.Id).to.equal(created.Id);
+                expect(fetched.Status).to.equal(created.Status);
+            });
+        });
+    });
 });

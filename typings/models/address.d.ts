@@ -13,7 +13,7 @@ export namespace address {
         /**
          * The second line of the address
          */
-        AddressLine2: string;
+        AddressLine2?: string;
 
         /**
          * The city of the address
@@ -23,7 +23,7 @@ export namespace address {
         /**
          * The region of the address - this is optional except if the Country is US, CA or MX
          */
-        Region: string;
+        Region?: string;
 
         /**
          * The postal code of the address - can be alphanumeric, dashes or spaces

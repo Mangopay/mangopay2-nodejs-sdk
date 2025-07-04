@@ -75,6 +75,7 @@ import { IdentityVerifications } from "./services/IdentityVerifications";
 import { identityVerification } from "./models/identityVerification";
 import { recipient } from "./models/recipient";
 import { Recipients } from "./services/Recipients";
+import { Settlements } from "./services/Settlements";
 
 export = MangoPay;
 
@@ -113,6 +114,7 @@ declare class MangoPay {
     VirtualAccounts: VirtualAccounts;
     IdentityVerifications: IdentityVerifications;
     Recipients: Recipients;
+    Settlements: Settlements;
 
     models: typeof MangoPay.models;
 

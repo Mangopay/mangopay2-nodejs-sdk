@@ -19,6 +19,7 @@
   "dependencies": {
     "@types/node": "14.14.x",
     "axios": "1.7.5",
+    "form-data": "4.0.3",
     "promise": "8.1.x",
     "underscore": "1.12.x"
   },
