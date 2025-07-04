@@ -195,4 +195,13 @@ export class PayIns {
      * @return {payIn.PayInIntentData}         Request promise
      */
     createPayInIntentPartialCapture: TwoArgsMethodOverload<string, payIn.CreatePayInIntentPartialCapture, payIn.PayInIntentData>
+
+    /**
+     * Get a PayInIntent
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {payIn.PayInIntentData}         Request promise
+     */
+    getPayInIntent: MethodOverload<string, payIn.PayInIntentData>
 }
