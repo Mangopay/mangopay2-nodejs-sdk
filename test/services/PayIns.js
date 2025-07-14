@@ -1986,7 +1986,7 @@ describe('PayIns', function () {
                 helpers.getNewPayInIntentAuthorization(api, john, function (data) {
                     const toCreate = {
                         "ExternalData" : {
-                            "ExternalProcessingDate" : "01-10-2024",
+                            "ExternalProcessingDate" : 1727788165,
                             "ExternalProviderReference" : Math.random().toString(),
                             "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
                             "ExternalProviderName" : "Stripe",
@@ -2016,7 +2016,7 @@ describe('PayIns', function () {
                         "Currency" : "EUR",
                         "PlatformFeesAmount": 0,
                         "ExternalData" : {
-                            "ExternalProcessingDate" : "01-10-2024",
+                            "ExternalProcessingDate" : 1727788165,
                             "ExternalProviderReference" : Math.random().toString(),
                             "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
                             "ExternalProviderName" : "Stripe",

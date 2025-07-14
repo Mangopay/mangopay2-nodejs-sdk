@@ -2915,7 +2915,7 @@ export namespace payIn {
         /**
          * The date at which the transaction was created
          */
-        ExternalProcessingDate: string;
+        ExternalProcessingDate: Timestamp;
 
         /**
          * The unique identifier of the transaction at the provider level
@@ -2942,7 +2942,7 @@ export namespace payIn {
         /**
          * The date at which the transaction was created
          */
-        ExternalProcessingDate: string;
+        ExternalProcessingDate: Timestamp;
 
         /**
          * The unique identifier of the transaction at the provider level
@@ -2969,7 +2969,7 @@ export namespace payIn {
         /**
          * The date at which the transaction was created
          */
-        ExternalProcessingDate?: string;
+        ExternalProcessingDate?: Timestamp;
 
         /**
          * The unique identifier of the transaction at the provider level
@@ -2996,7 +2996,7 @@ export namespace payIn {
         /**
          * The date at which the transaction was created
          */
-        ExternalProcessingDate: string;
+        ExternalProcessingDate: Timestamp;
 
         /**
          * The unique identifier of the transaction at the provider level
@@ -3051,7 +3051,7 @@ export namespace payIn {
          * <p></p>
          * Must be a date in the future
          */
-        TransferDate?: string;
+        TransferDate?: Timestamp;
     }
 
     interface PayInIntentLineItem {
@@ -3167,12 +3167,12 @@ export namespace payIn {
         /**
          * The date at which the object was created
          */
-        CreationDate: number;
+        CreationDate: Timestamp;
 
         /**
          * The date at which the object was successfully moved to CAPTURED
          */
-        ExecutionDate: number;
+        ExecutionDate: Timestamp;
 
         /**
          * The captured amount
@@ -3199,12 +3199,12 @@ export namespace payIn {
         /**
          * The date at which the object was created
          */
-        CreationDate: number;
+        CreationDate: Timestamp;
 
         /**
          * The date at which the object was successfully moved to REFUNDED
          */
-        ExecutionDate: number;
+        ExecutionDate: Timestamp;
 
         /**
          * The refunded amount
@@ -3231,12 +3231,12 @@ export namespace payIn {
         /**
          * The date at which the object was created
          */
-        CreationDate: number;
+        CreationDate: Timestamp;
 
         /**
          * The date at which the object was successfully moved to DISPUTED
          */
-        ExecutionDate: number;
+        ExecutionDate: Timestamp;
 
         /**
          * The disputed amount
@@ -3263,12 +3263,12 @@ export namespace payIn {
         /**
          * The date at which the object was created
          */
-        CreationDate: number;
+        CreationDate: Timestamp;
 
         /**
          * The date at which the object was successfully moved to CREATED
          */
-        ExecutionDate: number;
+        ExecutionDate: Timestamp;
 
         /**
          * The split amount

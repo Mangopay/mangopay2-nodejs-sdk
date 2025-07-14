@@ -15,7 +15,7 @@ export namespace settlement {
         /**
          * The date at which the settlement was created by the external provider
          */
-        SettlementDate: string;
+        SettlementDate: Timestamp;
 
         /**
          * The name of the external provider
