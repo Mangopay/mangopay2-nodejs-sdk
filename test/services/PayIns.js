@@ -2069,7 +2069,13 @@ describe('PayIns', function () {
             before(function (done) {
                 helpers.getNewPayInIntentAuthorization(api, john, function (data) {
                     created = data;
-                    api.PayIns.cancelPayInIntent(created.Id, function(data) {
+                    const cancelDetails = {
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : 1728133765,
+                            "ExternalProviderReference" : Math.random().toString(),
+                        }
+                    };
+                    api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
                         canceled = data;
                         done();
                     });
