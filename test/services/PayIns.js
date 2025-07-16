@@ -2056,9 +2056,28 @@ describe('PayIns', function () {
                 });
             });
 
-            it('should create the PayInIntent Partial Capture', function () {
+            it('should get the intent', function () {
                 expect(fetched.Id).to.equal(created.Id);
                 expect(fetched.Status).to.equal(created.Status);
+            });
+        });
+
+        describe('Cancel intent', function () {
+            var canceled;
+            var created;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    created = data;
+                    api.PayIns.cancelPayInIntent(created.Id, function(data) {
+                        canceled = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should cancel the intent', function () {
+                expect(canceled.Status).to.equal('CANCELED');
             });
         });
     });

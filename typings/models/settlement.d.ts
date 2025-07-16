@@ -1,4 +1,5 @@
 import {entityBase} from "./entityBase";
+import {Timestamp} from "../types";
 
 export namespace settlement {
     interface SettlementData extends entityBase.EntityBaseData {

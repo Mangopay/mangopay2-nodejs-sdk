@@ -204,4 +204,13 @@ export class PayIns {
      * @return {payIn.PayInIntentData}         Request promise
      */
     getPayInIntent: MethodOverload<string, payIn.PayInIntentData>
+
+    /**
+     * Cancel a PayInIntent
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {payIn.PayInIntentData}         Request promise
+     */
+    cancelPayInIntent: MethodOverload<string, payIn.PayInIntentData>
 }
