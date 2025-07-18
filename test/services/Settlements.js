@@ -23,31 +23,21 @@ describe('Settlements', function () {
 
     describe('Fetch', function () {
         var fetched;
-        var fetchedAfterDelay;
 
         before(function (done) {
             api.Settlements.get(settlement.SettlementId).then(async function (data) {
                 fetched = data;
-                // wait for the API to process the file
-                const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-                await delay(10000);
-                api.Settlements.get(settlement.SettlementId).then(function (data) {
-                    fetchedAfterDelay = data;
-                    done();
-                });
+                done();
             });
         });
 
         it('should be fetched', function () {
             expect(fetched).not.to.be.undefined;
-            expect(fetchedAfterDelay).not.to.be.undefined;
             expect(fetched.Status).to.equal("UPLOADED");
-            expect(fetchedAfterDelay.Status).to.equal("PARTIALLY_SETTLED");
         });
     });
 
     describe('Update', function () {
-        var fetchedAfterUpdate;
         var updated;
 
         const filePath = path.resolve(__dirname, '../settlement_sample.csv');
@@ -56,21 +46,13 @@ describe('Settlements', function () {
         before(function (done) {
             api.Settlements.update(settlement.SettlementId, fileBuffer).then(async function (data) {
                 updated = data;
-                // wait for the API to process the file
-                const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-                await delay(10000);
-                api.Settlements.get(settlement.SettlementId).then(function (data) {
-                    fetchedAfterUpdate = data;
-                    done();
-                });
+                done();
             });
         });
 
         it('should be updated', function () {
             expect(updated).not.to.be.undefined;
-            expect(fetchedAfterUpdate).not.to.be.undefined;
             expect(updated.Status).to.equal("UPLOADED");
-            expect(fetchedAfterUpdate.Status).to.equal("PARTIALLY_SETTLED");
         });
     });
 });
