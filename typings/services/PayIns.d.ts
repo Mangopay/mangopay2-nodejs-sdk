@@ -167,4 +167,72 @@ export class PayIns {
      * @param options
      */
     createPayconiq: MethodOverload<payIn.CreatePayconiqWebPayInData, payIn.PayconiqWebPayInData>
+
+    /**
+     * Create a pay in intent authorization
+     * @param {payIn.CreatePayInIntentAuthorization}  payInIntentAuthorization    PayInIntentAuthorization object
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {payIn.PayInIntentData}         Request promise
+     */
+    createPayInIntentAuthorization: MethodOverload<payIn.CreatePayInIntentAuthorization, payIn.PayInIntentData>
+
+    /**
+     * Create a pay in intent full capture
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {payIn.CreatePayInIntentFullCapture}  payInIntentFullCapture    PayInIntentFullCapture object
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {payIn.PayInIntentData}         Request promise
+     */
+    createPayInIntentFullCapture: TwoArgsMethodOverload<string, payIn.CreatePayInIntentFullCapture, payIn.PayInIntentData>
+
+    /**
+     * Create a pay in intent partial capture
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {payIn.CreatePayInIntentPartialCapture}  payInIntentPartialCapture    PayInIntentPartialCapture object
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {payIn.PayInIntentData}         Request promise
+     */
+    createPayInIntentPartialCapture: TwoArgsMethodOverload<string, payIn.CreatePayInIntentPartialCapture, payIn.PayInIntentData>
+
+    /**
+     * Get a PayInIntent
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {payIn.PayInIntentData}         Request promise
+     */
+    getPayInIntent: MethodOverload<string, payIn.PayInIntentData>
+
+    // /**
+    //  * Cancel a PayInIntent
+    //  * @param {string}  payInIntentId    PayInIntent identifier
+    //  * @param {payIn.FullCancelPayInIntent}  intentDetails  Details about the intent to be canceled
+    //  * @param {Function} callback    Callback function
+    //  * @param {Object} options    Request options
+    //  * @return {payIn.PayInIntentData}         Request promise
+    //  */
+    // fullCancelPayInIntent: TwoArgsMethodOverload<string, payIn.FullCancelPayInIntent, payIn.PayInIntentData>
+    //
+    // /**
+    //  * Cancel a PayInIntent
+    //  * @param {string}  payInIntentId    PayInIntent identifier
+    //  * @param {payIn.PartialCancelPayInIntent}  intentDetails  Details about the intent to be canceled
+    //  * @param {Function} callback    Callback function
+    //  * @param {Object} options    Request options
+    //  * @return {payIn.PayInIntentData}         Request promise
+    //  */
+    // partialCancelPayInIntent: TwoArgsMethodOverload<string, payIn.PartialCancelPayInIntent, payIn.PayInIntentData>
+
+    /**
+     * Create PayInIntent splits
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {payIn.CreatePayInIntentSplits}  splits    CreatePayInIntentSplits object
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {payIn.PayInIntentData}         Request promise
+     */
+    createPayInIntentSplits: TwoArgsMethodOverload<string, payIn.CreatePayInIntentSplits, payIn.PayInIntentSplitsData>
 }

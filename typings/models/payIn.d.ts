@@ -1,4 +1,4 @@
-import {CountryISO, CultureISO, PickPartialRequired, SecureMode, Timestamp, ValueOf} from "../types";
+import { CountryISO, CultureISO, CurrencyISO, PickPartialRequired, SecureMode, Timestamp, ValueOf } from "../types";
 import { enums } from "../enums";
 import { transaction } from "./transaction";
 import { card } from "./card";
@@ -8,6 +8,7 @@ import { base } from "../base";
 import { money } from "./money";
 import { securityInfo } from "./securityInfo";
 import { shipping } from "./shipping";
+import { address } from "./address";
 
 export namespace payIn {
     import BillingData = billing.BillingData;
@@ -2919,5 +2920,652 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+    }
+
+    interface PayInIntentData extends entityBase.EntityBaseData {
+        /**
+         * An amount of money in the smallest subdivision of the currency
+         */
+        Amount: number;
+
+        /**
+         * The remaining amount on the intent available for transfers
+         */
+        AvailableAmountToSplit: number;
+
+        /**
+         * The currency of the funds
+         */
+        Currency: CurrencyISO;
+
+        /**
+         * Information about the fees
+         */
+        PlatformFeesAmount: number;
+
+        /**
+         * The status of the intent
+         */
+        Status: string;
+
+        /**
+         * The possible next statuses for the intent
+         */
+        NextActions: string;
+
+        /**
+         * Information about the external processed transaction
+         */
+        ExternalData: PayInIntentExternalData;
+
+        /**
+         * Information about the buyer
+         */
+        Buyer: PayInIntentBuyer;
+
+        /**
+         * Information about the items purchased in the transaction.
+         * <p></p>
+         * The total of all LineItems UnitAmount, TaxAmount, DiscountAmount, TotalLineItemAmount must equal the Amount
+         * <p></p>
+         * The total of all LineItems FeesAmount mus equal the PlatformFees amount
+         */
+        LineItems: PayInIntentLineItem[];
+
+        /**
+         * Information about the amounts captured against the intent
+         */
+        Captures: PayInIntentCapture[];
+
+        /**
+         * Information about the amounts refunded against the intent
+         */
+        Refunds: PayInIntentRefund[];
+
+        /**
+         * Information about the amounts refunded against the intent
+         */
+        Disputes: PayInIntentDispute[];
+
+        /**
+         * Information about the amounts split against the intent
+         */
+        Splits: PayInIntentSplitInfo[];
+
+        /**
+         * The unique identifier of the settlement linked to this intent in Mangopay ecosystem
+         */
+        SettlementId: string;
+    }
+
+    interface PayInIntentExternalData {
+        /**
+         * The date at which the transaction was created
+         */
+        ExternalProcessingDate: Timestamp;
+
+        /**
+         * The unique identifier of the transaction at the provider level
+         */
+        ExternalProviderReference: string;
+
+        /**
+         * The unique identifier of the transaction at the merchant level
+         */
+        ExternalMerchantReference: string;
+
+        /**
+         * The name of the external provider processing the transaction
+         */
+        ExternalProviderName: string;
+
+        /**
+         * The name of the payment method used to process the transaction
+         */
+        ExternalProviderPaymentMethod: string;
+    }
+
+    interface CreatePayInIntentAuthorizationExternalData {
+        /**
+         * The date at which the transaction was created
+         */
+        ExternalProcessingDate: Timestamp;
+
+        /**
+         * The unique identifier of the transaction at the provider level
+         */
+        ExternalProviderReference: string;
+
+        /**
+         * The unique identifier of the transaction at the merchant level
+         */
+        ExternalMerchantReference?: string;
+
+        /**
+         * The name of the external provider processing the transaction
+         */
+        ExternalProviderName: string;
+
+        /**
+         * The name of the payment method used to process the transaction
+         */
+        ExternalProviderPaymentMethod?: string;
+    }
+
+    interface CreatePayInIntentFullCaptureExternalData {
+        /**
+         * The date at which the transaction was created
+         */
+        ExternalProcessingDate?: Timestamp;
+
+        /**
+         * The unique identifier of the transaction at the provider level
+         */
+        ExternalProviderReference?: string;
+
+        /**
+         * The unique identifier of the transaction at the merchant level
+         */
+        ExternalMerchantReference?: string;
+
+        /**
+         * The name of the external provider processing the transaction
+         */
+        ExternalProviderName?: string;
+
+        /**
+         * The name of the payment method used to process the transaction
+         */
+        ExternalProviderPaymentMethod?: string;
+    }
+
+    interface CreatePayInIntentPartialCaptureExternalData {
+        /**
+         * The date at which the transaction was created
+         */
+        ExternalProcessingDate: Timestamp;
+
+        /**
+         * The unique identifier of the transaction at the provider level
+         */
+        ExternalProviderReference: string;
+
+        /**
+         * The unique identifier of the transaction at the merchant level
+         */
+        ExternalMerchantReference?: string;
+
+        /**
+         * The name of the external provider processing the transaction
+         */
+        ExternalProviderName?: string;
+
+        /**
+         * The name of the payment method used to process the transaction
+         */
+        ExternalProviderPaymentMethod?: string;
+    }
+
+    interface PayInIntentBuyer {
+        /**
+         * The unique identifier of the user at the source of the transaction
+         */
+        Id?: string;
+    }
+
+    interface PayInIntentSeller {
+        /**
+         * The unique identifier of the seller providing the item
+         * <p></p>
+         * One valid value must be sent between AuthorId & WalletId
+         */
+        AuthorId?: string;
+
+        /**
+         * The unique identifier of the wallet to credit the seller funds
+         * <p>
+         * One valid value must be sent between AuthorId & WalletId
+         */
+        WalletId?: string;
+
+        /**
+         * Information about the fees
+         */
+        FeesAmount?: number;
+
+        /**
+         * Information about the date when the funds are to be transferred to the seller’s wallet
+         * <p></p>
+         * Must be a date in the future
+         */
+        TransferDate?: Timestamp;
+    }
+
+    interface PayInIntentLineItem {
+        /**
+         * The unique identifier of the user at the source of the transaction
+         */
+        Id?: string;
+
+        /**
+         * Information about the seller involved in the transaction
+         */
+        Seller: PayInIntentSeller;
+
+        /**
+         * The unique identifier of the item
+         */
+        Sku: string;
+
+        /**
+         * The name of the item
+         */
+        Name?: string;
+
+        /**
+         * The description of the item
+         */
+        Description?: string;
+
+        /**
+         * The quantity of the item
+         */
+        Quantity: number;
+
+        /**
+         * The cost of the item, excluding tax and discount
+         */
+        UnitAmount: number;
+
+        /**
+         * The item total amount to be captured
+         */
+        Amount?: number;
+
+        /**
+         * The tax amount applied to the item
+         */
+        TaxAmount?: number;
+
+        /**
+         * The discount amount applied to the item
+         */
+        DiscountAmount?: number;
+
+        /**
+         * The item category
+         */
+        Category?: string;
+
+        /**
+         * Information about the end user’s shipping address
+         */
+        ShippingAddress?: address.AddressData;
+
+        /**
+         * The item total amount including tax and discount
+         */
+        TotalLineItemAmount?: number;
+
+        /**
+         * The item total canceled amount
+         */
+        CanceledAmount?: number;
+
+        /**
+         * The item total captured amount
+         */
+        CapturedAmount?: number;
+
+        /**
+         * The item total refunded amount
+         */
+        RefundedAmount?: number;
+
+        /**
+         * The item total disputed amount
+         */
+        DisputedAmount?: number;
+
+        /**
+         * The item total split amount
+         */
+        SplitAmount?: number;
+    }
+
+    interface CreatePayInIntentPartialCaptureLineItem {
+        /**
+         * The unique identifier of the user at the source of the transaction
+         */
+        Id: string;
+
+        /**
+         * The item total amount to be captured
+         */
+        Amount: number;
+    }
+
+    interface PayInIntentCapture {
+        /**
+         * The unique identifier of the user at the source of the transaction
+         */
+        Id: string;
+
+        /**
+         * The date at which the object was created
+         */
+        CreationDate: Timestamp;
+
+        /**
+         * The date at which the object was successfully moved to CAPTURED
+         */
+        ExecutionDate: Timestamp;
+
+        /**
+         * The captured amount
+         */
+        Amount: number;
+
+        /**
+         * The status of the capture
+         */
+        Status: string;
+
+        /**
+         * Information about the items captured in the transaction.
+         */
+        LineItems: PayInIntentLineItem[];
+    }
+
+    interface PayInIntentRefund {
+        /**
+         * The unique identifier of the user at the source of the transaction
+         */
+        Id: string;
+
+        /**
+         * The date at which the object was created
+         */
+        CreationDate: Timestamp;
+
+        /**
+         * The date at which the object was successfully moved to REFUNDED
+         */
+        ExecutionDate: Timestamp;
+
+        /**
+         * The refunded amount
+         */
+        Amount: number;
+
+        /**
+         * The status of the refund
+         */
+        Status: string;
+
+        /**
+         * Information about the items captured in the transaction.
+         */
+        LineItems: PayInIntentLineItem[];
+    }
+
+    interface PayInIntentDispute {
+        /**
+         * The unique identifier of the user at the source of the transaction
+         */
+        Id: string;
+
+        /**
+         * The date at which the object was created
+         */
+        CreationDate: Timestamp;
+
+        /**
+         * The date at which the object was successfully moved to DISPUTED
+         */
+        ExecutionDate: Timestamp;
+
+        /**
+         * The disputed amount
+         */
+        Amount: number;
+
+        /**
+         * The status of the dispute
+         */
+        Status: string;
+
+        /**
+         * Information about the items captured in the transaction.
+         */
+        LineItems: PayInIntentLineItem[];
+    }
+
+    interface PayInIntentSplitInfo {
+        /**
+         * The unique identifier of the user at the source of the transaction
+         */
+        Id: string;
+
+        /**
+         * The date at which the object was created
+         */
+        CreationDate: Timestamp;
+
+        /**
+         * The date at which the object was successfully moved to CREATED
+         */
+        ExecutionDate: Timestamp;
+
+        /**
+         * The split amount
+         */
+        Amount: number;
+
+        /**
+         * The status of the split
+         */
+        Status: string;
+
+        /**
+         * Information about the items captured in the transaction.
+         */
+        LineItems: PayInIntentLineItem[];
+    }
+
+    interface CreatePayInIntentAuthorization {
+        /**
+         * An amount of money in the smallest subdivision of the currency
+         */
+        Amount: number;
+
+        /**
+         * The currency of the funds
+         */
+        Currency: CurrencyISO;
+
+        /**
+         * Information about the fees
+         */
+        PlatformFeesAmount?: number;
+
+        /**
+         * Information about the external processed transaction
+         */
+        ExternalData: CreatePayInIntentAuthorizationExternalData;
+
+        /**
+         * Information about the buyer
+         */
+        Buyer?: PayInIntentBuyer;
+
+        /**
+         * Information about the items purchased in the transaction.
+         * <p></p>
+         * The total of all LineItems UnitAmount, TaxAmount, DiscountAmount, TotalLineItemAmount must equal the Amount
+         * <p></p>
+         * The total of all LineItems FeesAmount mus equal the PlatformFees amount
+         */
+        LineItems: PayInIntentLineItem[];
+    }
+
+    interface CreatePayInIntentFullCapture {
+        /**
+         * Information about the external processed transaction
+         */
+        ExternalData?: CreatePayInIntentFullCaptureExternalData;
+    }
+
+    interface CreatePayInIntentPartialCapture {
+        /**
+         * An amount of money in the smallest subdivision of the currency
+         */
+        Amount: number;
+
+        /**
+         * The currency of the funds
+         */
+        Currency?: CurrencyISO;
+
+        /**
+         * Information about the fees
+         */
+        PlatformFeesAmount?: number;
+
+        /**
+         * Information about the external processed transaction
+         */
+        ExternalData: CreatePayInIntentPartialCaptureExternalData;
+
+        /**
+         * Information about the items purchased in the transaction.
+         * <p></p>
+         * The total of all LineItems UnitAmount, TaxAmount, DiscountAmount, TotalLineItemAmount must equal the Amount
+         * <p></p>
+         * The total of all LineItems FeesAmount mus equal the PlatformFees amount
+         */
+        LineItems: CreatePayInIntentPartialCaptureLineItem[];
+    }
+
+    interface FullCancelPayInIntent {
+        ExternalData: CancelPayInIntentExternalData;
+    }
+
+    interface PartialCancelPayInIntent {
+        Amount: number;
+        Currency?: CurrencyISO;
+        PlatformFees?: number;
+        ExternalData: CancelPayInIntentExternalData;
+        LineItems: CancelPayInIntentLineItem[];
+    }
+
+    interface CancelPayInIntentExternalData {
+        /**
+         * The date at which the transaction was created
+         */
+        ExternalProcessingDate: Timestamp;
+
+        /**
+         * The unique identifier of the transaction at the provider level
+         */
+        ExternalProviderReference: string;
+
+        /**
+         * The unique identifier of the transaction at the merchant level
+         */
+        ExternalMerchantReference?: string;
+
+        /**
+         * The name of the external provider processing the transaction
+         */
+        ExternalProviderName?: string;
+
+        /**
+         * The name of the payment method used to process the transaction
+         */
+        ExternalProviderPaymentMethod?: string;
+    }
+
+    interface CancelPayInIntentLineItem {
+        Id: string;
+        Amount: number;
+    }
+
+    interface PayInIntentSplitData {
+        /**
+         * The unique identifier of an item in Mangopay ecosystem
+         */
+        LineItemId: string;
+
+        /**
+         * The unique identifier of the seller providing the item (userId)
+         */
+        SellerId?: string;
+
+        /**
+         * The unique identifier of the wallet to credit the seller funds
+         */
+        WalletId?: string;
+
+        /**
+         * Information about the amount to be credited to the seller wallet
+         */
+        SplitAmount: number;
+
+        /**
+         * Information about the fees
+         */
+        FeesAmount?: number;
+
+        /**
+         * Information about the date when the funds are to be transferred to the seller’s wallet
+         * Must be a date in the future
+         */
+        TransferDate?: number;
+
+        /**
+         * The description of the split object
+         */
+        Description?: string;
+
+        /**
+         * The status of the split
+         */
+        Status?: string;
+    }
+
+    interface CreatePayInIntentSplit {
+        /**
+         * The unique identifier of an item in Mangopay ecosystem
+         */
+        LineItemId: string;
+        /**
+         * Information about the amount to be credited to the seller wallet
+         */
+        SplitAmount: number;
+
+        /**
+         * Information about the fees
+         */
+        FeesAmount?: number;
+
+        /**
+         * Information about the date when the funds are to be transferred to the seller’s wallet
+         * Must be a date in the future
+         */
+        TransferDate?: number;
+
+        /**
+         * The description of the split object
+         */
+        Description?: string;
+    }
+
+    interface CreatePayInIntentSplits {
+        Splits: CreatePayInIntentSplit[];
+    }
+
+    interface PayInIntentSplitsData {
+        Splits: PayInIntentSplitData[];
     }
 }
