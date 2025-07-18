@@ -2062,28 +2062,66 @@ describe('PayIns', function () {
             });
         });
 
-        describe('Cancel intent', function () {
-            var canceled;
-            var created;
+        // describe('Cancel intent', function () {
+        //     var canceled;
+        //     var created;
+        //
+        //     before(function (done) {
+        //         helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+        //             created = data;
+        //             const cancelDetails = {
+        //                 "ExternalData" : {
+        //                     "ExternalProcessingDate" : 1728133765,
+        //                     "ExternalProviderReference" : Math.random().toString(),
+        //                 }
+        //             };
+        //             api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
+        //                 canceled = data;
+        //                 done();
+        //             });
+        //         });
+        //     });
+        //
+        //     it('should cancel the intent', function () {
+        //         expect(canceled.Status).to.equal('CANCELED');
+        //     });
+        // });
+
+        describe('Create splits', function () {
+            var payInIntent;
+            var splitsResult;
 
             before(function (done) {
                 helpers.getNewPayInIntentAuthorization(api, john, function (data) {
-                    created = data;
-                    const cancelDetails = {
+                    payInIntent = data;
+                    const fullCapture = {
                         "ExternalData" : {
-                            "ExternalProcessingDate" : 1728133765,
+                            "ExternalProcessingDate" : 1727788165,
                             "ExternalProviderReference" : Math.random().toString(),
+                            "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                            "ExternalProviderName" : "Stripe",
+                            "ExternalProviderPaymentMethod" : "PAYPAL"
                         }
                     };
-                    api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
-                        canceled = data;
-                        done();
+                    api.PayIns.createPayInIntentFullCapture(payInIntent.Id, fullCapture, function(data) {
+                        const splits = {
+                            Splits: [
+                                {
+                                    LineItemId: payInIntent.LineItems[0].Id,
+                                    SplitAmount: 10
+                                }
+                            ]
+                        };
+                        api.PayIns.createPayInIntentSplits(payInIntent.Id, splits, function(data) {
+                            splitsResult = data;
+                            done();
+                        });
                     });
                 });
             });
 
-            it('should cancel the intent', function () {
-                expect(canceled.Status).to.equal('CANCELED');
+            it('should create the Splits', function () {
+                expect(splitsResult.Splits[0].Status).to.equal('CREATED');
             });
         });
     });

@@ -2903,7 +2903,7 @@ export namespace payIn {
         /**
          * Information about the amounts split against the intent
          */
-        Splits: PayInIntentSplit[];
+        Splits: PayInIntentSplitInfo[];
 
         /**
          * The unique identifier of the settlement linked to this intent in Mangopay ecosystem
@@ -3254,7 +3254,7 @@ export namespace payIn {
         LineItems: PayInIntentLineItem[];
     }
 
-    interface PayInIntentSplit {
+    interface PayInIntentSplitInfo {
         /**
          * The unique identifier of the user at the source of the transaction
          */
@@ -3402,5 +3402,83 @@ export namespace payIn {
     interface CancelPayInIntentLineItem {
         Id: string;
         Amount: number;
+    }
+
+    interface PayInIntentSplitData {
+        /**
+         * The unique identifier of an item in Mangopay ecosystem
+         */
+        LineItemId: string;
+
+        /**
+         * The unique identifier of the seller providing the item (userId)
+         */
+        SellerId?: string;
+
+        /**
+         * The unique identifier of the wallet to credit the seller funds
+         */
+        WalletId?: string;
+
+        /**
+         * Information about the amount to be credited to the seller wallet
+         */
+        SplitAmount: number;
+
+        /**
+         * Information about the fees
+         */
+        FeesAmount?: number;
+
+        /**
+         * Information about the date when the funds are to be transferred to the seller’s wallet
+         * Must be a date in the future
+         */
+        TransferDate?: number;
+
+        /**
+         * The description of the split object
+         */
+        Description?: string;
+
+        /**
+         * The status of the split
+         */
+        Status?: string;
+    }
+
+    interface CreatePayInIntentSplit {
+        /**
+         * The unique identifier of an item in Mangopay ecosystem
+         */
+        LineItemId: string;
+        /**
+         * Information about the amount to be credited to the seller wallet
+         */
+        SplitAmount: number;
+
+        /**
+         * Information about the fees
+         */
+        FeesAmount?: number;
+
+        /**
+         * Information about the date when the funds are to be transferred to the seller’s wallet
+         * Must be a date in the future
+         */
+        TransferDate?: number;
+
+        /**
+         * The description of the split object
+         */
+        Description?: string;
+    }
+
+    interface CreatePayInIntentSplits {
+        Splits: CreatePayInIntentSplit[];
+    }
+
+    interface PayInIntentSplitsData {
+        Splits: PayInIntentSplitData[];
     }
 }
