@@ -1,3 +1,14 @@
+## [1.59.0] - 2025-07-18
+### Added
+Endpoints for [Mangopay Echo](https://docs.mangopay.com/guides/echo), a solution for platforms working with another third-party PSP for funds acquisition (including via the Mirakl Connector) #482:
+- [POST Create an Intent](https://docs.mangopay.com/api-reference/intents/create-intent)
+- [GET View an Intent](https://docs.mangopay.com/api-reference/intents/view-intent)
+- [POST Create a Capture for an Intent](https://docs.mangopay.com/api-reference/intents/create-intent-capture)
+- [POST Create a Settlement](https://docs.mangopay.com/api-reference/settlements/create-settlement)
+- [PUT Update a Settlement](https://docs.mangopay.com/api-reference/settlements/update-settlement)
+- [GET View a Settlement](https://docs.mangopay.com/api-reference/settlements/view-settlement)
+- [POST Create a Split of an Intent](https://docs.mangopay.com/api-reference/intents/create-intent-split)
+
 ## [1.58.0] - 2025-07-03
 ### Added
 - New endpoint [POST Create a Bizum PayIn](https://docs.mangopay.com/api-reference/bizum/create-bizum-payin)
