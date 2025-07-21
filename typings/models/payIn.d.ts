@@ -1093,7 +1093,15 @@ export namespace payIn {
          */
         Description: string;
 
+        /**
+         * The category of the item, allowing line items of different types to be distinguished
+         */
         Category: string;
+
+        /**
+         * The unique identifier of the line item.
+         */
+        Sku: string;
     }
 
     interface CreateLineItem {
@@ -1124,7 +1132,15 @@ export namespace payIn {
          */
         Description: string;
 
+        /**
+         * The category of the item, allowing line items of different types to be distinguished
+         */
         Category?: string;
+
+        /**
+         * The unique identifier of the line item.
+         */
+        Sku?: string;
     }
 
     interface DirectDebitDirectPayInData extends BasePayInData {
