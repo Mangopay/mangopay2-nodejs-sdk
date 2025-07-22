@@ -3568,4 +3568,23 @@ export namespace payIn {
     interface PayInIntentSplitsData {
         Splits: PayInIntentSplitData[];
     }
+
+    interface Bank {
+        BankName: string;
+        Scheme: string[];
+        Name: string;
+    }
+
+    interface BanksByCountry {
+        Banks: Bank[];
+        Country: CountryISO;
+    }
+
+    interface SupportedBank {
+        Countries: BanksByCountry[];
+    }
+
+    interface PayByBankSupportedBank {
+        SupportedBanks: SupportedBank;
+    }
 }
