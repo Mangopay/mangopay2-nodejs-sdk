@@ -2032,6 +2032,65 @@ describe('PayIns', function () {
                 expect(getPayIn.ExecutionType).to.equal('WEB');
             });
         });
+
+        describe('Get supported banks', function () {
+            var withoutFilterAndPagination;
+            var withFilter;
+            var withPagination;
+            var withFilterAndPagination;
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withoutFilterAndPagination = data;
+                    done();
+                });
+            });
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withFilter = data;
+                    done();
+                }, {
+                    CountryCodes: "DE"
+                });
+            });
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withPagination = data;
+                    done();
+                }, {
+                    per_page: 2,
+                    page: 1
+                });
+            });
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withFilterAndPagination = data;
+                    done();
+                }, {
+                    per_page: 2,
+                    page: 1,
+                    CountryCodes: "DE"
+                });
+            });
+
+            it('should get the supported banks', function () {
+                expect(withoutFilterAndPagination).not.to.be.undefined;
+                expect(withoutFilterAndPagination.SupportedBanks.Countries.length).to.be.above(0);
+
+                expect(withoutFilterAndPagination.SupportedBanks.Countries.length)
+                    .to.be.greaterThan(withFilter.SupportedBanks.Countries.length);
+                expect(withFilter.SupportedBanks.Countries[0].Banks.length).to.eq(5);
+
+                expect(withPagination.SupportedBanks.Countries[0].Banks.length).to.eq(2);
+
+                expect(withoutFilterAndPagination.SupportedBanks.Countries.length)
+                    .to.be.greaterThan(withFilterAndPagination.SupportedBanks.Countries.length);
+                expect(withFilterAndPagination.SupportedBanks.Countries[0].Banks.length).to.eq(2);
+            });
+        });
     });
 
     describe('PayIn Intent', function () {
