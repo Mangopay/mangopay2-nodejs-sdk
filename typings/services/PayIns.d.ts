@@ -3,6 +3,7 @@ import { refund } from "../models/refund";
 import { base } from "../base";
 import MethodOverload = base.MethodOverload;
 import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
+import ThreeArgsMethodOverload = base.ThreeArgsMethodOverload;
 
 export class PayIns {
     /**
@@ -169,39 +170,39 @@ export class PayIns {
 
     /**
      * Create a pay in intent authorization
-     * @param {payIn.CreatePayInIntentAuthorization}  payInIntentAuthorization    PayInIntentAuthorization object
-     * @param {Function} callback    Callback function
-     * @param {Object} options    Request options
-     * @return {payIn.PayInIntentData}         Request promise
+     * @param {payIn.CreatePayInIntentAuthorization} payInIntentAuthorization PayInIntentAuthorization object
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
      */
     createPayInIntentAuthorization: MethodOverload<payIn.CreatePayInIntentAuthorization, payIn.PayInIntentData>
 
     /**
      * Create a pay in intent full capture
-     * @param {string}  payInIntentId    PayInIntent identifier
-     * @param {payIn.CreatePayInIntentFullCapture}  payInIntentFullCapture    PayInIntentFullCapture object
-     * @param {Function} callback    Callback function
-     * @param {Object} options    Request options
-     * @return {payIn.PayInIntentData}         Request promise
+     * @param {string} payInIntentId PayInIntent identifier
+     * @param {payIn.CreatePayInIntentFullCapture}  payInIntentFullCapture PayInIntentFullCapture object
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
      */
     createPayInIntentFullCapture: TwoArgsMethodOverload<string, payIn.CreatePayInIntentFullCapture, payIn.PayInIntentData>
 
     /**
      * Create a pay in intent partial capture
-     * @param {string}  payInIntentId    PayInIntent identifier
-     * @param {payIn.CreatePayInIntentPartialCapture}  payInIntentPartialCapture    PayInIntentPartialCapture object
-     * @param {Function} callback    Callback function
-     * @param {Object} options    Request options
-     * @return {payIn.PayInIntentData}         Request promise
+     * @param {string} payInIntentId PayInIntent identifier
+     * @param {payIn.CreatePayInIntentPartialCapture} payInIntentPartialCapture PayInIntentPartialCapture object
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
      */
     createPayInIntentPartialCapture: TwoArgsMethodOverload<string, payIn.CreatePayInIntentPartialCapture, payIn.PayInIntentData>
 
     /**
      * Get a PayInIntent
-     * @param {string}  payInIntentId    PayInIntent identifier
-     * @param {Function} callback    Callback function
-     * @param {Object} options    Request options
-     * @return {payIn.PayInIntentData}         Request promise
+     * @param {string} payInIntentId PayInIntent identifier
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
      */
     getPayInIntent: MethodOverload<string, payIn.PayInIntentData>
 
@@ -211,7 +212,7 @@ export class PayIns {
     //  * @param {payIn.FullCancelPayInIntent}  intentDetails  Details about the intent to be canceled
     //  * @param {Function} callback    Callback function
     //  * @param {Object} options    Request options
-    //  * @return {payIn.PayInIntentData}         Request promise
+    //  * @return {Object}         Request promise
     //  */
     // fullCancelPayInIntent: TwoArgsMethodOverload<string, payIn.FullCancelPayInIntent, payIn.PayInIntentData>
     //
@@ -221,17 +222,58 @@ export class PayIns {
     //  * @param {payIn.PartialCancelPayInIntent}  intentDetails  Details about the intent to be canceled
     //  * @param {Function} callback    Callback function
     //  * @param {Object} options    Request options
-    //  * @return {payIn.PayInIntentData}         Request promise
+    //  * @return {Object}         Request promise
     //  */
     // partialCancelPayInIntent: TwoArgsMethodOverload<string, payIn.PartialCancelPayInIntent, payIn.PayInIntentData>
 
     /**
      * Create PayInIntent splits
-     * @param {string}  payInIntentId    PayInIntent identifier
-     * @param {payIn.CreatePayInIntentSplits}  splits    CreatePayInIntentSplits object
-     * @param {Function} callback    Callback function
-     * @param {Object} options    Request options
-     * @return {payIn.PayInIntentData}         Request promise
+     * @param {string} payInIntentId  PayInIntent identifier
+     * @param {payIn.CreatePayInIntentSplits} splits CreatePayInIntentSplits object
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
      */
     createPayInIntentSplits: TwoArgsMethodOverload<string, payIn.CreatePayInIntentSplits, payIn.PayInIntentSplitsData>
+
+    /**
+     * Execute split
+     * @param {string} payInIntentId PayInIntent identifier
+     * @param {string} splitId Split identifier
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
+     */
+    executePayInIntentSplit: TwoArgsMethodOverload<string, string, payIn.PayInIntentSplitData>
+
+    /**
+     * Reverse split
+     * @param {string} payInIntentId PayInIntent identifier
+     * @param {string} splitId Split identifier
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
+     */
+    reversePayInIntentSplit: TwoArgsMethodOverload<string, string, payIn.PayInIntentSplitData>
+
+    /**
+     * Get split
+     * @param {string} payInIntentId PayInIntent identifier
+     * @param {string} splitId Split identifier
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
+     */
+    getPayInIntentSplit: TwoArgsMethodOverload<string, string, payIn.PayInIntentSplitData>
+
+    /**
+     * Update split
+     * @param {string} payInIntentId PayInIntent identifier
+     * @param {string} splitId Split identifier
+     * @param {payIn.UpdatePayInIntentSplit} Object containing the split properties to be updated
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
+     */
+    updatePayInIntentSplit: ThreeArgsMethodOverload<string, string, payIn.UpdatePayInIntentSplit, payIn.PayInIntentSplitData>
 }

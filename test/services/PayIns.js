@@ -2094,34 +2094,109 @@ describe('PayIns', function () {
             before(function (done) {
                 helpers.getNewPayInIntentAuthorization(api, john, function (data) {
                     payInIntent = data;
-                    const fullCapture = {
-                        "ExternalData" : {
-                            "ExternalProcessingDate" : 1727788165,
-                            "ExternalProviderReference" : Math.random().toString(),
-                            "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
-                            "ExternalProviderName" : "Stripe",
-                            "ExternalProviderPaymentMethod" : "PAYPAL"
-                        }
-                    };
-                    api.PayIns.createPayInIntentFullCapture(payInIntent.Id, fullCapture, function(data) {
-                        const splits = {
-                            Splits: [
-                                {
-                                    LineItemId: payInIntent.LineItems[0].Id,
-                                    SplitAmount: 10
-                                }
-                            ]
-                        };
-                        api.PayIns.createPayInIntentSplits(payInIntent.Id, splits, function(data) {
-                            splitsResult = data;
-                            done();
-                        });
+                    helpers.getNewPayInIntentSplit(api, payInIntent, function(data) {
+                        splitsResult = data;
+                        done();
                     });
                 });
             });
 
             it('should create the Splits', function () {
                 expect(splitsResult.Splits[0].Status).to.equal('CREATED');
+            });
+        });
+
+        describe('Execute split', function () {
+            var payInIntent;
+            var error;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    payInIntent = data;
+                    helpers.getNewPayInIntentSplit(api, data, function (data) {
+                        api.PayIns.executePayInIntentSplit(payInIntent.Id, data.Splits[0].Id, function (data) {
+                        })
+                            .catch(function (err) {
+                                error = err;
+                                done();
+                            });
+                    });
+                });
+            });
+
+            it('should return error while trying to execute the Split', function () {
+                // expect error. A success use case cannot be automated because it needs a PayIn to be created manually
+                expect(error.Errors.Split).to.contain("Execute split requires a status in [AVAILABLE, REJECTED]");
+            });
+        });
+
+        describe('Reverse split', function () {
+            var payInIntent;
+            var error;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    payInIntent = data;
+                    helpers.getNewPayInIntentSplit(api, data, function (data) {
+                        api.PayIns.reversePayInIntentSplit(payInIntent.Id, data.Splits[0].Id, function (data) {
+                        })
+                            .catch(function (err) {
+                                error = err;
+                                done();
+                            });
+                    });
+                });
+            });
+
+            it('should return error while trying to reverse the Split', function () {
+                // expect error. A success use case cannot be automated because it needs a PayIn to be created manually
+                expect(error.Errors.Status).to.contain("Reverse split requires a status in [AVAILABLE, REJECTED]");
+            });
+        });
+
+        describe('Get split', function () {
+            var payInIntent;
+            var fetched;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    payInIntent = data;
+                    helpers.getNewPayInIntentSplit(api, data, function (data) {
+                        api.PayIns.getPayInIntentSplit(payInIntent.Id, data.Splits[0].Id, function (data) {
+                            fetched = data;
+                            done();
+                        });
+                    });
+                });
+            });
+
+            it('should get the Split', function () {
+                expect(fetched.Status).to.equal('CREATED');
+            });
+        });
+
+        describe('Update split', function () {
+            var payInIntent;
+            var updated;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    payInIntent = data;
+                    helpers.getNewPayInIntentSplit(api, data, function (data) {
+                        const dto = {
+                            LineItemId: data.Splits[0].LineItemId,
+                            Description: "updated description"
+                        };
+                        api.PayIns.updatePayInIntentSplit(payInIntent.Id, data.Splits[0].Id, dto, function (data) {
+                            updated = data;
+                            done();
+                        });
+                    });
+                });
+            });
+
+            it('should update the Split', function () {
+                expect(updated.Description).to.equal("updated description");
             });
         });
     });

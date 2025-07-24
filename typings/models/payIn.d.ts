@@ -3481,4 +3481,12 @@ export namespace payIn {
     interface PayInIntentSplitsData {
         Splits: PayInIntentSplitData[];
     }
+
+    interface UpdatePayInIntentSplit {
+        LineItemId: string;
+        SplitAmount?: string;
+        FeesAmount?: string;
+        TransferDate?: number;
+        Description?: string;
+    }
 }

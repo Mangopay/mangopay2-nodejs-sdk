@@ -1346,4 +1346,27 @@ module.exports = {
             api.PayIns.createPayInIntentAuthorization(payInIntent, callback);
         });
     },
+
+    getNewPayInIntentSplit: function (api, intent, callback) {
+        const fullCapture = {
+            "ExternalData" : {
+                "ExternalProcessingDate" : 1727788165,
+                "ExternalProviderReference" : Math.random().toString(),
+                "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                "ExternalProviderName" : "Stripe",
+                "ExternalProviderPaymentMethod" : "PAYPAL"
+            }
+        };
+        api.PayIns.createPayInIntentFullCapture(intent.Id, fullCapture, function(data) {
+            const splits = {
+                Splits: [
+                    {
+                        LineItemId: intent.LineItems[0].Id,
+                        SplitAmount: 10
+                    }
+                ]
+            };
+            api.PayIns.createPayInIntentSplits(intent.Id, splits, callback);
+        });
+    }
 };
