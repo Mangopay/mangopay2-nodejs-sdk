@@ -242,7 +242,7 @@ export class PayIns {
      * Optionally filter by CountryCodes. Paginated.
      * @param {Function} callback   Callback function
      * @param {Object} options  Request options
-     * @return {payIn.PayByBankSupportedBank}   Request promise
+     * @return {Object}   Request promise
      */
     getPayByBankSupportedBanks: NoArgMethodOverload<payIn.PayByBankSupportedBank>
 }

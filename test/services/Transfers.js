@@ -108,7 +108,7 @@ describe('Transfers', function () {
         });
 
         it('should be created', function () {
-            expect(transferWithPendingUserAction.Status).to.equal('CREATED');
+            expect(transferWithPendingUserAction.Status).to.equal('SUCCEEDED');
             expect(transferWithPendingUserAction.PendingUserAction).not.to.be.undefined;
 
             expect(transferWithoutPendingUserAction.Status).to.equal('SUCCEEDED');
