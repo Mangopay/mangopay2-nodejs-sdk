@@ -3,6 +3,7 @@ import { refund } from "../models/refund";
 import { base } from "../base";
 import MethodOverload = base.MethodOverload;
 import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
+import NoArgMethodOverload = base.NoArgMethodOverload;
 
 export class PayIns {
     /**
@@ -235,4 +236,13 @@ export class PayIns {
      * @return {payIn.PayInIntentData}         Request promise
      */
     createPayInIntentSplits: TwoArgsMethodOverload<string, payIn.CreatePayInIntentSplits, payIn.PayInIntentSplitsData>
+
+    /**
+     * Retrieve a paginated list of banks that you can present to the user for selection during their Pay by Bank checkout experience
+     * Optionally filter by CountryCodes. Paginated.
+     * @param {Function} callback   Callback function
+     * @param {Object} options  Request options
+     * @return {Object}   Request promise
+     */
+    getPayByBankSupportedBanks: NoArgMethodOverload<payIn.PayByBankSupportedBank>
 }

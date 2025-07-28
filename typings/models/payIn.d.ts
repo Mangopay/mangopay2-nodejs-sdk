@@ -1093,7 +1093,15 @@ export namespace payIn {
          */
         Description: string;
 
+        /**
+         * The category of the item, allowing line items of different types to be distinguished
+         */
         Category: string;
+
+        /**
+         * The unique identifier of the line item.
+         */
+        Sku: string;
     }
 
     interface CreateLineItem {
@@ -1124,7 +1132,15 @@ export namespace payIn {
          */
         Description: string;
 
+        /**
+         * The category of the item, allowing line items of different types to be distinguished
+         */
         Category?: string;
+
+        /**
+         * The unique identifier of the line item.
+         */
+        Sku?: string;
     }
 
     interface DirectDebitDirectPayInData extends BasePayInData {
@@ -3567,5 +3583,24 @@ export namespace payIn {
 
     interface PayInIntentSplitsData {
         Splits: PayInIntentSplitData[];
+    }
+
+    interface Bank {
+        BankName: string;
+        Scheme: string[];
+        Name: string;
+    }
+
+    interface BanksByCountry {
+        Banks: Bank[];
+        Country: CountryISO;
+    }
+
+    interface SupportedBank {
+        Countries: BanksByCountry[];
+    }
+
+    interface PayByBankSupportedBank {
+        SupportedBanks: SupportedBank;
     }
 }
