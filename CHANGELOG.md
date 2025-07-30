@@ -1,3 +1,32 @@
+## [1.59.1] - 2025-07-28
+### Added
+- `Sku` parameter on LineItem, for [Klarna PayIns](https://docs.mangopay.com/api-reference/klarna/create-klarna-payin)
+- support for new endpoint [View supported banks for Pay by Bank](https://docs.mangopay.com/api-reference/pay-by-bank/view-supported-banks-pay-by-bank), to enable presentation of banks to user before Pay by Bank payment request
+
+## [1.59.0] - 2025-07-18
+### Added
+Endpoints for [Mangopay Echo](https://docs.mangopay.com/guides/echo), a solution for platforms working with another third-party PSP for funds acquisition (including via the Mirakl Connector) #482:
+- [POST Create an Intent](https://docs.mangopay.com/api-reference/intents/create-intent)
+- [GET View an Intent](https://docs.mangopay.com/api-reference/intents/view-intent)
+- [POST Create a Capture for an Intent](https://docs.mangopay.com/api-reference/intents/create-intent-capture)
+- [POST Create a Settlement](https://docs.mangopay.com/api-reference/settlements/create-settlement)
+- [PUT Update a Settlement](https://docs.mangopay.com/api-reference/settlements/update-settlement)
+- [GET View a Settlement](https://docs.mangopay.com/api-reference/settlements/view-settlement)
+- [POST Create a Split of an Intent](https://docs.mangopay.com/api-reference/intents/create-intent-split)
+
+## [1.58.0] - 2025-07-03
+### Added
+- New endpoint [POST Create a Bizum PayIn](https://docs.mangopay.com/api-reference/bizum/create-bizum-payin)
+- New webhook event types for SCA enrollment ([API release note](https://docs.mangopay.com/release-notes/api/2025-06-23)), note that these are triggered on enrollment not authentication:
+  - `SCA_ENROLLMENT_SUCCEEDED`
+  - `SCA_ENROLLMENT_FAILED`
+  - `SCA_ENROLLMENT_EXPIRED`
+- New webhook event types for `UserCategory` change ([API release note](https://docs.mangopay.com/release-notes/api/2025-06-23) ):
+  - `USER_CATEGORY_UPDATED_TO_OWNER`
+  - `USER_CATEGORY_UPDATED_TO_PAYER`
+  - `USER_CATEGORY_UPDATED_TO_PLATFORM`
+- Support for `PLATFORM` value to `UserCategory` enum
+
 ## [1.57.1] - 2025-06-17
 ### Added
 - [US and CA virtual accounts](https://docs.mangopay.com/release-notes/api/2025-06-12) for local pay-in collection

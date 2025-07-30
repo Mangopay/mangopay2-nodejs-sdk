@@ -3,6 +3,7 @@ import { refund } from "../models/refund";
 import { base } from "../base";
 import MethodOverload = base.MethodOverload;
 import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
+import NoArgMethodOverload = base.NoArgMethodOverload;
 import ThreeArgsMethodOverload = base.ThreeArgsMethodOverload;
 
 export class PayIns {
@@ -31,6 +32,7 @@ export class PayIns {
         MethodOverload<payIn.CreateSwishWebPayIn, payIn.SwishWebPayInData> &
         MethodOverload<payIn.CreateTwintWebPayIn, payIn.TwintWebPayInData> &
         MethodOverload<payIn.CreateBancontactWebPayIn, payIn.BancontactWebPayInData> &
+        MethodOverload<payIn.CreateBizumWebPayIn, payIn.BizumWebPayInData> &
         MethodOverload<payIn.CreatePayByBankWebPayIn, payIn.PayByBankWebPayInData>;
 
 
@@ -276,4 +278,13 @@ export class PayIns {
      * @return {Object} Request promise
      */
     updatePayInIntentSplit: ThreeArgsMethodOverload<string, string, payIn.UpdatePayInIntentSplit, payIn.PayInIntentSplitData>
+
+    /**
+     * Retrieve a paginated list of banks that you can present to the user for selection during their Pay by Bank checkout experience
+     * Optionally filter by CountryCodes. Paginated.
+     * @param {Function} callback   Callback function
+     * @param {Object} options  Request options
+     * @return {Object}   Request promise
+     */
+    getPayByBankSupportedBanks: NoArgMethodOverload<payIn.PayByBankSupportedBank>
 }

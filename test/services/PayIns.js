@@ -1276,6 +1276,78 @@ describe('PayIns', function () {
         });
     });
 
+    describe('Bizum Web', function () {
+        var payInWithPhone;
+        var payInWithReturnUrl;
+
+        before(function (done) {
+            helpers.getNewPayInBizumWebWithPhone(api, john, function (data, response) {
+                payInWithPhone = data;
+                helpers.getNewPayInBizumWebWithReturnUrl(api, john, function (data) {
+                    payInWithReturnUrl = data;
+                    done();
+                });
+            });
+        });
+
+        describe('Create', function () {
+            it('should create Bizum PayIn with Phone', function () {
+                expect(payInWithPhone.Id).not.to.be.undefined;
+                expect(payInWithPhone.PaymentType).to.equal('BIZUM');
+                expect(payInWithPhone.ExecutionType).to.equal('WEB');
+                expect(payInWithPhone.AuthorId).to.equal(john.Id);
+                expect(payInWithPhone.Status).to.equal('CREATED');
+                expect(payInWithPhone.Type).to.equal('PAYIN');
+                expect(payInWithPhone.Phone).not.to.be.null;
+                expect(payInWithPhone.ReturnURL).to.be.undefined;
+            });
+            it('should create Bizum PayIn with ReturnUrl', function () {
+                expect(payInWithReturnUrl.Id).not.to.be.undefined;
+                expect(payInWithReturnUrl.PaymentType).to.equal('BIZUM');
+                expect(payInWithReturnUrl.ExecutionType).to.equal('WEB');
+                expect(payInWithReturnUrl.AuthorId).to.equal(john.Id);
+                expect(payInWithReturnUrl.Status).to.equal('CREATED');
+                expect(payInWithReturnUrl.Type).to.equal('PAYIN');
+                expect(payInWithReturnUrl.Phone).to.be.null;
+                expect(payInWithReturnUrl.ReturnURL).not.to.be.null;
+            });
+        });
+
+        describe('Get', function () {
+            var getPayInWithPhone;
+            var getPayInWithReturnUrl;
+
+            before(function (done) {
+                api.PayIns.get(payInWithPhone.Id, function (data, response) {
+                    getPayInWithPhone = data;
+                    api.PayIns.get(payInWithReturnUrl.Id, function (data, response) {
+                        getPayInWithReturnUrl = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should get Bizum PayIn with Phone', function () {
+                expect(getPayInWithPhone.Id).to.equal(payInWithPhone.Id);
+                expect(getPayInWithPhone.PaymentType).to.equal('BIZUM');
+                expect(getPayInWithPhone.ExecutionType).to.equal('WEB');
+                expect(getPayInWithPhone.Phone).not.to.be.null;
+                expect(getPayInWithPhone.Phone).to.equal(payInWithPhone.Phone);
+                expect(getPayInWithPhone.ReturnURL).to.equal(payInWithPhone.ReturnURL);
+                expect(getPayInWithPhone.ReturnURL).to.be.undefined;
+            });
+
+            it('should get the Bizum with ReturnUrl', function () {
+                expect(getPayInWithReturnUrl.Id).to.equal(payInWithReturnUrl.Id);
+                expect(getPayInWithReturnUrl.PaymentType).to.equal('BIZUM');
+                expect(getPayInWithReturnUrl.ExecutionType).to.equal('WEB');
+                expect(getPayInWithReturnUrl.Phone).to.be.null;
+                expect(getPayInWithReturnUrl.ReturnURL).not.to.be.null;
+                expect(getPayInWithReturnUrl.ReturnURL).to.equal(payInWithReturnUrl.ReturnURL);
+            });
+        });
+    });
+
     describe('PayPal Web V2', function () {
         var payIn;
 
@@ -1958,6 +2030,229 @@ describe('PayIns', function () {
                 expect(getPayIn.Id).to.equal(payIn.Id);
                 expect(getPayIn.PaymentType).to.equal('PAY_BY_BANK');
                 expect(getPayIn.ExecutionType).to.equal('WEB');
+            });
+        });
+
+        describe('Get supported banks', function () {
+            var withoutFilterAndPagination;
+            var withFilter;
+            var withPagination;
+            var withFilterAndPagination;
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withoutFilterAndPagination = data;
+                    done();
+                });
+            });
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withFilter = data;
+                    done();
+                }, {
+                    CountryCodes: "DE"
+                });
+            });
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withPagination = data;
+                    done();
+                }, {
+                    per_page: 2,
+                    page: 1
+                });
+            });
+
+            before(function (done) {
+                api.PayIns.getPayByBankSupportedBanks(function (data, response) {
+                    withFilterAndPagination = data;
+                    done();
+                }, {
+                    per_page: 2,
+                    page: 1,
+                    CountryCodes: "DE"
+                });
+            });
+
+            it('should get the supported banks', function () {
+                expect(withoutFilterAndPagination).not.to.be.undefined;
+                expect(withoutFilterAndPagination.SupportedBanks.Countries.length).to.be.above(0);
+
+                expect(withoutFilterAndPagination.SupportedBanks.Countries.length)
+                    .to.be.greaterThan(withFilter.SupportedBanks.Countries.length);
+                expect(withFilter.SupportedBanks.Countries[0].Banks.length).to.eq(5);
+
+                expect(withPagination.SupportedBanks.Countries[0].Banks.length).to.eq(2);
+
+                expect(withoutFilterAndPagination.SupportedBanks.Countries.length)
+                    .to.be.greaterThan(withFilterAndPagination.SupportedBanks.Countries.length);
+                expect(withFilterAndPagination.SupportedBanks.Countries[0].Banks.length).to.eq(2);
+            });
+        });
+    });
+
+    describe('PayIn Intent', function () {
+        describe('Create intent authorization', function () {
+            var payInIntent;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    payInIntent = data;
+                    done();
+                });
+            });
+
+            it('should create the PayInIntent Authorization', function () {
+                expect(payInIntent.Id).not.to.be.undefined;
+                expect(payInIntent.Status).to.equal('AUTHORIZED');
+            });
+        });
+
+        describe('Create full capture', function () {
+            var payInIntent;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    const toCreate = {
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : 1727788165,
+                            "ExternalProviderReference" : Math.random().toString(),
+                            "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                            "ExternalProviderName" : "Stripe",
+                            "ExternalProviderPaymentMethod" : "PAYPAL"
+                        }
+                    };
+                    api.PayIns.createPayInIntentFullCapture(data.Id, toCreate, function(data) {
+                        payInIntent = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should create the PayInIntent Full Capture', function () {
+                expect(payInIntent.Id).not.to.be.undefined;
+                expect(payInIntent.Status).to.equal('CAPTURED');
+            });
+        });
+
+        describe('Create partial capture', function () {
+            var payInIntent;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    const toCreate = {
+                        "Amount" : 1000,
+                        "Currency" : "EUR",
+                        "PlatformFeesAmount": 0,
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : 1727788165,
+                            "ExternalProviderReference" : Math.random().toString(),
+                            "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                            "ExternalProviderName" : "Stripe",
+                            "ExternalProviderPaymentMethod" : "PAYPAL"
+                        },
+                        "LineItems": [
+                            {
+                                "Amount": 1000,
+                                "Id": data.LineItems[0].Id
+                            }
+                        ]
+                    };
+                    api.PayIns.createPayInIntentPartialCapture(data.Id, toCreate, function(data) {
+                        payInIntent = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should create the PayInIntent Partial Capture', function () {
+                expect(payInIntent.Id).not.to.be.undefined;
+                expect(payInIntent.Status).to.equal('CAPTURED');
+            });
+        });
+
+        describe('Get intent', function () {
+            var fetched;
+            var created;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    created = data;
+                    api.PayIns.getPayInIntent(created.Id, function(data) {
+                        fetched = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should get the intent', function () {
+                expect(fetched.Id).to.equal(created.Id);
+                expect(fetched.Status).to.equal(created.Status);
+            });
+        });
+
+        // describe('Cancel intent', function () {
+        //     var canceled;
+        //     var created;
+        //
+        //     before(function (done) {
+        //         helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+        //             created = data;
+        //             const cancelDetails = {
+        //                 "ExternalData" : {
+        //                     "ExternalProcessingDate" : 1728133765,
+        //                     "ExternalProviderReference" : Math.random().toString(),
+        //                 }
+        //             };
+        //             api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
+        //                 canceled = data;
+        //                 done();
+        //             });
+        //         });
+        //     });
+        //
+        //     it('should cancel the intent', function () {
+        //         expect(canceled.Status).to.equal('CANCELED');
+        //     });
+        // });
+
+        describe('Create splits', function () {
+            var payInIntent;
+            var splitsResult;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    payInIntent = data;
+                    const fullCapture = {
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : 1727788165,
+                            "ExternalProviderReference" : Math.random().toString(),
+                            "ExternalMerchantReference" : "Order-xyz-35e8490e-2ec9-4c82-978e-c712a3f5ba16",
+                            "ExternalProviderName" : "Stripe",
+                            "ExternalProviderPaymentMethod" : "PAYPAL"
+                        }
+                    };
+                    api.PayIns.createPayInIntentFullCapture(payInIntent.Id, fullCapture, function(data) {
+                        const splits = {
+                            Splits: [
+                                {
+                                    LineItemId: payInIntent.LineItems[0].Id,
+                                    SplitAmount: 10
+                                }
+                            ]
+                        };
+                        api.PayIns.createPayInIntentSplits(payInIntent.Id, splits, function(data) {
+                            splitsResult = data;
+                            done();
+                        });
+                    });
+                });
+            });
+
+            it('should create the Splits', function () {
+                expect(splitsResult.Splits[0].Status).to.equal('CREATED');
             });
         });
     });
