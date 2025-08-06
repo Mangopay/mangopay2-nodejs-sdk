@@ -38,7 +38,13 @@ export namespace report {
         | "Status"
         | "Tag"
         | "Type"
-        | "WireReference";
+        | "WireReference"
+        | "Owners"
+        | "Description"
+        | "BalanceAmount"
+        | "BalanceCurrency"
+        | "Currency"
+        | "FundsType";
 
     interface Filters {
         /**
@@ -115,6 +121,41 @@ export namespace report {
          * The ID of a wallet
          */
         WalletId: string;
+
+        /**
+         * The transaction result codes to be taken into account.
+         */
+        ResultCode?: string[];
+
+        /**
+         * The unique identifier of the user owning the wallet.
+         */
+        OwnerId?: string;
+
+        /**
+         * The currency of the wallets to take into account.
+         */
+        Currency?: string;
+
+        /**
+         * The balance amount above which the wallets are taken into account.
+         */
+        MinBalanceAmount?: number;
+
+        /**
+         * The currency of the MinBalanceAmount value.
+         */
+        MinBalanceCurrency?: CurrencyISO;
+
+        /**
+         * The balance amount below which the wallets are taken into account.
+         */
+        MaxBalanceAmount?: number;
+
+        /**
+         * The currency of the MaxBalanceAmount value.
+         */
+        MaxBalanceCurrency?: CurrencyISO;
     }
 
     interface ReportData extends entityBase.EntityBaseData {
@@ -172,6 +213,12 @@ export namespace report {
          * A verbal explanation of the ResultCode
          */
         ResultMessage: string;
+
+        /**
+         * The status of the report.
+         * Returned values: PENDING, READY_FOR_DOWNLOAD, FAILED, EXPIRED
+         */
+        Status: string;
     }
 
     interface CreateReport extends PickPartial<ReportData,
