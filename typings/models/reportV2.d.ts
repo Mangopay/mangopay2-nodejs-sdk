@@ -17,6 +17,18 @@ export namespace reportV2 {
          * The unique identifier of the wallet referenced as the DebitedWalletId or CreditedWalletId of the transaction.
          */
         WalletId?: string;
+
+        PaymentMethod?: string;
+
+        Status?: string;
+
+        Type?: string;
+
+        IntentId?: string;
+
+        ExternalProviderName?: string;
+
+        Scheduled?: boolean;
     }
 
     interface ReportDataV2 extends entityBase.EntityBaseData {
