@@ -11,6 +11,10 @@ export class Conversions {
 
     createQuotedConversion: MethodOverload<conversion.CreateQuotedConversion, conversion.ConversionData>;
 
+    createClientWalletsQuotedConversion: MethodOverload<conversion.CreateClientWalletsQuotedConversion, conversion.ConversionData>;
+
+    createClientWalletsInstantConversion: MethodOverload<conversion.CreateClientWalletsInstantConversion, conversion.ConversionData>;
+
     getConversion: MethodOverload<string, conversion.ConversionData>;
 
     createQuote: MethodOverload<conversion.CreateQuote, conversion.QuoteData>;

@@ -8,6 +8,7 @@ export namespace conversion {
     import TransactionType = transaction.TransactionType;
     import TransactionNature = transaction.TransactionNature;
     import MoneyData = money.MoneyData;
+    import MoneyDataOptionalAmount = money.MoneyDataOptionalAmount;
     import ConversionRateData = conversionRate.ConversionRateData;
 
     type QuoteStatus = "ACTIVE" | "EXPIRED";
@@ -147,6 +148,59 @@ export namespace conversion {
          * The unique identifier of the credited wallet
          */
         CreditedWalletId: string;
+
+        /**
+         * Custom data that you can add to this object.
+         */
+        Tag?: string;
+    }
+
+    interface CreateClientWalletsQuotedConversion {
+        /**
+         * The unique identifier of the active quote which guaranteed the rate for the conversion.
+         */
+        QuoteId: string;
+
+        /**
+         * The type of the client wallet to be debited.
+         * Allowed values: FEES, CREDIT
+         */
+        DebitedWalletType: string;
+
+        /**
+         * The type of the client wallet to be credited.
+         * Allowed values: FEES, CREDIT
+         */
+        CreditedWalletType: string;
+
+        /**
+         * Custom data that you can add to this object.
+         */
+        Tag?: string;
+    }
+
+    interface CreateClientWalletsInstantConversion {
+        /**
+         * The sell funds
+         */
+        DebitedFunds: MoneyData;
+
+        /**
+         * The buy funds
+         */
+        CreditedFunds: MoneyDataOptionalAmount;
+
+        /**
+         * The type of the client wallet to be debited.
+         * Allowed values: FEES, CREDIT
+         */
+        DebitedWalletType: string;
+
+        /**
+         * The type of the client wallet to be credited.
+         * Allowed values: FEES, CREDIT
+         */
+        CreditedWalletType: string;
 
         /**
          * Custom data that you can add to this object.

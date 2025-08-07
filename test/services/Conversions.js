@@ -234,6 +234,58 @@ describe('Conversions', function () {
         });
     });
 
+    describe('Create Client Wallets Quoted Conversion', function () {
+        var created;
+        before(function (done) {
+            helpers.getNewQuote(api, function (data, response) {
+                quote = data;
+
+                var body = {
+                    QuoteId: quote.Id,
+                    CreditedWalletType: "CREDIT",
+                    DebitedWalletType: "FEES"
+                };
+
+                api.Conversions.createClientWalletsQuotedConversion(body, function (data, response) {
+                    created = data;
+                    done();
+                });
+            });
+        });
+
+        it('should be created', function () {
+            expect(created.Id).not.to.be.null;
+            expect(created.QuoteId).not.to.be.null;
+            expect(created.Status).to.equal('SUCCEEDED');
+        });
+    });
+
+    describe('Create Client Wallets Instant Conversion', function () {
+        var created;
+        before(function (done) {
+            var body = {
+                CreditedWalletType: "FEES",
+                DebitedWalletType: "FEES",
+                CreditedFunds: {
+                    Currency: 'GBP'
+                },
+                DebitedFunds: {
+                    Currency: 'EUR',
+                    Amount: 79
+                }
+            };
+
+            api.Conversions.createClientWalletsInstantConversion(body, function (data, response) {
+                created = data;
+                done();
+            });
+        });
+
+        it('should be created', function () {
+            expect(created.Id).not.to.be.null;
+            expect(created.Status).to.equal('SUCCEEDED');
+        });
+    });
 
     describe('Get Conversion', function () {
         var fetchedConversion;
