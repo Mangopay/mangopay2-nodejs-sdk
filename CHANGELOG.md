@@ -1,3 +1,17 @@
+## [1.60.0] - 2025-08-07
+### Added
+Support for new Splits endpoints for Echo (#489, [API release note](https://docs.mangopay.com/release-notes/api/2025-07-16)):
+- [PUT Update a Split of an Intent](https://docs.mangopay.com/api-reference/intents/update-intent-split)
+- [POST Execute a Split of an Intent](https://docs.mangopay.com/api-reference/intents/execute-intent-split)
+- [POST Reverse the Split of an Intent](https://docs.mangopay.com/api-reference/intents/reverse-intent-split)
+- [GET View a Split of an Intent](https://docs.mangopay.com/api-reference/intents/view-intent-split)
+
+New `ReportTypes` for Echo (#490, [API release note](https://docs.mangopay.com/release-notes/api/2025-08-06))):
+- `ECHO_INTENT`
+- `ECHO_INTENT_ACTION`
+- `ECHO_SETTLEMENT`
+- `ECHO_SPLIT`
+
 ## [1.59.1] - 2025-07-28
 ### Added
 - `Sku` parameter on LineItem, for [Klarna PayIns](https://docs.mangopay.com/api-reference/klarna/create-klarna-payin)
