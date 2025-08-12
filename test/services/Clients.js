@@ -216,7 +216,7 @@ describe("Clients", function () {
                         "Amount": 1000
                 }
             };
-            api.Clients.createPayInBankWireDirect(dto, function(data) {
+            api.Clients.createBankWireDirectPayIn(dto, function(data) {
                 created = data;
                 done();
             });

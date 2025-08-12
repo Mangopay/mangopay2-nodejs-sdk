@@ -73,5 +73,5 @@ export class Clients {
      * Create a Direct Bank Wire PayIn, instead of a Settlement Transfer, to the Repudiation Wallet in order to settle the negative balance due to a LOST dispute.
      * The object expires 1 month after creation if no funds are received.
      */
-    createPayInBankWireDirect: MethodOverload<client.CreatePayInBankWireDirect, payIn.BankWireDirectPayInData>
+    createBankWireDirectPayIn: MethodOverload<client.CreateBankWireDirectPayIn, payIn.BankWireDirectPayInData>
 }

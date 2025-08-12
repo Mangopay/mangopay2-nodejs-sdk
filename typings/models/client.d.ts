@@ -187,7 +187,7 @@ export namespace client {
         File: string;
     }
 
-    interface CreatePayInBankWireDirect {
+    interface CreateBankWireDirectPayIn {
         /**
          * The unique identifier of the credited wallet.
          * In the case of the direct bank wire to the Repudiation Wallet,
