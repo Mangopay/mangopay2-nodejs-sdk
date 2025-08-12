@@ -3,7 +3,6 @@ import { address } from "./address";
 import { entityBase } from "./entityBase";
 
 export namespace user {
-    import EntityBaseData = entityBase.EntityBaseData;
     /**
      * Should be only one of these values:
      * 1 - for incomes <18K€),
@@ -950,7 +949,7 @@ export namespace user {
         ValidationRules?: string[];
     }
 
-    interface RegulatoryData extends EntityBaseData {
+    interface RegulatoryData extends entityBase.EntityBaseData {
         /**
          * Code indicating the reason for blocking the user, and steps you can take to get them unblocked.
          */
