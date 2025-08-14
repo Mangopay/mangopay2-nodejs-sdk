@@ -1,3 +1,11 @@
+## [1.60.1] - 2025-08-14
+### Added
+- Types for user `getRegulatory` function #495 (#443 thanks for raising @DriesVS)
+- Support for [POST Create a Quoted Conversion between Client Wallets](https://docs.mangopay.com/api-reference/conversions/create-quoted-conversion-client-wallets) and [POST Create an Instant Conversion between Client Wallets](https://docs.mangopay.com/api-reference/conversions/create-instant-conversion-client-wallets) #492
+- Missing `MarketRateDate` param to FX `conversionRate` #491
+- Support for [POST Create a Bank Wire to the Repudiation Wallet](https://docs.mangopay.com/api-reference/dispute-settlement/create-bank-wire-payin-to-repudiation-wallet) #494
+- Missing keys for legacy Wallets Report #491
+
 ## [1.60.0] - 2025-08-07
 ### Added
 Support for new Splits endpoints for Echo (#489, [API release note](https://docs.mangopay.com/release-notes/api/2025-07-16)):
