@@ -279,4 +279,13 @@ export class Users {
      * @param options
      */
     validateDataFormat: MethodOverload<user.UserDataFormatValidation, user.UserDataFormatValidation>
+
+    /**
+     * Get user regulatory
+     * @param {string} userId User identifier
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
+     */
+    getRegulatory: MethodOverload<string, user.RegulatoryData>
 }
