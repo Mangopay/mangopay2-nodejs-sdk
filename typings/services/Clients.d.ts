@@ -3,6 +3,7 @@ import { wallet } from "../models/wallet";
 import { CurrencyISO } from "../types";
 import { transaction } from "../models/transaction";
 import { base } from "../base";
+import { payIn } from "../models/payIn";
 import NoArgMethodOverload = base.NoArgMethodOverload;
 import MethodOverload = base.MethodOverload;
 import TwoArgsMethodOverload = base.TwoArgsMethodOverload;
@@ -67,4 +68,10 @@ export class Clients {
     getClientWalletTransactions: TwoArgsMethodOverload<wallet.ClientFundsType,
         CurrencyISO,
         transaction.TransactionData[]>;
+
+    /**
+     * Create a Direct Bank Wire PayIn, instead of a Settlement Transfer, to the Repudiation Wallet in order to settle the negative balance due to a LOST dispute.
+     * The object expires 1 month after creation if no funds are received.
+     */
+    createBankWireDirectPayIn: MethodOverload<client.CreateBankWireDirectPayIn, payIn.BankWireDirectPayInData>
 }

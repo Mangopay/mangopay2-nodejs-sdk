@@ -204,4 +204,31 @@ describe("Clients", function () {
             expect(createdPayOut.Id).not.to.be.undefined;
         });
     });
+
+    describe("Create PayIn BankWire Direct", function () {
+        var created;
+
+        before(function (done) {
+            const dto = {
+                "CreditedWalletId": "CREDIT_EUR",
+                    "DeclaredDebitedFunds": {
+                    "Currency": "EUR",
+                        "Amount": 1000
+                }
+            };
+            api.Clients.createBankWireDirectPayIn(dto, function(data) {
+                created = data;
+                done();
+            });
+        });
+
+        it('should create the payin', function () {
+            expect(created).not.to.be.undefined;
+            expect(created.Id).not.to.be.undefined;
+            expect(created.Type).to.eq('PAYIN');
+            expect(created.Status).to.eq('CREATED');
+            expect(created.PaymentType).to.eq('BANK_WIRE');
+            expect(created.ExecutionType).to.eq('DIRECT');
+        });
+    });
 });
