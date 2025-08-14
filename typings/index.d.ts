@@ -800,9 +800,6 @@ declare namespace MangoPay {
             constructor(data?: Partial<report.Filters>);
         }
 
-        interface Report extends report.Filters {
-        }
-
         class DebitedBankAccount extends EntityBase<bankAccount.DebitedBankAccountData> {
             constructor(data: bankAccount.DebitedBankAccountData);
         }

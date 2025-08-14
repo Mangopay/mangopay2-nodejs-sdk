@@ -2,8 +2,11 @@ import { ValueOf } from "../types";
 import { enums } from "../enums";
 import { address } from "./address";
 import { entityBase } from "./entityBase";
+import { money } from "./money";
 
 export namespace client {
+    import MoneyData = money.MoneyData;
+
     type BusinessType = "MARKETPLACE" | "CROWDFUNDING" | "FRANCHISE" | "OTHER";
 
     type Sector =
@@ -182,5 +185,19 @@ export namespace client {
          * The base64 encoded file which needs to be uploaded
          */
         File: string;
+    }
+
+    interface CreateBankWireDirectPayIn {
+        /**
+         * The unique identifier of the credited wallet.
+         * In the case of the direct bank wire to the Repudiation Wallet,
+         * this value has the format CREDIT_CCY where CCY is the currency of the Client Wallet to be credited (e.g., CREDIT_EUR).
+         */
+        CreditedWalletId: string;
+
+        /**
+         * Information about the declared funds to be wired by the platform to the returned bank account.
+         */
+        DeclaredDebitedFunds: MoneyData;
     }
 }

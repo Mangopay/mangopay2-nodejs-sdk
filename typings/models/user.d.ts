@@ -948,4 +948,28 @@ export namespace user {
          */
         ValidationRules?: string[];
     }
+
+    interface RegulatoryData extends entityBase.EntityBaseData {
+        /**
+         * Code indicating the reason for blocking the user, and steps you can take to get them unblocked.
+         */
+        ActionCode: string;
+
+        /**
+         * Information about which payment flows are blocked for the user.
+         */
+        ScopeBlocked: ScopeBlocked;
+    }
+
+    interface ScopeBlocked {
+        /**
+         * Whether or not the user is blocked from making pay-ins or sending or receiving transfers.
+         */
+        Inflows: boolean;
+
+        /**
+         * Whether or not the user is blocked from making payouts or sending or receiving transfers.
+         */
+        Outflows: boolean;
+    }
 }
