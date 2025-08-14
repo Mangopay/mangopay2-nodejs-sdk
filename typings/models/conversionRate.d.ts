@@ -20,5 +20,10 @@ export namespace conversionRate {
          * The rate used for the conversion, excluding Mangopay's commission.
          */
         MarketRate: string;
+
+        /**
+         *
+         */
+        MarketRateDate: number;
     }
 }
