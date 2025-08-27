@@ -15,8 +15,8 @@ describe('Reports - Transactions', function () {
             Preview: false,
             Filters:
                 {
-                    BeforeDate: 1658838931,
-                    AfterDate: 1658838931,
+                    BeforeDate: 1756293864,
+                    AfterDate: 1753615463,
                     Type: ['PAYIN'],
                     ResultCode: ['000000'],
                     Status: ['SUCCEEDED'],
@@ -59,7 +59,7 @@ describe('Reports - Transactions', function () {
         });
     });
 
-    it('should exist after creting it', function () {
+    it('should exist after creating it', function () {
         expect(report.Id).to.exist;
     });
 

@@ -26,7 +26,7 @@ module.exports = {
                 Occupation: 'programmer',
                 IncomeRange: 3,
                 PersonType: 'NATURAL',
-                TermsAndConditionsAccepted: false
+                TermsAndConditionsAccepted: true
             };
         },
         getUserNaturalScaOwner: function() {
@@ -87,7 +87,7 @@ module.exports = {
                     "PostalCode": "20007",
                     "Country": "US"
                 }),
-                TermsAndConditionsAccepted: false,
+                TermsAndConditionsAccepted: true,
                 UserCategory: 'PAYER'
             };
         },
@@ -110,7 +110,7 @@ module.exports = {
                 CountryOfResidence: 'FR',
                 Occupation: 'programmer',
                 IncomeRange: 3,
-                TermsAndConditionsAccepted: false,
+                TermsAndConditionsAccepted: true,
                 UserCategory: 'OWNER',
             };
         },
@@ -136,8 +136,9 @@ module.exports = {
                 Birthplace: {
                     "City": "Paris",
                     "Country": "FR"
-                    }
-            }
+                    },
+                TermsAndConditionsAccepted: true
+            };
         },
         getUserLegal: function(){
             return {
@@ -167,7 +168,7 @@ module.exports = {
                 LegalRepresentativeNationality: 'FR',
                 LegalRepresentativeCountryOfResidence: 'FR',
                 CompanyNumber: "123456789",
-                TermsAndConditionsAccepted: false
+                TermsAndConditionsAccepted: true
             };
         },
         getUserLegalPayer: function(){
@@ -186,7 +187,7 @@ module.exports = {
                     "PostalCode": "20007",
                     "Country": "US"
                 },
-                TermsAndConditionsAccepted: false,
+                TermsAndConditionsAccepted: true,
                 UserCategory: 'PAYER'
             };
         },
@@ -219,7 +220,7 @@ module.exports = {
                 LegalRepresentativeNationality: 'FR',
                 LegalRepresentativeCountryOfResidence: 'FR',
                 CompanyNumber: "123456789",
-                TermsAndConditionsAccepted: false,
+                TermsAndConditionsAccepted: true,
                 UserCategory: 'OWNER'
             };
         },
