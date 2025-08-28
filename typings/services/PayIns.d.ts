@@ -77,15 +77,21 @@ export class PayIns {
         payIn.PayInRecurringRegistrationData>;
 
     /**
-     * Create Recurring PayIn
+     * Create Recurring PayIn Registration
      * @param createData
      */
     createRecurringPayment: MethodOverload<payIn.CreatePayInRecurringRegistration,
         payIn.PayInRecurringRegistrationData>;
 
+    /**
+     * Create new recurring pay-in CIT
+     */
     createRecurringPayInRegistrationCIT: MethodOverload<payIn.CreateRecurringPayInCIT,
         payIn.RecurringPayInData>;
 
+    /**
+     * Create new recurring pay-in MIT
+     */
     createRecurringPayInRegistrationMIT: MethodOverload<payIn.CreateRecurringPayInMIT,
         payIn.RecurringPayInData>;
 
