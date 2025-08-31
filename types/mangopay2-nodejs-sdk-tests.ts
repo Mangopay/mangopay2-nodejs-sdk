@@ -1,4 +1,4 @@
-import Mangopay = require("mangopay2-nodejs-sdk");
+import * as Mangopay from "mangopay2-nodejs-sdk";
 
 // $ExpectError
 const invalidConfig: Mangopay.base.Config = {};

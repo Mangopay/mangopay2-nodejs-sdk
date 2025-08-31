@@ -77,66 +77,71 @@ import { recipient } from "./models/recipient";
 import { Recipients } from "./services/Recipients";
 import { Settlements } from "./services/Settlements";
 
-export = MangoPay;
+declare module "mangopay2-nodejs-sdk" {
+    export * from "./base";
+    export * from "./models";
+    export * from "./services/Users";
+    export * from "./services/BankAccounts";
+    // ... export other services
 
-declare class MangoPay {
-    constructor(config: base.Config);
+    export default class MangoPay {
+        constructor(config: base.Config);
+        config: base.Config;
+        requestOptions: base.RequestOptions;
+        Users: Users;
+        BankAccounts: BankAccounts;
+        BankingAliases: BankingAliases;
+        DisputeDocuments: DisputeDocuments;
+        Wallets: Wallets;
+        KycDocuments: KycDocuments;
+        UboDeclarations: UboDeclarations;
+        Cards: Cards;
+        CardRegistrations: CardRegistrations;
+        CardPreAuthorizations: CardPreAuthorizations;
+        PayIns: PayIns;
+        Transfers: Transfers;
+        PayOuts: PayOuts;
+        Refunds: Refunds;
+        Clients: Clients;
+        Disputes: Disputes;
+        Repudiations: Repudiations;
+        Events: Events;
+        Responses: Responses;
+        Mandates: Mandates;
+        Hooks: Hooks;
+        Reports: Reports;
+        ReportsV2: ReportsV2;
+        Idempotency: Idempotency;
+        Regulatory: Regulatory;
+        Deposits: Deposits;
+        Conversions: Conversions;
+        VirtualAccounts: VirtualAccounts;
+        IdentityVerifications: IdentityVerifications;
+        Recipients: Recipients;
+        Settlements: Settlements;
 
-    config: base.Config;
-    requestOptions: base.RequestOptions;
-    Users: Users;
-    BankAccounts: BankAccounts;
-    BankingAliases: BankingAliases;
-    DisputeDocuments: DisputeDocuments;
-    Wallets: Wallets;
-    KycDocuments: KycDocuments;
-    UboDeclarations: UboDeclarations;
-    Cards: Cards;
-    CardRegistrations: CardRegistrations;
-    CardPreAuthorizations: CardPreAuthorizations;
-    PayIns: PayIns;
-    Transfers: Transfers;
-    PayOuts: PayOuts;
-    Refunds: Refunds;
-    Clients: Clients;
-    Disputes: Disputes;
-    Repudiations: Repudiations;
-    Events: Events;
-    Responses: Responses;
-    Mandates: Mandates;
-    Hooks: Hooks;
-    Reports: Reports;
-    ReportsV2: ReportsV2;
-    Idempotency: Idempotency;
-    Regulatory: Regulatory;
-    Deposits: Deposits;
-    Conversions: Conversions;
-    VirtualAccounts: VirtualAccounts;
-    IdentityVerifications: IdentityVerifications;
-    Recipients: Recipients;
-    Settlements: Settlements;
+        models: typeof MangoPay.models;
 
-    models: typeof MangoPay.models;
+        rateLimits: MangoPay.models.RateLimit[];
 
-    rateLimits: MangoPay.models.RateLimit[];
+        Log(...args: any[]): void;
 
-    Log(...args: any[]): void;
+        authorize(callback: (data: base.AuthorizationData) => void): void;
 
-    authorize(callback: (data: base.AuthorizationData) => void): void;
+        authorize(): Promise<base.AuthorizationData>;
 
-    authorize(): Promise<base.AuthorizationData>;
+        buildRequestData(entity: any): any;
 
-    buildRequestData(entity: any): any;
+        canReadSubRequestData(entity: any, propertyName: any): boolean;
 
-    canReadSubRequestData(entity: any, propertyName: any): boolean;
+        isExpired(): boolean;
 
-    isExpired(): boolean;
-
-    method(
-        method: ApiMethod,
-        callback: (...args: any[]) => void,
-        options: base.RequestOptions
-    ): any;
+        method(
+            method: ApiMethod,
+            callback: (...args: any[]) => void,
+            options: base.RequestOptions
+        ): any;
+    }
 }
 
 declare namespace MangoPay {
