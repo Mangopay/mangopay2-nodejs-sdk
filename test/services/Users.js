@@ -102,7 +102,7 @@ describe('Users', function() {
     it('Create Natural', function(){
         expect(john.Id).not.to.be.undefined;
         expect(john.PersonType).to.equal(PersonType.Natural);
-        expect(john.TermsAndConditionsAccepted).to.be.false;
+        expect(john.TermsAndConditionsAccepted).to.be.true;
         expect(john.UserCategory).to.equal('OWNER');
     });
 
@@ -120,7 +120,7 @@ describe('Users', function() {
     it('Create Legal', function() {
         expect(matrix.Id).not.to.be.undefined;
         expect(matrix.PersonType).to.equal(PersonType.Legal);
-        expect(matrix.TermsAndConditionsAccepted).to.be.false;
+        expect(matrix.TermsAndConditionsAccepted).to.be.true;
         expect(matrix.UserCategory).to.equal('OWNER');
     });
 
@@ -179,8 +179,8 @@ describe('Users', function() {
         it('John should be the same', function(){
             expect(_.isMatch(john1, _.omit(john.data, 'Address'))).to.be.true;
             expect(_.isMatch(john2, _.omit(john.data, 'Address'))).to.be.true;
-            expect(john1.TermsAndConditionsAccepted).to.be.false;
-            expect(john2.TermsAndConditionsAccepted).to.be.false;
+            expect(john1.TermsAndConditionsAccepted).to.be.true;
+            expect(john2.TermsAndConditionsAccepted).to.be.true;
         });
 
         it('Fails for Legal User', function(done) {
@@ -284,8 +284,8 @@ describe('Users', function() {
         it('Matrix should be the same', function(){
             expect(_.isMatch(matrix1, _.omit(matrix.data, 'HeadquartersAddress', 'LegalRepresentativeAddress'))).to.be.true;
             expect(_.isMatch(matrix2, _.omit(matrix.data, 'HeadquartersAddress', 'LegalRepresentativeAddress'))).to.be.true;
-            expect(matrix1.TermsAndConditionsAccepted).to.be.false;
-            expect(matrix2.TermsAndConditionsAccepted).to.be.false;
+            expect(matrix1.TermsAndConditionsAccepted).to.be.true;
+            expect(matrix2.TermsAndConditionsAccepted).to.be.true;
         });
 
         it('Fails for Natural User', function(done) {

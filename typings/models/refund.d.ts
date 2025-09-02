@@ -84,5 +84,9 @@ export namespace refund {
         AuthorId: string;
 
         Tag?: string;
+
+        DebitedFunds?: MoneyData;
+
+        Fees?: MoneyData;
     }
 }

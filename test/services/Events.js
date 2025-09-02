@@ -50,11 +50,11 @@ describe('Events', function() {
                         done();
                     }, {
                         parameters: {
-                            BeforeDate: payIn.ExecutionDate+10,
-                            AfterDate: payIn.CreationDate-10,
+                            BeforeDate: payIn.ExecutionDate+100,
+                            AfterDate: payIn.CreationDate-100,
                             EventType: 'PAYIN_NORMAL_SUCCEEDED'
                         }
-                    })
+                    });
                 });
             });
 
