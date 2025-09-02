@@ -1,3 +1,15 @@
+## [1.60.2] - 2025-09-02
+### Added
+- `XK` to country ISO values #499
+
+### Fixed
+- Typescript function definition (thank you @hmica #287 #498)
+- Typings for `BankingAliases.getAll` (thank you @Tug #351)
+- Missing `CreationDate` with `toJSON()` (thank you @CanoGit #355 @fredleroy #345)
+- Missing fields in `CreateTransferRefund` (thank you @lachauj #363)
+- Missing `getBlockStatus` definition (thank you @capontebable #389)
+- Tests #497
+
 ## [1.60.1] - 2025-08-14
 ### Added
 - Types for user `getRegulatory` function #495 (#443 thanks for raising @DriesVS)
