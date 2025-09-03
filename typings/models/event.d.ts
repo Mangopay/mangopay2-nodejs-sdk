@@ -107,6 +107,21 @@ export namespace event {
         | "SCA_ENROLLMENT_EXPIRED"
         | "REPORT_GENERATED"
         | "REPORT_FAILED"
+        | "INTENT_AUTHORIZED"
+        | "INTENT_CAPTURED"
+        | "INTENT_REFUNDED"
+        | "INTENT_REFUND_REVERSED"
+        | "INTENT_DISPUTE_CREATED"
+        | "INTENT_DISPUTE_DEFENDED"
+        | "INTENT_DISPUTE_WON"
+        | "INTENT_DISPUTE_LOST"
+        | "INTENT_SETTLED_NOT_PAID"
+        | "INTENT_PAID"
+        | "SPLIT_CREATED"
+        | "SPLIT_PENDING_FUNDS_RECEPTION"
+        | "SPLIT_AVAILABLE"
+        | "SPLIT_REJECTED"
+        | "SPLIT_REVERSED"
 
     interface EventData {
         /**
