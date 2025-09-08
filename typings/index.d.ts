@@ -841,6 +841,7 @@ declare namespace MangoPay {
         card,
         cardPreAuthorization,
         cardRegistration,
+        cardValidation,
         client,
         dispute,
         disputeDocument,

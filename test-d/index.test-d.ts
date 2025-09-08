@@ -1,9 +1,9 @@
-import Mangopay = require("mangopay2-nodejs-sdk");
+import {expectError, expectType} from 'tsd';
+import Mangopay = require("../typings/index");
 
-// $ExpectError
-const invalidConfig: Mangopay.base.Config = {};
-
-/* General Types */
+// Config tests
+const invalidConfig = {};
+expectError<Mangopay.base.Config>(invalidConfig);
 
 const validConfig: Mangopay.base.Config = {
     clientId: "your_client_id",
@@ -11,21 +11,18 @@ const validConfig: Mangopay.base.Config = {
     baseUrl: "https://api.mangopay.com"
 };
 
-const api = new Mangopay(validConfig); // $ExpectType MangoPay
-const payIn: Mangopay.models.PayIn = new api.models.PayIn({}); // $ExpectType PayIn
-const address: Mangopay.models.Address = new api.models.Address({}); // $ExpectType Address
+// API instance tests
+const api = new Mangopay(validConfig);
+expectType<Mangopay>(api);
 
-const addressData: Mangopay.address.AddressData = {
-    AddressLine1: "20 T Street",
-    AddressLine2: "",
-    City: "London",
-    Country: "AD",
-    PostalCode: "FR43 2WE",
-    Region: "London"
-};
+// Models tests
+const payIn = new api.models.PayIn({});
+expectType<Mangopay.models.PayIn>(payIn);
 
-/* Users */
+const address = new api.models.Address({});
+expectType<Mangopay.models.Address>(address);
 
+// User tests
 const legalUser = new api.models.UserLegal({
     Name: "MangoPay",
     Email: "info@mangopay.com",
@@ -35,7 +32,6 @@ const legalUser = new api.models.UserLegal({
     LegalRepresentativeEmail: "mango@mangopay.com",
     HeadquartersAddress: new api.models.Address({
         AddressLine1: "4101 Reservoir Rd NW",
-        AddressLine2: "",
         City: "Washington",
         Region: "District of Columbia",
         PostalCode: "20007",
@@ -43,22 +39,21 @@ const legalUser = new api.models.UserLegal({
     }),
     LegalRepresentativeBirthday: 1300186358,
     LegalRepresentativeNationality: "FR",
-    LegalRepresentativeCountryOfResidence: "FR",
-    Tag: "custom tag"
+    LegalRepresentativeCountryOfResidence: "FR"
 });
+expectType<Mangopay.models.UserLegal>(legalUser);
 
 api.Users.create(legalUser).then(data => {
-    const d = data; // $ExpectType UserLegalData
-    const value = data.PersonType; // $ExpectType "LEGAL"
-
-    const rateLimits = api.rateLimits; // $ExpectType RateLimit[]
+    expectType<Mangopay.user.UserLegalData>(data);
+    expectType<"LEGAL">(data.PersonType);
+    expectType<Mangopay.models.RateLimit[]>(api.rateLimits);
 
     console.log(`${legalUser.Name} user created at ${legalUser.CreationDate}`);
 });
 
 api.Users.create(legalUser, {resolveWithFullResponse: true}).then(data => {
-    const d = data; // $ExpectType WithResponse<UserLegalData>
-    const value = data.body; // $ExpectType UserLegalData
+    expectType<Mangopay.base.WithResponse<Mangopay.user.UserLegalData>>(data);
+    expectType<Mangopay.user.UserLegalData>(data.body);
 });
 
 api.Users.create(
@@ -94,7 +89,7 @@ api.Users.create(
     },
     {headers: {}}
 ).then(data => {
-    const d = data; // $ExpectType UserLegalData
+    expectType<Mangopay.user.UserLegalData>(data);
 });
 
 const naturalUser = new api.models.UserNatural({
@@ -107,9 +102,8 @@ const naturalUser = new api.models.UserNatural({
 });
 
 api.Users.create(naturalUser, {}).then(data => {
-    const d = data; // $ExpectType UserNaturalData
-    const value = data.PersonType; // $ExpectType "NATURAL"
-    return;
+    expectType<Mangopay.user.UserNaturalData>(data);
+    expectType<"NATURAL">(data.PersonType);
 });
 
 api.Users.create(
@@ -125,7 +119,7 @@ api.Users.create(
         TermsAndConditionsAccepted: true
     },
     data => {
-        const d = data; // $ExpectType UserNaturalData
+        expectType<Mangopay.user.UserNaturalData>(data);
     }
 );
 
@@ -139,7 +133,7 @@ const userNaturalPayer = new api.models.UserNaturalPayer({
 
 api.Users.create(userNaturalPayer,
     data => {
-        const d = data; // $ExpectType UserNaturalData
+        expectType<Mangopay.user.UserNaturalData>(data);
     }
 );
 
@@ -158,7 +152,7 @@ const userNaturalOwner = new api.models.UserNaturalOwner({
 
 api.Users.create(userNaturalOwner,
     data => {
-        const d = data; // $ExpectType UserNaturalData
+        expectType<Mangopay.user.UserNaturalData>(data);
     }
 );
 
@@ -176,7 +170,7 @@ const userLegalPayer = new api.models.UserLegalPayer({
 
 api.Users.create(userLegalPayer,
     data => {
-        const d = data; // $ExpectType UserLegalData
+        expectType<Mangopay.user.UserLegalData>(data);
     }
 );
 
@@ -205,26 +199,26 @@ const userLegalOwner = new api.models.UserLegalOwner({
 
 api.Users.create(userLegalOwner,
     data => {
-        const d = data; // $ExpectType UserLegalData
+        expectType<Mangopay.user.UserLegalData>(data);
     }
 );
 
 api.Users.get("1234").then(data => {
-    const d = data; // $ExpectType UserLegalData | UserNaturalData
+    expectType<Mangopay.user.UserLegalData | Mangopay.user.UserNaturalData>(data);
     if (data.PersonType === "LEGAL") {
-        const legalData = data; // $ExpectType UserLegalData
+        expectType<Mangopay.user.UserLegalData>(data);
     } else {
-        const naturalData = data; // $ExpectType UserNaturalData
+        expectType<Mangopay.user.UserNaturalData>(data);
     }
 });
 
 api.Users.getAll().then(users => {
     users.forEach(user => {
-        const d = user; // $ExpectType UserLegalData | UserNaturalData
+        expectType<Mangopay.user.UserLegalData | Mangopay.user.UserNaturalData>(user);
         if (user.PersonType === "LEGAL") {
-            const legalData = user; // $ExpectType UserLegalData
+            expectType<Mangopay.user.UserLegalData>(user);
         } else {
-            const naturalData = user; // $ExpectType UserNaturalData
+            expectType<Mangopay.user.UserNaturalData>(user);
         }
     });
 });
@@ -240,7 +234,7 @@ api.Users.update({
     Nationality: "US",
     TermsAndConditionsAccepted: true
 }).then(data => {
-    const d = data; // $ExpectType UserNaturalData
+    expectType<Mangopay.user.UserNaturalData>(data);
 });
 
 api.Users.update({
@@ -249,7 +243,7 @@ api.Users.update({
     Tag: "custom meta",
     TermsAndConditionsAccepted: true
 }).then(data => {
-    const d = data; // $ExpectType UserLegalData
+    expectType<Mangopay.user.UserLegalData>(data);
 });
 
 api.Users.createBankAccount("user-id", {
@@ -259,55 +253,55 @@ api.Users.createBankAccount("user-id", {
     OwnerAddress: "",
     OwnerName: ""
 }).then(data => {
-    const d = data; // $ExpectType GBData
+    expectType<Mangopay.bankAccount.GBData>(data);
 });
 
 api.Users.getBankAccount("user-id", "bankAccount-id").then(data => {
-    const d = data; // $ExpectType Data
+    expectType<Mangopay.bankAccount.Data>(data);
 });
 
 api.Users.getBankAccounts("user-id", {parameters: {Sort: "CreationDate:ASC"}}).then(data => {
-    const d = data; // $ExpectType Data[]
+    expectType<Mangopay.bankAccount.Data[]>(data);
 });
 
 api.Users.deactivateBankAccount("user-id", "bankAccount-id").then(data => {
-    const d = data; // $ExpectType Data
+    expectType<Mangopay.bankAccount.Data>(data);
 });
 
 api.Users.getTransactions("user-id").then(data => {
-    const d = data; // $ExpectType TransactionData[]
+    expectType<Mangopay.transaction.TransactionData[]>(data);
 });
 
 api.Users.getWallets("user-id").then(data => {
-    const d = data; // $ExpectType WalletData[]
+    expectType<Mangopay.wallet.WalletData[]>(data);
 });
 
 api.Users.getCards("user-id").then(data => {
-    const d = data; // $ExpectType CardData[]
+    expectType<Mangopay.card.CardData[]>(data);
 });
 
 api.Users.createKycDocument("user-id", {Type: "ADDRESS_PROOF", Tag: "custom meta"}).then(data => {
-    const d = data; // $ExpectType KycDocumentData
+    expectType<Mangopay.kycDocument.KycDocumentData>(data);
 });
 
 api.Users.getKycDocuments("user-id").then(data => {
-    const d = data; // $ExpectType KycDocumentData[]
+    expectType<Mangopay.kycDocument.KycDocumentData[]>(data);
 });
 
 api.Users.getKycDocument("user-id", "kycDocument-id").then(data => {
-    const d = data; // $ExpectType KycDocumentData
+    expectType<Mangopay.kycDocument.KycDocumentData>(data);
 });
 
 api.Users.updateKycDocument("user-id", {Status: "VALIDATION_ASKED", Id: "kycDocument-id"}).then(
     data => {
-        const d = data; // $ExpectType KycDocumentData
+        expectType<Mangopay.kycDocument.KycDocumentData>(data);
     }
 );
 
 api.Users.createKycPage("user-id", "kycDocument-id", {
     File: "...base64data..."
 }).then(data => {
-    const d = data; // $ExpectType KycDocumentData
+    expectType<Mangopay.kycDocument.KycDocumentData>(data);
 });
 
 api.Users.createKycPageFromFile(
@@ -315,55 +309,47 @@ api.Users.createKycPageFromFile(
     "kyc-document-id",
     "path/to/file"
 ).then(data => {
-    const d = data; // $ExpectType KycDocumentData
+    expectType<Mangopay.kycDocument.KycDocumentData>(data);
 });
 
 // MangoPay.
-
 api.Users.getEMoney("user-id").then(data => {
-    const d = data; // $ExpectType EMoneyData
+    expectType<Mangopay.money.EMoneyData>(data);
 });
 
-// api.Users.createUboDeclaration("user-id", { DeclaredUBOs: ["user1"] }).then(
-//   data => {
-//     const d = data; // $ExpectType UboDeclarationData
-//   }
-// );
-
 api.Users.getPreAuthorizations("user-id").then(data => {
-    const d = data; // $ExpectType CardPreAuthorizationData[]
+    expectType<Mangopay.cardPreAuthorization.CardPreAuthorizationData[]>(data);
 });
 
 /* KycDocuments */
-
 api.KycDocuments.getAll().then(data => {
-    const d = data; // $ExpectType KycDocumentData[]
+    expectType<Mangopay.kycDocument.KycDocumentData[]>(data);
 });
 
 api.KycDocuments.get("kyc-id").then(data => {
-    const d = data; // $ExpectType KycDocumentData
+    expectType<Mangopay.kycDocument.KycDocumentData>(data);
 });
 
 api.KycDocuments.createKycDocumentConsult("kyc-id").then(data => {
-    const d = data; // TODO unsure of expected type
+    expectType<any>(data); // TODO unsure of expected type from docs
 });
 
 /* UboDeclarations */
-
 api.UboDeclarations.get("userId", "id").then(data => {
-    const d = data; // $ExpectType UboDeclarationData
+    expectType<Mangopay.uboDeclaration.UboDeclarationData>(data);
 });
 
 api.UboDeclarations.update("userId", {
     Id: "uboId",
     Ubos: ["user1", "user2"]
 }).then(data => {
-    const d = data; // $ExpectType UboDeclarationData
+    expectType<Mangopay.uboDeclaration.UboDeclarationData>(data);
 });
 
 api.UboDeclarations.create("userId").then(data => {
-    const d = data; // $ExpectType UboDeclarationData
+    expectType<Mangopay.uboDeclaration.UboDeclarationData>(data);
 });
+
 
 api.UboDeclarations.createUbo("userId", "uboDeclarationId", {
     Address: address,
@@ -376,15 +362,15 @@ api.UboDeclarations.createUbo("userId", "uboDeclarationId", {
         Country: "RO"
     }
 }).then(data => {
-    const d = data; // $ExpectType UboData
+    expectType<Mangopay.uboDeclaration.UboData>(data);
 });
 
 api.UboDeclarations.getAll("userId").then((data => {
-    const d = data; // $ExpectType UboDeclarationData[]
+    expectType<Mangopay.uboDeclaration.UboDeclarationData[]>(data);
 }));
 
 api.UboDeclarations.getUbo("userId", "uboDeclarationId", "uboId").then(data => {
-    const d = data; // $ExpectType UboData
+    expectType<Mangopay.uboDeclaration.UboData>(data);
 });
 
 api.UboDeclarations.updateUbo("userId", "uboDeclarationId", {
@@ -399,23 +385,21 @@ api.UboDeclarations.updateUbo("userId", "uboDeclarationId", {
         Country: "RO"
     }
 }).then(data => {
-    const d = data; // $ExpectType UboData
+    expectType<Mangopay.uboDeclaration.UboData>(data);
 });
 
 /* BankAccounts */
-
 api.BankAccounts.getTransactions("account-id").then(data => {
-    const d = data; // $ExpectType TransactionData[]
+    expectType<Mangopay.transaction.TransactionData[]>(data);
 });
 
 /* Wallets */
-
 api.Wallets.create({
     Currency: "GBP",
     Description: "A description",
     Owners: ["user-id"]
 }).then(data => {
-    const d = data; // $ExpectType WalletData
+    expectType<Mangopay.wallet.WalletData>(data);
 });
 
 const wallet = new api.models.Wallet({
@@ -425,39 +409,38 @@ const wallet = new api.models.Wallet({
 });
 
 api.Wallets.create(wallet).then(data => {
-    const d = data; // $ExpectType WalletData
+    expectType<Mangopay.wallet.WalletData>(data);
 });
 
 api.Wallets.update({
     Description: "A description"
 }).then(data => {
-    const d = data; // $ExpectType WalletData
+    expectType<Mangopay.wallet.WalletData>(data);
 });
 
 api.Wallets.get("wallet-id").then(data => {
-    const d = data; // $ExpectType WalletData
+    expectType<Mangopay.wallet.WalletData>(data);
 });
 
 api.Wallets.getTransactions("wallet-id").then(data => {
-    const d = data; // $ExpectType TransactionData[]
+    expectType<Mangopay.transaction.TransactionData[]>(data);
 });
 
 /* Cards */
-
 api.Cards.get("card-id").then(data => {
-    const d = data; // $ExpectType CardData
+    expectType<Mangopay.card.CardData>(data);
 });
 
 api.Cards.getByFingerprint("fingerprinthash").then(data => {
-    const d = data; // $ExpectType CardData[]
+    expectType<Mangopay.card.CardData[]>(data);
 });
 
 api.Cards.update({Active: false, Id: "card-id"}).then(data => {
-    const d = data; // $ExpectType CardData
+    expectType<Mangopay.card.CardData>(data);
 });
 
 api.Cards.getTransactions("card-id").then(data => {
-    const d = data; // $ExpectType TransactionData[]
+    expectType<Mangopay.transaction.TransactionData[]>(data);
 });
 
 api.Cards.validate(
@@ -479,36 +462,34 @@ api.Cards.validate(
         SecureModeReturnURL: "http://example.com"
     }
 ).then(data => {
-    const d = data; // $ExpectType CardValidationData
+    expectType<Mangopay.cardValidation.CardValidationData>(data);
 });
 
 api.Cards.getCardValidation(
     "cardId",
     "cardValidationId"
 ).then(data => {
-    const d = data; // $ExpectType CardValidationData
+    expectType<Mangopay.cardValidation.CardValidationData>(data);
 });
 
 /* CardRegistrations */
-
 api.CardRegistrations.create({
     CardType: "BCMC",
     Currency: "GBP",
     UserId: "user-id"
 }).then(data => {
-    const d = data; // $ExpectType CardRegistrationData
+    expectType<Mangopay.cardRegistration.CardRegistrationData>(data);
 });
 
 api.CardRegistrations.get("reg-id").then(data => {
-    const d = data; // $ExpectType CardRegistrationData
+    expectType<Mangopay.cardRegistration.CardRegistrationData>(data);
 });
 
 api.CardRegistrations.update({RegistrationData: "hmmm", Id: "Id"}).then(data => {
-    const d = data; // $ExpectType CardRegistrationData
+    expectType<Mangopay.cardRegistration.CardRegistrationData>(data);
 });
 
 /* CardPreAuthorizations */
-
 api.CardPreAuthorizations.create({
     AuthorId: "user",
     CardId: "card-id",
@@ -527,28 +508,26 @@ api.CardPreAuthorizations.create({
         UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
     }
 }).then(data => {
-    const d = data; // $ExpectType CardPreAuthorizationData
+    expectType<Mangopay.cardPreAuthorization.CardPreAuthorizationData>(data);
 });
 
 api.CardPreAuthorizations.get("auth-id").then(data => {
-    const d = data; // $ExpectType CardPreAuthorizationData
+    expectType<Mangopay.cardPreAuthorization.CardPreAuthorizationData>(data);
 });
 
 api.CardPreAuthorizations.update({
     Id: "auth-id",
     PaymentStatus: "CANCELED"
 }).then(data => {
-    const d = data; // $ExpectType CardPreAuthorizationData
+    expectType<Mangopay.cardPreAuthorization.CardPreAuthorizationData>(data);
 });
 
 /* Refunds */
-
 api.Refunds.get("refund-id").then(data => {
-    const d = data; // $ExpectType RefundData
+    expectType<Mangopay.refund.RefundData>(data);
 });
 
 /* PayIns */
-
 api.PayIns.create({
     PaymentType: "CARD",
     ExecutionType: "DIRECT",
@@ -559,7 +538,7 @@ api.PayIns.create({
     DebitedFunds: {Amount: 2000, Currency: "GBP"},
     SecureModeReturnURL: "https://secure-return.co"
 }).then(data => {
-    const d = data; // $ExpectType CardDirectPayInData
+    expectType<Mangopay.payIn.CardDirectPayInData>(data);
 });
 
 api.PayIns.create({
@@ -573,7 +552,7 @@ api.PayIns.create({
     Tag: "test tag",
     StatementDescriptor: "test"
 }).then(data => {
-    const d = data; // $ExpectType MbwayWebPayInData
+    expectType<Mangopay.payIn.MbwayWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -611,7 +590,7 @@ api.PayIns.create({
     },
     Reference: "1234"
 }).then(data => {
-    const d = data; // $ExpectType KlarnaWebPayInData
+    expectType<Mangopay.payIn.KlarnaWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -625,7 +604,7 @@ api.PayIns.create({
     Tag: "test tag",
     StatementDescriptor: "test"
 }).then(data => {
-    const d = data; // $ExpectType MultibancoWebPayInData
+    expectType<Mangopay.payIn.MultibancoWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -640,7 +619,7 @@ api.PayIns.create({
     Tag: "test tag",
     StatementDescriptor: "test"
 }).then(data => {
-    const d = data; // $ExpectType SatispayWebPayInData
+    expectType<Mangopay.payIn.SatispayWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -654,7 +633,7 @@ api.PayIns.create({
     Tag: "test tag",
     StatementDescriptor: "test"
 }).then(data => {
-    const d = data; // $ExpectType BlikWebPayInData
+    expectType<Mangopay.payIn.BlikWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -669,7 +648,7 @@ api.PayIns.create({
     Bic: "RBRBNL21",
     Tag: "test"
 }).then(data => {
-    const d = data; // $ExpectType IdealWebPayInData
+    expectType<Mangopay.payIn.IdealWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -683,7 +662,7 @@ api.PayIns.create({
     StatementDescriptor: "Giropay",
     Tag: "test"
 }).then(data => {
-    const d = data; // $ExpectType GiropayWebPayInData
+    expectType<Mangopay.payIn.GiropayWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -698,7 +677,7 @@ api.PayIns.create({
     Tag: "test",
     PaymentFlow: "WEB"
 }).then(data => {
-    const d = data; // $ExpectType SwishWebPayInData
+    expectType<Mangopay.payIn.SwishWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -713,7 +692,7 @@ api.PayIns.create({
     Bic: "RBRBNL21",
     CardType: "IDEAL"
 }).then(data => {
-    const d = data; // $ExpectType CardWebPayInData
+    expectType<Mangopay.payIn.CardWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -727,7 +706,7 @@ api.PayIns.create({
     Culture: "AD",
     CardType: "MAESTRO"
 }).then(data => {
-    const d = data; // $ExpectType CardWebPayInData
+    expectType<Mangopay.payIn.CardWebPayInData>(data);
 });
 
 api.PayIns.createPayPal({
@@ -764,7 +743,7 @@ api.PayIns.createPayPal({
     Reference: "Reference",
     Culture: "FR"
 }).then(data => {
-    const d = data; // $ExpectType PayPalWebPayInData
+    expectType<Mangopay.payIn.PayPalWebPayInData>(data);
 });
 
 api.PayIns.addPayPalTrackingInformation(
@@ -774,7 +753,7 @@ api.PayIns.addPayPalTrackingInformation(
         Carrier: "DHL",
         NotifyBuyer: true
     }).then(data => {
-    const d = data; // $ExpectType PayPalWebPayInData
+    expectType<Mangopay.payIn.PayPalWebPayInData>(data);
 });
 
 api.PayIns.createGooglePay({
@@ -799,7 +778,7 @@ api.PayIns.createGooglePay({
     IpAddress: "1234",
     PaymentData: "placeholder"
 }).then(data => {
-    const d = data; // $ExpectType GooglePayDirectPayInData
+    expectType<Mangopay.payIn.GooglePayDirectPayInData>(data);
 });
 
 api.PayIns.create({
@@ -810,7 +789,7 @@ api.PayIns.create({
     DeclaredDebitedFunds: {Amount: 10000, Currency: "GBP"},
     DeclaredFees: {Amount: 500, Currency: "GBP"}
 }).then(data => {
-    const d = data; // $ExpectType BankWireDirectPayInData
+    expectType<Mangopay.payIn.BankWireDirectPayInData>(data);
 });
 
 // create Payconiq PayIn
@@ -825,7 +804,7 @@ api.PayIns.create({
     ReturnURL: "http://www.my-site.com/returnURL",
     Country: "BE"
 }).then(data => {
-    const d = data; // $ExpectType PayconiqWebPayInData
+    expectType<Mangopay.payIn.PayconiqWebPayInData>(data);
 });
 
 api.PayIns.create({
@@ -839,7 +818,7 @@ api.PayIns.create({
     StatementDescriptor: "placeholder",
     MandateId: "mandate-id"
 }).then(data => {
-    const d = data; // $ExpectType DirectDebitDirectPayInData
+    expectType<Mangopay.payIn.DirectDebitDirectPayInData>(data);
 });
 
 api.PayIns.create({
@@ -853,15 +832,15 @@ api.PayIns.create({
     DirectDebitType: "GIROPAY",
     Culture: "EN"
 }).then(data => {
-    const d = data; // $ExpectType DirectDebitWebPayInData
+    expectType<Mangopay.payIn.DirectDebitWebPayInData>(data);
 });
 
 api.PayIns.get("payin-id").then(data => {
-    const d = data; // $ExpectType PayInData
+    expectType<Mangopay.payIn.PayInData>(data);
 });
 
 api.PayIns.createRefund("payin-id", {AuthorId: "user-id"}).then(data => {
-    const d = data; // $ExpectType RefundData
+    expectType<Mangopay.refund.RefundData>(data);
 });
 
 api.PayIns.createRefund("payin-id", {
@@ -869,11 +848,11 @@ api.PayIns.createRefund("payin-id", {
     DebitedFunds: {Amount: 100, Currency: "EUR"},
     Fees: {Amount: 15, Currency: "EUR"}
 }).then(data => {
-    const d = data; // $ExpectType RefundData
+    expectType<Mangopay.refund.RefundData>(data);
 });
 
 api.PayIns.getRefunds("payin-id").then(data => {
-    const d = data; // $ExpectType RefundData[]
+    expectType<Mangopay.refund.RefundData[]>(data);
 });
 
 api.PayIns.createRecurringPayment({
@@ -912,11 +891,11 @@ api.PayIns.createRecurringPayment({
     NextTransactionFees: {Amount: 10000, Currency: "EUR"},
     FreeCycles: 0
 }).then(data => {
-    const d = data; // $ExpectType PayInRecurringRegistrationData
+    expectType<Mangopay.payIn.PayInRecurringRegistrationData>(data);
 });
 
 api.PayIns.getRecurringPayin("payin-id").then(data => {
-    const d = data; // $ExpectType PayInRecurringRegistrationData
+    expectType<Mangopay.payIn.PayInRecurringRegistrationData>(data);
 });
 
 api.PayIns.updateRecurringPayin("payin-id", {
@@ -942,7 +921,7 @@ api.PayIns.updateRecurringPayin("payin-id", {
         }
     }
 }).then(data => {
-    const d = data; // $ExpectType PayInRecurringRegistrationData
+    expectType<Mangopay.payIn.PayInRecurringRegistrationData>(data);
 });
 
 api.PayIns.createRecurringPayInRegistrationCIT({
@@ -965,7 +944,7 @@ api.PayIns.createRecurringPayInRegistrationCIT({
     StatementDescriptor: "lorem",
     Tag: "custom meta"
 }).then(data => {
-    const d = data; // $ExpectType RecurringPayInData
+    expectType<Mangopay.payIn.RecurringPayInData>(data);
 });
 
 api.PayIns.createRecurringPayInRegistrationMIT({
@@ -975,51 +954,50 @@ api.PayIns.createRecurringPayInRegistrationMIT({
     StatementDescriptor: "lorem",
     Tag: "custom meta"
 }).then(data => {
-    const d = data; // $ExpectType RecurringPayInData
+    expectType<Mangopay.payIn.RecurringPayInData>(data);
 });
 
 api.PayIns.getPaymentMethodMetadata({
     Type: "BIN",
     Bin: "1234"
 }).then(data => {
-    const d = data; // $ExpectType PaymentMethodMetadata
+    expectType<Mangopay.payIn.PaymentMethodMetadata>(data);
 });
 
 /* Clients */
 api.Clients.get().then(data => {
-    const d = data; // $ExpectType ClientData
+    expectType<Mangopay.client.ClientData>(data);
 });
 
 api.Clients.update({PlatformType: "CROWDFUNDING_DONATION"}).then(data => {
-    const d = data; // $ExpectType ClientData
+    expectType<Mangopay.client.ClientData>(data);
 });
 
 api.Clients.uploadLogo("...logobase64...").then(data => {
-    const d = data; // $ExpectType ClientData
+    expectType<Mangopay.client.ClientData>(data);
 });
 
 api.Clients.uploadLogoFromFile("path/to/file").then(data => {
-    const d = data; // $ExpectType ClientData
+    expectType<Mangopay.client.ClientData>(data);
 });
 
 api.Clients.getClientWallets().then(data => {
-    const d = data; // $ExpectType ClientWalletData[]
+    expectType<Mangopay.wallet.ClientWalletData[]>(data);
 });
 
 api.Clients.getClientWallet("CREDIT", "GBP").then(data => {
-    const d = data; // $ExpectType ClientWalletData
+    expectType<Mangopay.wallet.ClientWalletData>(data);
 });
 
 api.Clients.getClientWalletsByFundsType("FEES").then(data => {
-    const d = data; // $ExpectType ClientWalletData[]
+    expectType<Mangopay.wallet.ClientWalletData[]>(data);
 });
 
 api.Clients.getClientWalletTransactions("CREDIT", "GBP").then(data => {
-    const d = data; // $ExpectType TransactionData[]
+    expectType<Mangopay.transaction.TransactionData[]>(data);
 });
 
 /* PayOuts */
-
 api.PayOuts.create({
     Fees: {Amount: 0, Currency: "GBP"},
     AuthorId: "user-id",
@@ -1030,15 +1008,15 @@ api.PayOuts.create({
     Tag: "placeholder",
     PaymentType: api.models.PayOutPaymentType.BankWire
 }).then(data => {
-    const d = data; // $ExpectType PayOutData
+    expectType<Mangopay.payOut.PayOutData>(data);
 });
 
 api.PayOuts.get("payout-id").then(data => {
-    const d = data; // $ExpectType PayOutData
+    expectType<Mangopay.payOut.PayOutData>(data);
 });
 
 api.PayOuts.getRefunds("payout-id").then(data => {
-    const d = data; // $ExpectType RefundData[]
+    expectType<Mangopay.refund.RefundData[]>(data);
 });
 
 api.PayOuts.checkEligibility({
@@ -1049,11 +1027,10 @@ api.PayOuts.checkEligibility({
     DebitedWalletId: "wallet_id",
     PaymentType: api.models.PayOutPaymentType.BankWire
 }).then(data => {
-    const d = data; // $ExpectType CheckPayOutEligibilityData
+    expectType<Mangopay.payOut.CheckPayOutEligibilityData>(data);
 });
 
 /* Transfers */
-
 api.Transfers.create({
     Fees: {Amount: 0, Currency: "GBP"},
     AuthorId: "user-id",
@@ -1061,117 +1038,118 @@ api.Transfers.create({
     DebitedWalletId: "debit-wallet-id",
     CreditedWalletId: "credit-wallet-id"
 }).then(data => {
-    const d = data; // $ExpectType TransferData
+    expectType<Mangopay.transfer.TransferData>(data);
 });
 
 api.Transfers.get("transfer-id").then(data => {
-    const d = data; // $ExpectType TransferData
+    expectType<Mangopay.transfer.TransferData>(data);
 });
 
 api.Transfers.createRefund("transfer-id", {AuthorId: "user-id"}).then(
     data => {
-        const d = data; // $ExpectType RefundData
+        expectType<Mangopay.refund.RefundData>(data);
     }
 );
 
 api.Transfers.getRefunds("transfer-id").then(data => {
-    const d = data; // $ExpectType RefundData[]
+    expectType<Mangopay.refund.RefundData[]>(data);
 });
 
 /* BankingAliases */
-
 api.BankingAliases.create({
     Country: "GB",
     OwnerName: "owner-id",
     Type: 'IBAN',
     WalletId: '1234'
 }).then(data => {
-    const d = data; // $ExpectType IBANBankingAliasData
+    expectType<Mangopay.bankingAlias.IBANBankingAliasData>(data);
 });
+
 api.BankingAliases.get("alias-id").then(data => {
-    const d = data; // $ExpectType IBANBankingAliasData
+    expectType<Mangopay.bankingAlias.IBANBankingAliasData>(data);
 });
-api.BankingAliases.getAll().then(data => {
-    const d = data; // $ExpectType IBANBankingAliasData[]
+
+api.BankingAliases.getAll("1234").then(data => {
+    expectType<Mangopay.bankingAlias.IBANBankingAliasData[]>(data);
 });
+
 api.BankingAliases.update({
     Id: '1234',
     Active: false
 }).then(data => {
-    const d = data; // $ExpectType IBANBankingAliasData
+    expectType<Mangopay.bankingAlias.IBANBankingAliasData>(data);
 });
+
 api.BankingAliases.deactivate("alias-id").then(data => {
-    const d = data; // $ExpectType IBANBankingAliasData
+    expectType<Mangopay.bankingAlias.IBANBankingAliasData>(data);
 });
+
 api.BankingAliases.activate("alias-id").then(data => {
-    const d = data; // $ExpectType IBANBankingAliasData
+    expectType<Mangopay.bankingAlias.IBANBankingAliasData>(data);
 });
 
 /* DisputeDocuments */
-
 api.DisputeDocuments.getAll().then(data => {
-    const d = data; // $ExpectType DisputeDocumentData[]
+    expectType<Mangopay.disputeDocument.DisputeDocumentData[]>(data);
 });
 
 api.DisputeDocuments.get("dispute-doc-id").then(data => {
-    const d = data; // $ExpectType DisputeDocumentData
+    expectType<Mangopay.disputeDocument.DisputeDocumentData>(data);
 });
 
 api.DisputeDocuments.createDisputeDocumentConsult("dispute-doc-id").then(
     data => {
-        const d = data; // TODO unsure of expected type
+        expectType<any>(data); // TODO unsure of expected type from docs
     }
 );
 
 /* Repudiations */
-
 api.Repudiations.getRefunds("repudiation-id").then(data => {
-    const d = data; // $Expect RefundData[]
+    expectType<Mangopay.refund.RefundData[]>(data);
 });
 
 /* Disputes */
-
 api.Disputes.get("dispute-id").then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.dispute.DisputeData>(data);
 });
 
 api.Disputes.getAll().then(data => {
-    const d = data; // $Expect DisputeData[]
+    expectType<Mangopay.dispute.DisputeData[]>(data);
 });
 
 api.Disputes.update({Tag: "any tags"}).then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.dispute.DisputeData>(data);
 });
 
 api.Disputes.contestDispute("dispute-id", {
     Amount: 1000,
     Currency: "GBP"
 }).then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.dispute.DisputeData>(data);
 });
 
 api.Disputes.resubmitDispute("dispute-id").then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.dispute.DisputeData>(data);
 });
 
 api.Disputes.closeDispute("dispute-id").then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.dispute.DisputeData>(data);
 });
 
 api.Disputes.getTransactions("dispute-id").then(data => {
-    const d = data; // $Expect TransactionData[]
+    expectType<Mangopay.transaction.TransactionData[]>(data);
 });
 
 api.Disputes.getDisputesForWallet("wallet-id").then(data => {
-    const d = data; // $Expect DisputeData[]
+    expectType<Mangopay.dispute.DisputeData[]>(data);
 });
 
 api.Disputes.getDisputesForUser("user-id").then(data => {
-    const d = data; // $Expect DisputeData[]
+    expectType<Mangopay.dispute.DisputeData[]>(data);
 });
 
 api.Disputes.getRepudiation("repudiation-id").then(data => {
-    const d = data; // $Expect RepudationData
+    expectType<Mangopay.repudiation.RepudiationData>(data);
 });
 
 api.Disputes.createSettlementTransfer(
@@ -1182,33 +1160,33 @@ api.Disputes.createSettlementTransfer(
     },
     "repudiation-id"
 ).then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.settlementTransfer.SettlementTransferData>(data);
 });
 
 api.Disputes.getSettlementTransfer("settlement-id").then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.settlementTransfer.SettlementTransferData>(data);
 });
 
 api.Disputes.getDocumentsForDispute("dispute-id").then(data => {
-    const d = data; // $Expect DisputeDocumentData[]
+    expectType<Mangopay.disputeDocument.DisputeDocumentData[]>(data);
 });
 
 api.Disputes.updateDisputeDocument("dispute-id", {Tag: "update"}).then(
     data => {
-        const d = data; // $Expect DisputeDocumentData
+        expectType<Mangopay.disputeDocument.DisputeDocumentData>(data);
     }
 );
 
 api.Disputes.createDisputeDocument("dispute-id", {
     Type: "DELIVERY_PROOF"
 }).then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.disputeDocument.DisputeDocumentData>(data);
 });
 
 api.Disputes.createDisputeDocumentPage("dispute-id", "dispute-doc-id", {
     File: "...base64string..."
 }).then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.disputeDocument.DisputeDocumentData>(data);
 });
 
 api.Disputes.createDisputeDocumentPageFromFile(
@@ -1216,107 +1194,102 @@ api.Disputes.createDisputeDocumentPageFromFile(
     "dispute-doc-id",
     "path/to/file"
 ).then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.disputeDocument.DisputeDocumentData>(data);
 });
 
 api.Disputes.getPendingSettlement().then(data => {
-    const d = data; // $Expect DisputeData
+    expectType<Mangopay.dispute.DisputeData[]>(data);
 });
 
 /* Events */
-
 api.Events.getAll().then(data => {
-    const d = data; // $Expect EventData[]
+    expectType<Mangopay.event.EventData[]>(data);
 });
 
 /* Responses */
-
 api.Responses.get().then(data => {
-    const d = data; // $ExpectType any[]
+    expectType<any[]>(data);
 });
 
 /* Mandates */
-
 api.Mandates.create({
     BankAccountId: "bank-account-id",
     ReturnURL: "https://return-url.com",
     Culture: "EN"
 }).then(data => {
-    const d = data; // $ExpectType MandateData
+    expectType<Mangopay.mandate.MandateData>(data);
 });
 
 api.Mandates.getAll().then(data => {
-    const d = data; // $ExpectType MandateData[]
+    expectType<Mangopay.mandate.MandateData[]>(data);
 });
 
 api.Mandates.get("mandate-id").then(data => {
-    const d = data; // $ExpectType MandateData
+    expectType<Mangopay.mandate.MandateData>(data);
 });
 
 api.Mandates.cancel("mandate-id").then(data => {
-    const d = data; // $ExpectType MandateData
+    expectType<Mangopay.mandate.MandateData>(data);
 });
 
 api.Mandates.getMandatesForUser("user-id").then(data => {
-    const d = data; // $ExpectType MandateData[]
+    expectType<Mangopay.mandate.MandateData[]>(data);
 });
 
 api.Mandates.getMandatesForBankAccount("user-id", "bank-account-id").then(
     data => {
-        const d = data; // $ExpectType MandateData[]
+        expectType<Mangopay.mandate.MandateData[]>(data);
     }
 );
 api.Mandates.getTransactions("mandate-id").then(data => {
-    const d = data; // $ExpectType TransactionData[]
+    expectType<Mangopay.transaction.TransactionData[]>(data);
 });
 
 /* Hooks */
-
 api.Hooks.create({
     Url: "https://hook-url.com",
     EventType: "DISPUTE_ACTION_REQUIRED"
 }).then(data => {
-    const d = data; // $ExpectType HookData
+    expectType<Mangopay.hook.HookData>(data);
 });
 
 api.Hooks.get("hook-id").then(data => {
-    const d = data; // $ExpectType HookData
+    expectType<Mangopay.hook.HookData>(data);
 });
 
 api.Hooks.update({Id: "hook-id", Url: "https://new-hook.com/hooks"}).then(
     data => {
-        const d = data; // $ExpectType HookData
+        expectType<Mangopay.hook.HookData>(data);
     }
 );
 
 api.Hooks.getAll().then(data => {
-    const d = data; // $ExpectType HookData[]
+    expectType<Mangopay.hook.HookData[]>(data);
 });
 
 /* Reports */
-
 api.Reports.create({Columns: ["Alias", "AuthorId"], ReportType: "WALLETS"}).then(data => {
-    const d = data; // $ExpectType ReportData
+    expectType<Mangopay.report.ReportData>(data);
 });
 
 api.Reports.get("report-id").then(data => {
-    const d = data; // $ExpectType ReportData
+    expectType<Mangopay.report.ReportData>(data);
 });
 
 api.Reports.getAll().then(data => {
-    const d = data; // $ExpectType ReportData[]
+    expectType<Mangopay.report.ReportData[]>(data);
 });
 
 api.Idempotency.get("idempotency-key").then(data => {
-    const d = data; // $ExpectType IdempotencyData
+    expectType<Mangopay.idempotency.IdempotencyData>(data);
 });
 
 api.Regulatory.getCountryAuthorizations("FR").then(data => {
-    const d = data; // $ExpectType CountryAuthorizationData
+    expectType<Mangopay.countryAuthorization.CountryAuthorizationData>(data);
 });
 
 api.Regulatory.getAllCountriesAuthorizations().then(data => {
-    const d = data; // $ExpectType CountryAuthorizationData[]
+    expectType<Mangopay.countryAuthorization.CountryAuthorizationData[]>(data);
 });
 
 api.Deposits.create(new api.models.Deposit({
@@ -1340,15 +1313,15 @@ api.Deposits.create(new api.models.Deposit({
         UserAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
     }
 }), data => {
-    const d = data; // $ExpectType DepositData
+    expectType<Mangopay.deposit.DepositData>(data);
 });
 
 api.Deposits.get("placeholder", data => {
-    const d = data; // $ExpectType DepositData
+    expectType<Mangopay.deposit.DepositData>(data);
 });
 
 api.Deposits.cancel("placeholder", data => {
-    const d = data; // $ExpectType DepositData
+    expectType<Mangopay.deposit.DepositData>(data);
 });
 
 api.PayIns.createCardPreAuthorizedDepositPayIn({
@@ -1363,12 +1336,12 @@ api.PayIns.createCardPreAuthorizedDepositPayIn({
     },
     DepositId: "placeholder"
 }, data => {
-    const d = data; // $ExpectType CardPreAuthorizedDepositPayInData
+    expectType<Mangopay.payIn.CardPreAuthorizedDepositPayInData>(data);
 });
 
 api.Conversions.getConversionRate("EUR", "GBP")
     .then(data => {
-        const d = data; // $ExpectType ConversionRateData
+        expectType<Mangopay.conversionRate.ConversionRateData>(data);
     });
 
 api.Conversions.createInstantConversion(
@@ -1386,7 +1359,7 @@ api.Conversions.createInstantConversion(
         }
     }
 ).then(data => {
-    const d = data; // $ExpectType ConversionData
+    expectType<Mangopay.conversion.ConversionData>(data);
 });
 
 api.Conversions.createQuotedConversion(
@@ -1397,12 +1370,12 @@ api.Conversions.createQuotedConversion(
         DebitedWalletId: "debited-wallet-id"
     }
 ).then(data => {
-    const d = data; // $ExpectType ConversionData
+    expectType<Mangopay.conversion.ConversionData>(data);
 });
 
 api.Conversions.getConversion("conversion-id")
     .then(data => {
-        const d = data; // $ExpectType ConversionData
+        expectType<Mangopay.conversion.ConversionData>(data);
     });
 
 api.Conversions.createQuote(
@@ -1418,16 +1391,15 @@ api.Conversions.createQuote(
         Duration: 60
     }
 ).then(data => {
-    const d = data; // $ExpectType QuoteData
+    expectType<Mangopay.conversion.QuoteData>(data);
 });
 
 api.Conversions.getQuote("quote-id")
     .then(data => {
-        const d = data; // $ExpectType QuoteData
+        expectType<Mangopay.conversion.QuoteData>(data);
     });
 
 /* Namespace Access */
-
 const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
 
 const bankingAliasType: Mangopay.bankingAlias.BankingAliasType = "IBAN";
