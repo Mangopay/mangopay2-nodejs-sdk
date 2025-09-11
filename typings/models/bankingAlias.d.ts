@@ -34,6 +34,8 @@ export namespace bankingAlias {
          * Whether the banking alias is active or not
          */
         Active: boolean;
+
+        VirtualAccountPurpose: string;
     }
 
     interface IBANBankingAliasData extends BankingAliasData {
