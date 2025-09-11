@@ -293,4 +293,27 @@ export class PayIns {
      * @return {Object}   Request promise
      */
     getPayByBankSupportedBanks: NoArgMethodOverload<payIn.PayByBankSupportedBank>
+
+    /**
+     * Send key pre-transaction data such as order details, buyer information,
+     * and merchant context before initiating a PayPal payment.
+     *
+     * Given that the payload can be anything, depending on what PayPal needs, there is no defined interface for it.
+     *
+     * @param dataCollection The data collection to be created
+     * @param callback Callback function
+     * @param options Request options
+     * @returns {Object} Request promise
+     */
+    createPayPalDataCollection: MethodOverload<any, any>
+
+    /**
+     * Get a PayPal data collection.
+     *
+     * @param dataCollectionId Data collection identifier
+     * @param callback Callback function
+     * @param options Request options
+     * @returns {Object} Request promise
+     */
+    getPayPalDataCollection: MethodOverload<string, any>
 }
