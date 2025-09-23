@@ -1,5 +1,6 @@
 import {expectError, expectType} from 'tsd';
 import Mangopay = require("../typings/index");
+import {base} from "../typings";
 
 // Config tests
 const invalidConfig = {};
@@ -1398,6 +1399,11 @@ api.Conversions.getQuote("quote-id")
     .then(data => {
         expectType<Mangopay.conversion.QuoteData>(data);
     });
+
+api.OptionsHelper.withIdempotency({}, "1234")
+    .then(data => {
+        expectType<base.MethodOptions>(data);
+    })
 
 /* Namespace Access */
 const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
