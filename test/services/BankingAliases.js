@@ -30,6 +30,7 @@ describe('Banking Aliases', function() {
 
     it('should exist after creating it', function () {
         expect(bankingAlias.Id).to.exist;
+        expect(bankingAlias.VirtualAccountPurpose).to.exist;
     });
 
     describe('Getting created banking alias', function () {

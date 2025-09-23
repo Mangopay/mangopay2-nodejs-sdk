@@ -76,6 +76,7 @@ import { identityVerification } from "./models/identityVerification";
 import { recipient } from "./models/recipient";
 import { Recipients } from "./services/Recipients";
 import { Settlements } from "./services/Settlements";
+import { OptionsHelper } from "./services/OptionsHelper";
 
 export = MangoPay;
 
@@ -115,6 +116,7 @@ declare class MangoPay {
     IdentityVerifications: IdentityVerifications;
     Recipients: Recipients;
     Settlements: Settlements;
+    OptionsHelper: OptionsHelper;
 
     models: typeof MangoPay.models;
 
@@ -841,6 +843,7 @@ declare namespace MangoPay {
         card,
         cardPreAuthorization,
         cardRegistration,
+        cardValidation,
         client,
         dispute,
         disputeDocument,
