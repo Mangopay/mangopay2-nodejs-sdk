@@ -1,7 +1,7 @@
 {
   "name": "mangopay2-nodejs-sdk",
   "version": "1.60.2",
-  "types": "./typings/index.d.ts",
+  "types": "./test-d/index.test-d.ts",
   "description": "Mangopay Node.js SDK",
   "repository": "https://github.com/Mangopay/mangopay2-nodejs-sdk.git",
   "license": "MIT",
@@ -25,9 +25,9 @@
   },
   "devDependencies": {
     "chai": "4.2.x",
-    "dtslint": "4.2.1",
     "mocha": "9.2.0",
     "sinon": "9.2.x",
+    "tsd": "^0.30.4",
     "ts-node": "^9.1.1",
     "typescript": "4.1.x"
   },
@@ -35,6 +35,6 @@
     "start": "npm install -g mocha && npm install -g jsdox && npm install",
     "documentation": "jsdox -t docs/templates/ -i README -o docs lib/services",
     "test": "mocha 'test/**/*.js' --recursive --timeout 30000 --ui bdd",
-    "test:types": "dtslint ./typings"
+    "test:types": "tsd"
   }
 }
