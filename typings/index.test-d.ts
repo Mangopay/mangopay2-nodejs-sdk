@@ -1,6 +1,6 @@
 import {expectError, expectType} from 'tsd';
-import Mangopay = require("../typings/index");
-import {base} from "../typings";
+import Mangopay = require("./index");
+import {base} from "./index";
 
 // Config tests
 const invalidConfig = {};
