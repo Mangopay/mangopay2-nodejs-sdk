@@ -144,6 +144,12 @@ export namespace payIn {
          * The type of execution for the payin
          */
         ExecutionType: PayInExecutionType;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CardWebPayInData extends BasePayInData {
@@ -314,6 +320,12 @@ export namespace payIn {
          * The BIC identifier of the end-user’s bank
          */
         Bic?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CardDirectPayInData extends BasePayInData {
@@ -459,11 +471,6 @@ export namespace payIn {
          * If the Phone parameter is sent, then RedirectURL is not returned and ReturnURL is ignored.
          */
         Phone?: string;
-
-        /**
-         * The unique reference generated for the profiling session, used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
-         */
-        ProfilingAttemptReference?: string;
     }
 
     interface PayPalWebPayInData extends BasePayInData {
@@ -703,6 +710,12 @@ export namespace payIn {
          * TelephoneOrder – Payment received via mail order or telephone order (MOTO).
          */
         PaymentCategory?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateMbwayWebPayIn {
@@ -746,6 +759,12 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateBancontactWebPayIn {
@@ -798,6 +817,12 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateBizumWebPayIn {
@@ -843,7 +868,8 @@ export namespace payIn {
         StatementDescriptor?: string;
 
         /**
-         * The unique reference generated for the profiling session, used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
          */
         ProfilingAttemptReference?: string;
 
@@ -956,6 +982,12 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateSatispayWebPayIn {
@@ -1003,6 +1035,12 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateBlikWebPayIn {
@@ -1063,6 +1101,12 @@ export namespace payIn {
          * Required when creating a Blik PayIn with code.
          */
         BrowserInfo?: BrowserInfoData;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface LineItemData {
@@ -1180,6 +1224,12 @@ export namespace payIn {
         MandateId: string;
 
         StatementDescriptor?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface DirectDebitWebPayInData extends BasePayInData {
@@ -1261,6 +1311,12 @@ export namespace payIn {
          * The type of web direct debit
          */
         DirectDebitType: DirectDebitType;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CardPreAuthorizedPayInData extends BasePayInData {
@@ -1312,6 +1368,12 @@ export namespace payIn {
          * The ID of the Preauthorization object
          */
         PreauthorizationId: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface BankAccountData {
@@ -1393,6 +1455,12 @@ export namespace payIn {
         "AuthorId" | "CreditedWalletId" | "DeclaredDebitedFunds" | "DeclaredFees"> {
         ExecutionType: "DIRECT";
         PaymentType: "BANK_WIRE";
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface PayInRecurringRegistrationState {
@@ -1943,6 +2011,12 @@ export namespace payIn {
         Country: CountryISO;
 
         StatementDescriptor?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateCardPreAuthorizedDepositPayIn {
@@ -2025,6 +2099,12 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
     interface ApplePayPayInData extends BasePayInData {
         ExecutionType: "DIRECT";
@@ -2153,6 +2233,12 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface GooglePayDirectPayInData extends BasePayInData {
@@ -2381,6 +2467,12 @@ export namespace payIn {
          * characters or spaces. See here for important info. Note that each bank handles this information differently, some show less or no information.
          */
         StatementDescriptor?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface IdealWebPayInData extends BasePayInData {
@@ -2460,6 +2552,12 @@ export namespace payIn {
          * Custom data that you can add to this object
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface GiropayWebPayInData extends BasePayInData {
@@ -2589,6 +2687,12 @@ export namespace payIn {
          * Custom data that you can add to this object
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateSwishWebPayIn {
@@ -2641,6 +2745,12 @@ export namespace payIn {
          *  <p>In both cases you need to provide the relevant ReturnURL, whether to your app or website.</p>
          */
         PaymentFlow?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface CreateTwintWebPayIn {
@@ -2683,6 +2793,12 @@ export namespace payIn {
          * Custom data that you can add to this object
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface BinData {
@@ -2936,6 +3052,12 @@ export namespace payIn {
          * Custom data that you can add to this item
          */
         Tag?: string;
+
+        /**
+         * The unique reference generated for the profiling session,
+         * used by the fraud prevention solution to produce recommendations for the transaction using the profiling data.
+         */
+        ProfilingAttemptReference?: string;
     }
 
     interface PayInIntentData extends entityBase.EntityBaseData {
