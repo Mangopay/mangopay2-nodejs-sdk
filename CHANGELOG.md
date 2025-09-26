@@ -1,3 +1,7 @@
+## [1.60.4] - 2025-09-26
+### Improved
+- Method for building the OAuth token URL, fixing a potential issue introduced in 1.42.1 #510
+
 ## [1.60.3] - 2025-09-23
 ### Added
 - Support for `ProfilingAttemptReference` on all payment methods for Mangopay's Fraud Prevention solution #505
