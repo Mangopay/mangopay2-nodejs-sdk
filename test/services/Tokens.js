@@ -45,3 +45,11 @@ describe('When trying to authenticate with wrong credentials', function() {
         expect(wrongCredentialsError.error).to.equal('invalid_client');
     })
 });
+
+describe('OAuth URL is correct', function() {
+    const url = api.buildOauthUrl();
+
+    it('has the correct format', function() {
+        expect(url).to.equal(`/${api.config.apiVersion}/oauth/token`);
+    });
+});
