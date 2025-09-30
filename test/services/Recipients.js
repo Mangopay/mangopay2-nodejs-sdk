@@ -10,25 +10,26 @@ describe('Recipients', function() {
         api.Users.create(john).then(function(data){
             john = data;
             const createRecipient = {
-                DisplayName: "My GB account",
+                DisplayName: "My EUR account",
                 PayoutMethodType: "LocalBankTransfer",
                 RecipientType: "Individual",
-                Currency: "GBP",
-                Country: "GB",
+                Currency: "EUR",
+                Country: "DE",
                 IndividualRecipient: {
-                    FirstName: "Payout",
-                    LastName: "Team",
+                    FirstName: "John",
+                    LastName: "Doe",
                     Address: {
                         AddressLine1: "10 Kingsway",
                         City: "London",
                         PostalCode: "WC2B 6LH",
-                        Country: "GB"
+                        Country: "DE"
                     }
                 },
                 LocalBankTransfer: {
-                    GBP: {
+                    EUR: {
                         SortCode: "010039",
-                        AccountNumber: "11696419"
+                        AccountNumber: "11696419",
+                        IBAN: "DE75512108001245126199"
                     }
                 }
             };
@@ -49,6 +50,7 @@ describe('Recipients', function() {
             expect(recipient.IndividualRecipient).to.not.be.null;
             expect(recipient.LocalBankTransfer).to.not.be.null;
             expect(recipient.PendingUserAction).to.not.be.null;
+            expect(recipient.RecipientVerificationOfPayee).to.not.be.null;
         });
     });
 
