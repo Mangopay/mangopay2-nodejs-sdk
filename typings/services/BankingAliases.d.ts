@@ -22,9 +22,10 @@ export class BankingAliases {
 
     /**
      * Get all banking aliases
+     * @param walletId
      * @param options
      */
-    getAll: NoArgMethodOverload<bankingAlias.IBANBankingAliasData[]>;
+    getAll: MethodOverload<string, bankingAlias.IBANBankingAliasData[]>;
 
     /**
      * Update banking alias

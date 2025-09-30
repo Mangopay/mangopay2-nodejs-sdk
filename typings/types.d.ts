@@ -475,7 +475,8 @@ export type CountryISO =
     | "YT"
     | "ZA"
     | "ZM"
-    | "ZW";
+    | "ZW"
+    | "XK";
 
 export type CurrencyISO =
     | "AED"

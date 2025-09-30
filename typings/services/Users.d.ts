@@ -288,4 +288,13 @@ export class Users {
      * @return {Object} Request promise
      */
     getRegulatory: MethodOverload<string, user.RegulatoryData>
+
+    /**
+     * Get user block status
+     * @param {string} userId User identifier
+     * @param {Function} callback Callback function
+     * @param {Object} options Request options
+     * @return {Object} Request promise
+     */
+    getBlockStatus: MethodOverload<string, user.RegulatoryData>
 }

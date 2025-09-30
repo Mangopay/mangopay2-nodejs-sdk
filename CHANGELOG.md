@@ -1,3 +1,29 @@
+## [1.60.4] - 2025-09-26
+### Improved
+- Method for building the OAuth token URL, fixing a potential issue introduced in 1.42.1 #510
+
+## [1.60.3] - 2025-09-23
+### Added
+- Support for `ProfilingAttemptReference` on all payment methods for Mangopay's Fraud Prevention solution #505
+- Webhook event types for [Echo](https://docs.mangopay.com/guides/echo), Mangopay's solution for third-party PSP integrations: `INTENT_AUTHORIZED`,`INTENT_CAPTURED`,`INTENT_REFUNDED`,`INTENT_REFUND_REVERSED`,`INTENT_DISPUTE_CREATED`,`INTENT_DISPUTE_DEFENDED`,`INTENT_DISPUTE_WON`,`INTENT_DISPUTE_LOST`,`INTENT_SETTLED_NOT_PAID`,`INTENT_PAID`,`SPLIT_CREATED`,`SPLIT_PENDING_FUNDS_RECEPTION`,`SPLIT_AVAILABLE`,`SPLIT_REJECTED`,`SPLIT_REVERSED` #502
+- Support for `VirtualAccountPurpose` on Banking Alias object #508
+
+### Improved
+- Added missing `OptionsHelper` in TypeScript #503
+- Add new library for unit tests #504
+
+## [1.60.2] - 2025-09-02
+### Added
+- `XK` to country ISO values #499
+
+### Fixed
+- Typescript function definition (thank you @hmica #287 #498)
+- Typings for `BankingAliases.getAll` (thank you @Tug #351)
+- Missing `CreationDate` with `toJSON()` (thank you @CanoGit #355 @fredleroy #345)
+- Missing fields in `CreateTransferRefund` (thank you @lachauj #363)
+- Missing `getBlockStatus` definition (thank you @capontebable #389)
+- Tests #497
+
 ## [1.60.1] - 2025-08-14
 ### Added
 - Types for user `getRegulatory` function #495 (#443 thanks for raising @DriesVS)
