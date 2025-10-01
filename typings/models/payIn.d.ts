@@ -940,6 +940,8 @@ export namespace payIn {
         Reference?: string;
 
         CancelURL?: string;
+
+        DataCollectionId?: string;
     }
 
     interface CreateMultibancoWebPayIn {
@@ -1831,6 +1833,8 @@ export namespace payIn {
          * The platform’s order reference for the transaction.
          */
         Reference?: string;
+
+        DataCollectionId?: string;
     }
 
     interface CreateRecurringPayInMIT {
@@ -1938,6 +1942,8 @@ export namespace payIn {
          * The platform’s order reference for the transaction.
          */
         Reference?: string;
+
+        DataCollectionId?: string;
     }
 
     interface PayconiqWebPayInData extends BasePayInData {
