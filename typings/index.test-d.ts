@@ -1405,6 +1405,16 @@ api.OptionsHelper.withIdempotency({}, "1234")
         expectType<base.MethodOptions>(data);
     })
 
+api.PayIns.partialCancelPayInIntent("intentId", {Amount: 0, LineItems: [], ExternalData: {}})
+    .then(data => {
+        expectType<Mangopay.payIn.PayInIntentData>(data);
+    })
+
+api.PayIns.fullCancelPayInIntent("intentId", {ExternalData: {}})
+    .then(data => {
+        expectType<Mangopay.payIn.PayInIntentData>(data);
+    })
+
 /* Namespace Access */
 const bankAccountType: Mangopay.bankAccount.BankAccountType = "CA";
 

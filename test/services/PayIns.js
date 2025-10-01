@@ -2194,30 +2194,30 @@ describe('PayIns', function () {
             });
         });
 
-        // describe('Cancel intent', function () {
-        //     var canceled;
-        //     var created;
-        //
-        //     before(function (done) {
-        //         helpers.getNewPayInIntentAuthorization(api, john, function (data) {
-        //             created = data;
-        //             const cancelDetails = {
-        //                 "ExternalData" : {
-        //                     "ExternalProcessingDate" : 1728133765,
-        //                     "ExternalProviderReference" : Math.random().toString(),
-        //                 }
-        //             };
-        //             api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
-        //                 canceled = data;
-        //                 done();
-        //             });
-        //         });
-        //     });
-        //
-        //     it('should cancel the intent', function () {
-        //         expect(canceled.Status).to.equal('CANCELED');
-        //     });
-        // });
+        describe('Cancel intent', function () {
+            var canceled;
+            var created;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    created = data;
+                    const cancelDetails = {
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : 1728133765,
+                            "ExternalProviderReference" : Math.random().toString(),
+                        }
+                    };
+                    api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
+                        canceled = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should cancel the intent', function () {
+                expect(canceled.Status).to.equal('CANCELLED');
+            });
+        });
 
         describe('Create splits', function () {
             var payInIntent;
@@ -2493,6 +2493,62 @@ describe('PayIns', function () {
 
             it('should update the Split', function () {
                 expect(updated.Description).to.equal("updated description");
+            });
+        });
+    });
+
+    describe('PayPal Data Collection', function () {
+        var dataCollection;
+
+        before(function (done) {
+            const toCreate = {
+                "sender_account_id" : "A12345N343",
+                "sender_first_name" : "Jane",
+                "sender_last_name" : "Doe",
+                "sender_email" : "jane.doe@sample.com",
+                "sender_phone" : "(042) 1123 4567",
+                "sender_address_zip" : "75009",
+                "sender_country_code" : "FR",
+                "sender_create_date" : "2012-12-09T19:14:55.277-0:00",
+                "sender_signup_ip" : "10.220.90.20",
+                "sender_popularity_score" : "high",
+                "receiver_account_id" : "A12345N344",
+                "receiver_create_date" : "2012-12-09T19:14:55.277-0:00",
+                "receiver_email" : "jane@sample.com",
+                "receiver_address_country_code" : "FR",
+                "business_name" : "Jane Ltd",
+                "recipient_popularity_score" : "high",
+                "first_interaction_date" : "2012-12-09T19:14:55.277-0:00",
+                "txn_count_total" : "34",
+                "vertical" : "Household goods",
+                "transaction_is_tangible" : "0"
+            };
+            api.PayIns.createPayPalDataCollection(toCreate, function(data) {
+                dataCollection = data;
+                done();
+            });
+        });
+
+        describe('Create', function () {
+            it('should create the data collection', function () {
+                expect(dataCollection).not.to.be.undefined;
+                expect(dataCollection.dataCollectionId).not.to.be.undefined;
+            });
+        });
+
+        describe('Get', function () {
+            var getDataCollection;
+            before(function (done) {
+                api.PayIns.getPayPalDataCollection(dataCollection.dataCollectionId, function (data, response) {
+                    getDataCollection = data;
+                    done();
+                });
+            });
+
+            it('should get the data collection', function () {
+                expect(getDataCollection.dataCollectionId).to.equal(dataCollection.dataCollectionId);
+                expect(getDataCollection.sender_first_name).to.equal("Jane");
+                expect(getDataCollection.sender_last_name).to.equal("Doe");
             });
         });
     });

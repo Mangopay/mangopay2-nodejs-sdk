@@ -214,25 +214,25 @@ export class PayIns {
      */
     getPayInIntent: MethodOverload<string, payIn.PayInIntentData>
 
-    // /**
-    //  * Cancel a PayInIntent
-    //  * @param {string}  payInIntentId    PayInIntent identifier
-    //  * @param {payIn.FullCancelPayInIntent}  intentDetails  Details about the intent to be canceled
-    //  * @param {Function} callback    Callback function
-    //  * @param {Object} options    Request options
-    //  * @return {Object}         Request promise
-    //  */
-    // fullCancelPayInIntent: TwoArgsMethodOverload<string, payIn.FullCancelPayInIntent, payIn.PayInIntentData>
-    //
-    // /**
-    //  * Cancel a PayInIntent
-    //  * @param {string}  payInIntentId    PayInIntent identifier
-    //  * @param {payIn.PartialCancelPayInIntent}  intentDetails  Details about the intent to be canceled
-    //  * @param {Function} callback    Callback function
-    //  * @param {Object} options    Request options
-    //  * @return {Object}         Request promise
-    //  */
-    // partialCancelPayInIntent: TwoArgsMethodOverload<string, payIn.PartialCancelPayInIntent, payIn.PayInIntentData>
+    /**
+     * Cancel a PayInIntent
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {payIn.FullCancelPayInIntent}  intentDetails  Details about the intent to be canceled
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {Object}         Request promise
+     */
+    fullCancelPayInIntent: TwoArgsMethodOverload<string, payIn.FullCancelPayInIntent, payIn.PayInIntentData>
+
+    /**
+     * Cancel a PayInIntent
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {payIn.PartialCancelPayInIntent}  intentDetails  Details about the intent to be canceled
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {Object}         Request promise
+     */
+    partialCancelPayInIntent: TwoArgsMethodOverload<string, payIn.PartialCancelPayInIntent, payIn.PayInIntentData>
 
     /**
      * Create PayInIntent splits
@@ -293,4 +293,27 @@ export class PayIns {
      * @return {Object}   Request promise
      */
     getPayByBankSupportedBanks: NoArgMethodOverload<payIn.PayByBankSupportedBank>
+
+    /**
+     * Send key pre-transaction data such as order details, buyer information,
+     * and merchant context before initiating a PayPal payment.
+     *
+     * Given that the payload can be anything, depending on what PayPal needs, there is no defined interface for it.
+     *
+     * @param dataCollection The data collection to be created
+     * @param callback Callback function
+     * @param options Request options
+     * @returns {Object} Request promise
+     */
+    createPayPalDataCollection: MethodOverload<any, any>
+
+    /**
+     * Get a PayPal data collection.
+     *
+     * @param dataCollectionId Data collection identifier
+     * @param callback Callback function
+     * @param options Request options
+     * @returns {Object} Request promise
+     */
+    getPayPalDataCollection: MethodOverload<string, any>
 }

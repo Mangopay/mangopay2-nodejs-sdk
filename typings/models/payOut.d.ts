@@ -3,11 +3,13 @@ import { transfer } from "./transfer";
 import { enums } from "../enums";
 import { money } from "./money";
 import { base } from "../base";
+import { recipient } from "./recipient";
 
 export namespace payOut {
     import MoneyData = money.MoneyData;
     import FallbackReasonData = base.FallbackReasonData;
     import PayoutPaymentRefData = base.PayoutPaymentRefData;
+    import VerificationOfPayee = recipient.VerificationOfPayee;
 
     type PayoutModeRequestedType = "STANDARD" | "INSTANT_PAYMENT" | "INSTANT_PAYMENT_ONLY" | "RTGS_PAYMENT";
     type PayoutModeAppliedType = "STANDARD" | "INSTANT_PAYMENT" | "RTGS_PAYMENT" | "PENDING_RESPONSE";
@@ -38,6 +40,8 @@ export namespace payOut {
         ModeRequested: PayoutModeRequestedType;
 
         ModeApplied: PayoutModeAppliedType;
+
+        RecipientVerificationOfPayee?: VerificationOfPayee;
     }
 
     interface CreatePayOut {
