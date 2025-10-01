@@ -41,7 +41,7 @@ export namespace payOut {
 
         ModeApplied: PayoutModeAppliedType;
 
-        RecipientVerificationOfPayee: VerificationOfPayee;
+        RecipientVerificationOfPayee?: VerificationOfPayee;
     }
 
     interface CreatePayOut {

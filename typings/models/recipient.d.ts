@@ -78,7 +78,7 @@ export namespace recipient {
          */
         PendingUserAction: user.PendingUserActionData;
 
-        RecipientVerificationOfPayee: VerificationOfPayee;
+        RecipientVerificationOfPayee?: VerificationOfPayee;
     }
 
     interface CreateRecipientData {
@@ -222,7 +222,7 @@ export namespace recipient {
         /**
          * A unique identifier of the VOP check performed by Mangopay.
          */
-        RecipientVerificationId: string;
+        RecipientVerificationId?: string;
 
         /**
          * The outcome of the VOP check performed by Mangopay

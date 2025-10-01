@@ -27,8 +27,6 @@ describe('Recipients', function() {
                 },
                 LocalBankTransfer: {
                     EUR: {
-                        SortCode: "010039",
-                        AccountNumber: "11696419",
                         IBAN: "DE75512108001245126199"
                     }
                 }
