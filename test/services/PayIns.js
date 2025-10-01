@@ -2546,7 +2546,7 @@ describe('PayIns', function () {
             });
 
             it('should get the data collection', function () {
-                expect(getDataCollection.DataCollectionId).to.equal(dataCollection.dataCollectionId);
+                expect(getDataCollection.dataCollectionId).to.equal(dataCollection.dataCollectionId);
                 expect(getDataCollection.sender_first_name).to.equal("Jane");
                 expect(getDataCollection.sender_last_name).to.equal("Doe");
             });
