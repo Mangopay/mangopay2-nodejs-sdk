@@ -2194,30 +2194,30 @@ describe('PayIns', function () {
             });
         });
 
-        // describe('Cancel intent', function () {
-        //     var canceled;
-        //     var created;
-        //
-        //     before(function (done) {
-        //         helpers.getNewPayInIntentAuthorization(api, john, function (data) {
-        //             created = data;
-        //             const cancelDetails = {
-        //                 "ExternalData" : {
-        //                     "ExternalProcessingDate" : 1728133765,
-        //                     "ExternalProviderReference" : Math.random().toString(),
-        //                 }
-        //             };
-        //             api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
-        //                 canceled = data;
-        //                 done();
-        //             });
-        //         });
-        //     });
-        //
-        //     it('should cancel the intent', function () {
-        //         expect(canceled.Status).to.equal('CANCELED');
-        //     });
-        // });
+        describe('Cancel intent', function () {
+            var canceled;
+            var created;
+
+            before(function (done) {
+                helpers.getNewPayInIntentAuthorization(api, john, function (data) {
+                    created = data;
+                    const cancelDetails = {
+                        "ExternalData" : {
+                            "ExternalProcessingDate" : 1728133765,
+                            "ExternalProviderReference" : Math.random().toString(),
+                        }
+                    };
+                    api.PayIns.fullCancelPayInIntent(created.Id, cancelDetails, function(data) {
+                        canceled = data;
+                        done();
+                    });
+                });
+            });
+
+            it('should cancel the intent', function () {
+                expect(canceled.Status).to.equal('CANCELLED');
+            });
+        });
 
         describe('Create splits', function () {
             var payInIntent;

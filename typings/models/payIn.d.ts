@@ -3586,14 +3586,14 @@ export namespace payIn {
     }
 
     interface FullCancelPayInIntent {
-        ExternalData: CancelPayInIntentExternalData;
+        ExternalData?: CancelPayInIntentExternalData;
     }
 
     interface PartialCancelPayInIntent {
         Amount: number;
         Currency?: CurrencyISO;
         PlatformFees?: number;
-        ExternalData: CancelPayInIntentExternalData;
+        ExternalData?: CancelPayInIntentExternalData;
         LineItems: CancelPayInIntentLineItem[];
     }
 
@@ -3601,12 +3601,12 @@ export namespace payIn {
         /**
          * The date at which the transaction was created
          */
-        ExternalProcessingDate: Timestamp;
+        ExternalProcessingDate?: Timestamp;
 
         /**
          * The unique identifier of the transaction at the provider level
          */
-        ExternalProviderReference: string;
+        ExternalProviderReference?: string;
 
         /**
          * The unique identifier of the transaction at the merchant level

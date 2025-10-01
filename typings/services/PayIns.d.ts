@@ -214,25 +214,25 @@ export class PayIns {
      */
     getPayInIntent: MethodOverload<string, payIn.PayInIntentData>
 
-    // /**
-    //  * Cancel a PayInIntent
-    //  * @param {string}  payInIntentId    PayInIntent identifier
-    //  * @param {payIn.FullCancelPayInIntent}  intentDetails  Details about the intent to be canceled
-    //  * @param {Function} callback    Callback function
-    //  * @param {Object} options    Request options
-    //  * @return {Object}         Request promise
-    //  */
-    // fullCancelPayInIntent: TwoArgsMethodOverload<string, payIn.FullCancelPayInIntent, payIn.PayInIntentData>
-    //
-    // /**
-    //  * Cancel a PayInIntent
-    //  * @param {string}  payInIntentId    PayInIntent identifier
-    //  * @param {payIn.PartialCancelPayInIntent}  intentDetails  Details about the intent to be canceled
-    //  * @param {Function} callback    Callback function
-    //  * @param {Object} options    Request options
-    //  * @return {Object}         Request promise
-    //  */
-    // partialCancelPayInIntent: TwoArgsMethodOverload<string, payIn.PartialCancelPayInIntent, payIn.PayInIntentData>
+    /**
+     * Cancel a PayInIntent
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {payIn.FullCancelPayInIntent}  intentDetails  Details about the intent to be canceled
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {Object}         Request promise
+     */
+    fullCancelPayInIntent: TwoArgsMethodOverload<string, payIn.FullCancelPayInIntent, payIn.PayInIntentData>
+
+    /**
+     * Cancel a PayInIntent
+     * @param {string}  payInIntentId    PayInIntent identifier
+     * @param {payIn.PartialCancelPayInIntent}  intentDetails  Details about the intent to be canceled
+     * @param {Function} callback    Callback function
+     * @param {Object} options    Request options
+     * @return {Object}         Request promise
+     */
+    partialCancelPayInIntent: TwoArgsMethodOverload<string, payIn.PartialCancelPayInIntent, payIn.PayInIntentData>
 
     /**
      * Create PayInIntent splits
