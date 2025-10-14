@@ -23,6 +23,7 @@ describe("Clients", function () {
     it('Get Client', function () {
         expect(client.ClientId).not.to.be.undefined;
         expect(client.ClientId).to.equal(api.config.clientId);
+        expect(client.Licensor).not.to.be.undefined;
     });
 
     describe("Update client", function () {
