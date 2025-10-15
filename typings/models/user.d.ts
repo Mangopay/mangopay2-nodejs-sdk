@@ -641,6 +641,11 @@ export namespace user {
          * Custom data that you can add to this object.
          */
         Tag?: string;
+
+        /**
+         * If provided, possible values: USER_PRESENT, USER_NOT_PRESENT
+         */
+        ScaContext?: string;
     }
 
     interface CreateUserLegalScaData {
@@ -703,6 +708,11 @@ export namespace user {
          * Must be true if UserCategory is OWNER.
          */
         TermsAndConditionsAccepted: boolean;
+
+        /**
+         * If provided, possible values: USER_PRESENT, USER_NOT_PRESENT
+         */
+        ScaContext?: string;
     }
 
     interface CreateLegalRepresentativeData {
@@ -788,6 +798,7 @@ export namespace user {
         HeadquartersAddress?: address.CreateAddress;
         LegalRepresentativeAddress?: address.CreateAddress;
         Email?: string;
+        ScaContext?: string;
     }
 
     interface UpdateUserNaturalScaData {
@@ -808,6 +819,7 @@ export namespace user {
         PhoneNumber?: string;
         PhoneNumberCountry?: CountryISO;
         Address?: address.CreateAddress;
+        ScaContext?: string;
     }
 
     interface CategorizeUserNatural {
@@ -872,6 +884,11 @@ export namespace user {
          * Required if the PhoneNumber is provided in local format (recommended), to render the value in the E.164 standard.
          */
         PhoneNumberCountry?: string;
+
+        /**
+         * Possible values: USER_PRESENT, USER_NOT_PRESENT
+         */
+        ScaContext?: string;
     }
 
     interface CategorizeUserLegal {
@@ -909,6 +926,11 @@ export namespace user {
          * Required if LegalPersonType is BUSINESS.
          */
         CompanyNumber?: string;
+
+        /**
+         * Possible values: USER_PRESENT, USER_NOT_PRESENT
+         */
+        ScaContext?: string;
     }
 
     interface UserEnrollmentResult {
