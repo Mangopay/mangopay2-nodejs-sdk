@@ -121,6 +121,11 @@ export namespace client {
          * Your unique MANGOPAY reference which you should use when contacting us
          */
         CompanyReference: string;
+
+        /**
+         * The licensor of the platform’s company account, indicating the Mangopay entity the platform contracted with
+         */
+        Licensor: string;
     }
 
     interface UpdateClient {

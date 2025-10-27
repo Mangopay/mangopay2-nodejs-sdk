@@ -407,7 +407,8 @@ describe('Users', function() {
                     TermsAndConditionsAccepted: true,
                     Birthday: 188301600,
                     Nationality: 'FR',
-                    CountryOfResidence: 'FR'
+                    CountryOfResidence: 'FR',
+                    ScaContext: 'USER_PRESENT'
                 }
             );
 
@@ -452,7 +453,8 @@ describe('Users', function() {
                         "PostalCode": "20007",
                         "Country": "US"
                     },
-                    CompanyNumber: "123456789"
+                    CompanyNumber: "123456789",
+                    ScaContext: 'USER_NOT_PRESENT'
                 }
             );
 
@@ -481,6 +483,23 @@ describe('Users', function() {
 
         it('Category should be OWNER', function() {
             expect(enrollmentResult.PendingUserAction.RedirectUrl).to.not.be.undefined;
+        });
+    });
+
+    describe('Manage consent', function(){
+        var consentResult;
+
+        before(function (done) {
+            api.Users.enroll(johnOwner.Id).then(function(data){
+                api.Users.manageConsent(johnOwner.Id).then(function(data){
+                    consentResult = data;
+                    done();
+                });
+            });
+        });
+
+        it('Correct result expected', function() {
+            expect(consentResult.PendingUserAction.RedirectUrl).to.not.be.undefined;
         });
     });
 
