@@ -266,6 +266,14 @@ export class Users {
     enroll: MethodOverload<string, user.UserEnrollmentResult>;
 
     /**
+     * Manage user consent
+     *
+     * @param userId
+     * @param options
+     */
+    manageConsent: MethodOverload<string, user.UserConsent>;
+
+    /**
      * Close a user (change status to CLOSED). The resource remains available for historical purposes.
      * @param user
      * @param options

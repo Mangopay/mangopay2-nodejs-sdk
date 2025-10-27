@@ -484,6 +484,23 @@ describe('Users', function() {
         });
     });
 
+    describe('Manage consent', function(){
+        var consentResult;
+
+        before(function (done) {
+            api.Users.enroll(johnOwner.Id).then(function(data){
+                api.Users.manageConsent(johnOwner.Id).then(function(data){
+                    consentResult = data;
+                    done();
+                });
+            });
+        });
+
+        it('Correct result expected', function() {
+            expect(consentResult.PendingUserAction.RedirectUrl).to.not.be.undefined;
+        });
+    });
+
     describe('Save Natural Payer to Owner', function(){
         var updatedJohn;
         before(function(done){

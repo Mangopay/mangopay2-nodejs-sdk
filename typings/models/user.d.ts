@@ -918,6 +918,10 @@ export namespace user {
         PendingUserAction: PendingUserActionData;
     }
 
+    interface UserConsent {
+        PendingUserAction: PendingUserActionData;
+    }
+
     interface UserDataFormatValidation {
         /**
          * Information about the registration number of a legal entity
