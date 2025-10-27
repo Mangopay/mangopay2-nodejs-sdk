@@ -407,7 +407,8 @@ describe('Users', function() {
                     TermsAndConditionsAccepted: true,
                     Birthday: 188301600,
                     Nationality: 'FR',
-                    CountryOfResidence: 'FR'
+                    CountryOfResidence: 'FR',
+                    ScaContext: 'USER_PRESENT'
                 }
             );
 
@@ -452,7 +453,8 @@ describe('Users', function() {
                         "PostalCode": "20007",
                         "Country": "US"
                     },
-                    CompanyNumber: "123456789"
+                    CompanyNumber: "123456789",
+                    ScaContext: 'USER_NOT_PRESENT'
                 }
             );
 
