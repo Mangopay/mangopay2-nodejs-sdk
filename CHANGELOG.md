@@ -1,3 +1,8 @@
+## [1.62.1] - 2025-10-31
+### Fixed
+- Upgraded `form-data` library version - thanks for chasing @sipr-invivo
+- Upgraded `axios` library version
+
 ## [1.62.0] - 2025-10-27
 ### Added
 - New [POST Manage proxy consent for a User](https://docs.mangopay.com/api-reference/users/manage-proxy-consent) endpoint to obtain and manage user consent via the hosted SCA experience (if proxy is activated). A proxy and user consent are now required to use the `USER_NOT_PRESENT` value for `ScaContext` ([API release note](https://docs.mangopay.com/release-notes/api/2025-10-23), #515 )
